@@ -161,7 +161,7 @@ Itemized list with detailed explanations, full Matan, translation, and Dalil ref
   - **Doa setelah Wudhu** — HR. Muslim no. 234
     - **Matan**: أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ، اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ
     - **Terjemahan**: "Aku bersaksi bahwasanya tidak ada sesembahan yang berhak disembah selain Allah semata, tidak ada sekutu bagi-Nya, dan aku bersaksi bahwasanya Muhammad adalah hamba dan utusan-Nya. Ya Allah, jadikanlah aku termasuk orang-orang yang bertaubat dan jadikanlah aku termasuk orang-orang yang bersuci."
-    - **Tampilan**: kartu `#doa-setelah-wudhu` kini ada di sub-tab Tata Cara (di bawah 8 langkah; langkah 8 juga menampilkan Arab + arti), tab Sunnah hanya berisi penunjuk. Urutan: dalil (matan + arti, HR. Muslim no. 234) -> bacaan (Arab, latin, arti; tambahan doa HR. At-Tirmidzi no. 55) -> grid arti per kata. Sumber: rumaysho.com/19523.
+    - **Tampilan**: kartu `#doa-setelah-wudhu` ada di sub-tab Sunnah; langkah 8 di Tata Cara menampilkan Arab + arti dan tautan `goToDoaWudhu()` yang membuka Sunnah dan menggulir ke kartu. Urutan: dalil (matan + arti, HR. Muslim no. 234) -> bacaan (Arab, latin, arti; tambahan doa HR. At-Tirmidzi no. 55) -> grid arti per kata. Sumber: rumaysho.com/19523.
     - **Keutamaan**: مَا مِنْكُمْ مِنْ أَحَدٍ يَتَوَضَّأُ فَيُبْلِغُ أَوْ فَيُسْبِغُ الْوُضُوءَ ثُمَّ يَقُولُ أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَنَّ مُحَمَّدًا عَبْدُ اللَّهِ وَرَسُولُهُ إِلَّا فُتِحَتْ لَهُ أَبْوَابُ الْجَنَّةِ الثَّمَانِيَةُ يَدْخُلُ مِنْ أَيِّهَا شَاءَ
     - **Terjemahan**: "Tidak ada seorang pun di antara kalian yang berwudhu lalu menyempurnakan wudhunya, kemudian mengucapkan 'Aku bersaksi tidak ada sesembahan yang berhak disembah selain Allah dan Muhammad adalah hamba dan utusan Allah', kecuali dibukakan baginya delapan pintu surga; ia boleh masuk dari pintu mana saja yang ia kehendaki."
 - **Ancaman Wudhu Tidak Sempurna** — HR. Bukhari no. 60 & Muslim no. 242
@@ -233,7 +233,7 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 
 ### 5.4 PWA / Service worker
 - Strategy: stale-while-revalidate for all GET requests; precache list `ASSETS_TO_CACHE` is added one-by-one (`cache.add(...).catch`), so a failing CDN URL does not abort install.
-- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v8`.
+- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v9`.
 - Installability needs: valid manifest, 192/512 icons, active SW, HTTPS. Chrome will not fire `beforeinstallprompt` if the app is already installed.
 
 ---
