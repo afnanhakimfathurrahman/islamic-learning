@@ -1,4 +1,4 @@
-const CACHE_NAME = 'islamic-learning-v3';
+const CACHE_NAME = 'islamic-learning-v4';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -18,7 +18,8 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[Service Worker] Caching app shell and assets...');
-      return cache.addAll(ASSETS_TO_CACHE);
+      // Cache satu per satu agar kegagalan satu aset (mis. CDN) tidak membatalkan instalasi SW
+      return Promise.all(ASSETS_TO_CACHE.map((url) => cache.add(url).catch(() => {})));
     })
   );
   self.skipWaiting();

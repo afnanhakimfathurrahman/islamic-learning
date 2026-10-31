@@ -7,6 +7,7 @@
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./icon-192.png">
     <meta name="theme-color" content="#064e3b">
 
     <!-- Tailwind CSS -->
@@ -136,7 +137,7 @@
                         <i class="fa-solid fa-sliders"></i>
                     </button>
                     <!-- Install PWA Button (Hidden by default) -->
-                    <button id="pwa-install-btn" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gold-500 hover:bg-gold-600 text-emerald-950 font-semibold text-xs transition shadow">
+                    <button id="pwa-install-btn" class="hidden items-center gap-2 px-3 py-1.5 rounded-lg bg-gold-500 hover:bg-gold-600 text-emerald-950 font-semibold text-xs transition shadow">
                         <i class="fa-solid fa-download"></i> Install App
                     </button>
                 </div>
@@ -1311,6 +1312,41 @@
             }
             container.innerHTML = `<div class="bg-white p-4 rounded-xl border border-slate-200 text-sm text-emerald-800">Terdapat ${bookmarkedIds.length} item tersimpan dalam favorit Anda.</div>`;
         }
+
+      // PWA install
+      let deferredInstallPrompt = null;
+      const installBtn = document.getElementById('pwa-install-btn');
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+      const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+
+      function showInstallBtn(show) {
+        installBtn.classList.toggle('hidden', !show);
+        installBtn.classList.toggle('flex', show);
+      }
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+        showInstallBtn(true);
+      });
+
+      installBtn.addEventListener('click', async () => {
+        if (deferredInstallPrompt) {
+          deferredInstallPrompt.prompt();
+          await deferredInstallPrompt.userChoice;
+          deferredInstallPrompt = null;
+          showInstallBtn(false);
+        } else if (isIOS) {
+          alert('Untuk memasang: ketuk ikon Bagikan di Safari, lalu pilih "Tambahkan ke Layar Utama".');
+        }
+      });
+
+      window.addEventListener('appinstalled', () => {
+        deferredInstallPrompt = null;
+        showInstallBtn(false);
+      });
+
+      if (isIOS && !isStandalone) showInstallBtn(true);
 
       if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
