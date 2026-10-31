@@ -1,5 +1,3 @@
-Berikut adalah dokumen spesifikasi teknis lengkap (SPECIFICATION.md) dalam format Markdown. Dokumen ini dirancang khusus agar dapat dibaca dan dipahami oleh AI Coding Assistant (seperti Cursor, Claude Code, OpenCode CLI, atau Windsurf) untuk pengembangan dan pemeliharaan aplikasi lebih lanjut.
-Anda bisa menyimpan konten di bawah ini ke dalam file bernama SPECIFICATION.md di folder utama (root) repositori Anda.
 # Technical Specification Document: Panduan Sholat & Wudhu Sesuai Sunnah (PWA)
 
 ## 1. Project Overview & Context
@@ -13,10 +11,10 @@ Anda bisa menyimpan konten di bawah ini ke dalam file bernama SPECIFICATION.md d
 ---
 
 ## 2. Technical Stack & Dependencies
-- **Markup/Styling**: HTML5, Tailwind CSS (via CDN or JIT compilation).
+- **Markup/Styling**: HTML5, Tailwind CSS (via `https://cdn.tailwindcss.com`, config inline in `<script>tailwind.config = {...}`; no build step).
 - **Icons**: FontAwesome 6.4.0 (via CDN).
 - **Typography**:
-  - Latin: `Plus Jakarta Sans`, sans-serif
+  - Latin: `Inter`, sans-serif (Google Fonts)
   - Arabic: `Amiri`, serif
 - **State Management & Interactivity**: Vanilla JavaScript (ES6+) with `localStorage` persistence.
 - **PWA Capabilities**: Service Worker (`sw.js`), Web App Manifest (`manifest.json`), Offline Caching Strategy (Cache-First or Stale-While-Revalidate).
@@ -25,15 +23,20 @@ Anda bisa menyimpan konten di bawah ini ke dalam file bernama SPECIFICATION.md d
 
 ## 3. Directory & File Structure
 
+```
 islamic-learning/
-├── index.html               # Main Single-Page Application
-├── manifest.json            # Web App Manifest for PWA installation
-├── sw.js                    # Service Worker for offline functionality
-├── SPECIFICATION.md         # AI-readable technical specification (this file)
-├── wudhu.jpg                # Infografis gerakan wudhu (faceless Muslim avatars)
-├── sholat.jpg               # Infografis gerakan sholat (faceless Muslim avatars)
-├── icon-192.png             # PWA app icon (192x192)
-└── icon-512.png             # PWA app icon (512x512)
+├── index.html               # Entire SPA: markup, inline <style>, inline <script>
+├── manifest.json            # PWA manifest (id/scope/start_url "./", icons any + maskable)
+├── sw.js                    # Service worker (stale-while-revalidate, per-asset precache)
+├── SPECIFICATION.md         # This file: source of truth for AI agents
+├── AGENTS.md                # Short entry point for AI agents (points here)
+├── CLAUDE.md                # Same, for Claude Code
+├── .claude/skills/          # Task playbooks for AI agents (see section 7)
+├── wudhu.jpg / sholat.jpg   # Infographics (faceless Muslim avatars)
+└── icon-192.png / icon-512.png
+```
+
+Hosting: GitHub Pages from branch `main`, root. Live URL: `https://kamaludin68.github.io/islamic-learning/`. A push to `main` deploys automatically (about 1-2 minutes). There is no build or test tooling; everything is static.
 
 ---
 
@@ -200,25 +203,68 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 
 ---
 
-## 5. Guidelines for AI Assistants & Contributors
-1. **Maintain Image References**: Use `wudhu.jpg` for the wudhu infographic and `sholat.jpg` for the sholat infographic. Never remove, rename, or broken-link these files. Register any new image asset in `sw.js` pre-cache manifest.
-2. **Dalil Integrity**: All Islamic texts must retain the **full Matan (Arabic script)**, Indonesian translation, and precise source attributions (Surah/Ayat or Hadith Collector + Number). Do not display a hadith reference without its matan unless the item is explicitly a fiqh ruling or ijma' without a specific hadith text.
-3. **Faceless Avatar Rule**: Any new images generated or added must strictly feature faceless Muslim avatars (tanpa wajah).
-4. **Infographic UX**: Both infographics must remain tap-to-zoom via the shared lightbox, keep descriptive `alt` text, use lazy loading, and stay readable on mobile. Provide an "open in new tab" fallback.
-5. **Offline Capability**: Ensure any new assets added are registered in `sw.js` precache manifest. Bump `CACHE_NAME` when asset names change.
-6. **UI Consistency**: Maintain Tailwind CSS emerald/gold color scheme and `Amiri` font styling for all Arabic typography. Use collapsible `<details>` blocks for long matan so cards stay scannable.
-7. **PWA Correctness**: Use the real `manifest.json` link and register only `./sw.js`. Do not register service workers from `blob:` URLs.
+## 5. Architecture of `index.html`
+
+### 5.1 DOM conventions (IDs are an API; JS looks them up by string)
+| Purpose | ID / class pattern |
+|---|---|
+| Main tab buttons | `tab-<id>` (class `nav-tab`, active = `tab-active`); mobile bottom nav `mob-tab-<id>` |
+| Main tab panels | `content-<id>` (class `tab-content`), `<id>` in `home, syarat, wudhu, rukun, pembatal, bookmarks` |
+| Wudhu sub-tab buttons | `sub-wudhu-<name>` (class `wudhu-sub-btn`, pill style) |
+| Wudhu sub-tab panels | `wudhu-sub-<name>` (class `wudhu-sub-content`), `<name>` in `langkah, syarat, rukun, sunnah, ancaman` |
+| Sholat sub-tab buttons / panels | `btn-sholat-gerakan`, `btn-sholat-bacaan` / `sholat-gerakan-container`, `sholat-bacaan-container` |
+| Searchable card | class `search-item` (optional `data-search` overrides text used for matching) |
+| Install button | `#pwa-install-btn` (hidden until `beforeinstallprompt`, or iOS Safari not standalone) |
+
+### 5.2 JavaScript map (single inline `<script>`)
+- Data arrays: `syaratData`, `wudhuStepsData`, `sholatStepsData`, `bacaanSholatWords`, `pembatalData`. Rendered by `renderSyarat/renderWudhuSteps/renderSholatSteps/renderSholatWords/renderPembatal` (and `renderDalilDetails` for collapsible matan).
+- Navigation: `switchTab(tabId, skipSearchReset)`, `switchWudhuSub(subId)` (accepts `'wudhu-langkah'` or `'langkah'`; null-safe), `switchSholatSub('sholat-gerakan'|'sholat-bacaan')`.
+- Search: `toggleSearch`, `handleSearch`, `enterSearchMode` (snapshots active tab and sub-tabs), `exitSearchMode` (restores them). While searching, all sub-panels are un-hidden so matches in any sub-tab show.
+- Settings: `toggleSettings`, `changeFontSize(delta)` (CSS var `--arabic-size`, default 28px, 20-42px).
+- Lightbox: `openLightbox(src, title)`, `closeLightbox(event)`.
+- Bookmarks: `bookmarkItem(id)`, `renderBookmarks()`; persisted in `localStorage['sholat_bookmarks']` (JSON array of ids).
+- PWA: `beforeinstallprompt` handler stores `deferredInstallPrompt`; install button calls `.prompt()`; `appinstalled` hides the button; iOS shows an "Add to Home Screen" alert. Service worker registered on `load` via `./sw.js`.
+
+### 5.3 Styling
+- Tailwind palette: `emerald` (primary, `#064e3b` = emerald-900) and `gold` (accent, `#f59e0b`), configured in `tailwind.config`.
+- Active wudhu sub-tab: `bg-emerald-800 text-white border-emerald-800 shadow-sm`; inactive: `bg-white text-slate-600 border-slate-200`. Do NOT use `border-b-2` underline tabs inside an `overflow-x-auto` container: they collide with the container border (previous bug).
+- Arabic blocks use class `.arabic-size` and font `Amiri`.
+
+### 5.4 PWA / Service worker
+- Strategy: stale-while-revalidate for all GET requests; precache list `ASSETS_TO_CACHE` is added one-by-one (`cache.add(...).catch`), so a failing CDN URL does not abort install.
+- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v5`.
+- Installability needs: valid manifest, 192/512 icons, active SW, HTTPS. Chrome will not fire `beforeinstallprompt` if the app is already installed.
 
 ---
 
-## 6. Commit & Push ke GitHub
-Jalankan perintah berikut di terminal Anda untuk memasukkan perubahan ke dalam repositori:
+## 6. Guidelines for AI Assistants & Contributors
+1. **Maintain Image References**: Use `wudhu.jpg` and `sholat.jpg`. Never remove or rename them. Register any new asset in `sw.js` `ASSETS_TO_CACHE`.
+2. **Dalil Integrity**: All Islamic texts keep the **full Matan (Arabic)**, Indonesian translation, and precise source (Surah/Ayat or collector + number). Never invent, paraphrase or "fix" a hadith/ayat from memory; verify against the primary reference (Rumaysho.com) or ask the user. A hadith reference without matan is allowed only for fiqh rulings/ijma'.
+3. **Faceless Avatar Rule**: New images must show faceless Muslim avatars.
+4. **Infographic UX**: Tap-to-zoom via lightbox, descriptive `alt`, lazy loading, "open in new tab" fallback.
+5. **Offline**: Register new assets in `sw.js` and bump `CACHE_NAME`.
+6. **UI Consistency**: Emerald/gold scheme, `Amiri` for Arabic, collapsible `<details>` for long matan.
+7. **PWA Correctness**: Register only `./sw.js`; no blob: service workers; keep manifest `scope`/`start_url` as `./`.
+8. **ID contract**: When renaming or adding a tab/sub-tab, update the button ID, panel ID, the `onclick` argument, and the JS that references them together (see 5.1). Guard `getElementById` results against `null`.
+9. **No build step**: Keep it a single static `index.html`; do not introduce bundlers without the owner's approval.
+10. **Language**: UI copy and docs are Indonesian; code identifiers in English/Indonesian mix as already present. Match the surrounding style.
 
-# Tambahkan file yang berubah
-git add SPECIFICATION.md index.html sw.js manifest.json wudhu.jpg sholat.jpg icon-192.png icon-512.png
+## 7. Agent Skills
+Task playbooks live in `.claude/skills/<name>/SKILL.md` (frontmatter `name`, `description`). Agents other than Claude Code can read them as plain Markdown.
+- `add-dalil`: add a verse/hadith card with matan, translation, source, and search/bookmark hooks.
+- `add-subtab`: add a main tab or wudhu sub-tab without breaking the ID contract.
+- `pwa-release`: bump cache, validate manifest/SW, verify install and deploy.
+- `verify-site`: run the static checks (JS syntax, ID cross-check, manifest JSON) before pushing.
 
-# Commit perubahan
-git commit -m "Use wudhu/sholat infographics, improve UI/UX, and add hadith matan"
+## 8. Known Pitfalls (history)
+- `switchWudhuSub('wudhu-langkah')` once looked up `#wudhu-langkah` while the panel is `#wudhu-sub-langkah` -> `Cannot read properties of null (reading 'classList')`. Fixed by normalising the name and null-guarding.
+- Install button had no handler and was `hidden sm:flex` (invisible on phones). Fixed with the `beforeinstallprompt` flow.
+- `cache.addAll` in the SW aborts if any URL fails (e.g. CDN). Now per-asset.
+- Stale caches: forgetting to bump `CACHE_NAME` makes deployed fixes invisible to returning users.
 
-# Push ke GitHub
-git push origin main
+## 9. Deploy
+```bash
+bash .claude/skills/verify-site/check.sh   # static checks
+git add -A && git commit -m "<message>" && git push origin main
+```
+Then confirm: `curl -s https://kamaludin68.github.io/islamic-learning/sw.js | head -1` shows the new `CACHE_NAME`.
