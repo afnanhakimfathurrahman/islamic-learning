@@ -381,20 +381,20 @@
             </div>
 
             <!-- Sub Tabs inside Wudhu -->
-            <div class="flex border-b border-slate-200 overflow-x-auto gap-2">
-                <button onclick="switchWudhuSub('wudhu-langkah')" id="sub-wudhu-langkah" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold text-emerald-800 border-b-2 border-emerald-800 whitespace-nowrap">
+            <div class="flex overflow-x-auto gap-2 pb-2 -mx-1 px-1">
+                <button onclick="switchWudhuSub('wudhu-langkah')" id="sub-wudhu-langkah" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-emerald-800 text-white border-emerald-800 shadow-sm">
                     <i class="fa-solid fa-person-dots-from-line mr-1"></i> Visual & Tata Cara
                 </button>
-                <button onclick="switchWudhuSub('wudhu-syarat')" id="sub-wudhu-syarat" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold text-slate-500 border-b-2 border-transparent hover:text-emerald-800 whitespace-nowrap">
+                <button onclick="switchWudhuSub('wudhu-syarat')" id="sub-wudhu-syarat" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200 hover:bg-emerald-50 hover:text-emerald-800">
                     3.1 Syarat Sah Wudhu
                 </button>
-                <button onclick="switchWudhuSub('wudhu-rukun')" id="sub-wudhu-rukun" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold text-slate-500 border-b-2 border-transparent hover:text-emerald-800 whitespace-nowrap">
+                <button onclick="switchWudhuSub('wudhu-rukun')" id="sub-wudhu-rukun" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200 hover:bg-emerald-50 hover:text-emerald-800">
                     3.2 Rukun Wudhu
                 </button>
-                <button onclick="switchWudhuSub('wudhu-sunnah')" id="sub-wudhu-sunnah" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold text-slate-500 border-b-2 border-transparent hover:text-emerald-800 whitespace-nowrap">
+                <button onclick="switchWudhuSub('wudhu-sunnah')" id="sub-wudhu-sunnah" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200 hover:bg-emerald-50 hover:text-emerald-800">
                     3.3 Sunnah & Keutamaan
                 </button>
-                <button onclick="switchWudhuSub('wudhu-ancaman')" id="sub-wudhu-ancaman" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold text-slate-500 border-b-2 border-transparent hover:text-emerald-800 whitespace-nowrap">
+                <button onclick="switchWudhuSub('wudhu-ancaman')" id="sub-wudhu-ancaman" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200 hover:bg-emerald-50 hover:text-emerald-800">
                     3.4 Ancaman Wudhu Salah
                 </button>
             </div>
@@ -1149,14 +1149,15 @@
 
             document.querySelectorAll('.wudhu-sub-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.wudhu-sub-btn').forEach(btn => {
-                btn.classList.remove('text-emerald-800', 'border-emerald-800');
-                btn.classList.add('text-slate-500', 'border-transparent');
+                btn.classList.remove('bg-emerald-800', 'text-white', 'border-emerald-800', 'shadow-sm');
+                btn.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
             });
 
             content.classList.remove('hidden');
             if (activeBtn) {
-                activeBtn.classList.remove('text-slate-500', 'border-transparent');
-                activeBtn.classList.add('text-emerald-800', 'border-emerald-800');
+                activeBtn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+                activeBtn.classList.add('bg-emerald-800', 'text-white', 'border-emerald-800', 'shadow-sm');
+                activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
             }
         }
 
