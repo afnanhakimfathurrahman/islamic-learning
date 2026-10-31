@@ -6,7 +6,8 @@
     <title>Panduan Sholat & Wudhu Sesuai Sunnah</title>
 
     <!-- PWA Manifest -->
-    <link rel="manifest" id="manifest-placeholder">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#064e3b">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -70,6 +71,40 @@
         .word-badge:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        :root {
+            --arabic-size: 28px;
+        }
+        .arabic-size {
+            font-size: var(--arabic-size);
+        }
+        .infographic-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #f1f5f9;
+        }
+        .infographic-trigger {
+            cursor: zoom-in;
+        }
+        #lightbox {
+            overscroll-behavior: contain;
+        }
+        #lightbox-scroll {
+            -webkit-overflow-scrolling: touch;
+            touch-action: pinch-zoom;
+        }
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] .details-chevron {
+            transform: rotate(180deg);
+        }
+        .details-chevron {
+            transition: transform 0.2s ease;
         }
     </style>
 </head>
@@ -160,6 +195,9 @@
     <!-- Main Content Area -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 mb-20 md:mb-8">
 
+        <div id="search-status" role="status" aria-live="polite" class="hidden mb-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-900">
+        </div>
+
         <!-- TAB 1: HOME & DALIL -->
         <section id="content-home" class="tab-content space-y-6">
             <!-- Hero Banner -->
@@ -192,7 +230,7 @@
                 </div>
 
                 <!-- 1.1 Dalil Wajibnya Sholat -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition">
+                <div class="search-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition">
                     <div class="flex items-center justify-between mb-4">
                         <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                             <i class="fa-solid fa-scale-balanced"></i> 1.1 Wajibnya Sholat
@@ -234,7 +272,7 @@
                 </div>
 
                 <!-- 1.2 Dalil Ganjaran Mengerjakan Sholat -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition">
+                <div class="search-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition">
                     <div class="flex items-center justify-between mb-4">
                         <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                             <i class="fa-solid fa-gift"></i> 1.2 Keutamaan & Keagungan Sholat
@@ -276,7 +314,7 @@
                 </div>
 
                 <!-- 1.3 Dalil Ancaman Meninggalkan Sholat -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-red-200 hover:shadow-md transition">
+                <div class="search-item bg-white rounded-2xl p-6 shadow-sm border border-red-200 hover:shadow-md transition">
                     <div class="flex items-center justify-between mb-4">
                         <span class="bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                             <i class="fa-solid fa-triangle-exclamation"></i> 1.3 Ancaman Meninggalkan Sholat
@@ -362,14 +400,46 @@
 
             <!-- Sub Content 1: Visual Steps -->
             <div id="wudhu-sub-langkah" class="wudhu-sub-content space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="wudhu-steps-grid">
-                    <!-- Javascript populates interactive SVG visual steps -->
+                <!-- Infografis Gerakan Wudhu -->
+                <div class="search-item bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="flex items-start justify-between gap-3 p-5 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-lg font-bold text-emerald-950">
+                                <i class="fa-solid fa-image text-gold-500 mr-1"></i> Infografis Gerakan Wudhu
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-1">
+                                Urutan lengkap tata cara wudhu sesuai sunnah. Ketuk gambar untuk memperbesar.
+                            </p>
+                        </div>
+                        <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full whitespace-nowrap">
+                            <i class="fa-solid fa-hand-pointer"></i> Ketuk untuk zoom
+                        </span>
+                    </div>
+                    <button type="button" onclick="openLightbox('wudhu.jpg', 'Infografis Gerakan Wudhu')"
+                        class="infographic-trigger group relative block w-full text-left focus:outline-none focus-visible:ring-4 focus-visible:ring-gold-400/50"
+                        aria-label="Perbesar infografis gerakan wudhu">
+                        <img src="wudhu.jpg" alt="Infografis tata cara wudhu: niat, membasuh tangan, berkumur, membasuh muka, tangan, kepala, telinga, dan kaki"
+                            class="infographic-img" loading="lazy" decoding="async">
+                        <span class="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-lg bg-emerald-950/85 px-3 py-1.5 text-xs font-semibold text-white shadow-lg backdrop-blur transition group-hover:bg-emerald-900">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i> Perbesar
+                        </span>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span class="h-px flex-1 bg-slate-200"></span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Rincian 8 Langkah</span>
+                    <span class="h-px flex-1 bg-slate-200"></span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="wudhu-steps-grid">
+                    <!-- Javascript populates the written steps -->
                 </div>
             </div>
 
             <!-- Sub Content 2: Syarat Sah Wudhu -->
             <div id="wudhu-sub-syarat" class="wudhu-sub-content hidden space-y-4">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="search-item bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <h3 class="text-lg font-bold text-emerald-900 mb-4">Syarat Sah Wudhu</h3>
                     <ul class="space-y-3 text-slate-700 text-sm list-disc pl-5">
                         <li><strong>Islam:</strong> Wudhu orang kafir tidak sah.</li>
@@ -383,7 +453,7 @@
 
             <!-- Sub Content 3: Rukun Wudhu -->
             <div id="wudhu-sub-rukun" class="wudhu-sub-content hidden space-y-4">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                <div class="search-item bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
                     <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-emerald-800">
                         <span class="text-xs text-slate-500 font-bold">QS. Al-Ma'idah: 6</span>
                         <p class="font-arabic text-xl text-right text-emerald-950 my-2" dir="rtl">
@@ -406,16 +476,22 @@
 
             <!-- Sub Content 4: Sunnah Wudhu -->
             <div id="wudhu-sub-sunnah" class="wudhu-sub-content hidden space-y-4">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="search-item bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <h3 class="text-lg font-bold text-emerald-900 mb-3">Sunnah-Sunnah Wudhu & Keutamaannya</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                         <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                             <h4 class="font-bold text-emerald-800">1. Bersiwak / Gosok Gigi</h4>
-                            <p class="text-slate-600 text-xs mt-1">HR. Bukhari & Muslim: "Seandainya tidak memberatkan umatku, niscaya aku perintahkan bersiwak setiap wudhu."</p>
+                            <p class="font-arabic text-right text-lg text-emerald-950 mt-2 mb-1" dir="rtl">
+                                لَوْلَا أَنْ أَشُقَّ عَلَى أُمَّتِي لَأَمَرْتُهُمْ بِالسِّوَاكِ عِنْدَ كُلِّ وُضُوءٍ
+                            </p>
+                            <p class="text-slate-600 text-xs">"Seandainya tidak memberatkan umatku, niscaya aku perintahkan mereka bersiwak setiap kali wudhu." <span class="font-semibold">(HR. Ahmad)</span></p>
                         </div>
                         <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                             <h4 class="font-bold text-emerald-800">2. Membaca Basmalah</h4>
-                            <p class="text-slate-600 text-xs mt-1">HR. Abu Daud: "Tidak ada wudhu bagi yang tidak menyebut nama Allah atasnya."</p>
+                            <p class="font-arabic text-right text-lg text-emerald-950 mt-2 mb-1" dir="rtl">
+                                لَا وُضُوءَ لِمَنْ لَمْ يَذْكُرِ اسْمَ اللَّهِ عَلَيْهِ
+                            </p>
+                            <p class="text-slate-600 text-xs">"Tidak ada wudhu bagi orang yang tidak menyebut nama Allah atasnya." <span class="font-semibold">(HR. Abu Daud No. 101)</span></p>
                         </div>
                         <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                             <h4 class="font-bold text-emerald-800">3. Kumur & Istinsyaq (Hirup air ke hidung)</h4>
@@ -423,7 +499,10 @@
                         </div>
                         <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                             <h4 class="font-bold text-emerald-800">4. Mendahulukan Anggota Kanan (At-Tayamun)</h4>
-                            <p class="text-slate-600 text-xs mt-1">Rasulullah ﷺ menyukai mendahulukan yang kanan saat bersuci.</p>
+                            <p class="font-arabic text-right text-lg text-emerald-950 mt-2 mb-1" dir="rtl">
+                                كَانَ النَّبِيُّ ﷺ يُعْجِبُهُ التَّيَمُّنُ فِي تَنَعُّلِهِ وَتَرَجُّلِهِ وَطُهُورِهِ وَفِي شَأْنِهِ كُلِّهِ
+                            </p>
+                            <p class="text-slate-600 text-xs">"Nabi ﷺ menyukai mendahulukan yang kanan saat memakai sandal, menyisir, bersuci, dan dalam segala urusannya." <span class="font-semibold">(HR. Bukhari No. 168 & Muslim No. 268)</span></p>
                         </div>
                     </div>
 
@@ -445,10 +524,10 @@
 
             <!-- Sub Content 5: Ancaman Wudhu -->
             <div id="wudhu-sub-ancaman" class="wudhu-sub-content hidden space-y-4">
-                <div class="bg-red-50 p-6 rounded-2xl border border-red-200 shadow-sm">
+                <div class="search-item bg-red-50 p-6 rounded-2xl border border-red-200 shadow-sm">
                     <h3 class="text-lg font-bold text-red-900 mb-3"><i class="fa-solid fa-circle-exclamation"></i> Ancaman Bagi Wudhu Yang Tidak Sempurna</h3>
                     <div class="bg-white p-4 rounded-xl border-l-4 border-red-600 shadow-xs">
-                        <div class="text-xs text-slate-500 font-bold mb-1">HR. Bukhari (No. 60) & Muslim (No. 241)</div>
+                        <div class="text-xs text-slate-500 font-bold mb-1">HR. Bukhari (No. 60) & Muslim (No. 242)</div>
                         <p class="font-arabic text-xl text-right text-emerald-950 my-2" dir="rtl">
                             وَيْلٌ لِلأَعْقَابِ مِنَ النَّارِ
                         </p>
@@ -484,7 +563,41 @@
 
             <!-- Sub 1: Gerakan & Rukun Visual -->
             <div id="sholat-gerakan-container" class="space-y-6">
-                <!-- Dynamically populated cards with Faceless SVG illustrations -->
+                <!-- Infografis Gerakan Sholat -->
+                <div class="search-item bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="flex items-start justify-between gap-3 p-5 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-lg font-bold text-emerald-950">
+                                <i class="fa-solid fa-image text-gold-500 mr-1"></i> Infografis Gerakan Sholat
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-1">
+                                Rangkaian gerakan sholat dari takbiratul ihram hingga salam. Ketuk gambar untuk memperbesar.
+                            </p>
+                        </div>
+                        <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full whitespace-nowrap">
+                            <i class="fa-solid fa-hand-pointer"></i> Ketuk untuk zoom
+                        </span>
+                    </div>
+                    <button type="button" onclick="openLightbox('sholat.jpg', 'Infografis Gerakan Sholat')"
+                        class="infographic-trigger group relative block w-full text-left focus:outline-none focus-visible:ring-4 focus-visible:ring-gold-400/50"
+                        aria-label="Perbesar infografis gerakan sholat">
+                        <img src="sholat.jpg" alt="Infografis gerakan sholat: berdiri, takbiratul ihram, rukuk, i'tidal, sujud, duduk, tasyahud, dan salam"
+                            class="infographic-img" loading="lazy" decoding="async">
+                        <span class="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-lg bg-emerald-950/85 px-3 py-1.5 text-xs font-semibold text-white shadow-lg backdrop-blur transition group-hover:bg-emerald-900">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i> Perbesar
+                        </span>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span class="h-px flex-1 bg-slate-200"></span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Rincian Rukun & Gerakan</span>
+                    <span class="h-px flex-1 bg-slate-200"></span>
+                </div>
+
+                <div id="sholat-steps-list" class="space-y-4">
+                    <!-- Dynamically populated rukun cards -->
+                </div>
             </div>
 
             <!-- Sub 2: Bacaan Sholat Lengkap Word-by-Word -->
@@ -562,6 +675,30 @@
         </button>
     </nav>
 
+    <!-- Fullscreen Infographic Lightbox -->
+    <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-slate-950/95 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+        <div class="absolute inset-x-0 top-0 z-10 flex items-center justify-between gap-3 bg-gradient-to-b from-slate-950/90 to-transparent px-4 py-3 sm:px-6">
+            <h3 id="lightbox-title" class="text-sm sm:text-base font-semibold text-white truncate">Infografis</h3>
+            <div class="flex items-center gap-2">
+                <a id="lightbox-open" href="#" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-2 text-xs font-semibold text-white hover:bg-white/20 transition">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="hidden sm:inline">Buka Tab Baru</span>
+                </a>
+                <button type="button" onclick="closeLightbox()" aria-label="Tutup pratinjau"
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white hover:bg-white/20 transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+        </div>
+        <div id="lightbox-scroll" class="absolute inset-0 overflow-auto p-4 pt-20 sm:p-8 sm:pt-24" onclick="closeLightbox(event)">
+            <img id="lightbox-img" src="" alt=""
+                class="mx-auto h-auto w-full max-w-6xl rounded-lg bg-white shadow-2xl">
+        </div>
+        <p class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 to-transparent px-4 py-3 text-center text-[11px] text-slate-300 sm:text-xs">
+            Cubit untuk zoom &middot; Geser untuk menjelajah &middot; Ketuk area gelap untuk menutup
+        </p>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-8 px-4 border-t border-slate-800 text-center text-xs">
         <div class="max-w-4xl mx-auto space-y-3">
@@ -582,175 +719,99 @@
     <!-- App Logic Script -->
     <script>
         /* -------------------------------------------------------------
-           1. PWA Manifest & Service Worker Auto Inject
+           1. DATA SOURCES (Syarat, Wudhu Steps, Sholat Steps & Words)
         ------------------------------------------------------------- */
-        const manifestData = {
-            "name": "Panduan Sholat & Wudhu Sunnah",
-            "short_name": "SholatSunnah",
-            "start_url": "./",
-            "display": "standalone",
-            "background_color": "#064e3b",
-            "theme_color": "#064e3b",
-            "description": "Panduan Sholat dan Wudhu Sesuai Sunnah berdasarkan Rumaysho.com",
-            "icons": [
-                {
-                    "src": "https://cdn-icons-png.flaticon.com/512/2884/2884218.png",
-                    "sizes": "192x192",
-                    "type": "/png"
-                },
-                {
-                    "src": "https://cdn-icons-png.flaticon.com/512/2884/2884218.png",
-                    "sizes": "512x512",
-                    "type": "/png"
-                }
-            ]
-        };
-        const manifestBlob = new Blob([JSON.stringify(manifestData)], {type: 'application/json'});
-        document.getElementById('manifest-placeholder').setAttribute('href', URL.createObjectURL(manifestBlob));
-
-        // Register Inline Service Worker for Offline Capability
-        if ('serviceWorker' in navigator) {
-            const swCode = `
-                const CACHE_NAME = 'sholat-sunnah-v1';
-                self.addEventListener('install', (e) => {
-                    e.waitUntil(
-                        caches.open(CACHE_NAME).then((cache) => {
-                            return cache.addAll(['./']);
-                        })
-                    );
-                });
-                self.addEventListener('fetch', (e) => {
-                    e.respondWith(
-                        caches.match(e.request).then((res) => res || fetch(e.request))
-                    );
-                });
-            `;
-            const swBlob = new Blob([swCode], {type: 'application/javascript'});
-            navigator.serviceWorker.register(URL.createObjectURL(swBlob))
-                .then(() => console.log('SW Registered'))
-                .catch(err => console.log('SW Failed', err));
-        }
-
-        /* -------------------------------------------------------------
-           2. DATA SOURCES (Syarat, Wudhu Steps, Sholat Steps & Words)
-        ------------------------------------------------------------- */
-
-        // Faceless Muslim SVG Generators
-        function getFacelessSVG(type) {
-            // Reusable SVG elements for faceless muslim (cap/peci, green robe, neutral skin)
-            const baseHead = `<circle cx="100" cy="45" r="22" fill="#e0ac69"/>
-                              <path d="M75 40 C75 22, 125 22, 125 40 Z" fill="#022c22"/>`; // Peci
-            const eyesAndNose = ``; // Strictly Faceless
-
-            switch(type) {
-                case 'stand':
-                    return `<svg viewBox="0 0 200 220" class="w-full h-44 mx-auto">
-                        <rect width="200" height="220" fill="#f8fafc" rx="12"/>
-                        ${baseHead}
-                        <!-- Body standing arms folded (Sedekap) -->
-                        <path d="M60 80 Q100 70 140 80 L145 190 L55 190 Z" fill="#065f46"/>
-                        <!-- Folded hands -->
-                        <path d="M75 105 Q100 115 125 105 L120 120 Q100 125 80 120 Z" fill="#d97706"/>
-                    </svg>`;
-                case 'ruku':
-                    return `<svg viewBox="0 0 200 220" class="w-full h-44 mx-auto">
-                        <rect width="200" height="220" fill="#f8fafc" rx="12"/>
-                        <!-- Ruku bending 90 deg -->
-                        <path d="M40 190 L70 120 L150 120 L160 140" stroke="#065f46" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                        <circle cx="165" cy="120" r="20" fill="#e0ac69"/>
-                        <path d="M148 112 C148 98, 182 98, 182 112 Z" fill="#022c22"/>
-                        <!-- Arms to knees -->
-                        <path d="M120 120 L100 155" stroke="#d97706" stroke-width="10" stroke-linecap="round"/>
-                    </svg>`;
-                case 'sujud':
-                    return `<svg viewBox="0 0 200 220" class="w-full h-44 mx-auto">
-                        <rect width="200" height="220" fill="#f8fafc" rx="12"/>
-                        <!-- Sujud Prostrating -->
-                        <path d="M30 180 Q70 130 120 170 L160 185" stroke="#065f46" stroke-width="32" stroke-linecap="round" fill="none"/>
-                        <circle cx="165" cy="182" r="18" fill="#e0ac69"/>
-                        <path d="M150 175 C150 160, 180 160, 180 175 Z" fill="#022c22"/>
-                        <!-- Hands on ground -->
-                        <path d="M140 185 L155 185" stroke="#d97706" stroke-width="8" stroke-linecap="round"/>
-                    </svg>`;
-                case 'duduk':
-                    return `<svg viewBox="0 0 200 220" class="w-full h-44 mx-auto">
-                        <rect width="200" height="220" fill="#f8fafc" rx="12"/>
-                        ${baseHead}
-                        <!-- Sitting Body -->
-                        <path d="M65 85 L135 85 L145 170 L55 170 Z" fill="#065f46"/>
-                        <!-- Knees / Legs sitting -->
-                        <path d="M50 170 Q100 190 150 170" stroke="#064e3b" stroke-width="20" stroke-linecap="round"/>
-                        <!-- Hands on thighs -->
-                        <path d="M75 125 L90 145 M125 125 L110 145" stroke="#d97706" stroke-width="8" stroke-linecap="round"/>
-                    </svg>`;
-                case 'wudhu-tangan':
-                    return `<svg viewBox="0 0 200 220" class="w-full h-44 mx-auto">
-                        <rect width="200" height="220" fill="#f8fafc" rx="12"/>
-                        ${baseHead}
-                        <!-- Arms washing -->
-                        <path d="M70 90 L100 130 L130 90" stroke="#065f46" stroke-width="20" fill="none"/>
-                        <!-- Water drops -->
-                        <path d="M100 120 Q100 135 100 145" stroke="#38bdf8" stroke-width="4" stroke-dasharray="4"/>
-                        <circle cx="100" cy="150" r="3" fill="#38bdf8"/>
-                    </svg>`;
-                case 'wudhu-muka':
-                    return `<svg viewBox="0 0 200 220" class="w-full h-44 mx-auto">
-                        <rect width="200" height="220" fill="#f8fafc" rx="12"/>
-                        <circle cx="100" cy="80" r="30" fill="#e0ac69"/>
-                        <path d="M68 75 C68 50, 132 50, 132 75 Z" fill="#022c22"/>
-                        <!-- Hands touching face with water -->
-                        <path d="M70 100 Q100 110 130 100" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" fill="none"/>
-                    </svg>`;
-                case 'wudhu-kaki':
-                    return `<svg viewBox="0 0 200 220" class="w-full h-44 mx-auto">
-                        <rect width="200" height="220" fill="#f8fafc" rx="12"/>
-                        <!-- Washing Feet to ankles -->
-                        <path d="M80 60 L80 160 L130 160" stroke="#065f46" stroke-width="24" stroke-linecap="round" fill="none"/>
-                        <path d="M120 160 L140 160" stroke="#e0ac69" stroke-width="16" stroke-linecap="round"/>
-                        <!-- Water spray -->
-                        <path d="M125 140 Q130 155 135 170" stroke="#38bdf8" stroke-width="4" stroke-dasharray="3"/>
-                    </svg>`;
-                default:
-                    return `<svg viewBox="0 0 200 220" class="w-full h-44 mx-auto"><rect width="200" height="220" fill="#f8fafc" rx="12"/></svg>`;
-            }
-        }
 
         // Syarat Sah Data
         const syaratData = [
-            { title: "1. Beragama Islam", desc: "Sholat orang kafir/non-muslim tidak diterima sampai masuk Islam.", dalil: "QS. Ali Imran: 85" },
-            { title: "2. Berakal Sehat", desc: "Orang gila, pingsan, atau mabuk tidak wajib & tidak sah sholatnya.", dalil: "HR. Abu Daud (No. 4402)" },
-            { title: "3. Mumayyiz (Bisa Membedakan Baik/Buruk)", desc: "Anak kecil yang sudah paham (sekitar 7 tahun) sah sholatnya.", dalil: "HR. Abu Daud (No. 495)" },
-            { title: "4. Suci Dari Hadats Kecil & Besar", desc: "Wajib berwudhu dari hadats kecil dan mandi wajib dari junub/haid.", dalil: "HR. Bukhari (No. 135)" },
-            { title: "5. Suci Badan, Pakaian, & Tempat Sholat", desc: "Bebas dari najis yang tidak dimaafkan.", dalil: "QS. Al-Muddatsthir: 4" },
-            { title: "6. Menutup Aurat", desc: "Laki-laki (pusar hingga lutut), Wanita (seluruh tubuh kecuali wajah & telapak tangan).", dalil: "QS. Al-A'raf: 31" },
-            { title: "7. Masuk Waktu Sholat", desc: "Sholat tidak sah dikerjakan sebelum waktunya tiba.", dalil: "QS. An-Nisa: 103" },
-            { title: "8. Menghadap Kiblat (Ka'bah)", desc: "Menghadap ke arah Ka'bah di Masjidil Haram secara yakin/ijtihad.", dalil: "QS. Al-Baqarah: 144" },
-            { title: "9. Niat", desc: "Meniatkan sholat tertentu di dalam hati saat Takbiratul Ihram.", dalil: "HR. Bukhari (No. 1)" }
+            {
+                title: "1. Beragama Islam",
+                desc: "Sholat orang kafir/non-muslim tidak diterima sampai masuk Islam.",
+                dalil: "QS. Ali Imran: 85",
+                arab: "وَمَن يَبْتَغِ غَيْرَ الْإِسْلَامِ دِينًا فَلَن يُقْبَلَ مِنْهُ وَهُوَ فِي الْآخِرَةِ مِنَ الْخَاسِرِينَ",
+                translation: "Dan barangsiapa mencari agama selain Islam, maka tidak akan diterima (agama itu) darinya, dan di akhirat ia termasuk orang-orang yang merugi."
+            },
+            {
+                title: "2. Berakal Sehat",
+                desc: "Orang gila, pingsan, atau mabuk tidak wajib & tidak sah sholatnya.",
+                dalil: "HR. Abu Daud (No. 4403)",
+                arab: "رُفِعَ الْقَلَمُ عَنْ ثَلَاثَةٍ: عَنِ النَّائِمِ حَتَّى يَسْتَيْقِظَ، وَعَنِ الصَّبِيِّ حَتَّى يَحْتَلِمَ، وَعَنِ الْمَجْنُونِ حَتَّى يَعْقِلَ",
+                translation: "Diangkat pena (tidak dicatat) dari tiga orang: orang yang tidur hingga ia bangun, anak kecil hingga ia baligh, dan orang gila hingga ia berakal."
+            },
+            {
+                title: "3. Mumayyiz (Bisa Membedakan Baik/Buruk)",
+                desc: "Anak kecil yang sudah paham (sekitar 7 tahun) sah sholatnya.",
+                dalil: "HR. Abu Daud (No. 495)",
+                arab: "مُرُوا أَوْلَادَكُمْ بِالصَّلَاةِ وَهُمْ أَبْنَاءُ سَبْعِ سِنِينَ، وَاضْرِبُوهُمْ عَلَيْهَا وَهُمْ أَبْنَاءُ عَشْرِ سِنِينَ، وَفَرِّقُوا بَيْنَهُمْ فِي الْمَضَاجِعِ",
+                translation: "Perintahkanlah anak-anak kalian untuk sholat ketika mereka berumur tujuh tahun, pukullah mereka (mendidik) karena meninggalkannya ketika berumur sepuluh tahun, dan pisahkanlah tempat tidur mereka."
+            },
+            {
+                title: "4. Suci Dari Hadats Kecil & Besar",
+                desc: "Wajib berwudhu dari hadats kecil dan mandi wajib dari junub/haid.",
+                dalil: "HR. Bukhari (No. 135)",
+                arab: "لَا تُقْبَلُ صَلَاةُ مَنْ أَحْدَثَ حَتَّى يَتَوَضَّأَ",
+                translation: "Tidak diterima sholat orang yang berhadats hingga ia berwudhu."
+            },
+            {
+                title: "5. Suci Badan, Pakaian, & Tempat Sholat",
+                desc: "Bebas dari najis yang tidak dimaafkan.",
+                dalil: "HR. Bukhari (No. 216) & Muslim (No. 292)",
+                arab: "دَعُوهُ، وَهَرِيقُوا عَلَى بَوْلِهِ سَجْلًا مِنْ مَاءٍ، فَإِنَّمَا بُعِثْتُمْ مُيَسِّرِينَ وَلَمْ تُبْعَثُوا مُعَسِّرِينَ",
+                translation: "Biarkanlah dia, dan tuangkanlah seember air pada air kencingnya. Sesungguhnya kalian diutus untuk memudahkan, bukan untuk menyulitkan."
+            },
+            {
+                title: "6. Menutup Aurat",
+                desc: "Laki-laki (pusar hingga lutut), Wanita (seluruh tubuh kecuali wajah & telapak tangan).",
+                dalil: "QS. Al-A'raf: 31 & HR. Tirmidzi (No. 377)",
+                arab: "يَا بَنِي آدَمَ خُذُوا زِينَتَكُمْ عِنْدَ كُلِّ مَسْجِدٍ. لَا تُقْبَلُ صَلَاةُ الْحَائِضِ إِلَّا بِخِمَارٍ",
+                translation: "Wahai anak-anak Adam, pakailah pakaianmu yang indah di setiap (memasuki) masjid. (Dan) sholat seorang wanita yang telah haid tidak diterima kecuali dengan mengenakan khimar (penutup kepala)."
+            },
+            {
+                title: "7. Masuk Waktu Sholat",
+                desc: "Sholat tidak sah dikerjakan sebelum waktunya tiba.",
+                dalil: "QS. An-Nisa: 103",
+                arab: "إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَوْقُوتًا",
+                translation: "Sesungguhnya sholat itu adalah kewajiban yang ditetapkan waktunya atas orang-orang yang beriman."
+            },
+            {
+                title: "8. Menghadap Kiblat (Ka'bah)",
+                desc: "Menghadap ke arah Ka'bah di Masjidil Haram secara yakin/ijtihad.",
+                dalil: "QS. Al-Baqarah: 144",
+                arab: "فَوَلِّ وَجْهَكَ شَطْرَ الْمَسْجِدِ الْحَرَامِ",
+                translation: "Maka hadapkanlah wajahmu ke arah Masjidil Haram."
+            },
+            {
+                title: "9. Niat",
+                desc: "Meniatkan sholat tertentu di dalam hati saat Takbiratul Ihram.",
+                dalil: "HR. Bukhari (No. 1) & Muslim (No. 1907)",
+                arab: "إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى",
+                translation: "Sesungguhnya amal itu tergantung pada niatnya, dan setiap orang hanya mendapatkan apa yang ia niatkan."
+            }
         ];
 
         // Steps Wudhu Data
         const wudhuStepsData = [
-            { step: 1, title: "Niat & Membaca Bismillah", desc: "Berniat dalam hati untuk menghilangkan hadats kecil dan mengucap Bismillah.", svg: "wudhu-tangan" },
-            { step: 2, title: "Mencuci Telapak Tangan (3x)", desc: "Mencuci kedua telapak tangan hingga sela-sela jari sebanyak 3 kali.", svg: "wudhu-tangan" },
-            { step: 3, title: "Kumur & Istinsyaq (3x)", desc: "Berkumur sekaligus menghirup air ke hidung lalu menghembuskannya (Istintsar).", svg: "wudhu-muka" },
-            { step: 4, title: "Membasuh Muka (3x)", desc: "Membasuh seluruh batas muka dari batas tumbuh rambut hingga dagu dan telinga ke telinga.", svg: "wudhu-muka" },
-            { step: 5, title: "Membasuh Tangan Hingga Siku (3x)", desc: "Mendahulukan tangan kanan dari ujung jari hingga melewati siku, lalu tangan kiri.", svg: "wudhu-tangan" },
-            { step: 6, title: "Mengusap Kepala & Telinga (1x)", desc: "Basahi tangan lalu usap dari depan ke belakang kepala dan kembali ke depan, langsung usap daun telinga.", svg: "wudhu-muka" },
-            { step: 7, title: "Membasuh Kaki Hingga Mata Kaki (3x)", desc: "Mencuci kaki kanan lalu kiri hingga melebihi kedua mata kaki dan merenggangkan sela jari kaki.", svg: "wudhu-kaki" },
-            { step: 8, title: "Membaca Doa Setelah Wudhu", desc: "Menghadap kiblat dan membaca doa kesaksian (Asyhadu an laa ilaaha illallah...).", svg: "stand" }
+            { step: 1, title: "Niat & Membaca Bismillah", desc: "Berniat dalam hati untuk menghilangkan hadats kecil dan mengucap Bismillah.", icon: "fa-heart" },
+            { step: 2, title: "Mencuci Telapak Tangan (3x)", desc: "Mencuci kedua telapak tangan hingga sela-sela jari sebanyak 3 kali.", icon: "fa-hands" },
+            { step: 3, title: "Kumur & Istinsyaq (3x)", desc: "Berkumur sekaligus menghirup air ke hidung lalu menghembuskannya (Istintsar).", icon: "fa-face-smile" },
+            { step: 4, title: "Membasuh Muka (3x)", desc: "Membasuh seluruh batas muka dari batas tumbuh rambut hingga dagu dan telinga ke telinga.", icon: "fa-face-smile" },
+            { step: 5, title: "Membasuh Tangan Hingga Siku (3x)", desc: "Mendahulukan tangan kanan dari ujung jari hingga melewati siku, lalu tangan kiri.", icon: "fa-hand" },
+            { step: 6, title: "Mengusap Kepala & Telinga (1x)", desc: "Basahi tangan lalu usap dari depan ke belakang kepala dan kembali ke depan, langsung usap daun telinga.", icon: "fa-head-side-mask" },
+            { step: 7, title: "Membasuh Kaki Hingga Mata Kaki (3x)", desc: "Mencuci kaki kanan lalu kiri hingga melebihi kedua mata kaki dan merenggangkan sela jari kaki.", icon: "fa-shoe-prints" },
+            { step: 8, title: "Membaca Doa Setelah Wudhu", desc: "Menghadap kiblat dan membaca doa kesaksian (Asyhadu an laa ilaaha illallah...).", icon: "fa-hands-praying" }
         ];
 
         // Steps Sholat Data
         const sholatStepsData = [
-            { rukun: "Rukun 1 & 2", title: "Berdiri Tegak & Niat", desc: "Berdiri tegak menghadap kiblat bagi yang mampu, berniat sholat di dalam hati.", svg: "stand", dalil: "QS. Al-Baqarah: 238" },
-            { rukun: "Rukun 3", title: "Takbiratul Ihram", desc: "Mengangkat kedua tangan sejajar bahu/telinga seraya mengucapkan 'Allahu Akbar'.", svg: "stand", dalil: "HR. Bukhari (No. 757)" },
-            { rukun: "Sunnah", title: "Sedekap & Doa Iftitah", desc: "Meletakkan tangan kanan di atas punggung tangan kiri di atas dada. Membaca Iftitah & Al-Fatihah.", svg: "stand", dalil: "HR. Muslim (No. 401)" },
-            { rukun: "Rukun 4 & 5", title: "Ruku' Dengan Thuma'ninah", desc: "Membungkukkan badan, punggung rata, memegang kedua lutut, membaca doa ruku'.", svg: "ruku", dalil: "HR. Bukhari & Muslim" },
-            { rukun: "Rukun 6 & 7", title: "I'tidal Dengan Thuma'ninah", desc: "Bangkit dari ruku' seraya mengucapkan 'Sami'allahu liman hamidah', berdiri lurus.", svg: "stand", dalil: "HR. Bukhari (No. 789)" },
-            { rukun: "Rukun 8 & 9", title: "Sujud Pertama & Kedua", desc: "Sujud di atas 7 anggota tubuh (dahi+hidung, 2 telapak tangan, 2 lutut, 2 ujung kaki).", svg: "sujud", dalil: "HR. Bukhari (No. 812)" },
-            { rukun: "Rukun 10 & 11", title: "Duduk Antara Dua Sujud", desc: "Duduk Iftirasy (menduduki kaki kiri dan menegakkan kaki kanan), membaca doa.", svg: "duduk", dalil: "HR. Abu Daud (No. 850)" },
-            { rukun: "Rukun 12-14", title: "Tasyahud Akhir & Shalawat", desc: "Duduk Tawarruk (kaki kiri dimasukkan ke bawah kaki kanan), membaca Tasyahud & Shalawat Nabi.", svg: "duduk", dalil: "HR. Bukhari (No. 831)" },
-            { rukun: "Rukun 15", title: "Salam Pertama", desc: "Menoleh ke kanan hingga pipi terlihat dari belakang seraya mengucapkan 'Assalamu'alaikum wa rahmatullah'.", svg: "duduk", dalil: "HR. Muslim (No. 582)" }
+            { rukun: "Rukun 1 & 2", title: "Berdiri Tegak & Niat", desc: "Berdiri tegak menghadap kiblat bagi yang mampu, berniat sholat di dalam hati.", icon: "fa-person", dalil: "QS. Al-Baqarah: 238" },
+            { rukun: "Rukun 3", title: "Takbiratul Ihram", desc: "Mengangkat kedua tangan sejajar bahu/telinga seraya mengucapkan 'Allahu Akbar'.", icon: "fa-hands-praying", dalil: "HR. Bukhari (No. 757)" },
+            { rukun: "Sunnah", title: "Sedekap & Doa Iftitah", desc: "Meletakkan tangan kanan di atas punggung tangan kiri di atas dada. Membaca Iftitah & Al-Fatihah.", icon: "fa-hands", dalil: "HR. Muslim (No. 401)" },
+            { rukun: "Rukun 4 & 5", title: "Ruku' Dengan Thuma'ninah", desc: "Membungkukkan badan, punggung rata, memegang kedua lutut, membaca doa ruku'.", icon: "fa-person-praying", dalil: "HR. Bukhari & Muslim" },
+            { rukun: "Rukun 6 & 7", title: "I'tidal Dengan Thuma'ninah", desc: "Bangkit dari ruku' seraya mengucapkan 'Sami'allahu liman hamidah', berdiri lurus.", icon: "fa-person", dalil: "HR. Bukhari (No. 789)" },
+            { rukun: "Rukun 8 & 9", title: "Sujud Pertama & Kedua", desc: "Sujud di atas 7 anggota tubuh (dahi+hidung, 2 telapak tangan, 2 lutut, 2 ujung kaki).", icon: "fa-person-praying", dalil: "HR. Bukhari (No. 812)" },
+            { rukun: "Rukun 10 & 11", title: "Duduk Antara Dua Sujud", desc: "Duduk Iftirasy (menduduki kaki kiri dan menegakkan kaki kanan), membaca doa.", icon: "fa-chair", dalil: "HR. Abu Daud (No. 850)" },
+            { rukun: "Rukun 12-14", title: "Tasyahud Akhir & Shalawat", desc: "Duduk Tawarruk (kaki kiri dimasukkan ke bawah kaki kanan), membaca Tasyahud & Shalawat Nabi.", icon: "fa-chair", dalil: "HR. Bukhari (No. 831)" },
+            { rukun: "Rukun 15", title: "Salam Pertama", desc: "Menoleh ke kanan hingga pipi terlihat dari belakang seraya mengucapkan 'Assalamu'alaikum wa rahmatullah'.", icon: "fa-comment", dalil: "HR. Muslim (No. 582)" }
         ];
 
         // Word-by-Word Prayer Recitations Data
@@ -839,14 +900,62 @@
 
         // Pembatal Sholat Data
         const pembatalData = [
-            { title: "1. Berbicara dengan Sengaja", desc: "Berbicara perkataan manusia di luar bacaan sholat membatalkan sholat.", dalil: "HR. Muslim (No. 537)" },
-            { title: "2. Tertawa Terbahak-bahak", desc: "Tertawa hingga mengeluarkan suara membatalkan wudhu & sholat menurut ijma' ulama.", dalil: "Consensus (Ijma')" },
-            { title: "3. Terbuka Aurat Dengan Sengaja", desc: "Jika aurat terbuka dan tidak langsung ditutup seketika.", dalil: "QS. Al-A'raf: 31" },
-            { title: "4. Makan dan Minum", desc: "Sengaja menelan makanan/minuman meski sedikit.", dalil: "Kitab Al-Majmu'" },
-            { title: "5. Berhadats (Kutut/Batal Wudhu)", desc: "Keluarnya angin, air kencing, atau hadats lainnya.", dalil: "HR. Bukhari (No. 135)" },
-            { title: "6. Banyak Bergerak Berturut-turut", desc: "Gerakan besar di luar gerakan sholat secara berturut-turut tanpa hajat.", dalil: "Fikih Syafi'i" },
-            { title: "7. Mendahului Imam (Bagi Makmum)", desc: "Sengaja ruku' atau sujud mendahului imam hingga 2 rukun fi'li.", dalil: "HR. Bukhari (No. 691)" },
-            { title: "8. Murtad Atau Berubah Niat", desc: "Berniat keluar dari sholat atau membatalkannya saat sholat berlangsung.", dalil: "Kaidah Niat" }
+            {
+                title: "1. Berbicara dengan Sengaja",
+                desc: "Berbicara perkataan manusia di luar bacaan sholat membatalkan sholat.",
+                dalil: "HR. Muslim (No. 537)",
+                arab: "إِنَّ هَذِهِ الصَّلَاةَ لَا يَصْلُحُ فِيهَا شَيْءٌ مِنْ كَلَامِ النَّاسِ، إِنَّمَا هُوَ التَّسْبِيحُ وَالتَّكْبِيرُ وَقِرَاءَةُ الْقُرْآنِ",
+                translation: "Sesungguhnya sholat ini tidak boleh di dalamnya ada sesuatu dari perkataan manusia. Sholat itu hanyalah tasbih, takbir, dan bacaan Al-Qur'an."
+            },
+            {
+                title: "2. Tertawa Terbahak-bahak",
+                desc: "Tertawa hingga mengeluarkan suara membatalkan sholat menurut ijma' ulama.",
+                dalil: "Ijma' Ulama",
+                arab: "",
+                translation: "Para ulama sepakat bahwa tertawa terbahak-bahak (hingga terdengar suara) membatalkan sholat."
+            },
+            {
+                title: "3. Terbuka Aurat Dengan Sengaja",
+                desc: "Jika aurat terbuka dan tidak langsung ditutup seketika.",
+                dalil: "QS. Al-A'raf: 31",
+                arab: "يَا بَنِي آدَمَ خُذُوا زِينَتَكُمْ عِنْدَ كُلِّ مَسْجِدٍ",
+                translation: "Wahai anak-anak Adam, pakailah pakaianmu yang indah di setiap (memasuki) masjid."
+            },
+            {
+                title: "4. Makan dan Minum",
+                desc: "Sengaja menelan makanan/minuman meski sedikit.",
+                dalil: "Fikih Syafi'i",
+                arab: "",
+                translation: "Sengaja makan atau minum di tengah sholat membatalkannya menurut kesepakatan ulama."
+            },
+            {
+                title: "5. Berhadats (Kentut/Batal Wudhu)",
+                desc: "Keluarnya angin, air kencing, atau hadats lainnya.",
+                dalil: "HR. Bukhari (No. 135)",
+                arab: "لَا تُقْبَلُ صَلَاةُ مَنْ أَحْدَثَ حَتَّى يَتَوَضَّأَ",
+                translation: "Tidak diterima sholat orang yang berhadats hingga ia berwudhu."
+            },
+            {
+                title: "6. Banyak Bergerak Berturut-turut",
+                desc: "Gerakan besar di luar gerakan sholat secara berturut-turut tanpa hajat.",
+                dalil: "Fikih Syafi'i",
+                arab: "",
+                translation: "Gerakan besar yang berturut-turut tanpa kebutuhan membatalkan sholat menurut madzhab Syafi'i."
+            },
+            {
+                title: "7. Mendahului Imam (Bagi Makmum)",
+                desc: "Sengaja ruku' atau sujud mendahului imam hingga 2 rukun fi'li.",
+                dalil: "HR. Bukhari (No. 691) & Muslim (No. 427)",
+                arab: "أَمَا يَخْشَى الَّذِي يَرْفَعُ رَأْسَهُ قَبْلَ الْإِمَامِ أَنْ يُحَوِّلَ اللَّهُ رَأْسَهُ رَأْسَ حِمَارٍ",
+                translation: "Tidakkah orang yang mengangkat kepalanya sebelum imam takut bahwa Allah akan mengubah kepalanya menjadi kepala keledai?"
+            },
+            {
+                title: "8. Murtad Atau Berubah Niat",
+                desc: "Berniat keluar dari sholat atau membatalkannya saat sholat berlangsung.",
+                dalil: "Kaidah Niat",
+                arab: "",
+                translation: "Membatalkan niat sholat atau keluar dari Islam di tengah sholat membatalkan ibadah tersebut."
+            }
         ];
 
         /* -------------------------------------------------------------
@@ -854,8 +963,11 @@
         ------------------------------------------------------------- */
         let currentFontSize = 28;
         let bookmarkedIds = JSON.parse(localStorage.getItem('sholat_bookmarks') || '[]');
+        let searchActive = false;
+        let searchPrevState = null;
 
         window.onload = function() {
+            document.documentElement.style.setProperty('--arabic-size', currentFontSize + 'px');
             renderSyarat();
             renderWudhuSteps();
             renderSholatSteps();
@@ -865,48 +977,69 @@
         };
 
         // Render Syarat Sah
+        function renderDalilDetails(item) {
+            if (!item.arab && !item.translation) return '';
+            return `
+                <details class="mt-3 rounded-xl border border-slate-200 bg-slate-50/80 px-3 py-2">
+                    <summary class="flex cursor-pointer items-center justify-between gap-2 text-xs font-semibold text-emerald-800">
+                        <span><i class="fa-solid fa-book-open text-gold-500 mr-1"></i> Matan & Terjemahan</span>
+                        <i class="fa-solid fa-chevron-down details-chevron text-[10px]"></i>
+                    </summary>
+                    <div class="mt-3 space-y-2 border-t border-slate-200 pt-3">
+                        ${item.arab ? `<p class="font-arabic text-right text-xl leading-loose text-emerald-950" dir="rtl">${item.arab}</p>` : ''}
+                        ${item.translation ? `<p class="text-xs italic leading-relaxed text-slate-600">"${item.translation}"</p>` : ''}
+                    </div>
+                </details>
+            `;
+        }
+
         function renderSyarat() {
             const container = document.getElementById('syarat-container');
             container.innerHTML = syaratData.map(item => `
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:border-gold-400 transition">
-                    <div class="flex items-center justify-between mb-2">
+                <div class="search-item bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:border-gold-400 transition">
+                    <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
                         <h4 class="font-bold text-emerald-950">${item.title}</h4>
-                        <span class="text-xs px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-semibold">${item.dalil}</span>
+                        <span class="text-[11px] px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-semibold whitespace-nowrap">${item.dalil}</span>
                     </div>
                     <p class="text-xs text-slate-600 leading-relaxed">${item.desc}</p>
+                    ${renderDalilDetails(item)}
                 </div>
             `).join('');
         }
 
-        // Render Wudhu Visual Steps
+        // Render Wudhu Steps
         function renderWudhuSteps() {
             const container = document.getElementById('wudhu-steps-grid');
             container.innerHTML = wudhuStepsData.map(step => `
-                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 text-center flex flex-col justify-between hover:shadow-md transition">
-                    <div>
-                        <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full mb-3">Langkah ${step.step}</span>
-                        <h4 class="font-bold text-slate-800 mb-2">${step.title}</h4>
-                        <div class="my-3">${getFacelessSVG(step.svg)}</div>
-                        <p class="text-xs text-slate-600 leading-relaxed">${step.desc}</p>
+                <div class="search-item bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:border-emerald-300 hover:shadow-md transition">
+                    <div class="flex items-start gap-3">
+                        <div class="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-emerald-900 text-gold-400 shadow-sm">
+                            <i class="fa-solid ${step.icon} text-lg"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-gold-600">Langkah ${step.step}</span>
+                            <h4 class="font-bold leading-snug text-slate-800">${step.title}</h4>
+                        </div>
                     </div>
+                    <p class="mt-3 text-xs leading-relaxed text-slate-600">${step.desc}</p>
                 </div>
             `).join('');
         }
 
         // Render Sholat Gerakan Steps
         function renderSholatSteps() {
-            const container = document.getElementById('sholat-gerakan-container');
-            container.innerHTML = sholatStepsData.map((step, idx) => `
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col md:flex-row items-center gap-6">
-                    <div class="w-full md:w-1/3 flex-shrink-0">
-                        ${getFacelessSVG(step.svg)}
+            const container = document.getElementById('sholat-steps-list');
+            container.innerHTML = sholatStepsData.map(step => `
+                <div class="search-item bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:border-gold-300 hover:shadow-md transition flex gap-4">
+                    <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-emerald-900 text-gold-400 shadow-sm">
+                        <i class="fa-solid ${step.icon} text-xl"></i>
                     </div>
-                    <div class="w-full md:w-2/3 space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-full">${step.rukun}</span>
-                            <span class="text-xs text-slate-400">${step.dalil}</span>
+                    <div class="min-w-0 flex-1 space-y-1.5">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span class="bg-amber-100 text-amber-800 text-[11px] font-bold px-2.5 py-1 rounded-full">${step.rukun}</span>
+                            <span class="text-[11px] text-slate-400">${step.dalil}</span>
                         </div>
-                        <h3 class="text-lg font-bold text-emerald-950">${step.title}</h3>
+                        <h3 class="text-base sm:text-lg font-bold text-emerald-950">${step.title}</h3>
                         <p class="text-sm text-slate-600 leading-relaxed">${step.desc}</p>
                     </div>
                 </div>
@@ -917,7 +1050,7 @@
         function renderSholatWords() {
             const container = document.getElementById('sholat-bacaan-container');
             container.innerHTML = bacaanSholatWords.map((item, idx) => `
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+                <div class="search-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
                     <div class="flex items-center justify-between border-b pb-3">
                         <h3 class="font-bold text-emerald-900 text-base">${item.title}</h3>
                         <span class="text-xs text-slate-500 italic bg-slate-100 px-2.5 py-1 rounded-full">${item.source}</span>
@@ -925,7 +1058,7 @@
 
                     <!-- Full Arabic Text -->
                     <div class="bg-slate-50 p-4 rounded-xl text-right">
-                        <p class="font-arabic text-emerald-950 mb-2 leading-loose style="font-size: ${currentFontSize}px;" dir="rtl">
+                        <p class="font-arabic arabic-size text-emerald-950 mb-2 leading-loose" dir="rtl">
                             ${item.arabFull}
                         </p>
                         <p class="text-xs text-emerald-800 font-semibold text-left mb-1">${item.latinFull}</p>
@@ -953,10 +1086,11 @@
         function renderPembatal() {
             const container = document.getElementById('pembatal-list');
             container.innerHTML = pembatalData.map(item => `
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-red-100 hover:border-red-300 transition">
+                <div class="search-item bg-white p-5 rounded-2xl shadow-sm border border-red-100 hover:border-red-300 transition">
                     <h4 class="font-bold text-red-900 mb-1">${item.title}</h4>
                     <p class="text-xs text-slate-600 mb-2 leading-relaxed">${item.desc}</p>
                     <span class="inline-block text-[10px] font-semibold bg-red-50 text-red-700 px-2 py-0.5 rounded">${item.dalil}</span>
+                    ${renderDalilDetails(item)}
                 </div>
             `).join('');
         }
@@ -964,7 +1098,17 @@
         /* -------------------------------------------------------------
            4. NAVIGATION & TAB SWITCHING LOGIC
         ------------------------------------------------------------- */
-        function switchTab(tabId) {
+        function switchTab(tabId, skipSearchReset = false) {
+            if (searchActive && !skipSearchReset) {
+                searchActive = false;
+                searchPrevState = null;
+                document.getElementById('search-input').value = '';
+                document.getElementById('search-status').classList.add('hidden');
+                document.querySelectorAll('.search-item').forEach(el => el.classList.remove('hidden'));
+                switchWudhuSub('wudhu-langkah');
+                switchSholatSub('sholat-gerakan');
+            }
+
             // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             // Remove active classes
@@ -1027,6 +1171,30 @@
         /* -------------------------------------------------------------
            5. UTILITIES (Search, Font Size, Bookmarks)
         ------------------------------------------------------------- */
+        function openLightbox(src, title) {
+            const box = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const scroll = document.getElementById('lightbox-scroll');
+            document.getElementById('lightbox-title').innerText = title || 'Infografis';
+            img.src = src;
+            img.alt = title || 'Infografis';
+            document.getElementById('lightbox-open').href = src;
+            box.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            scroll.scrollTop = 0;
+        }
+
+        function closeLightbox(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('lightbox').classList.add('hidden');
+            document.getElementById('lightbox-img').src = '';
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeLightbox();
+        });
+
         function toggleSearch() {
             const sb = document.getElementById('search-bar');
             sb.classList.toggle('hidden');
@@ -1041,17 +1209,69 @@
 
         function changeFontSize(delta) {
             currentFontSize = Math.max(20, Math.min(42, currentFontSize + delta));
+            document.documentElement.style.setProperty('--arabic-size', currentFontSize + 'px');
             document.getElementById('font-size-label').innerText = currentFontSize + 'px';
-            renderSholatWords();
+        }
+
+        function enterSearchMode() {
+            if (searchActive) return;
+            searchActive = true;
+            const activeTab = document.querySelector('.tab-content:not(.hidden)');
+            const activeWudhu = document.querySelector('.wudhu-sub-content:not(.hidden)');
+            searchPrevState = {
+                tab: activeTab ? activeTab.id.replace('content-', '') : 'home',
+                wudhuSub: activeWudhu ? activeWudhu.id.replace('wudhu-sub-', '') : 'wudhu-langkah',
+                sholatSub: document.getElementById('sholat-bacaan-container').classList.contains('hidden')
+                    ? 'sholat-gerakan' : 'sholat-bacaan'
+            };
+        }
+
+        function exitSearchMode() {
+            if (!searchActive) return;
+            searchActive = false;
+            document.querySelectorAll('.search-item').forEach(el => el.classList.remove('hidden'));
+            document.getElementById('search-status').classList.add('hidden');
+            const prev = searchPrevState || { tab: 'home', wudhuSub: 'wudhu-langkah', sholatSub: 'sholat-gerakan' };
+            switchTab(prev.tab, true);
+            switchWudhuSub(prev.tab === 'wudhu' ? prev.wudhuSub : 'wudhu-langkah');
+            switchSholatSub(prev.tab === 'rukun' ? prev.sholatSub : 'sholat-gerakan');
+            searchPrevState = null;
         }
 
         function handleSearch() {
-            const query = document.getElementById('search-input').value.toLowerCase();
-            if (query.trim() === '') return;
+            const query = document.getElementById('search-input').value.trim().toLowerCase();
+            const status = document.getElementById('search-status');
+            if (!query) {
+                exitSearchMode();
+                return;
+            }
 
-            // Search logic across recitations & dalil
-            switchTab('rukun');
-            switchSholatSub('sholat-bacaan');
+            enterSearchMode();
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.wudhu-sub-content').forEach(el => el.classList.remove('hidden'));
+            document.getElementById('sholat-gerakan-container').classList.remove('hidden');
+            document.getElementById('sholat-bacaan-container').classList.remove('hidden');
+
+            let total = 0;
+            document.querySelectorAll('.tab-content').forEach(section => {
+                let matches = 0;
+                section.querySelectorAll('.search-item').forEach(item => {
+                    const haystack = (item.dataset.search || item.textContent).toLowerCase();
+                    const isMatch = haystack.includes(query);
+                    item.classList.toggle('hidden', !isMatch);
+                    if (isMatch) matches++;
+                });
+                if (matches > 0) {
+                    section.classList.remove('hidden');
+                    total += matches;
+                }
+            });
+
+            const safeQuery = query.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            status.classList.remove('hidden');
+            status.innerHTML = total > 0
+                ? `<i class="fa-solid fa-magnifying-glass mr-1 text-emerald-700"></i> Ditemukan <strong>${total}</strong> hasil untuk &ldquo;${safeQuery}&rdquo;.`
+                : `<i class="fa-solid fa-circle-info mr-1 text-emerald-700"></i> Tidak ada hasil untuk &ldquo;${safeQuery}&rdquo;. Coba kata kunci lain seperti <em>niat</em>, <em>sujud</em>, atau <em>wudhu</em>.`;
         }
 
         function bookmarkItem(id) {

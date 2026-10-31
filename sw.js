@@ -1,14 +1,16 @@
-const CACHE_NAME = 'islamic-learning-v1';
+const CACHE_NAME = 'islamic-learning-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
-  './image_0.png',
-  './1792763798721.jpg',
+  './wudhu.jpg',
+  './sholat.jpg',
+  './icon-192.png',
+  './icon-512.png',
   './SPECIFICATION.md',
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://fonts.googleapis.com/css2?family=Amiri&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap'
+  'https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap'
 ];
 
 // Install Event - Pre-cache Assets
@@ -41,6 +43,8 @@ self.addEventListener('activate', (event) => {
 
 // Fetch Event - Stale-While-Revalidate Strategy
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
