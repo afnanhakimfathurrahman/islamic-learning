@@ -1137,16 +1137,26 @@
         }
 
         function switchWudhuSub(subId) {
+            // Terima 'wudhu-langkah' maupun 'langkah'
+            const name = String(subId).replace(/^wudhu-/, '');
+            const content = document.getElementById(`wudhu-sub-${name}`);
+            const activeBtn = document.getElementById(`sub-wudhu-${name}`);
+            if (!content) {
+                console.warn(`Elemen wudhu-sub-${name} tidak ditemukan!`);
+                return;
+            }
+
             document.querySelectorAll('.wudhu-sub-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.wudhu-sub-btn').forEach(btn => {
                 btn.classList.remove('text-emerald-800', 'border-emerald-800');
                 btn.classList.add('text-slate-500', 'border-transparent');
             });
 
-            document.getElementById(subId).classList.remove('hidden');
-            const activeBtn = document.getElementById(`sub-${subId}`);
-            activeBtn.classList.remove('text-slate-500', 'border-transparent');
-            activeBtn.classList.add('text-emerald-800', 'border-emerald-800');
+            content.classList.remove('hidden');
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-500', 'border-transparent');
+                activeBtn.classList.add('text-emerald-800', 'border-emerald-800');
+            }
         }
 
         function switchSholatSub(type) {
