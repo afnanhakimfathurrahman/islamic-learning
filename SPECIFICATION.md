@@ -175,7 +175,7 @@ Itemized list with detailed explanations, full Matan, translation, and Dalil ref
   - Tap/click opens a fullscreen lightbox with pinch-zoom, pan, and "open in new tab" fallback.
 - **14 Rukun Sholat Grid**: Responsive grid overview below the infographic.
 - **Word-by-Word Interactivity**:
-  - Breakdown of key recitations (Takbir, Doa Istiftah, Rukuk, I'tidal, Sujud, Duduk antara dua sujud).
+  - Breakdown of 10 recitations in prayer order (`bacaanSholatWords`): Takbiratul Ihram, Doa Iftitah, Al-Fatihah, Ruku', I'tidal, Sujud, Duduk antara dua sujud, Tasyahud, Shalawat Ibrahimiyyah, Salam. Per-word badges must wrap (no `truncate`).
   - Arabic text paired with word-by-word Indonesian transliteration and literal word meaning grid.
   - Font size setting applies to Arabic recitation via the CSS variable `--arabic-size` (default `28px`, range `20px`–`42px`).
 
@@ -233,7 +233,7 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 
 ### 5.4 PWA / Service worker
 - Strategy: stale-while-revalidate for all GET requests; precache list `ASSETS_TO_CACHE` is added one-by-one (`cache.add(...).catch`), so a failing CDN URL does not abort install.
-- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v10`.
+- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v11`.
 - Installability needs: valid manifest, 192/512 icons, active SW, HTTPS. Chrome will not fire `beforeinstallprompt` if the app is already installed.
 
 ---
