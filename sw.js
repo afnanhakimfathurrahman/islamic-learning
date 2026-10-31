@@ -1,4 +1,4 @@
-const CACHE_NAME = 'islamic-learning-v5';
+const CACHE_NAME = 'islamic-learning-v6';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

@@ -46,6 +46,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* Hover hanya untuk tab tidak aktif (mencegah tab aktif jadi pucat setelah disentuh) */
+        @media (hover: hover) {
+            .wudhu-sub-btn.bg-white:hover { background-color: #ecfdf5; color: #065f46; }
+        }
         .font-arabic {
             font-family: 'Amiri', 'Traditional Arabic', serif;
             line-height: 2.2;
@@ -385,16 +389,16 @@
                 <button onclick="switchWudhuSub('wudhu-langkah')" id="sub-wudhu-langkah" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-emerald-800 text-white border-emerald-800 shadow-sm">
                     <i class="fa-solid fa-person-dots-from-line mr-1"></i> Visual & Tata Cara
                 </button>
-                <button onclick="switchWudhuSub('wudhu-syarat')" id="sub-wudhu-syarat" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200 hover:bg-emerald-50 hover:text-emerald-800">
+                <button onclick="switchWudhuSub('wudhu-syarat')" id="sub-wudhu-syarat" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200">
                     3.1 Syarat Sah Wudhu
                 </button>
-                <button onclick="switchWudhuSub('wudhu-rukun')" id="sub-wudhu-rukun" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200 hover:bg-emerald-50 hover:text-emerald-800">
+                <button onclick="switchWudhuSub('wudhu-rukun')" id="sub-wudhu-rukun" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200">
                     3.2 Rukun Wudhu
                 </button>
-                <button onclick="switchWudhuSub('wudhu-sunnah')" id="sub-wudhu-sunnah" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200 hover:bg-emerald-50 hover:text-emerald-800">
+                <button onclick="switchWudhuSub('wudhu-sunnah')" id="sub-wudhu-sunnah" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200">
                     3.3 Sunnah & Keutamaan
                 </button>
-                <button onclick="switchWudhuSub('wudhu-ancaman')" id="sub-wudhu-ancaman" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200 hover:bg-emerald-50 hover:text-emerald-800">
+                <button onclick="switchWudhuSub('wudhu-ancaman')" id="sub-wudhu-ancaman" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200">
                     3.4 Ancaman Wudhu Salah
                 </button>
             </div>
