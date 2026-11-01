@@ -31,12 +31,15 @@ islamic-learning/
 ├── SPECIFICATION.md         # This file: source of truth for AI agents
 ├── AGENTS.md                # Short entry point for AI agents (points here)
 ├── CLAUDE.md                # Same, for Claude Code
+├── CNAME                    # GitHub Pages custom domain (belajarsholat.is-my.app)
+├── scripts/serve-local.sh   # Local preview server (python http.server), manual trigger
+├── scripts/stop-local.sh    # Stops the local preview server
 ├── .claude/skills/          # Task playbooks for AI agents (see section 7)
 ├── wudhu.jpg / sholat.jpg   # Infographics (faceless Muslim avatars)
 └── icon-192.png / icon-512.png
 ```
 
-Hosting: GitHub Pages from branch `main`, root. Live URL: `https://kamaludin68.github.io/islamic-learning/`. A push to `main` deploys automatically (about 1-2 minutes). There is no build or test tooling; everything is static.
+Hosting: GitHub Pages from branch `main`, root. Live URL: `https://belajarsholat.is-my.app/` (custom domain via the free is-my.app subdomain registry; CNAME target `kamaludin68.github.io`). The GitHub fallback URL `https://kamaludin68.github.io/islamic-learning/` redirects to the custom domain. A push to `main` deploys automatically (about 1-2 minutes). There is no build or test tooling; everything is static.
 
 ---
 
@@ -56,7 +59,8 @@ Hosting: GitHub Pages from branch `main`, root. Live URL: `https://kamaludin68.g
     3. `wudhu` (Tata Cara & Infografis Wudhu)
     4. `rukun` (Rukun, Infografis & Bacaan Sholat)
     5. `pembatal` (Pembatal Sholat)
-    6. `bookmarks` (Favorit)
+    6. `quiz` (Kuis)
+    7. `bookmarks` (Favorit)
 
 ### 4.2 Global Real-time Search Filter
 - **Input Field**: Top search bar listening on `oninput="handleSearch()"`.
@@ -199,6 +203,14 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
    - **Terjemahan**: "Tidaklah orang yang mengangkat kepalanya sebelum imam takut bahwa Allah akan mengubah kepalanya menjadi kepala keledai?"
 9. **Murtad atau berubah niat** — Kaidah niat.
 
+#### Module 6: Kuis ("Yuk, Uji Pemahamanmu!")
+- Tab `quiz` (`tab-quiz`, `mob-tab-quiz`, panel `content-quiz`, root `#quiz-root`, dirender oleh `renderQuiz()`). Tidak memakai `.search-item`, jadi tidak ikut pencarian.
+- Satu putaran = 10 soal acak dari `quizBank`: 4 pilihan ganda (`mc`), 2 lengkapi bacaan (`fill`, kalimat Arab dengan `____`), 1 benar/salah (`tf`), 2 susun urutan (`order`), 1 pasangkan arti (`match`). Opsi diacak saat putaran dibuat; soal dari putaran sebelumnya dihindari selama bank cukup.
+- Level tanpa batas. Naik level hanya jika 10/10 benar (`quizNextLevel`); jika ada salah, tampil koreksi (jawaban pemain, jawaban benar, penjelasan, sumber) dan pemain mengulang level dengan soal baru. Soal sulit lebih sering muncul di level tinggi (`quizPick`, bobot per `lvl` 1-3).
+- Skor: 10 poin per jawaban benar, bonus 20 poin untuk 10/10 (maks 120 per level). Skor per level = skor terbaik pada level itu; total = jumlah skor terbaik semua level (mencegah farming).
+- Persistensi: `localStorage['quiz_progress']` = `{level, best:{<level>:skor}, lastIds:[...]}`; tombol Reset meminta konfirmasi.
+- Aturan isi: **setiap soal harus bersumber dari materi yang ada di aplikasi** (field `src` menunjuk bagian/dalil). Jangan menambah fakta atau dalil baru lewat kuis. Tambah soal dengan skill `add-quiz-question`.
+
 #### Footer Requirement
 - Mandatory attribution footer referencing [Rumaysho.com](https://rumaysho.com) (Ustadz Muhammad Abduh Tuasikal, M.Sc.).
 
@@ -210,11 +222,12 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 | Purpose | ID / class pattern |
 |---|---|
 | Main tab buttons | `tab-<id>` (class `nav-tab`, active = `tab-active`); mobile bottom nav `mob-tab-<id>` |
-| Main tab panels | `content-<id>` (class `tab-content`), `<id>` in `home, syarat, wudhu, rukun, pembatal, bookmarks` |
+| Main tab panels | `content-<id>` (class `tab-content`), `<id>` in `home, syarat, wudhu, rukun, pembatal, quiz, bookmarks` |
 | Wudhu sub-tab buttons | `sub-wudhu-<name>` (class `wudhu-sub-btn`, pill style) |
 | Wudhu sub-tab panels | `wudhu-sub-<name>` (class `wudhu-sub-content`), `<name>` in `langkah, syarat, rukun, sunnah, ancaman` |
 | Sholat sub-tab buttons / panels | `btn-sholat-gerakan`, `btn-sholat-bacaan` / `sholat-gerakan-container`, `sholat-bacaan-container` |
 | Searchable card | class `search-item` (optional `data-search` overrides text used for matching) |
+| Quiz | `tab-quiz`, `mob-tab-quiz`, `content-quiz`, `#quiz-root` |
 | Install button | `#pwa-install-btn` (hidden until `beforeinstallprompt`, or iOS Safari not standalone) |
 
 ### 5.2 JavaScript map (single inline `<script>`)
@@ -224,6 +237,7 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 - Settings: `toggleSettings`, `changeFontSize(delta)` (CSS var `--arabic-size`, default 28px, 20-42px).
 - Lightbox: `openLightbox(src, title)`, `closeLightbox(event)`.
 - Bookmarks: `bookmarkItem(id)`, `renderBookmarks()`; persisted in `localStorage['sholat_bookmarks']` (JSON array of ids).
+- Quiz: data `quizBank` (helper `mc/fill/tf/order/match`), state `quizProgress`/`quizRound`, fungsi `quizStart`, `quizChoose`, `quizOrderAdd/Remove/Check`, `quizMatchLeft/Right/Check`, `quizNext`, `quizEndRound`, `quizNextLevel`, `quizReset`, render `renderQuiz` (`quizViewHome/Question/Result`).
 - PWA: `beforeinstallprompt` handler stores `deferredInstallPrompt`; install button calls `.prompt()`; `appinstalled` hides the button; iOS shows an "Add to Home Screen" alert. Service worker registered on `load` via `./sw.js`.
 
 ### 5.3 Styling
@@ -233,7 +247,7 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 
 ### 5.4 PWA / Service worker
 - Strategy: stale-while-revalidate for all GET requests; precache list `ASSETS_TO_CACHE` is added one-by-one (`cache.add(...).catch`), so a failing CDN URL does not abort install.
-- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v11`.
+- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v12`.
 - Installability needs: valid manifest, 192/512 icons, active SW, HTTPS. Chrome will not fire `beforeinstallprompt` if the app is already installed.
 
 ---
@@ -255,6 +269,7 @@ Task playbooks live in `.claude/skills/<name>/SKILL.md` (frontmatter `name`, `de
 - `add-dalil`: add a verse/hadith card with matan, translation, source, and search/bookmark hooks.
 - `add-subtab`: add a main tab or wudhu sub-tab without breaking the ID contract.
 - `pwa-release`: bump cache, validate manifest/SW, verify install and deploy.
+- `add-quiz-question`: tambah/ubah soal kuis dari materi yang sudah ada.
 - `verify-site`: run the static checks (JS syntax, ID cross-check, manifest JSON) before pushing.
 
 ## 8. Known Pitfalls (history)
@@ -263,7 +278,14 @@ Task playbooks live in `.claude/skills/<name>/SKILL.md` (frontmatter `name`, `de
 - `cache.addAll` in the SW aborts if any URL fails (e.g. CDN). Now per-asset.
 - Stale caches: forgetting to bump `CACHE_NAME` makes deployed fixes invisible to returning users.
 
-## 9. Deploy
+## 9. Local Preview & Deploy
+Local preview (no build step):
+```bash
+bash scripts/serve-local.sh [port]   # default 8080 -> http://localhost:8080/ (also prints LAN URL)
+```
+The service worker is active on `localhost`; if edits do not show, reload twice or unregister it in DevTools. Stop it with `bash scripts/stop-local.sh [port]`.
+
+Deploy:
 ```bash
 bash .claude/skills/verify-site/check.sh   # static checks
 git add -A && git commit -m "<message>" && git push origin main

@@ -190,6 +190,9 @@
                 <button onclick="switchTab('pembatal')" id="tab-pembatal" class="nav-tab py-3 px-2 text-sm font-medium text-emerald-200 hover:text-gold-400 whitespace-nowrap">
                     <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Pembatal Sholat
                 </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-tab py-3 px-2 text-sm font-medium text-emerald-200 hover:text-gold-400 whitespace-nowrap">
+                    <i class="fa-solid fa-circle-question mr-1.5"></i> Kuis
+                </button>
                 <button onclick="switchTab('bookmarks')" id="tab-bookmarks" class="nav-tab py-3 px-2 text-sm font-medium text-emerald-200 hover:text-gold-400 whitespace-nowrap">
                     <i class="fa-solid fa-bookmark mr-1.5"></i> Favorit
                 </button>
@@ -749,6 +752,17 @@
         </section>
 
         <!-- TAB 6: BOOKMARKS / FAVORIT -->
+        <!-- ============ TAB: KUIS ============ -->
+        <section id="content-quiz" class="tab-content hidden space-y-6">
+            <div class="bg-emerald-900 text-white p-6 rounded-2xl shadow-md border border-gold-500/20">
+                <h2 class="text-2xl font-bold mb-2 text-amber-50"><i class="fa-solid fa-circle-question text-gold-400"></i> Yuk, Uji Pemahamanmu!</h2>
+                <p class="text-emerald-200 text-sm">
+                    Jawab 10 soal acak dari materi wudhu & sholat. Semua benar? Naik ke level berikutnya!
+                </p>
+            </div>
+            <div id="quiz-root"></div>
+        </section>
+
         <section id="content-bookmarks" class="tab-content hidden space-y-6">
             <div class="bg-emerald-900 text-white p-6 rounded-2xl shadow-md border border-gold-500/20">
                 <h2 class="text-2xl font-bold mb-2 text-amber-50"><i class="fa-solid fa-bookmark text-gold-400"></i> Bacaan & Dalil Favorit Anda</h2>
@@ -785,6 +799,10 @@
         <button onclick="switchTab('pembatal')" id="mob-tab-pembatal" class="flex-1 py-1.5 px-1 text-xs text-emerald-300 flex flex-col items-center">
             <i class="fa-solid fa-triangle-exclamation text-base mb-0.5"></i>
             <span>Batal</span>
+        </button>
+        <button onclick="switchTab('quiz')" id="mob-tab-quiz" class="flex-1 py-1.5 px-1 text-xs text-emerald-300 flex flex-col items-center">
+            <i class="fa-solid fa-circle-question text-base mb-0.5"></i>
+            <span>Kuis</span>
         </button>
     </nav>
 
@@ -1180,6 +1198,7 @@
             renderSholatSteps();
             renderSholatWords();
             renderPembatal();
+            renderQuiz();
             renderBookmarks();
         };
 
@@ -1395,6 +1414,482 @@
                 bBtn.className = "flex-1 py-2 text-xs sm:text-sm font-bold rounded-lg bg-white shadow text-emerald-900 transition";
                 gBtn.className = "flex-1 py-2 text-xs sm:text-sm font-bold rounded-lg text-slate-600 hover:text-emerald-900 transition";
             }
+        }
+
+        /* -------------------------------------------------------------
+           QUIZ BANK (semua soal bersumber dari materi aplikasi ini)
+           mc(id, topik, tingkat 1-3, tanya, [benar, salah, salah, salah], penjelasan, sumber)
+           fill(...): sama dengan mc, ditambah argumen terakhir `ar` (kalimat Arab dengan ____)
+           tf(id, topik, tingkat, pernyataan, true|false, penjelasan, sumber)
+           order(id, topik, tingkat, tanya, [item urut benar], penjelasan, sumber)
+           match(id, topik, tingkat, tanya, [[kiri, kanan] x4], penjelasan, sumber)
+        ------------------------------------------------------------- */
+        const mc = (id, topic, lvl, q, opts, exp, src, ar) => ({ t: ar ? 'fill' : 'mc', id, topic, lvl, q, opts, exp, src, ar });
+        const fill = (id, topic, lvl, q, opts, exp, src, ar) => mc(id, topic, lvl, q, opts, exp, src, ar);
+        const tf = (id, topic, lvl, q, a, exp, src) => ({ t: 'tf', id, topic, lvl, q, a, exp, src });
+        const order = (id, topic, lvl, q, items, exp, src) => ({ t: 'order', id, topic, lvl, q, items, exp, src });
+        const match = (id, topic, lvl, q, pairs, exp, src) => ({ t: 'match', id, topic, lvl, q, pairs, exp, src });
+
+        const quizBank = [
+            // ---- Dalil sholat (Home)
+            mc('d1', 'Dalil Sholat', 1, "Menurut QS. Al-Baqarah: 43, perintah yang disebut bersama sholat dan rukuk adalah…", ["Menunaikan zakat", "Berpuasa", "Berhaji", "Bersedekah"], "Ayat ini memerintahkan: laksanakan sholat, tunaikan zakat, dan rukuklah bersama orang-orang yang rukuk.", "QS. Al-Baqarah: 43"),
+            mc('d2', 'Dalil Sholat', 1, "Berapa perkara yang menjadi dasar bangunan Islam menurut HR. Bukhari no. 8 & Muslim no. 16?", ["Lima", "Tiga", "Empat", "Enam"], "\"Islam dibangun di atas lima perkara\", salah satunya mendirikan sholat.", "HR. Bukhari no. 8 & Muslim no. 16"),
+            mc('d3', 'Dalil Sholat', 2, "Menurut HR. Muslim no. 233, sholat lima waktu menghapus dosa di antaranya selama…", ["tidak melakukan dosa-dosa besar", "tidak lupa membaca Al-Fatihah", "dikerjakan di masjid", "dikerjakan berjamaah"], "Sholat lima waktu dan Jumat ke Jumat adalah penghapus dosa di antara keduanya selama tidak melakukan dosa-dosa besar.", "HR. Muslim no. 233"),
+            mc('d4', 'Dalil Sholat', 1, "Dalam HR. Bukhari no. 528 & Muslim no. 667, sholat lima waktu diumpamakan seperti…", ["Sungai di depan rumah yang dipakai mandi lima kali sehari", "Pohon yang berbuah setiap hari", "Cahaya yang menerangi malam", "Pagar yang melindungi rumah"], "Orang yang mandi lima kali sehari di sungai tidak akan tersisa kotorannya; begitu pula sholat lima waktu menghapus kesalahan.", "HR. Bukhari no. 528 & Muslim no. 667"),
+            mc('d5', 'Dalil Sholat', 1, "Menurut QS. Al-Ankabut: 45, sholat mencegah dari…", ["Perbuatan keji dan mungkar", "Rasa malas", "Kemiskinan", "Penyakit"], "\"Sesungguhnya sholat itu mencegah dari (perbuatan) keji dan mungkar.\"", "QS. Al-Ankabut: 45"),
+            mc('d6', 'Dalil Sholat', 2, "Menurut HR. Muslim no. 82, batas antara seseorang dengan kesyirikan dan kekafiran adalah…", ["Meninggalkan sholat", "Meninggalkan puasa sunnah", "Terlambat sholat", "Tidak berjamaah"], "\"Sesungguhnya batasan antara seseorang dengan kesyirikan dan kekafiran adalah meninggalkan sholat.\"", "HR. Muslim no. 82"),
+            mc('d7', 'Dalil Sholat', 3, "Dalam QS. Al-Muddaththir: 42-43, penghuni Saqar menjawab mereka masuk neraka karena…", ["Dahulu tidak termasuk orang-orang yang melaksanakan sholat", "Tidak berzakat", "Tidak berpuasa", "Tidak bersedekah"], "\"Dahulu kami tidak termasuk orang-orang yang melaksanakan sholat.\"", "QS. Al-Muddaththir: 42-43"),
+
+            // ---- Syarat sah sholat
+            mc('s1', 'Syarat Sah Sholat', 1, "Anak yang sudah mumayyiz dan sah sholatnya berusia sekitar…", ["7 tahun", "3 tahun", "5 tahun", "12 tahun"], "Syarat mumayyiz: anak yang sudah bisa membedakan baik dan buruk (sekitar 7 tahun).", "HR. Abu Daud no. 495"),
+            mc('s2', 'Syarat Sah Sholat', 1, "Batas aurat laki-laki dalam sholat menurut materi adalah…", ["Pusar hingga lutut", "Dada hingga lutut", "Bahu hingga mata kaki", "Seluruh tubuh"], "Laki-laki: pusar hingga lutut.", "QS. Al-A'raf: 31 & HR. Tirmidzi no. 377"),
+            mc('s3', 'Syarat Sah Sholat', 1, "Aurat wanita dalam sholat adalah seluruh tubuh kecuali…", ["Wajah dan telapak tangan", "Wajah dan telapak kaki", "Rambut dan leher", "Telapak tangan dan kaki"], "Wanita: seluruh tubuh kecuali wajah dan telapak tangan.", "QS. Al-A'raf: 31 & HR. Tirmidzi no. 377"),
+            mc('s4', 'Syarat Sah Sholat', 2, "Dalil syarat menghadap kiblat terdapat pada…", ["QS. Al-Baqarah: 144", "QS. An-Nisa: 103", "QS. Ali 'Imran: 85", "QS. Maryam: 59"], "\"Maka hadapkanlah wajahmu ke arah Masjidil Haram.\"", "QS. Al-Baqarah: 144"),
+            mc('s5', 'Syarat Sah Sholat', 2, "Syarat masuk waktu sholat berdalil pada…", ["QS. An-Nisa: 103", "QS. Al-Baqarah: 144", "QS. Al-A'raf: 31", "QS. Ali 'Imran: 85"], "Sholat adalah kewajiban yang ditetapkan waktunya atas orang-orang beriman.", "QS. An-Nisa: 103"),
+            mc('s6', 'Syarat Sah Sholat', 2, "Hadits \"Innamal a'maalu bin niyyaat\" menjadi dalil syarat…", ["Niat", "Menutup aurat", "Suci dari najis", "Menghadap kiblat"], "Amal tergantung niatnya.", "HR. Bukhari no. 1 & Muslim no. 1907"),
+            mc('s7', 'Syarat Sah Sholat', 2, "QS. Al-A'raf: 31 (\"pakailah pakaianmu yang indah di setiap masjid\") menjadi dalil syarat…", ["Menutup aurat", "Berakal", "Islam", "Masuk waktu"], "Ayat ini dipakai sebagai dalil menutup aurat.", "QS. Al-A'raf: 31"),
+            mc('s8', 'Syarat Sah Sholat', 3, "Hadits dua orang yang disiksa, salah satunya tidak menjaga diri dari air kencing, menjadi dalil syarat…", ["Suci badan, pakaian, dan tempat dari najis", "Berakal", "Mumayyiz", "Niat"], "Syarat menghilangkan najis yang tidak dimaafkan.", "HR. Bukhari no. 216 & Muslim no. 292"),
+            mc('s9', 'Syarat Sah Sholat', 3, "Menurut HR. Abu Daud no. 4403, pena diangkat dari orang tidur hingga bangun, anak kecil hingga baligh, dan…", ["Orang gila hingga berakal", "Orang sakit hingga sembuh", "Musafir hingga pulang", "Orang miskin hingga kaya"], "Hadits ini menjadi dalil syarat berakal.", "HR. Abu Daud no. 4403"),
+
+            // ---- Wudhu
+            mc('w1', 'Wudhu', 1, "Mencuci kedua telapak tangan pada awal wudhu dilakukan sebanyak…", ["3 kali", "1 kali", "2 kali", "4 kali"], "Langkah 2: mencuci telapak tangan 3 kali hingga sela-sela jari.", "Tata Cara Wudhu, langkah 2"),
+            mc('w2', 'Wudhu', 1, "Mengusap kepala dan telinga dalam wudhu dilakukan sebanyak…", ["1 kali", "2 kali", "3 kali", "4 kali"], "Langkah 6: mengusap kepala dan telinga 1 kali.", "Tata Cara Wudhu, langkah 6"),
+            mc('w3', 'Wudhu', 1, "Berapa rukun wudhu yang wajib menurut materi?", ["6", "4", "5", "8"], "Niat, membasuh muka, membasuh tangan sampai siku, mengusap kepala, membasuh kaki sampai mata kaki, dan tertib.", "Rukun Wudhu"),
+            mc('w4', 'Wudhu', 2, "Manakah yang BUKAN termasuk rukun wudhu?", ["Bersiwak", "Niat", "Tertib", "Membasuh muka"], "Bersiwak termasuk sunnah wudhu, bukan rukun.", "Rukun & Sunnah Wudhu"),
+            mc('w5', 'Wudhu', 1, "Ayat yang menjelaskan tata cara wudhu adalah…", ["QS. Al-Ma'idah: 6", "QS. Al-Ankabut: 45", "QS. Maryam: 59", "QS. An-Nisa: 103"], "Ayat ini menyebut membasuh wajah, tangan sampai siku, mengusap kepala, dan membasuh kaki sampai mata kaki.", "QS. Al-Ma'idah: 6"),
+            mc('w6', 'Wudhu', 1, "Berapa pintu surga yang dibukakan bagi orang yang menyempurnakan wudhu lalu membaca syahadat?", ["Delapan", "Tujuh", "Lima", "Sepuluh"], "\"…dibukakan baginya delapan pintu surga; ia boleh masuk dari pintu mana saja yang ia kehendaki.\"", "HR. Muslim no. 234"),
+            mc('w7', 'Wudhu', 1, "Hadits \"Wailul lil a'qaab minan naar\" mengancam…", ["Tumit yang tidak terbasuh air wudhu", "Orang yang tidak bersiwak", "Orang yang tidak berdoa setelah wudhu", "Orang yang berwudhu terlalu lama"], "Celakalah tumit-tumit yang tidak terbasuh air wudhu dari api neraka.", "HR. Bukhari no. 60 & Muslim no. 242"),
+            mc('w8', 'Wudhu', 2, "Kumur dan istinsyaq (menghirup air ke hidung) sebaiknya dilakukan…", ["Dalam satu cakupan air, 3 kali", "Terpisah, masing-masing 1 kali", "Hanya sekali", "Setelah mencuci kaki"], "Disatukan dalam satu cakupan air dan dilakukan 3 kali.", "Sunnah Wudhu"),
+            mc('w9', 'Wudhu', 2, "Mendahulukan anggota badan yang kanan dalam bersuci disebut…", ["At-Tayamun", "Tuma'ninah", "Istinsyaq", "Tawarruk"], "Nabi ﷺ menyukai mendahulukan yang kanan dalam bersuci dan segala urusan.", "HR. Bukhari no. 168 & Muslim no. 268"),
+            mc('w10', 'Wudhu', 2, "Hadits \"Seandainya tidak memberatkan umatku, niscaya aku perintahkan mereka … setiap kali wudhu\" menyebut sunnah…", ["Bersiwak", "Membaca basmalah", "Berkumur", "Membasuh telinga"], "Sunnah bersiwak setiap akan berwudhu.", "HR. Ahmad"),
+            mc('w11', 'Wudhu', 2, "Yang termasuk penghalang air ke kulit sehingga wudhu tidak sah adalah…", ["Cat kuku waterproof (kutek)", "Keringat", "Air hujan", "Air sumur"], "Penghalang seperti cat, cat kuku waterproof, lilin, atau minyak tebal harus dihilangkan.", "Syarat Sah Wudhu"),
+            mc('w12', 'Wudhu', 2, "Menurut HR. Abu Daud no. 101, tidak ada wudhu bagi orang yang tidak…", ["Menyebut nama Allah atasnya", "Bersiwak", "Berniat dengan lisan", "Berwudhu berurutan"], "Dalil sunnah membaca basmalah saat wudhu.", "HR. Abu Daud no. 101"),
+            mc('w13', 'Wudhu', 3, "Wudhu bagi penderita istihadhah (beser) disyaratkan…", ["Masuk waktu sholat", "Dilakukan tiga kali", "Dengan siwak", "Setelah mandi"], "Salah satu syarat sah wudhu: masuk waktu sholat bagi penderita istihadhah/beser.", "Syarat Sah Wudhu"),
+
+            // ---- Sholat: gerakan & rukun
+            mc('g1', 'Gerakan Sholat', 1, "Sujud dilakukan di atas berapa anggota tubuh?", ["7", "5", "6", "8"], "Dahi+hidung, 2 telapak tangan, 2 lutut, dan 2 ujung kaki.", "HR. Bukhari no. 812"),
+            mc('g2', 'Gerakan Sholat', 1, "Duduk di antara dua sujud memakai cara duduk…", ["Iftirasy", "Tawarruk", "Bersila", "Berlutut"], "Menduduki kaki kiri dan menegakkan kaki kanan.", "HR. Abu Daud no. 850"),
+            mc('g3', 'Gerakan Sholat', 1, "Duduk pada tasyahud akhir memakai cara duduk…", ["Tawarruk", "Iftirasy", "Bersila", "Berlutut"], "Kaki kiri dimasukkan ke bawah kaki kanan.", "HR. Bukhari no. 831"),
+            mc('g4', 'Gerakan Sholat', 1, "Ucapan ketika bangkit dari ruku' menuju i'tidal adalah…", ["Sami'allahu liman hamidah", "Allahu akbar", "Subhaana rabbiyal 'azhiim", "Assalaamu 'alaikum"], "Bangkit dari ruku' sambil mengucapkan 'Sami'allahu liman hamidah'.", "HR. Bukhari no. 789"),
+            mc('g5', 'Gerakan Sholat', 2, "Saat salam pertama, kepala ditoleh ke kanan hingga…", ["Pipi terlihat dari belakang", "Bahu menyentuh dagu", "Mata terpejam", "Telinga menyentuh bahu"], "Menoleh ke kanan hingga pipi terlihat dari belakang.", "HR. Muslim no. 582"),
+            mc('g6', 'Gerakan Sholat', 2, "Posisi tangan saat sedekap adalah…", ["Tangan kanan di atas punggung tangan kiri, di atas dada", "Kedua tangan di samping badan", "Tangan kiri di atas tangan kanan di perut", "Kedua tangan di belakang"], "Sedekap sunnah: kanan di atas punggung tangan kiri, di atas dada.", "HR. Muslim no. 401"),
+            mc('g7', 'Gerakan Sholat', 2, "Saat takbiratul ihram, tangan diangkat sejajar…", ["Bahu atau telinga", "Pinggang", "Lutut", "Dahi"], "Mengangkat kedua tangan sejajar bahu/telinga sambil mengucapkan 'Allahu Akbar'.", "HR. Bukhari no. 757"),
+
+            // ---- Pembatal sholat
+            mc('p1', 'Pembatal Sholat', 1, "Menurut ijma' ulama, tertawa terbahak-bahak (hingga terdengar suara) dalam sholat…", ["Membatalkan sholat", "Tidak berpengaruh", "Hanya makruh", "Menggugurkan pahala saja"], "Para ulama sepakat tertawa terbahak-bahak membatalkan sholat.", "Ijma' Ulama"),
+            mc('p2', 'Pembatal Sholat', 1, "Hadits tentang \"kepala keledai\" berkaitan dengan…", ["Mendahului imam", "Berbicara saat sholat", "Menoleh saat sholat", "Meninggalkan sholat"], "Orang yang mengangkat kepalanya sebelum imam diancam Allah mengubah kepalanya menjadi kepala keledai.", "HR. Bukhari no. 691 & Muslim no. 427"),
+            mc('p3', 'Pembatal Sholat', 1, "Menurut HR. Muslim no. 537, sholat itu hanyalah…", ["Tasbih, takbir, dan bacaan Al-Qur'an", "Doa dan zikir bebas", "Gerakan dan diam", "Perkataan baik"], "Tidak boleh ada perkataan manusia di dalam sholat.", "HR. Muslim no. 537"),
+            mc('p4', 'Pembatal Sholat', 2, "Dalil berhadats (batal wudhu) membatalkan sholat adalah…", ["HR. Bukhari no. 135", "HR. Muslim no. 82", "QS. Maryam: 59", "HR. Abu Daud no. 495"], "\"Tidak diterima sholat orang yang berhadats hingga ia berwudhu.\"", "HR. Bukhari no. 135"),
+            mc('p5', 'Pembatal Sholat', 3, "Berapa hal yang membatalkan sholat dibahas pada materi aplikasi ini?", ["8", "5", "10", "12"], "Berbicara sengaja, tertawa terbahak-bahak, terbuka aurat, makan-minum, berhadats, banyak bergerak berturut-turut, mendahului imam, dan murtad/berubah niat.", "Tab Batal"),
+
+            // ---- Lengkapi bacaan
+            fill('f1', 'Bacaan Sholat', 1, "Lengkapi potongan ayat Al-Fatihah ini:", ["الْعَالَمِينَ", "الْمُسْتَقِيمَ", "الدِّينِ", "الرَّحِيمِ"], "Alhamdu lillaahi rabbil 'aalamiin: segala puji bagi Allah, Tuhan semesta alam.", "QS. Al-Fatihah: 2", "الْحَمْدُ لِلَّهِ رَبِّ ____"),
+            fill('f2', 'Bacaan Sholat', 1, "Lengkapi potongan ayat Al-Fatihah ini:", ["الدِّينِ", "الْعَالَمِينَ", "الْمُسْتَقِيمَ", "الضَّالِّينَ"], "Maaliki yawmid-diin: Pemilik hari pembalasan.", "QS. Al-Fatihah: 4", "مَالِكِ يَوْمِ ____"),
+            fill('f3', 'Bacaan Sholat', 1, "Lengkapi potongan ayat Al-Fatihah ini:", ["نَسْتَعِينُ", "نَعْبُدُ", "الْمُسْتَقِيمَ", "اهْدِنَا"], "Hanya kepada-Mu kami menyembah dan hanya kepada-Mu kami memohon pertolongan.", "QS. Al-Fatihah: 5", "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ ____"),
+            fill('f4', 'Bacaan Sholat', 2, "Lengkapi potongan ayat Al-Fatihah ini:", ["الْمُسْتَقِيمَ", "الْعَالَمِينَ", "الدِّينِ", "الرَّحِيمِ"], "Ihdinash-shiraathal mustaqiim: tunjukilah kami jalan yang lurus.", "QS. Al-Fatihah: 6", "اهْدِنَا الصِّرَاطَ ____"),
+            fill('f5', 'Bacaan Sholat', 1, "Lengkapi bacaan RUKU' berikut:", ["الْعَظِيمِ", "الْأَعْلَى", "الْكَرِيمِ", "الْحَكِيمِ"], "Subhaana rabbiyal 'azhiimi wa bihamdih: Maha Suci Tuhanku Yang Maha Agung.", "HR. Abu Daud no. 870 & An-Nasa'i", "سُبْحَانَ رَبِّيَ ____ وَبِحَمْدِهِ"),
+            fill('f6', 'Bacaan Sholat', 1, "Lengkapi bacaan SUJUD berikut:", ["الْأَعْلَى", "الْعَظِيمِ", "الْكَبِيرِ", "الرَّحِيمِ"], "Subhaana rabbiyal a'laa wa bihamdih: Maha Suci Tuhanku Yang Maha Tinggi.", "HR. Abu Daud no. 870 & An-Nasa'i", "سُبْحَانَ رَبِّيَ ____ وَبِحَمْدِهِ"),
+            fill('f7', 'Bacaan Sholat', 2, "Lengkapi bacaan duduk di antara dua sujud:", ["اغْفِرْ", "ارْحَمْ", "ارْزُقْ", "اهْدِ"], "Rabbighfir lii: Wahai Tuhanku ampunilah aku.", "HR. Abu Daud no. 874 & Ibn Majah", "رَبِّ ____ لِي"),
+            fill('f8', 'Bacaan Sholat', 2, "Lengkapi doa setelah wudhu:", ["التَّوَّابِينَ", "الْمُتَطَهِّرِينَ", "الصَّالِحِينَ", "الْمُؤْمِنِينَ"], "Ya Allah, jadikanlah aku termasuk orang-orang yang bertaubat.", "HR. At-Tirmidzi no. 55", "اللَّهُمَّ اجْعَلْنِي مِنَ ____"),
+            fill('f9', 'Bacaan Sholat', 2, "Lengkapi bacaan tasyahud:", ["الطَّيِّبَاتُ", "الصَّالِحَاتُ", "الْبَرَكَاتُ", "الْحَسَنَاتُ"], "Segala penghormatan, sholawat, dan kebaikan adalah milik Allah.", "HR. Bukhari no. 6265 & Muslim no. 402", "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَ____"),
+            fill('f10', 'Bacaan Sholat', 3, "Lengkapi bacaan i'tidal:", ["مُبَارَكًا", "كَثِيرًا", "طَيِّبًا", "عَظِيمًا"], "Pujian yang banyak, baik, dan diberkahi di dalamnya.", "HR. Bukhari no. 799", "رَبَّنَا وَلَكَ الْحَمْدُ حَمْدًا كَثِيرًا طَيِّبًا ____ فِيهِ"),
+            fill('f11', 'Bacaan Sholat', 3, "Lengkapi doa iftitah:", ["الْمَغْرِبِ", "الْمَشْرِقِ", "الشَّمَالِ", "الْجَنُوبِ"], "Sebagaimana Engkau menjauhkan antara timur dan barat.", "HR. Bukhari no. 744 & Muslim no. 598", "اللَّهُمَّ بَاعِدْ بَيْنِي وَبَيْنَ خَطَايَايَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَ____"),
+            fill('f12', 'Bacaan Sholat', 2, "Lengkapi bacaan salam:", ["رَحْمَةُ", "بَرَكَاتُ", "مَغْفِرَةُ", "جَنَّةُ"], "Semoga keselamatan dan rahmat Allah tercurah kepada kalian.", "HR. Abu Daud no. 996 & At-Tirmidzi no. 295", "السَّلَامُ عَلَيْكُمْ وَ____ اللَّهِ"),
+            fill('f13', 'Wudhu', 2, "Lengkapi hadits tentang basmalah dalam wudhu:", ["اسْمَ اللَّهِ", "الْبَسْمَلَةَ", "الدُّعَاءَ", "النِّيَّةَ"], "Tidak ada wudhu bagi orang yang tidak menyebut nama Allah atasnya.", "HR. Abu Daud no. 101", "لَا وُضُوءَ لِمَنْ لَمْ يَذْكُرِ ____ عَلَيْهِ"),
+            fill('f14', 'Wudhu', 2, "Lengkapi hadits ancaman wudhu tidak sempurna:", ["النَّارِ", "الْمَاءِ", "الْأَرْضِ", "الْجَنَّةِ"], "Celakalah bagi tumit-tumit dari api neraka.", "HR. Bukhari no. 60 & Muslim no. 242", "وَيْلٌ لِلْأَعْقَابِ مِنَ ____"),
+
+            // ---- Benar atau salah
+            tf('t1', 'Wudhu', 1, "Wudhu tetap sah meskipun ada cat kuku waterproof yang menutupi kuku.", false, "Penghalang air ke kulit harus dihilangkan agar wudhu sah.", "Syarat Sah Wudhu"),
+            tf('t2', 'Wudhu', 1, "Mengusap kepala dan telinga dalam wudhu dilakukan satu kali.", true, "Langkah 6: usap kepala dan telinga 1 kali.", "Tata Cara Wudhu"),
+            tf('t3', 'Pembatal Sholat', 1, "Berbicara dengan sengaja di tengah sholat membatalkan sholat.", true, "Sholat tidak boleh dicampuri perkataan manusia.", "HR. Muslim no. 537"),
+            tf('t4', 'Syarat Sah Sholat', 1, "Anak yang sudah mumayyiz (sekitar 7 tahun) sah sholatnya.", true, "Mumayyiz adalah salah satu syarat sah sholat.", "HR. Abu Daud no. 495"),
+            tf('t5', 'Wudhu', 2, "Orang yang berakal dan orang yang kehilangan akal sama-sama sah wudhunya.", false, "Berakal adalah syarat sah wudhu; orang gila/pingsan wudhunya tidak sah.", "Syarat Sah Wudhu"),
+            tf('t6', 'Gerakan Sholat', 1, "Duduk di antara dua sujud memakai duduk tawarruk.", false, "Antara dua sujud memakai iftirasy; tawarruk dipakai pada tasyahud akhir.", "HR. Abu Daud no. 850"),
+            tf('t7', 'Dalil Sholat', 2, "Sholat lima waktu menghapus dosa apa pun tanpa syarat.", false, "Penghapusan dosa berlaku selama tidak melakukan dosa-dosa besar.", "HR. Muslim no. 233"),
+            tf('t8', 'Syarat Sah Sholat', 1, "Sholat yang dikerjakan sebelum masuk waktunya tetap sah.", false, "Sholat adalah kewajiban yang ditetapkan waktunya.", "QS. An-Nisa: 103"),
+            tf('t9', 'Pembatal Sholat', 1, "Makan dan minum dengan sengaja membatalkan sholat.", true, "Termasuk hal yang membatalkan sholat.", "Fikih Syafi'i"),
+            tf('t10', 'Pembatal Sholat', 2, "Mendahului imam dengan sengaja termasuk perbuatan yang diancam dalam hadits.", true, "Diancam Allah mengubah kepalanya menjadi kepala keledai.", "HR. Bukhari no. 691 & Muslim no. 427"),
+            tf('t11', 'Wudhu', 1, "Tertib (berurutan) termasuk rukun wudhu.", true, "Tertib adalah salah satu dari enam rukun wudhu.", "Rukun Wudhu"),
+            tf('t12', 'Gerakan Sholat', 1, "Salam pertama diucapkan sambil menoleh ke kiri.", false, "Salam pertama menoleh ke kanan hingga pipi terlihat dari belakang.", "HR. Muslim no. 582"),
+            tf('t13', 'Wudhu', 2, "Doa setelah wudhu dibaca sambil menghadap kiblat (langkah 8 tata cara wudhu).", true, "Langkah 8: menghadap kiblat dan membaca doa kesaksian.", "Tata Cara Wudhu"),
+            tf('t14', 'Syarat Sah Sholat', 2, "Terbukanya aurat dengan sengaja membatalkan sholat.", true, "Termasuk hal yang membatalkan sholat.", "QS. Al-A'raf: 31"),
+            tf('t15', 'Wudhu', 3, "Basmalah saat wudhu termasuk rukun wudhu.", false, "Basmalah termasuk sunnah wudhu; rukunnya ada enam (niat, muka, tangan, kepala, kaki, tertib).", "HR. Abu Daud no. 101"),
+            tf('t16', 'Gerakan Sholat', 2, "Tangan diangkat sejajar bahu atau telinga saat takbiratul ihram.", true, "Dilakukan sambil mengucapkan 'Allahu Akbar'.", "HR. Bukhari no. 757"),
+
+            // ---- Susun urutan
+            order('o1', 'Wudhu', 1, "Urutkan anggota wudhu sesuai urutan dalam QS. Al-Ma'idah: 6:", ["Wajah", "Kedua tangan sampai siku", "Kepala", "Kedua kaki sampai mata kaki"], "Urutannya: wajah, tangan sampai siku, usap kepala, kaki sampai mata kaki.", "QS. Al-Ma'idah: 6"),
+            order('o2', 'Wudhu', 2, "Urutkan 8 langkah wudhu berikut:", ["Niat & Bismillah", "Mencuci telapak tangan", "Kumur & istinsyaq", "Membasuh muka", "Membasuh tangan hingga siku", "Mengusap kepala & telinga", "Membasuh kaki hingga mata kaki", "Membaca doa setelah wudhu"], "Urutan sesuai Tata Cara Wudhu (langkah 1 sampai 8).", "Tata Cara Wudhu"),
+            order('o3', 'Gerakan Sholat', 1, "Urutkan gerakan berikut:", ["Ruku'", "I'tidal", "Sujud", "Duduk antara dua sujud"], "Ruku', i'tidal, sujud, lalu duduk di antara dua sujud.", "Rukun Sholat"),
+            order('o4', 'Gerakan Sholat', 2, "Urutkan gerakan sholat dari awal:", ["Takbiratul ihram", "Ruku'", "I'tidal", "Sujud", "Duduk antara dua sujud", "Tasyahud akhir", "Salam"], "Sesuai urutan rukun pada materi.", "Rukun Sholat"),
+            order('o5', 'Bacaan Sholat', 2, "Urutkan bacaan dalam sholat:", ["Doa iftitah", "Al-Fatihah", "Bacaan ruku'", "Bacaan i'tidal", "Bacaan sujud", "Tasyahud"], "Urutan bacaan sesuai gerakan sholat.", "Bacaan Sholat"),
+            order('o6', 'Wudhu', 3, "Susun doa setelah wudhu dengan urutan yang benar:", ["Asyhadu an laa ilaaha illallaah", "wahdahu laa syariika lah", "wa asyhadu anna Muhammadan 'abduhu wa rasuuluh", "Allaahummaj'alnii minat tawwaabiin", "waj'alnii minal mutathahhiriin"], "Dua kalimat syahadat, lalu permohonan menjadi golongan yang bertaubat dan bersuci.", "HR. At-Tirmidzi no. 55"),
+
+            // ---- Pasangkan arti
+            match('m1', 'Bacaan Sholat', 1, "Pasangkan kata Arab dengan artinya (doa iftitah):", [["اللَّهُمَّ", "Ya Allah"], ["بَاعِدْ", "jauhkanlah"], ["الْمَشْرِقِ", "timur"], ["وَالْمَغْرِبِ", "dan barat"]], "Arti per kata doa iftitah.", "Bacaan Sholat: Doa Iftitah"),
+            match('m2', 'Bacaan Sholat', 1, "Pasangkan kata Arab dengan artinya (Al-Fatihah):", [["الْحَمْدُ", "segala puji"], ["رَبِّ", "Tuhan"], ["الْعَالَمِينَ", "semesta alam"], ["مَالِكِ", "Pemilik"]], "Arti per kata Al-Fatihah.", "Bacaan Sholat: Al-Fatihah"),
+            match('m3', 'Bacaan Sholat', 1, "Pasangkan kata Arab dengan artinya (bacaan ruku' dan sujud):", [["سُبْحَانَ", "Maha Suci"], ["الْعَظِيمِ", "Yang Maha Agung"], ["الْأَعْلَى", "Yang Maha Tinggi"], ["رَبِّيَ", "Tuhanku"]], "Arti per kata bacaan ruku' dan sujud.", "Bacaan Sholat: Ruku' & Sujud"),
+            match('m4', 'Wudhu', 2, "Pasangkan kata Arab dengan artinya (doa setelah wudhu):", [["أَشْهَدُ", "aku bersaksi"], ["وَحْدَهُ", "Dia semata"], ["عَبْدُهُ", "hamba-Nya"], ["اجْعَلْنِي", "jadikanlah aku"]], "Arti per kata doa setelah wudhu.", "Doa Setelah Wudhu"),
+            match('m5', 'Bacaan Sholat', 2, "Pasangkan kata Arab dengan artinya (i'tidal dan takbir):", [["رَبَّنَا", "Wahai Tuhan kami"], ["كَثِيرًا", "yang banyak"], ["مُبَارَكًا", "yang diberkahi"], ["أَكْبَرُ", "Maha Besar"]], "Arti per kata bacaan i'tidal dan takbiratul ihram.", "Bacaan Sholat"),
+            match('m6', 'Bacaan Sholat', 3, "Pasangkan kata Arab dengan artinya (tasyahud):", [["التَّحِيَّاتُ", "Segala penghormatan"], ["عَلَيْكَ", "atasmu"], ["النَّبِيُّ", "Nabi"], ["وَبَرَكَاتُهُ", "dan berkah-Nya"]], "Arti per kata tasyahud.", "Bacaan Sholat: Tasyahud")
+        ];
+
+        /* -------------------------------------------------------------
+           QUIZ ENGINE
+        ------------------------------------------------------------- */
+        const QUIZ_KEY = 'quiz_progress';
+        const QUIZ_ROUND_SIZE = 10;
+        const QUIZ_POINTS = 10;
+        const QUIZ_BONUS = 20;
+        let quizProgress = loadQuizProgress();
+        let quizRound = null;
+
+        function loadQuizProgress() {
+            try {
+                const p = JSON.parse(localStorage.getItem(QUIZ_KEY));
+                if (p && typeof p.level === 'number' && p.best) return { level: p.level, best: p.best, lastIds: p.lastIds || [] };
+            } catch (e) { /* data rusak: mulai dari awal */ }
+            return { level: 1, best: {}, lastIds: [] };
+        }
+
+        function saveQuizProgress() {
+            localStorage.setItem(QUIZ_KEY, JSON.stringify(quizProgress));
+        }
+
+        const quizShuffle = (arr) => {
+            const a = arr.slice();
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        };
+
+        function quizTotalScore() {
+            return Object.values(quizProgress.best).reduce((s, v) => s + v, 0);
+        }
+
+        // Pilih soal acak berbobot: level lebih tinggi -> soal sulit lebih sering muncul
+        function quizPick(pool, n, level) {
+            const weight = (q) => q.lvl === 1 ? Math.max(1, 4 - level) : q.lvl === 2 ? 2 : 1 + level * 0.5;
+            const rest = pool.slice();
+            const out = [];
+            while (out.length < n && rest.length) {
+                const total = rest.reduce((s, q) => s + weight(q), 0);
+                let r = Math.random() * total, k = 0;
+                for (; k < rest.length - 1; k++) { r -= weight(rest[k]); if (r <= 0) break; }
+                out.push(rest.splice(k, 1)[0]);
+            }
+            return out;
+        }
+
+        function quizBuildRound() {
+            const fresh = quizBank.filter(q => !quizProgress.lastIds.includes(q.id));
+            const byType = (t, src) => src.filter(q => q.t === t);
+            const quota = { mc: 4, fill: 2, tf: 1, order: 2, match: 1 };
+            const chosen = [];
+            Object.entries(quota).forEach(([t, n]) => {
+                let src = byType(t, fresh);
+                if (src.length < n) src = byType(t, quizBank); // bank menipis: boleh mengulang
+                chosen.push(...quizPick(src, n, quizProgress.level));
+            });
+            // Jika masih kurang (jenis soal kosong), tambah dari sisa bank
+            if (chosen.length < QUIZ_ROUND_SIZE) {
+                const ids = new Set(chosen.map(q => q.id));
+                chosen.push(...quizPick(quizBank.filter(q => !ids.has(q.id)), QUIZ_ROUND_SIZE - chosen.length, quizProgress.level));
+            }
+            return quizShuffle(chosen).map(quizPrepare);
+        }
+
+        // Siapkan tampilan per soal (acak opsi, dll.) tanpa mengubah data bank
+        function quizPrepare(q) {
+            const v = { q, done: false, ok: false, yours: '', correct: '' };
+            if (q.t === 'mc' || q.t === 'fill') {
+                v.opts = quizShuffle(q.opts.map((text, i) => ({ text, right: i === 0 })));
+                v.correct = q.opts[0];
+            } else if (q.t === 'tf') {
+                v.opts = [{ text: 'Benar', right: q.a === true }, { text: 'Salah', right: q.a === false }];
+                v.correct = q.a ? 'Benar' : 'Salah';
+            } else if (q.t === 'order') {
+                v.pool = quizShuffle(q.items.map((text, i) => ({ text, i })));
+                v.ans = [];
+                v.correct = q.items.map((t, i) => `${i + 1}. ${t}`).join(' → ');
+            } else if (q.t === 'match') {
+                v.right = quizShuffle(q.pairs.map((p, i) => ({ text: p[1], i })));
+                v.map = {};
+                v.sel = null;
+                v.correct = q.pairs.map(p => `${p[0]} = ${p[1]}`).join('; ');
+            }
+            return v;
+        }
+
+        function quizStart() {
+            quizRound = { items: quizBuildRound(), idx: 0, screen: 'play' };
+            quizProgress.lastIds = quizRound.items.map(v => v.q.id);
+            saveQuizProgress();
+            renderQuiz();
+        }
+
+        function quizHome() {
+            quizRound = null;
+            renderQuiz();
+        }
+
+        function quizCurrent() { return quizRound.items[quizRound.idx]; }
+
+        function quizFinishQuestion(v, ok, yours) {
+            v.done = true;
+            v.ok = ok;
+            v.yours = yours;
+            renderQuiz();
+        }
+
+        function quizChoose(i) {
+            const v = quizCurrent();
+            if (v.done) return;
+            v.pickedIdx = i;
+            quizFinishQuestion(v, v.opts[i].right, v.opts[i].text);
+        }
+
+        function quizOrderAdd(poolIdx) {
+            const v = quizCurrent();
+            if (v.done) return;
+            v.ans.push(v.pool.splice(poolIdx, 1)[0]);
+            renderQuiz();
+        }
+
+        function quizOrderRemove(ansIdx) {
+            const v = quizCurrent();
+            if (v.done) return;
+            v.pool.push(v.ans.splice(ansIdx, 1)[0]);
+            renderQuiz();
+        }
+
+        function quizOrderCheck() {
+            const v = quizCurrent();
+            if (v.done || v.pool.length) return;
+            const ok = v.ans.every((a, i) => a.i === i);
+            quizFinishQuestion(v, ok, v.ans.map((a, i) => `${i + 1}. ${a.text}`).join(' → '));
+        }
+
+        function quizMatchLeft(i) {
+            const v = quizCurrent();
+            if (v.done) return;
+            v.sel = v.sel === i ? null : i;
+            renderQuiz();
+        }
+
+        function quizMatchRight(i) {
+            const v = quizCurrent();
+            if (v.done || v.sel === null) return;
+            Object.keys(v.map).forEach(k => { if (v.map[k] === i) delete v.map[k]; });
+            v.map[v.sel] = i;
+            v.sel = null;
+            renderQuiz();
+        }
+
+        function quizMatchCheck() {
+            const v = quizCurrent();
+            if (v.done || Object.keys(v.map).length < v.q.pairs.length) return;
+            const ok = v.q.pairs.every((p, i) => v.map[i] === i);
+            const yours = v.q.pairs.map((p, i) => `${p[0]} = ${v.q.pairs[v.map[i]][1]}`).join('; ');
+            quizFinishQuestion(v, ok, yours);
+        }
+
+        function quizNext() {
+            if (quizRound.idx < quizRound.items.length - 1) {
+                quizRound.idx++;
+            } else {
+                quizEndRound();
+                return;
+            }
+            renderQuiz();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function quizEndRound() {
+            const correct = quizRound.items.filter(v => v.ok).length;
+            const perfect = correct === quizRound.items.length;
+            const score = correct * QUIZ_POINTS + (perfect ? QUIZ_BONUS : 0);
+            const level = quizProgress.level;
+            quizRound.screen = 'result';
+            quizRound.result = { correct, perfect, score, level };
+            if (score > (quizProgress.best[level] || 0)) quizProgress.best[level] = score;
+            saveQuizProgress();
+            renderQuiz();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function quizNextLevel() {
+            quizProgress.level++;
+            saveQuizProgress();
+            quizStart();
+        }
+
+        function quizReset() {
+            if (!confirm('Hapus semua level dan skor kuis? Tindakan ini tidak bisa dibatalkan.')) return;
+            quizProgress = { level: 1, best: {}, lastIds: [] };
+            saveQuizProgress();
+            quizHome();
+        }
+
+        /* ---------- Rendering ---------- */
+        const quizBtnBase = 'w-full text-left px-4 py-3 rounded-xl border text-sm font-medium transition ';
+        const quizBtnIdle = 'bg-white border-slate-200 text-slate-700 hover:bg-emerald-50 hover:border-emerald-300';
+
+        function quizScoreTable() {
+            const levels = Object.keys(quizProgress.best).map(Number).sort((a, b) => a - b);
+            if (!levels.length) return '';
+            return `
+                <div class="bg-white rounded-2xl border border-slate-200 p-5">
+                    <h3 class="font-bold text-emerald-900 mb-3 text-sm"><i class="fa-solid fa-ranking-star text-gold-500 mr-1"></i> Skor Per Level</h3>
+                    <div class="divide-y divide-slate-100 text-sm">
+                        ${levels.map(l => `
+                            <div class="flex items-center justify-between py-2">
+                                <span class="text-slate-600">Level ${l}${l < quizProgress.level ? ' <i class="fa-solid fa-circle-check text-emerald-600 ml-1"></i>' : ''}</span>
+                                <span class="font-semibold text-emerald-800">${quizProgress.best[l]} poin</span>
+                            </div>`).join('')}
+                        <div class="flex items-center justify-between pt-3 font-bold text-emerald-900">
+                            <span>Total Skor</span><span>${quizTotalScore()} poin</span>
+                        </div>
+                    </div>
+                </div>`;
+        }
+
+        function renderQuiz() {
+            const root = document.getElementById('quiz-root');
+            if (!root) return;
+            if (!quizRound) root.innerHTML = quizViewHome();
+            else if (quizRound.screen === 'result') root.innerHTML = quizViewResult();
+            else root.innerHTML = quizViewQuestion();
+        }
+
+        function quizViewHome() {
+            const started = Object.keys(quizProgress.best).length > 0;
+            return `
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 text-center space-y-4">
+                    <div class="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-900 text-gold-400 text-3xl shadow"><i class="fa-solid fa-circle-question"></i></div>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-wider text-gold-600">Level ${quizProgress.level}</p>
+                        <p class="text-sm text-slate-600 mt-1">Total skor: <strong class="text-emerald-800">${quizTotalScore()} poin</strong></p>
+                    </div>
+                    <p class="text-sm text-slate-600 max-w-md mx-auto">10 soal acak dari seluruh materi: pilihan ganda, benar/salah, lengkapi bacaan, susun urutan, dan pasangkan arti. Jawab semuanya dengan benar untuk naik level.</p>
+                    <button onclick="quizStart()" class="px-6 py-3 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-sm shadow transition">
+                        <i class="fa-solid fa-play mr-1"></i> ${started ? 'Mulai Level ' + quizProgress.level : 'Mulai Kuis'}
+                    </button>
+                    ${started ? `<div><button onclick="quizReset()" class="text-xs text-slate-500 underline">Reset kemajuan</button></div>` : ''}
+                </div>
+                ${quizScoreTable()}`;
+        }
+
+        function quizViewQuestion() {
+            const v = quizCurrent();
+            const q = v.q;
+            const n = quizRound.idx + 1, total = quizRound.items.length;
+            let body = '';
+
+            if (q.t === 'mc' || q.t === 'fill' || q.t === 'tf') {
+                body = (q.ar ? `<div class="bg-slate-50 rounded-xl p-4 mb-3"><p class="font-arabic arabic-size text-center text-emerald-950 leading-loose" dir="rtl">${q.ar}</p></div>` : '')
+                    + `<div class="space-y-2.5">` + v.opts.map((o, i) => {
+                        let cls = quizBtnIdle;
+                        if (v.done) {
+                            if (o.right) cls = 'bg-emerald-100 border-emerald-500 text-emerald-900';
+                            else if (v.pickedIdx === i) cls = 'bg-red-50 border-red-400 text-red-800';
+                            else cls = 'bg-white border-slate-200 text-slate-400';
+                        }
+                        const arabic = q.t === 'fill' ? ' font-arabic text-xl text-center' : '';
+                        return `<button ${v.done ? 'disabled' : ''} onclick="quizChoose(${i})" class="${quizBtnBase}${cls}${arabic}" ${q.t === 'fill' ? 'dir="rtl"' : ''}>${o.text}</button>`;
+                    }).join('') + `</div>`;
+            } else if (q.t === 'order') {
+                body = `
+                    <p class="text-xs text-slate-500 mb-2">Ketuk item sesuai urutan. Ketuk jawaban untuk membatalkan.</p>
+                    <div class="min-h-[3rem] space-y-2 mb-4 rounded-xl border-2 border-dashed border-emerald-200 bg-emerald-50/40 p-3">
+                        ${v.ans.length ? v.ans.map((a, i) => `
+                            <button ${v.done ? 'disabled' : ''} onclick="quizOrderRemove(${i})" class="${quizBtnBase}${v.done ? (a.i === i ? 'bg-emerald-100 border-emerald-500 text-emerald-900' : 'bg-red-50 border-red-400 text-red-800') : 'bg-emerald-100 border-emerald-300 text-emerald-900'}">
+                                <span class="font-bold mr-1">${i + 1}.</span> ${a.text}</button>`).join('') : '<p class="text-xs text-slate-400 text-center">Jawaban Anda muncul di sini</p>'}
+                    </div>
+                    <div class="space-y-2">
+                        ${v.pool.map((p, i) => `<button onclick="quizOrderAdd(${i})" class="${quizBtnBase}${quizBtnIdle}">${p.text}</button>`).join('')}
+                    </div>
+                    ${v.done ? '' : `<button onclick="quizOrderCheck()" ${v.pool.length ? 'disabled' : ''} class="mt-4 w-full py-3 rounded-xl font-bold text-sm text-white transition ${v.pool.length ? 'bg-slate-300' : 'bg-emerald-800 hover:bg-emerald-900'}">Periksa Jawaban</button>`}`;
+            } else if (q.t === 'match') {
+                const rightUsed = new Set(Object.values(v.map));
+                body = `
+                    <p class="text-xs text-slate-500 mb-2">Ketuk kata Arab, lalu ketuk artinya. Ketuk lagi untuk mengubah.</p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="space-y-2">
+                            ${q.pairs.map((p, i) => {
+                                const chosen = v.map[i] !== undefined;
+                                const right = v.done && v.map[i] === i;
+                                let cls = v.sel === i ? 'bg-gold-500/20 border-gold-500 text-emerald-950' : chosen ? 'bg-emerald-100 border-emerald-300 text-emerald-900' : quizBtnIdle;
+                                if (v.done) cls = right ? 'bg-emerald-100 border-emerald-500 text-emerald-900' : 'bg-red-50 border-red-400 text-red-800';
+                                return `<button ${v.done ? 'disabled' : ''} onclick="quizMatchLeft(${i})" class="${quizBtnBase}${cls} font-arabic text-lg text-center" dir="rtl">${p[0]}${chosen ? `<span class="block text-[11px] font-sans font-semibold" dir="ltr">${q.pairs[v.map[i]][1]}</span>` : ''}</button>`;
+                            }).join('')}
+                        </div>
+                        <div class="space-y-2">
+                            ${v.right.map(r => `<button ${v.done ? 'disabled' : ''} onclick="quizMatchRight(${r.i})" class="${quizBtnBase}${rightUsed.has(r.i) ? 'bg-slate-100 border-slate-200 text-slate-400' : quizBtnIdle} text-center text-xs">${r.text}</button>`).join('')}
+                        </div>
+                    </div>
+                    ${v.done ? '' : `<button onclick="quizMatchCheck()" ${Object.keys(v.map).length < q.pairs.length ? 'disabled' : ''} class="mt-4 w-full py-3 rounded-xl font-bold text-sm text-white transition ${Object.keys(v.map).length < q.pairs.length ? 'bg-slate-300' : 'bg-emerald-800 hover:bg-emerald-900'}">Periksa Jawaban</button>`}`;
+            }
+
+            const feedback = v.done ? `
+                <div class="mt-4 rounded-xl p-4 text-sm ${v.ok ? 'bg-emerald-50 border border-emerald-200 text-emerald-900' : 'bg-red-50 border border-red-200 text-red-900'}">
+                    <p class="font-bold mb-1">${v.ok ? '<i class="fa-solid fa-circle-check"></i> Benar!' : '<i class="fa-solid fa-circle-xmark"></i> Belum tepat'}</p>
+                    ${v.ok ? '' : `<p class="text-xs mb-1">Jawaban benar: <strong>${v.correct}</strong></p>`}
+                    <p class="text-xs">${q.exp} <span class="text-slate-500">(${q.src})</span></p>
+                </div>
+                <button onclick="quizNext()" class="mt-4 w-full py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-emerald-950 font-bold text-sm transition">${n === total ? 'Lihat Hasil' : 'Lanjut'} <i class="fa-solid fa-arrow-right ml-1"></i></button>` : '';
+
+            return `
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-semibold text-slate-500 mb-1.5">
+                            <span>Level ${quizProgress.level} · Soal ${n}/${total}</span>
+                            <span>${q.topic}</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-200 overflow-hidden"><div class="h-full bg-emerald-700 transition-all" style="width:${(quizRound.idx + (v.done ? 1 : 0)) / total * 100}%"></div></div>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-slate-200 p-5">
+                        <h3 class="font-bold text-slate-800 mb-4 leading-snug">${q.q}</h3>
+                        ${body}
+                        ${feedback}
+                    </div>
+                </div>`;
+        }
+
+        function quizViewResult() {
+            const r = quizRound.result;
+            const wrong = quizRound.items.filter(v => !v.ok);
+            return `
+                <div class="space-y-4">
+                    <div class="bg-white rounded-2xl border ${r.perfect ? 'border-emerald-300' : 'border-slate-200'} p-6 text-center space-y-3">
+                        <div class="inline-flex h-16 w-16 items-center justify-center rounded-full ${r.perfect ? 'bg-emerald-100 text-emerald-700' : 'bg-gold-500/20 text-gold-600'} text-3xl">
+                            <i class="fa-solid ${r.perfect ? 'fa-circle-check' : 'fa-book-open-reader'}"></i></div>
+                        <p class="text-xs font-bold uppercase tracking-wider text-gold-600">Level ${r.level}</p>
+                        <p class="text-3xl font-extrabold text-emerald-900">${r.correct}/${quizRound.items.length}</p>
+                        <p class="text-sm text-slate-600">Skor level ini: <strong class="text-emerald-800">${r.score} poin</strong>${r.perfect ? ` (termasuk bonus ${QUIZ_BONUS} poin)` : ''}</p>
+                        <p class="text-sm text-slate-600">${r.perfect ? 'Masyaa Allah, semua benar! Siap lanjut ke level berikutnya?' : 'Sedikit lagi. Pelajari koreksi di bawah, lalu coba lagi dengan soal baru.'}</p>
+                        <div class="flex flex-col sm:flex-row gap-2 justify-center pt-1">
+                            ${r.perfect
+                                ? `<button onclick="quizNextLevel()" class="px-5 py-3 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-sm">Lanjut ke Level ${r.level + 1} <i class="fa-solid fa-arrow-right ml-1"></i></button>`
+                                : `<button onclick="quizStart()" class="px-5 py-3 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-sm"><i class="fa-solid fa-rotate-right mr-1"></i> Ulangi Level ${r.level}</button>`}
+                            <button onclick="quizHome()" class="px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm">Ringkasan Skor</button>
+                        </div>
+                    </div>
+                    ${wrong.length ? `
+                    <div class="space-y-3">
+                        <h3 class="font-bold text-emerald-900 text-sm"><i class="fa-solid fa-lightbulb text-gold-500 mr-1"></i> Koreksi (${wrong.length} soal)</h3>
+                        ${wrong.map(v => `
+                            <div class="bg-white rounded-2xl border border-red-200 p-4 text-sm space-y-1.5">
+                                <p class="font-semibold text-slate-800">${v.q.q}</p>
+                                ${v.q.ar ? `<p class="font-arabic text-lg text-center text-emerald-950" dir="rtl">${v.q.ar}</p>` : ''}
+                                <p class="text-xs text-red-700"><i class="fa-solid fa-xmark mr-1"></i> Jawaban Anda: ${v.yours || '-'}</p>
+                                <p class="text-xs text-emerald-800"><i class="fa-solid fa-check mr-1"></i> Jawaban benar: <strong>${v.correct}</strong></p>
+                                <p class="text-xs text-slate-600">${v.q.exp} <span class="text-slate-500">(${v.q.src})</span></p>
+                            </div>`).join('')}
+                    </div>` : ''}
+                    ${quizScoreTable()}
+                </div>`;
         }
 
         /* -------------------------------------------------------------
