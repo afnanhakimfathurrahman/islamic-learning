@@ -6,7 +6,7 @@
 - **Primary Reference Source**: [Rumaysho.com](https://rumaysho.com) (Ustadz Muhammad Abduh Tuasikal, M.Sc.)
 - **Repository URL**: `https://github.com/kamaludin68/islamic-learning`
 - **Architecture**: Single Page Application (SPA), Progressive Web App (PWA) offline-first.
-- **Design Persona**: Clean Islamic Modern Aesthetic (Emerald Green `#064e3b`, Gold/Amber accents `#f59e0b`, Light Slate background `#f8fafc`). Character illustrations must strictly use faceless Muslim avatars (karakter Muslim tanpa wajah).
+- **Design Persona**: Clean Islamic Modern Aesthetic (default theme Langit Pagi: sky blue `#0c4a6e`, Gold/Amber accents `#f59e0b`, Light Slate background `#f8fafc`; selectable themes below). Character illustrations must strictly use faceless Muslim avatars (karakter Muslim tanpa wajah).
 
 ---
 
@@ -179,7 +179,7 @@ Itemized list with detailed explanations, full Matan, translation, and Dalil ref
   - Tap/click opens a fullscreen lightbox with pinch-zoom, pan, and "open in new tab" fallback.
 - **14 Rukun Sholat Grid**: Responsive grid overview below the infographic.
 - **Word-by-Word Interactivity**:
-  - Breakdown of 10 recitations in prayer order (`bacaanSholatWords`): Takbiratul Ihram, Doa Iftitah, Al-Fatihah, Ruku', I'tidal, Sujud, Duduk antara dua sujud, Tasyahud, Shalawat Ibrahimiyyah, Salam. Per-word badges must wrap (no `truncate`).
+  - Breakdown of 11 recitations in prayer order (`bacaanSholatWords`): Takbiratul Ihram, Doa Iftitah, Al-Fatihah, Ruku', Tasmi' (Sami'allahu liman hamidah; HR. Bukhari 689 & Muslim 411, from Rumaysho.com), I'tidal, Sujud, Duduk antara dua sujud, Tasyahud, Shalawat Ibrahimiyyah, Salam. Per-word badges must wrap (no `truncate`).
   - Arabic text paired with word-by-word Indonesian transliteration and literal word meaning grid.
   - Font size setting applies to Arabic recitation via the CSS variable `--arabic-size` (default `28px`, range `20px`–`42px`).
 
@@ -209,6 +209,7 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 - Level tanpa batas. Naik level hanya jika 10/10 benar (`quizNextLevel`); jika ada salah, tampil koreksi (jawaban pemain, jawaban benar, penjelasan, sumber) dan pemain mengulang level dengan soal baru. Soal sulit lebih sering muncul di level tinggi (`quizPick`, bobot per `lvl` 1-3).
 - Skor: 10 poin per jawaban benar, bonus 20 poin untuk 10/10 (maks 120 per level). Skor per level = skor terbaik pada level itu; total = jumlah skor terbaik semua level (mencegah farming).
 - Persistensi: `localStorage['quiz_progress']` = `{level, best:{<level>:skor}, lastIds:[...]}`; tombol Reset meminta konfirmasi.
+- Aturan Arab: soal yang menyangkut doa atau bacaan yang memiliki teks Arab di aplikasi **wajib menampilkan tulisan Arabnya** (disalin persis dari aplikasi), tidak hanya transliterasi Latin. Soal yang hanya menyebut terjemahan dalil menampilkan Arabnya pada penjelasan setelah menjawab (`QUIZ_AR`), agar jawaban tidak bocor. Soal `fill` `h1`-`h14` melengkapi ayat/hadits dari kartu dalil.
 - Aturan isi: **setiap soal harus bersumber dari materi yang ada di aplikasi** (field `src` menunjuk bagian/dalil). Jangan menambah fakta atau dalil baru lewat kuis. Tambah soal dengan skill `add-quiz-question`.
 
 #### Footer Requirement
@@ -227,6 +228,7 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 | Wudhu sub-tab panels | `wudhu-sub-<name>` (class `wudhu-sub-content`), `<name>` in `langkah, syarat, rukun, sunnah, ancaman` |
 | Sholat sub-tab buttons / panels | `btn-sholat-gerakan`, `btn-sholat-bacaan` / `sholat-gerakan-container`, `sholat-bacaan-container` |
 | Searchable card | class `search-item` (optional `data-search` overrides text used for matching) |
+| Theme | `#theme-picker`, `#meta-theme-color` (in `#settings-bar`) |
 | Quiz | `tab-quiz`, `mob-tab-quiz`, `content-quiz`, `#quiz-root` |
 | Install button | `#pwa-install-btn` (hidden until `beforeinstallprompt`, or iOS Safari not standalone) |
 
@@ -241,7 +243,8 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 - PWA: `beforeinstallprompt` handler stores `deferredInstallPrompt`; install button calls `.prompt()`; `appinstalled` hides the button; iOS shows an "Add to Home Screen" alert. Service worker registered on `load` via `./sw.js`.
 
 ### 5.3 Styling
-- Tailwind palette: `emerald` (primary, `#064e3b` = emerald-900) and `gold` (accent, `#f59e0b`), configured in `tailwind.config`.
+- Tailwind palette: names `emerald` (primary scale) and `gold` (accent) are kept in markup but resolve to CSS variables (`--p-50..950`, `--g-400/500/600`) in `tailwind.config`, so themes only swap variables. Do not hardcode hex colors; use `rgb(var(--p-*))` in CSS.
+- Themes: `data-theme` on `<html>`, stored in `localStorage['theme']`, applied by an inline script in `<head>` before render. Values: `langit` (default, `:root`), `zamrud` (the old emerald green), `taman` (kids: bright green + orange, rounder corners), `senja` (violet), `gelap` (black/grey dark mode: primary scale becomes neutral greys, light surfaces and dark text utilities are inverted by explicit `[data-theme="gelap"]` rules; when you introduce a new light-surface or dark-text utility class, add its override there). Picker `#theme-picker` lives in `#settings-bar`; `THEMES`, `applyTheme`, `renderThemePicker` in JS. `manifest.json` colors and the icons use the default theme (`#0c4a6e`); the `<meta name="theme-color">` follows the active theme.
 - Active wudhu sub-tab: `bg-emerald-800 text-white border-emerald-800 shadow-sm`; inactive: `bg-white text-slate-600 border-slate-200`. Do NOT use `border-b-2` underline tabs inside an `overflow-x-auto` container: they collide with the container border (previous bug).
 - Arabic blocks use class `.arabic-size` and font `Amiri`.
 

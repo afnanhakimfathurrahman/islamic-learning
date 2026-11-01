@@ -6,9 +6,19 @@
     <title>Panduan Sholat & Wudhu Sesuai Sunnah</title>
 
     <!-- PWA Manifest -->
-    <link rel="manifest" href="./manifest.json">
-    <link rel="apple-touch-icon" href="./icon-192.png">
-    <meta name="theme-color" content="#064e3b">
+    <link rel="manifest" id="app-manifest" href="./manifest.json">
+    <link rel="icon" id="app-icon" type="image/png" href="./icon-192.png">
+    <link rel="apple-touch-icon" id="app-apple-icon" href="./icon-192.png">
+    <meta name="theme-color" id="meta-theme-color" content="#375e85">
+    <script>
+        // Terapkan tema tersimpan sebelum render agar tidak berkedip
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('theme'); } catch (e) {}
+            if (!['langit', 'zamrud', 'taman', 'senja', 'coklat', 'gelap'].includes(t)) t = 'langit';
+            document.documentElement.dataset.theme = t;
+        })();
+    </script>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,14 +28,22 @@
                 extend: {
                     colors: {
                         emerald: {
-                            800: '#065f46',
-                            900: '#064e3b',
-                            950: '#022c22',
+                            50: 'rgb(var(--p-50) / <alpha-value>)',
+                            100: 'rgb(var(--p-100) / <alpha-value>)',
+                            200: 'rgb(var(--p-200) / <alpha-value>)',
+                            300: 'rgb(var(--p-300) / <alpha-value>)',
+                            400: 'rgb(var(--p-400) / <alpha-value>)',
+                            500: 'rgb(var(--p-500) / <alpha-value>)',
+                            600: 'rgb(var(--p-600) / <alpha-value>)',
+                            700: 'rgb(var(--p-700) / <alpha-value>)',
+                            800: 'rgb(var(--p-800) / <alpha-value>)',
+                            900: 'rgb(var(--p-900) / <alpha-value>)',
+                            950: 'rgb(var(--p-950) / <alpha-value>)',
                         },
                         gold: {
-                            400: '#fbbf24',
-                            500: '#f59e0b',
-                            600: '#d97706',
+                            400: 'rgb(var(--g-400) / <alpha-value>)',
+                            500: 'rgb(var(--g-500) / <alpha-value>)',
+                            600: 'rgb(var(--g-600) / <alpha-value>)',
                         }
                     },
                     fontFamily: {
@@ -46,9 +64,150 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* Tema warna: skala utama (--p-*) dan aksen (--g-*) dipakai kelas emerald-* dan gold-* lewat tailwind.config.
+           Tema dipilih lewat data-theme pada <html> (default: langit). */
+        :root {
+            --p-50: 242 248 253;
+            --p-100: 226 239 250;
+            --p-200: 200 224 245;
+            --p-300: 168 205 236;
+            --p-400: 138 186 226;
+            --p-500: 113 166 214;
+            --p-600: 94 148 198;
+            --p-700: 78 128 176;
+            --p-800: 66 110 154;
+            --p-900: 55 94 133;
+            --p-950: 44 77 112;
+            --g-400: 254 215 170;
+            --g-500: 253 186 116;
+            --g-600: 240 145 74;
+        }
+        [data-theme="zamrud"] {
+            --p-50: 236 253 245;
+            --p-100: 209 250 229;
+            --p-200: 167 243 208;
+            --p-300: 110 231 183;
+            --p-400: 52 211 153;
+            --p-500: 16 185 129;
+            --p-600: 5 150 105;
+            --p-700: 4 120 87;
+            --p-800: 6 95 70;
+            --p-900: 6 78 59;
+            --p-950: 2 44 34;
+            --g-400: 251 191 36;
+            --g-500: 245 158 11;
+            --g-600: 217 119 6;
+        }
+        [data-theme="taman"] {
+            --p-50: 243 250 246;
+            --p-100: 227 244 234;
+            --p-200: 200 232 214;
+            --p-300: 166 216 189;
+            --p-400: 132 198 162;
+            --p-500: 108 177 145;
+            --p-600: 90 158 130;
+            --p-700: 77 139 114;
+            --p-800: 68 122 100;
+            --p-900: 58 105 85;
+            --p-950: 47 87 70;
+            --g-400: 254 215 170;
+            --g-500: 253 186 116;
+            --g-600: 240 145 74;
+        }
+        [data-theme="senja"] {
+            --p-50: 247 244 253;
+            --p-100: 237 231 250;
+            --p-200: 221 210 245;
+            --p-300: 198 182 236;
+            --p-400: 172 152 224;
+            --p-500: 150 128 211;
+            --p-600: 129 104 196;
+            --p-700: 112 89 176;
+            --p-800: 98 80 158;
+            --p-900: 85 68 140;
+            --p-950: 70 55 122;
+            --g-400: 253 230 138;
+            --g-500: 252 211 77;
+            --g-600: 245 158 11;
+        }
+        [data-theme="coklat"] {
+            --p-50: 251 247 243;
+            --p-100: 243 234 224;
+            --p-200: 230 213 195;
+            --p-300: 212 185 156;
+            --p-400: 191 153 112;
+            --p-500: 166 124 82;
+            --p-600: 139 98 64;
+            --p-700: 114 78 51;
+            --p-800: 93 63 42;
+            --p-900: 74 50 34;
+            --p-950: 51 35 26;
+            --g-400: 251 191 36;
+            --g-500: 245 158 11;
+            --g-600: 217 119 6;
+        }
+        /* Tema pastel/hangat: latar halaman diberi semburat warna tema */
+        :root body { background-color: #f4f9fd; }
+        [data-theme="taman"] body { background-color: #f3faf6; }
+        [data-theme="senja"] body { background-color: #f8f5fd; }
+        [data-theme="coklat"] body { background-color: #faf6f1; }
+        /* Gelap: hitam-abu-abu netral. Skala --p-* menjadi abu-abu untuk header/tombol (gelap), sedangkan permukaan terang
+           (bg-white, bg-slate-*, bg-emerald-50/100, bg-red/amber-50) dan teks gelap di atasnya dibalik lewat aturan di bawah. */
+        [data-theme="gelap"] {
+            --p-50: 250 250 250;
+            --p-100: 229 229 229;
+            --p-200: 212 212 212;
+            --p-300: 189 189 189;
+            --p-400: 163 163 163;
+            --p-500: 115 115 115;
+            --p-600: 107 107 107;
+            --p-700: 64 64 64;
+            --p-800: 38 38 38;
+            --p-900: 23 23 23;
+            --p-950: 10 10 10;
+            --g-400: 251 191 36;
+            --g-500: 245 158 11;
+            --g-600: 217 119 6;
+            color-scheme: dark;
+        }
+        [data-theme="gelap"] body { background-color: #0f0f10; color: #e5e5e5; }
+        [data-theme="gelap"] .bg-white { background-color: #1c1c1e; }
+        [data-theme="gelap"] .bg-slate-50, [data-theme="gelap"] .bg-emerald-50 { background-color: #262628; }
+        [data-theme="gelap"] .bg-slate-50\/80, [data-theme="gelap"] .bg-emerald-50\/40 { background-color: #262628; }
+        [data-theme="gelap"] .bg-slate-100, [data-theme="gelap"] .bg-emerald-100 { background-color: #2c2c2e; }
+        [data-theme="gelap"] .bg-red-50, [data-theme="gelap"] .bg-red-50\/50 { background-color: rgba(239, 68, 68, 0.12); }
+        [data-theme="gelap"] .bg-red-100 { background-color: rgba(239, 68, 68, 0.2); }
+        [data-theme="gelap"] .bg-amber-50 { background-color: rgba(245, 158, 11, 0.12); }
+        [data-theme="gelap"] .bg-amber-100 { background-color: rgba(245, 158, 11, 0.2); }
+        [data-theme="gelap"] .border-slate-100, [data-theme="gelap"] .border-slate-200, [data-theme="gelap"] .border-slate-300,
+        [data-theme="gelap"] .border-emerald-100, [data-theme="gelap"] .border-emerald-200, [data-theme="gelap"] .border-emerald-300 { border-color: #3a3a3c; }
+        [data-theme="gelap"] .border-red-100, [data-theme="gelap"] .border-red-200, [data-theme="gelap"] .border-red-300 { border-color: rgba(239, 68, 68, 0.4); }
+        [data-theme="gelap"] .border-l-4.border-emerald-800, [data-theme="gelap"] .border-l-4.border-emerald-900 { border-left-color: rgb(var(--g-500)); }
+        [data-theme="gelap"] .text-slate-800, [data-theme="gelap"] .text-emerald-950, [data-theme="gelap"] .text-emerald-900 { color: #ececec; }
+        [data-theme="gelap"] .text-slate-700, [data-theme="gelap"] .text-emerald-800 { color: #dcdcdc; }
+        [data-theme="gelap"] .text-slate-600, [data-theme="gelap"] .text-emerald-700 { color: #bcbcbc; }
+        [data-theme="gelap"] .text-slate-500 { color: #a3a3a3; }
+        [data-theme="gelap"] .text-slate-400 { color: #8e8e93; }
+        [data-theme="gelap"] .text-red-700, [data-theme="gelap"] .text-red-800, [data-theme="gelap"] .text-red-900 { color: #fca5a5; }
+        [data-theme="gelap"] .text-amber-800 { color: #fcd34d; }
+        [data-theme="gelap"] .text-emerald-600 { color: #34d399; }
+        [data-theme="gelap"] .bg-gold-500.text-emerald-950 { color: #171717; }
+        [data-theme="gelap"] .bg-emerald-100.border-emerald-500 { background-color: rgba(16, 185, 129, 0.18); border-color: #10b981; color: #a7f3d0; }
+        [data-theme="gelap"] .hover\:bg-emerald-50:hover { background-color: #2c2c2e; }
+        [data-theme="gelap"] .hover\:border-emerald-300:hover { border-color: #525252; }
+        [data-theme="gelap"] .hover\:bg-slate-200:hover { background-color: #3a3a3c; }
+        [data-theme="gelap"] .hover\:text-emerald-900:hover { color: #fff; }
+        [data-theme="gelap"] .wudhu-sub-btn.bg-white:hover { background-color: #2c2c2e; color: #fff; }
+        [data-theme="gelap"] .infographic-img { background: #2c2c2e; }
+        [data-theme="gelap"] ::-webkit-scrollbar-track { background: #1c1c1e; }
+        /* Taman (mode anak): sudut lebih bulat */
+        [data-theme="taman"] .rounded-2xl { border-radius: 1.75rem; }
+        [data-theme="taman"] .rounded-xl { border-radius: 1.25rem; }
+        .theme-swatch { width: 2rem; height: 2rem; border-radius: 9999px; border: 2px solid transparent; }
+        .theme-swatch.active { border-color: #fff; box-shadow: 0 0 0 2px rgb(var(--g-400)); }
         /* Hover hanya untuk tab tidak aktif (mencegah tab aktif jadi pucat setelah disentuh) */
         @media (hover: hover) {
-            .wudhu-sub-btn.bg-white:hover { background-color: #ecfdf5; color: #065f46; }
+            .wudhu-sub-btn.bg-white:hover { background-color: rgb(var(--p-50)); color: rgb(var(--p-800)); }
         }
         .font-arabic {
             font-family: 'Amiri', 'Traditional Arabic', serif;
@@ -62,12 +221,12 @@
             background: #f1f5f9;
         }
         ::-webkit-scrollbar-thumb {
-            background: #059669;
+            background: rgb(var(--p-600));
             border-radius: 3px;
         }
         .tab-active {
-            border-bottom: 3px solid #d97706;
-            color: #fbbf24;
+            border-bottom: 3px solid rgb(var(--g-600));
+            color: rgb(var(--g-400));
             font-weight: 600;
         }
         .word-badge {
@@ -161,7 +320,12 @@
         </div>
 
         <!-- Font Size Settings Bar (Hidden) -->
-        <div id="settings-bar" class="hidden bg-emerald-950 px-4 py-3 border-t border-emerald-800">
+        <div id="settings-bar" class="hidden bg-emerald-950 px-4 py-3 border-t border-emerald-800 space-y-3">
+            <div class="max-w-3xl mx-auto flex items-center justify-between text-sm text-emerald-200">
+                <span>Tema Warna:</span>
+                <div id="theme-picker" class="flex flex-wrap justify-end items-center gap-2"></div>
+            </div>
+            <p class="max-w-3xl mx-auto text-[11px] text-emerald-300">Ikon aplikasi mengikuti tema saat aplikasi dipasang (Install). Untuk mengganti ikon yang sudah terpasang, hapus lalu pasang ulang.</p>
             <div class="max-w-3xl mx-auto flex items-center justify-between text-sm text-emerald-200">
                 <span>Ukuran Teks Arab:</span>
                 <div class="flex items-center gap-3">
@@ -1020,7 +1184,20 @@
                 ]
             },
             {
-                title: "5. Bacaan I'tidal (Bangkit Ruku')",
+                title: "5. Ucapan Bangkit dari Ruku' (Tasmi')",
+                arabFull: "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ",
+                latinFull: "Sami'allahu liman hamidah.",
+                translationFull: "Allah mendengar pujian dari orang yang memuji-Nya.",
+                source: "HR. Bukhari (No. 689) & Muslim (No. 411)",
+                words: [
+                    { ar: "سَمِعَ", lat: "Sami'a", id: "Mendengar (mengabulkan)" },
+                    { ar: "اللَّهُ", lat: "Allahu", id: "Allah" },
+                    { ar: "لِمَنْ", lat: "liman", id: "bagi orang yang" },
+                    { ar: "حَمِدَهُ", lat: "hamidah", id: "memuji-Nya" }
+                ]
+            },
+            {
+                title: "6. Bacaan I'tidal (Bangkit Ruku')",
                 arabFull: "رَبَّنَا وَلَكَ الْحَمْدُ حَمْدًا كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ",
                 latinFull: "Rabbanaa wa lakal hamdu hamdan katsiiran thayyiban mubaarakan fiih.",
                 translationFull: "Wahai Tuhan kami, bagi-Mu segala pujian, pujian yang banyak, baik, dan diberkahi di dalamnya.",
@@ -1037,7 +1214,7 @@
                 ]
             },
             {
-                title: "6. Bacaan Sujud",
+                title: "7. Bacaan Sujud",
                 arabFull: "سُبْحَانَ رَبِّيَ الْأَعْلَى وَبِحَمْدِهِ",
                 latinFull: "Subhaana rabbiyal a'laa wa bihamdih (3x)",
                 translationFull: "Maha Suci Tuhanku Yang Maha Tinggi dan dengan memuji-Nya.",
@@ -1050,7 +1227,7 @@
                 ]
             },
             {
-                title: "7. Duduk Antara Dua Sujud",
+                title: "8. Duduk Antara Dua Sujud",
                 arabFull: "رَبِّ اغْفِرْ لِي رَبِّ اغْفِرْ لِي",
                 latinFull: "Rabbighfir lii, Rabbighfir lii",
                 translationFull: "Wahai Tuhanku ampunilah aku, wahai Tuhanku ampunilah aku.",
@@ -1062,7 +1239,7 @@
                 ]
             },
             {
-                title: "8. Tasyahud Awal & Akhir",
+                title: "9. Tasyahud Awal & Akhir",
                 arabFull: "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ السَّلاَمُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
                 latinFull: "At-tahiyyaatu lillaahi wash-shalawaatu wath-thayyibaatu. Assalaamu 'alaika ayyuhan-nabiyyu wa rahmatullaahi wa barakaatuh. Assalaamu 'alainaa wa 'alaa 'ibaadillaahish-shaalihiin. Asyhadu allaa ilaaha illallaah, wa asyhadu anna Muhammadan 'abduhu wa rasuuluh.",
                 translationFull: "Segala penghormatan, sholawat, dan kebaikan adalah milik Allah. Semoga keselamatan, rahmat Allah, dan berkah-Nya tercurah kepadamu wahai Nabi. Semoga keselamatan tercurah kepada kami dan kepada hamba-hamba Allah yang shalih. Aku bersaksi bahwa tidak ada sesembahan yang berhak disembah selain Allah, dan aku bersaksi bahwa Muhammad adalah hamba dan utusan-Nya.",
@@ -1088,7 +1265,7 @@
                 ]
             },
             {
-                title: "9. Shalawat Ibrahimiyyah (Tasyahud Akhir)",
+                title: "10. Shalawat Ibrahimiyyah (Tasyahud Akhir)",
                 arabFull: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
                 latinFull: "Allaahumma shalli 'alaa Muhammad wa 'alaa aali Muhammad, kamaa shallaita 'alaa Ibraahiim wa 'alaa aali Ibraahiim, innaka hamiidum majiid. Allaahumma baarik 'alaa Muhammad wa 'alaa aali Muhammad, kamaa baarakta 'alaa Ibraahiim wa 'alaa aali Ibraahiim, innaka hamiidum majiid.",
                 translationFull: "Ya Allah, limpahkanlah sholawat kepada Muhammad dan keluarga Muhammad, sebagaimana Engkau telah melimpahkan sholawat kepada Ibrahim dan keluarga Ibrahim; sungguh Engkau Maha Terpuji lagi Maha Mulia. Ya Allah, berikanlah berkah kepada Muhammad dan keluarga Muhammad, sebagaimana Engkau telah memberikan berkah kepada Ibrahim dan keluarga Ibrahim; sungguh Engkau Maha Terpuji lagi Maha Mulia.",
@@ -1109,7 +1286,7 @@
                 ]
             },
             {
-                title: "10. Salam",
+                title: "11. Salam",
                 arabFull: "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",
                 latinFull: "Assalaamu 'alaikum wa rahmatullaah",
                 translationFull: "Semoga keselamatan dan rahmat Allah tercurah kepada kalian. (Diucapkan sambil menoleh ke kanan, lalu ke kiri.)",
@@ -1430,6 +1607,9 @@
         const order = (id, topic, lvl, q, items, exp, src) => ({ t: 'order', id, topic, lvl, q, items, exp, src });
         const match = (id, topic, lvl, q, pairs, exp, src) => ({ t: 'match', id, topic, lvl, q, pairs, exp, src });
 
+        // Opsi/butir berisi Arab (disalin dari aplikasi) + Latin; teks dirender sebagai HTML
+        const ARL = (ar, lat) => `<span class="font-arabic text-xl leading-loose" dir="rtl">${ar}</span><span class="block text-xs font-normal text-slate-500">${lat}</span>`;
+
         const quizBank = [
             // ---- Dalil sholat (Home)
             mc('d1', 'Dalil Sholat', 1, "Menurut QS. Al-Baqarah: 43, perintah yang disebut bersama sholat dan rukuk adalah…", ["Menunaikan zakat", "Berpuasa", "Berhaji", "Bersedekah"], "Ayat ini memerintahkan: laksanakan sholat, tunaikan zakat, dan rukuklah bersama orang-orang yang rukuk.", "QS. Al-Baqarah: 43"),
@@ -1446,7 +1626,7 @@
             mc('s3', 'Syarat Sah Sholat', 1, "Aurat wanita dalam sholat adalah seluruh tubuh kecuali…", ["Wajah dan telapak tangan", "Wajah dan telapak kaki", "Rambut dan leher", "Telapak tangan dan kaki"], "Wanita: seluruh tubuh kecuali wajah dan telapak tangan.", "QS. Al-A'raf: 31 & HR. Tirmidzi no. 377"),
             mc('s4', 'Syarat Sah Sholat', 2, "Dalil syarat menghadap kiblat terdapat pada…", ["QS. Al-Baqarah: 144", "QS. An-Nisa: 103", "QS. Ali 'Imran: 85", "QS. Maryam: 59"], "\"Maka hadapkanlah wajahmu ke arah Masjidil Haram.\"", "QS. Al-Baqarah: 144"),
             mc('s5', 'Syarat Sah Sholat', 2, "Syarat masuk waktu sholat berdalil pada…", ["QS. An-Nisa: 103", "QS. Al-Baqarah: 144", "QS. Al-A'raf: 31", "QS. Ali 'Imran: 85"], "Sholat adalah kewajiban yang ditetapkan waktunya atas orang-orang beriman.", "QS. An-Nisa: 103"),
-            mc('s6', 'Syarat Sah Sholat', 2, "Hadits \"Innamal a'maalu bin niyyaat\" menjadi dalil syarat…", ["Niat", "Menutup aurat", "Suci dari najis", "Menghadap kiblat"], "Amal tergantung niatnya.", "HR. Bukhari no. 1 & Muslim no. 1907"),
+            mc('s6', 'Syarat Sah Sholat', 2, "Hadits <span class='font-arabic text-xl' dir='rtl'>إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ</span> (Innamal a'maalu bin niyyaat) menjadi dalil syarat…", ["Niat", "Menutup aurat", "Suci dari najis", "Menghadap kiblat"], "Amal tergantung niatnya.", "HR. Bukhari no. 1 & Muslim no. 1907"),
             mc('s7', 'Syarat Sah Sholat', 2, "QS. Al-A'raf: 31 (\"pakailah pakaianmu yang indah di setiap masjid\") menjadi dalil syarat…", ["Menutup aurat", "Berakal", "Islam", "Masuk waktu"], "Ayat ini dipakai sebagai dalil menutup aurat.", "QS. Al-A'raf: 31"),
             mc('s8', 'Syarat Sah Sholat', 3, "Hadits dua orang yang disiksa, salah satunya tidak menjaga diri dari air kencing, menjadi dalil syarat…", ["Suci badan, pakaian, dan tempat dari najis", "Berakal", "Mumayyiz", "Niat"], "Syarat menghilangkan najis yang tidak dimaafkan.", "HR. Bukhari no. 216 & Muslim no. 292"),
             mc('s9', 'Syarat Sah Sholat', 3, "Menurut HR. Abu Daud no. 4403, pena diangkat dari orang tidur hingga bangun, anak kecil hingga baligh, dan…", ["Orang gila hingga berakal", "Orang sakit hingga sembuh", "Musafir hingga pulang", "Orang miskin hingga kaya"], "Hadits ini menjadi dalil syarat berakal.", "HR. Abu Daud no. 4403"),
@@ -1458,7 +1638,7 @@
             mc('w4', 'Wudhu', 2, "Manakah yang BUKAN termasuk rukun wudhu?", ["Bersiwak", "Niat", "Tertib", "Membasuh muka"], "Bersiwak termasuk sunnah wudhu, bukan rukun.", "Rukun & Sunnah Wudhu"),
             mc('w5', 'Wudhu', 1, "Ayat yang menjelaskan tata cara wudhu adalah…", ["QS. Al-Ma'idah: 6", "QS. Al-Ankabut: 45", "QS. Maryam: 59", "QS. An-Nisa: 103"], "Ayat ini menyebut membasuh wajah, tangan sampai siku, mengusap kepala, dan membasuh kaki sampai mata kaki.", "QS. Al-Ma'idah: 6"),
             mc('w6', 'Wudhu', 1, "Berapa pintu surga yang dibukakan bagi orang yang menyempurnakan wudhu lalu membaca syahadat?", ["Delapan", "Tujuh", "Lima", "Sepuluh"], "\"…dibukakan baginya delapan pintu surga; ia boleh masuk dari pintu mana saja yang ia kehendaki.\"", "HR. Muslim no. 234"),
-            mc('w7', 'Wudhu', 1, "Hadits \"Wailul lil a'qaab minan naar\" mengancam…", ["Tumit yang tidak terbasuh air wudhu", "Orang yang tidak bersiwak", "Orang yang tidak berdoa setelah wudhu", "Orang yang berwudhu terlalu lama"], "Celakalah tumit-tumit yang tidak terbasuh air wudhu dari api neraka.", "HR. Bukhari no. 60 & Muslim no. 242"),
+            mc('w7', 'Wudhu', 1, "Hadits <span class='font-arabic text-xl' dir='rtl'>وَيْلٌ لِلْأَعْقَابِ مِنَ النَّارِ</span> (Wailul lil a'qaab minan naar) mengancam…", ["Tumit yang tidak terbasuh air wudhu", "Orang yang tidak bersiwak", "Orang yang tidak berdoa setelah wudhu", "Orang yang berwudhu terlalu lama"], "Celakalah tumit-tumit yang tidak terbasuh air wudhu dari api neraka.", "HR. Bukhari no. 60 & Muslim no. 242"),
             mc('w8', 'Wudhu', 2, "Kumur dan istinsyaq (menghirup air ke hidung) sebaiknya dilakukan…", ["Dalam satu cakupan air, 3 kali", "Terpisah, masing-masing 1 kali", "Hanya sekali", "Setelah mencuci kaki"], "Disatukan dalam satu cakupan air dan dilakukan 3 kali.", "Sunnah Wudhu"),
             mc('w9', 'Wudhu', 2, "Mendahulukan anggota badan yang kanan dalam bersuci disebut…", ["At-Tayamun", "Tuma'ninah", "Istinsyaq", "Tawarruk"], "Nabi <span class='font-arabic'>ﷺ</span> menyukai mendahulukan yang kanan dalam bersuci dan segala urusan.", "HR. Bukhari no. 168 & Muslim no. 268"),
             mc('w10', 'Wudhu', 2, "Hadits \"Seandainya tidak memberatkan umatku, niscaya aku perintahkan mereka … setiap kali wudhu\" menyebut sunnah…", ["Bersiwak", "Membaca basmalah", "Berkumur", "Membasuh telinga"], "Sunnah bersiwak setiap akan berwudhu.", "HR. Ahmad"),
@@ -1470,7 +1650,7 @@
             mc('g1', 'Gerakan Sholat', 1, "Sujud dilakukan di atas berapa anggota tubuh?", ["7", "5", "6", "8"], "Dahi+hidung, 2 telapak tangan, 2 lutut, dan 2 ujung kaki.", "HR. Bukhari no. 812"),
             mc('g2', 'Gerakan Sholat', 1, "Duduk di antara dua sujud memakai cara duduk…", ["Iftirasy", "Tawarruk", "Bersila", "Berlutut"], "Menduduki kaki kiri dan menegakkan kaki kanan.", "HR. Abu Daud no. 850"),
             mc('g3', 'Gerakan Sholat', 1, "Duduk pada tasyahud akhir memakai cara duduk…", ["Tawarruk", "Iftirasy", "Bersila", "Berlutut"], "Kaki kiri dimasukkan ke bawah kaki kanan.", "HR. Bukhari no. 831"),
-            mc('g4', 'Gerakan Sholat', 1, "Ucapan ketika bangkit dari ruku' menuju i'tidal adalah…", ["Sami'allahu liman hamidah", "Allahu akbar", "Subhaana rabbiyal 'azhiim", "Assalaamu 'alaikum"], "Bangkit dari ruku' sambil mengucapkan 'Sami'allahu liman hamidah'.", "HR. Bukhari no. 789"),
+            mc('g4', 'Gerakan Sholat', 1, "Ucapan ketika bangkit dari ruku' menuju i'tidal adalah…", [ARL("سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ", "Sami'allahu liman hamidah"), ARL("اللَّهُ أَكْبَرُ", "Allahu akbar"), ARL("سُبْحَانَ رَبِّيَ الْعَظِيمِ وَبِحَمْدِهِ", "Subhaana rabbiyal 'azhiimi wa bihamdih"), ARL("السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ", "Assalaamu 'alaikum wa rahmatullaah")], "Bangkit dari ruku' sambil mengucapkan 'Sami'allahu liman hamidah'.", "HR. Bukhari no. 789"),
             mc('g5', 'Gerakan Sholat', 2, "Saat salam pertama, kepala ditoleh ke kanan hingga…", ["Pipi terlihat dari belakang", "Bahu menyentuh dagu", "Mata terpejam", "Telinga menyentuh bahu"], "Menoleh ke kanan hingga pipi terlihat dari belakang.", "HR. Muslim no. 582"),
             mc('g6', 'Gerakan Sholat', 2, "Posisi tangan saat sedekap adalah…", ["Tangan kanan di atas punggung tangan kiri, di atas dada", "Kedua tangan di samping badan", "Tangan kiri di atas tangan kanan di perut", "Kedua tangan di belakang"], "Sedekap sunnah: kanan di atas punggung tangan kiri, di atas dada.", "HR. Muslim no. 401"),
             mc('g7', 'Gerakan Sholat', 2, "Saat takbiratul ihram, tangan diangkat sejajar…", ["Bahu atau telinga", "Pinggang", "Lutut", "Dahi"], "Mengangkat kedua tangan sejajar bahu/telinga sambil mengucapkan 'Allahu Akbar'.", "HR. Bukhari no. 757"),
@@ -1498,6 +1678,22 @@
             fill('f13', 'Wudhu', 2, "Lengkapi hadits tentang basmalah dalam wudhu:", ["اسْمَ اللَّهِ", "الْبَسْمَلَةَ", "الدُّعَاءَ", "النِّيَّةَ"], "Tidak ada wudhu bagi orang yang tidak menyebut nama Allah atasnya.", "HR. Abu Daud no. 101", "لَا وُضُوءَ لِمَنْ لَمْ يَذْكُرِ ____ عَلَيْهِ"),
             fill('f14', 'Wudhu', 2, "Lengkapi hadits ancaman wudhu tidak sempurna:", ["النَّارِ", "الْمَاءِ", "الْأَرْضِ", "الْجَنَّةِ"], "Celakalah bagi tumit-tumit dari api neraka.", "HR. Bukhari no. 60 & Muslim no. 242", "وَيْلٌ لِلْأَعْقَابِ مِنَ ____"),
 
+            // ---- Lengkapi dalil (Al-Qur'an & hadits; Arab disalin dari aplikasi)
+            fill('h1', 'Dalil Sholat', 1, "Lengkapi potongan ayat tentang perintah sholat dan zakat:", ["ٱلزَّكَوٰةَ", "ٱلْمُنكَرِ", "ٱلْفَحْشَآءِ", "ٱلْمَرَافِقِ"], "Laksanakan sholat, tunaikan zakat, dan rukuklah bersama orang-orang yang rukuk.", "QS. Al-Baqarah: 43", "وَأَقِيمُوا۟ ٱلصَّلَوٰةَ وَءَاتُوا۟ ____ وَٱرْكَعُوا۟ مَعَ ٱلرَّٰكِعِينَ"),
+            fill('h2', 'Dalil Sholat', 1, "Lengkapi potongan ayat tentang manfaat sholat:", ["ٱلْمُنكَرِ", "ٱلزَّكَوٰةَ", "ٱلْكَعْبَيْنِ", "ٱلرَّٰكِعِينَ"], "Sesungguhnya sholat itu mencegah dari (perbuatan) keji dan mungkar.", "QS. Al-Ankabut: 45", "إِنَّ ٱلصَّلَوٰةَ تَنْهَىٰ عَنِ ٱلْفَحْشَآءِ وَ____"),
+            fill('h3', 'Dalil Sholat', 2, "Lengkapi jawaban penghuni Saqar:", ["الْمُصَلِّينَ", "الْمُتَطَهِّرِينَ", "التَّوَّابِينَ", "الصَّالِحِينَ"], "Dahulu kami tidak termasuk orang-orang yang melaksanakan sholat.", "QS. Al-Muddaththir: 42-43", "مَا سَلَكَكُمْ فِي سَقَرَ . قَالُوا لَمْ نَكُ مِنَ ____"),
+            fill('h4', 'Dalil Sholat', 2, "Lengkapi hadits tentang batas antara keimanan dan kekafiran:", ["الصَّلاَةِ", "الزَّكَاةِ", "الْوُضُوءِ", "الْمَاءِ"], "Batasan antara seseorang dengan kesyirikan dan kekafiran adalah meninggalkan sholat.", "HR. Muslim no. 82", "إِنَّ بَيْنَ الرَّجُلِ وَبَيْنَ الشِّرْكِ وَالْكُفْرِ تَرْكَ ____"),
+            fill('h5', 'Syarat Sah Sholat', 2, "Lengkapi hadits tentang wudhu dan diterimanya sholat:", ["يَتَوَضَّأَ", "يَسْتَيْقِظَ", "يَعْقِلَ", "يَحْتَلِمَ"], "Tidak diterima sholat orang yang berhadats hingga ia berwudhu.", "HR. Bukhari no. 135", "لَا تُقْبَلُ صَلَاةُ مَنْ أَحْدَثَ حَتَّى ____"),
+            fill('h6', 'Wudhu', 1, "Lengkapi hadits tentang sunnah sebelum wudhu:", ["بِالسِّوَاكِ", "بِالصَّلَاةِ", "بِالْمَاءِ", "بِالنَّارِ"], "Seandainya tidak memberatkan umatku, niscaya aku perintahkan mereka bersiwak setiap kali wudhu.", "HR. Ahmad", "لَوْلَا أَنْ أَشُقَّ عَلَى أُمَّتِي لَأَمَرْتُهُمْ ____ عِنْدَ كُلِّ وُضُوءٍ"),
+            fill('h7', 'Wudhu', 3, "Lengkapi hadits tentang mendahulukan anggota kanan:", ["التَّيَمُّنُ", "التَّسْبِيحُ", "التَّكْبِيرُ", "التَّحِيَّاتُ"], "Nabi menyukai mendahulukan yang kanan saat memakai sandal, menyisir, bersuci, dan dalam segala urusannya.", "HR. Bukhari no. 168 & Muslim no. 268", "كَانَ النَّبِيُّ ﷺ يُعْجِبُهُ ____ فِي تَنَعُّلِهِ وَتَرَجُّلِهِ وَطُهُورِهِ وَفِي شَأْنِهِ كُلِّهِ"),
+            fill('h8', 'Syarat Sah Sholat', 2, "Lengkapi ayat tentang menghadap kiblat:", ["الْمَسْجِدِ", "الْمَشْرِقِ", "الْمَغْرِبِ", "الْعَالَمِينَ"], "Maka hadapkanlah wajahmu ke arah Masjidil Haram.", "QS. Al-Baqarah: 144", "فَوَلِّ وَجْهَكَ شَطْرَ ____ الْحَرَامِ"),
+            fill('h9', 'Syarat Sah Sholat', 2, "Lengkapi hadits tentang niat:", ["النِّيَّاتِ", "الصَّلَوَاتِ", "الطَّيِّبَاتِ", "الْحَسَنَاتِ"], "Amal tergantung niatnya.", "HR. Bukhari no. 1 & Muslim no. 1907", "إِنَّمَا الْأَعْمَالُ بِ____، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى"),
+            fill('h10', 'Wudhu', 1, "Lengkapi ayat tentang tata cara wudhu:", ["ٱلْمَرَافِقِ", "ٱلْكَعْبَيْنِ", "ٱلصَّلَوٰةِ", "بِرُءُوسِكُمْ"], "Basuhlah wajahmu dan tanganmu sampai siku.", "QS. Al-Ma'idah: 6", "فَٱغْسِلُوا۟ وُجُوهَكُمْ وَأَيْدِيَكُمْ إِلَى ____"),
+            fill('h11', 'Bacaan Sholat', 2, "Lengkapi shalawat ibrahimiyyah:", ["إِبْرَاهِيمَ", "الْمُصَلِّينَ", "الصَّالِحِينَ", "الْمُؤْمِنِينَ"], "Sebagaimana Engkau bershalawat atas Ibrahim dan keluarga Ibrahim.", "Bacaan Sholat: Shalawat Ibrahimiyyah", "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى ____ وَعَلَى آلِ إِبْرَاهِيمَ"),
+            fill('h12', 'Bacaan Sholat', 1, "Lengkapi akhir surat Al-Fatihah:", ["الضَّالِّينَ", "الْمُسْتَقِيمَ", "الدِّينِ", "الرَّحِيمِ"], "Bukan jalan mereka yang dimurkai dan bukan pula jalan mereka yang sesat.", "QS. Al-Fatihah: 7", "غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا ____"),
+            fill('h13', 'Syarat Sah Sholat', 3, "Lengkapi hadits tentang diangkatnya pena:", ["يَعْقِلَ", "يَتَوَضَّأَ", "يَذْكُرِ", "يَقُولُ"], "Pena diangkat dari orang gila hingga ia berakal.", "HR. Abu Daud no. 4403", "رُفِعَ الْقَلَمُ عَنْ ثَلَاثَةٍ: عَنِ النَّائِمِ حَتَّى يَسْتَيْقِظَ، وَعَنِ الصَّبِيِّ حَتَّى يَحْتَلِمَ، وَعَنِ الْمَجْنُونِ حَتَّى ____"),
+            fill('h14', 'Pembatal Sholat', 2, "Lengkapi hadits tentang bacaan yang boleh dalam sholat:", ["الْقُرْآنِ", "الْوُضُوءِ", "النَّاسِ", "السِّوَاكِ"], "Sholat itu hanyalah tasbih, takbir, dan bacaan Al-Qur'an.", "HR. Muslim no. 537", "إِنَّمَا هُوَ التَّسْبِيحُ وَالتَّكْبِيرُ وَقِرَاءَةُ ____"),
+
             // ---- Benar atau salah
             tf('t1', 'Wudhu', 1, "Wudhu tetap sah meskipun ada cat kuku waterproof yang menutupi kuku.", false, "Penghalang air ke kulit harus dihilangkan agar wudhu sah.", "Syarat Sah Wudhu"),
             tf('t2', 'Wudhu', 1, "Mengusap kepala dan telinga dalam wudhu dilakukan satu kali.", true, "Langkah 6: usap kepala dan telinga 1 kali.", "Tata Cara Wudhu"),
@@ -1522,7 +1718,7 @@
             order('o3', 'Gerakan Sholat', 1, "Urutkan gerakan berikut:", ["Ruku'", "I'tidal", "Sujud", "Duduk antara dua sujud"], "Ruku', i'tidal, sujud, lalu duduk di antara dua sujud.", "Rukun Sholat"),
             order('o4', 'Gerakan Sholat', 2, "Urutkan gerakan sholat dari awal:", ["Takbiratul ihram", "Ruku'", "I'tidal", "Sujud", "Duduk antara dua sujud", "Tasyahud akhir", "Salam"], "Sesuai urutan rukun pada materi.", "Rukun Sholat"),
             order('o5', 'Bacaan Sholat', 2, "Urutkan bacaan dalam sholat:", ["Doa iftitah", "Al-Fatihah", "Bacaan ruku'", "Bacaan i'tidal", "Bacaan sujud", "Tasyahud"], "Urutan bacaan sesuai gerakan sholat.", "Bacaan Sholat"),
-            order('o6', 'Wudhu', 3, "Susun doa setelah wudhu dengan urutan yang benar:", ["Asyhadu an laa ilaaha illallaah", "wahdahu laa syariika lah", "wa asyhadu anna Muhammadan 'abduhu wa rasuuluh", "Allaahummaj'alnii minat tawwaabiin", "waj'alnii minal mutathahhiriin"], "Dua kalimat syahadat, lalu permohonan menjadi golongan yang bertaubat dan bersuci.", "HR. At-Tirmidzi no. 55"),
+            order('o6', 'Wudhu', 3, "Susun doa setelah wudhu dengan urutan yang benar:", [ARL("أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ", "Asyhadu an laa ilaaha illallaah"), ARL("وَحْدَهُ لَا شَرِيكَ لَهُ", "wahdahu laa syariika lah"), ARL("وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ", "wa asyhadu anna Muhammadan 'abduhu wa rasuuluh"), ARL("اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ", "Allaahummaj'alnii minat tawwaabiin"), ARL("وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ", "waj'alnii minal mutathahhiriin")], "Dua kalimat syahadat, lalu permohonan menjadi golongan yang bertaubat dan bersuci.", "HR. At-Tirmidzi no. 55"),
 
             // ---- Pasangkan arti
             match('m1', 'Bacaan Sholat', 1, "Pasangkan kata Arab dengan artinya (doa iftitah):", [["اللَّهُمَّ", "Ya Allah"], ["بَاعِدْ", "jauhkanlah"], ["الْمَشْرِقِ", "timur"], ["وَالْمَغْرِبِ", "dan barat"]], "Arti per kata doa iftitah.", "Bacaan Sholat: Doa Iftitah"),
@@ -1532,6 +1728,24 @@
             match('m5', 'Bacaan Sholat', 2, "Pasangkan kata Arab dengan artinya (i'tidal dan takbir):", [["رَبَّنَا", "Wahai Tuhan kami"], ["كَثِيرًا", "yang banyak"], ["مُبَارَكًا", "yang diberkahi"], ["أَكْبَرُ", "Maha Besar"]], "Arti per kata bacaan i'tidal dan takbiratul ihram.", "Bacaan Sholat"),
             match('m6', 'Bacaan Sholat', 3, "Pasangkan kata Arab dengan artinya (tasyahud):", [["التَّحِيَّاتُ", "Segala penghormatan"], ["عَلَيْكَ", "atasmu"], ["النَّبِيُّ", "Nabi"], ["وَبَرَكَاتُهُ", "dan berkah-Nya"]], "Arti per kata tasyahud.", "Bacaan Sholat: Tasyahud")
         ];
+
+        // Teks Arab dalil (disalin dari kartu di aplikasi) untuk soal yang hanya menyebut terjemahan; ditampilkan pada penjelasan setelah menjawab (agar tidak membocorkan jawaban)
+        const QUIZ_AR = {
+            d1: "وَأَقِيمُوا۟ ٱلصَّلَوٰةَ وَءَاتُوا۟ ٱلزَّكَوٰةَ وَٱرْكَعُوا۟ مَعَ ٱلرَّٰكِعِينَ",
+            d2: "بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلاَةِ، وَإِيتَاءِ الزَّكَاةِ، وَالحَجِّ، وَصَوْمِ رَمَضَانَ",
+            d4: "أَرَأَيْتُمْ لَوْ أَنَّ نَهَرًا بِبَابِ أَحَدِكُمْ يَغْتَسِلُ مِنْهُ كُلَّ يَوْمٍ خَمْسَ مَرَّاتٍ، هَلْ يَبْقَى مِنْ دَرَنِهِ شَيْءٌ؟ قَالُوا: لاَ يَبْقَى مِنْ دَرَنِهِ شَيْءٌ، قَالَ: فَذَلِكَ مَثَلُ الصَّلَوَاتِ الْخَمْسِ، يَمْحُو اللَّهُ بِهِنَّ الْخَطَايَا",
+            d5: "إِنَّ ٱلصَّلَوٰةَ تَنْهَىٰ عَنِ ٱلْفَحْشَآءِ وَٱلْمُنكَرِ ۗ وَلَذِكْرُ ٱللَّهِ أَكْبَرُ",
+            d6: "إِنَّ بَيْنَ الرَّجُلِ وَبَيْنَ الشِّرْكِ وَالْكُفْرِ تَرْكَ الصَّلاَةِ",
+            d7: "مَا سَلَكَكُمْ فِي سَقَرَ . قَالُوا لَمْ نَكُ مِنَ الْمُصَلِّينَ",
+            w6: "مَا مِنْكُمْ مِنْ أَحَدٍ يَتَوَضَّأُ فَيُبْلِغُ أَوْ فَيُسْبِغُ الْوُضُوءَ ثُمَّ يَقُولُ أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَنَّ مُحَمَّدًا عَبْدُ اللَّهِ وَرَسُولُهُ إِلَّا فُتِحَتْ لَهُ أَبْوَابُ الْجَنَّةِ الثَّمَانِيَةُ يَدْخُلُ مِنْ أَيِّهَا شَاءَ",
+            w10: "لَوْلَا أَنْ أَشُقَّ عَلَى أُمَّتِي لَأَمَرْتُهُمْ بِالسِّوَاكِ عِنْدَ كُلِّ وُضُوءٍ",
+            w12: "لَا وُضُوءَ لِمَنْ لَمْ يَذْكُرِ اسْمَ اللَّهِ عَلَيْهِ",
+            p2: "أَمَا يَخْشَى الَّذِي يَرْفَعُ رَأْسَهُ قَبْلَ الْإِمَامِ أَنْ يُحَوِّلَ اللَّهُ رَأْسَهُ رَأْسَ حِمَارٍ",
+            p3: "إِنَّ هَذِهِ الصَّلَاةَ لَا يَصْلُحُ فِيهَا شَيْءٌ مِنْ كَلَامِ النَّاسِ، إِنَّمَا هُوَ التَّسْبِيحُ وَالتَّكْبِيرُ وَقِرَاءَةُ الْقُرْآنِ"
+        };
+        quizBank.forEach(q => {
+            if (QUIZ_AR[q.id]) q.exp += `<span class="block font-arabic text-xl text-right text-emerald-950 leading-loose font-normal mt-3 p-3 bg-slate-50 rounded-xl" dir="rtl">${QUIZ_AR[q.id]}</span>`;
+        });
 
         /* -------------------------------------------------------------
            QUIZ ENGINE
@@ -1931,6 +2145,59 @@
             document.getElementById('settings-bar').classList.toggle('hidden');
         }
 
+        // Tema warna: label, warna swatch (skala 500) dan warna bilah browser (skala 900)
+        const THEMES = {
+            langit: { label: 'Langit Pagi', swatch: '#8abae2', bar: '#375e85' },
+            zamrud: { label: 'Zamrud', swatch: '#10b981', bar: '#064e3b' },
+            taman: { label: 'Taman (mint pastel)', swatch: '#84c6a2', bar: '#3a6955' },
+            senja: { label: 'Lavender pastel', swatch: '#ac98e0', bar: '#55448c' },
+            coklat: { label: 'Coklat', swatch: '#a67c52', bar: '#4a3222' },
+            gelap: { label: 'Gelap', swatch: '#3f3f46', bar: '#171717' }
+        };
+
+
+        function applyTheme(name) {
+            if (!THEMES[name]) name = 'langit';
+            document.documentElement.dataset.theme = name;
+            try { localStorage.setItem('theme', name); } catch (e) {}
+            document.getElementById('meta-theme-color').setAttribute('content', THEMES[name].bar);
+            updateAppIdentity(name);
+            renderThemePicker();
+        }
+
+        // Ikon & manifest mengikuti tema. Tema default memakai manifest.json + icon-*.png; tema lain memakai icon-<tema>-*.png
+        // dan manifest sementara (Blob) dengan URL absolut. Ikon aplikasi yang sudah terpasang tidak berubah sampai dipasang ulang.
+        const BASE_MANIFEST_HREF = document.getElementById('app-manifest').getAttribute('href');
+        let themeManifestUrl = null;
+        function themeIcon(name, size) {
+            return new URL(`icon${name === 'langit' ? '' : '-' + name}-${size}.png`, location.href).href;
+        }
+        async function updateAppIdentity(name) {
+            document.getElementById('app-icon').href = themeIcon(name, 192);
+            document.getElementById('app-apple-icon').href = themeIcon(name, 192);
+            const link = document.getElementById('app-manifest');
+            if (name === 'langit') { link.href = BASE_MANIFEST_HREF; return; }
+            try {
+                const m = await (await fetch(BASE_MANIFEST_HREF)).json();
+                const abs = (u) => new URL(u, location.href).href;
+                m.id = abs(m.id); m.scope = abs(m.scope); m.start_url = abs(m.start_url);
+                m.theme_color = m.background_color = THEMES[name].bar;
+                m.icons = [192, 512].flatMap((sz) => ['any', 'maskable'].map((purpose) =>
+                    ({ src: themeIcon(name, sz), sizes: `${sz}x${sz}`, type: 'image/png', purpose })));
+                const url = URL.createObjectURL(new Blob([JSON.stringify(m)], { type: 'application/manifest+json' }));
+                if (themeManifestUrl) URL.revokeObjectURL(themeManifestUrl);
+                themeManifestUrl = url;
+                if (document.documentElement.dataset.theme === name) link.href = url;
+            } catch (e) { /* tanpa jaringan/cache: tetap pakai manifest bawaan */ }
+        }
+
+        function renderThemePicker() {
+            const current = document.documentElement.dataset.theme;
+            document.getElementById('theme-picker').innerHTML = Object.entries(THEMES).map(([k, t]) =>
+                `<button onclick="applyTheme('${k}')" title="${t.label}" aria-label="Tema ${t.label}" class="theme-swatch${k === current ? ' active' : ''}" style="background:${t.swatch}"></button>`
+            ).join('');
+        }
+
         function changeFontSize(delta) {
             currentFontSize = Math.max(20, Math.min(42, currentFontSize + delta));
             document.documentElement.style.setProperty('--arabic-size', currentFontSize + 'px');
@@ -2025,6 +2292,8 @@
             }
             container.innerHTML = `<div class="bg-white p-4 rounded-xl border border-slate-200 text-sm text-emerald-800">Terdapat ${bookmarkedIds.length} item tersimpan dalam favorit Anda.</div>`;
         }
+
+        applyTheme(document.documentElement.dataset.theme);
 
       // PWA install
       let deferredInstallPrompt = null;

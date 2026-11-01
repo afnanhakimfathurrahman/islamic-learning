@@ -9,6 +9,8 @@ Questions live in `quizBank` inside `index.html`, built with helpers (see the co
 
 **Hard rule:** every question must come from content already shown in the app (dalil, steps, per-word meanings). Do not introduce new hadith, rulings, or numbers via the quiz. `src` must name the app section/dalil it is based on, and `exp` should restate the app text.
 
+**Arabic rule:** any question about a doa or recitation that has Arabic text in the app must show the Arabic (copied exactly from the app), not only the Latin transliteration. Put the Arabic in the question text or options (alongside the Latin if useful), in an element with `dir="rtl"` and the Arabic font. Never write Arabic from memory; copy it from the app's existing card.
+
 | Type | Helper | Notes |
 |---|---|---|
 | Pilihan ganda | `mc(id, topik, lvl, q, [benar, salah, salah, salah], exp, src)` | The correct answer is ALWAYS first in the array; it is shuffled at runtime. Exactly 4 unique options. |

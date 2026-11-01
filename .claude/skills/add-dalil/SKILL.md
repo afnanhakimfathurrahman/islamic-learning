@@ -9,4 +9,4 @@ description: Add a Quran verse or hadith card (matan, translation, source) to in
 2. Find the right panel in `index.html` (`content-home`, `content-syarat`, `content-wudhu` sub-panels, `content-pembatal`) or the data array (`syaratData`, `pembatalData`, ...) that a `render*` function turns into cards.
 3. Copy an existing card, keeping: `search-item` class, Arabic in an element with `arabic-size` + `dir="rtl"`, Indonesian translation, and source line (Surah:Ayat, or collector + number). Use `<details>` for long matan. Give bookmarkable cards a unique id used by `bookmarkItem(id)` and `bm-<id>`.
 4. Mirror the change in `SPECIFICATION.md` section 4.3.
-5. Bump `CACHE_NAME` in `sw.js`, run `verify-site`, then commit.
+5. Bump `CACHE_NAME` in `sw.js`, run `verify-site`, then stop. Do NOT commit or push; leave changes uncommitted so the user can review first.
