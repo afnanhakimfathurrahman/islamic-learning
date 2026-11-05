@@ -3,7 +3,7 @@
 ## 1. Project Overview & Context
 - **Project Name**: Panduan Sholat & Wudhu Sesuai Sunnah
 - **Target Audience**: Umat Muslim yang ingin mempelajari tata cara sholat dan wudhu yang sesuai dengan dalil sahih.
-- **Primary Reference Source**: [Rumaysho.com](https://rumaysho.com) (Ustadz Muhammad Abduh Tuasikal, M.Sc.)
+- **Primary Reference Source**: [Hadits.id](https://www.hadits.id) (matan Arab, terjemahan, nomor, dan derajat hadits). Referensi penjelasan: Rumaysho.com, Muslim.or.id. Semua referensi dicantumkan hanya di tab Info.
 - **Repository URL**: `https://github.com/kamaludin68/islamic-learning`
 - **Architecture**: Single Page Application (SPA), Progressive Web App (PWA) offline-first.
 - **Design Persona**: Clean Islamic Modern Aesthetic (default theme Langit Pagi: sky blue `#0c4a6e`, Gold/Amber accents `#f59e0b`, Light Slate background `#f8fafc`; selectable themes below). Character illustrations must strictly use faceless Muslim avatars (karakter Muslim tanpa wajah).
@@ -46,7 +46,7 @@ Hosting: GitHub Pages from branch `main`, root. Live URL: `https://belajarsholat
 ## 4. Core Features & Functional Requirements
 
 ### 4.1 Header & Global Navigation
-- **Branding**: Title "Panduan Sholat & Wudhu" with subtitle referencing "Rumaysho.com".
+- **Branding**: Title "Panduan Sholat & Wudhu Sesuai Sunnah", tanpa subtitle. Nama situs referensi tidak boleh muncul di header atau konten kartu; letakkan di tab Info.
 - **Dynamic Font Resizer**:
   - `changeFontSize(delta)` updates the CSS variable `--arabic-size` between `20px` and `42px`.
   - The `.arabic-size` class applies the variable to Arabic recitation blocks.
@@ -155,9 +155,9 @@ Itemized list with detailed explanations, full Matan, translation, and Dalil ref
   - **Basmalah** — HR. Abu Daud no. 101
     - **Matan**: لَا وُضُوءَ لِمَنْ لَمْ يَذْكُرِ اسْمَ اللَّهِ عَلَيْهِ
     - **Terjemahan**: "Tidak ada wudhu bagi orang yang tidak menyebut nama Allah atasnya."
-  - **Siwak** — HR. Ahmad
-    - **Matan**: لَوْلَا أَنْ أَشُقَّ عَلَى أُمَّتِي لَأَمَرْتُهُمْ بِالسِّوَاكِ عِنْدَ كُلِّ وُضُوءٍ
-    - **Terjemahan**: "Seandainya tidak memberatkan umatku, niscaya aku perintahkan mereka bersiwak setiap kali wudhu."
+  - **Siwak** — HR. Bukhari 887 & Muslim 252
+    - **Matan**: لَوْلاَ أَنْ أَشُقَّ عَلَى أُمَّتِي ـ أَوْ عَلَى النَّاسِ ـ لأَمَرْتُهُمْ بِالسِّوَاكِ مَعَ كُلِّ صَلاَةٍ
+    - **Terjemahan**: "Seandainya aku tidak merasa berat bagi umatku -atau bagi manusia- niscaya aku akan memerintahkan mereka untuk bersiwak setiap kali shalat."
   - **Membasuh dua telapak tangan, menyela jari/jenggot.**
   - **Mendahulukan yang kanan** — HR. Bukhari no. 168 & Muslim no. 268
     - **Matan**: كَانَ النَّبِيُّ ﷺ يُعْجِبُهُ التَّيَمُّنُ فِي تَنَعُّلِهِ وَتَرَجُّلِهِ وَطُهُورِهِ وَفِي شَأْنِهِ كُلِّهِ
@@ -182,6 +182,8 @@ Itemized list with detailed explanations, full Matan, translation, and Dalil ref
   - Breakdown of 11 recitations in prayer order (`bacaanSholatWords`): Takbiratul Ihram, Doa Iftitah, Al-Fatihah, Ruku', Tasmi' (Sami'allahu liman hamidah; HR. Bukhari 689 & Muslim 411, from Rumaysho.com), I'tidal, Sujud, Duduk antara dua sujud, Tasyahud, Shalawat Ibrahimiyyah, Salam. Per-word badges must wrap (no `truncate`).
   - Arabic text paired with word-by-word Indonesian transliteration and literal word meaning grid.
   - Font size setting applies to Arabic recitation via the CSS variable `--arabic-size` (default `28px`, range `20px`–`42px`).
+- **Ragam Bacaan (sub-tab ketiga, `btn-sholat-ragam` / `sholat-ragam-container`)**: daftar pilihan semua riwayat bacaan per gerakan (tujuannya menyediakan opsi, bukan membandingkan), agar tab Bacaan tidak menumpuk. Data `ragamBacaan` (13 grup berurutan sesuai sholat: iftitah, taawudz, fatihah, ruku, bangkit, itidal, sujud, duduk, tasyahud, sholawat, doasalam, salam, dzikir; tiap item: `label`, `tag` pokok|tambahan|alternatif, `arab`, `latin`, `translation`, `source`, `refs[{k,n}]`, `grade`, `madzhab`, `note`). Dirender `renderRagam()`: chip navigasi `#ragam-nav` (id `ragam-chip-<key>`), panel `ragam-g-<key>` (class `ragam-group`, satu tampil sekaligus lewat `showRagamGroup(key)`), kartu `<details class="ragam-item search-item">`, tombol sebelumnya/berikutnya, `toggleRagamAll`. Kartu di tab Bacaan hanya menampilkan tombol "Lihat N pilihan bacaan" (`openRagam(key)`, pemetaan `RAGAM_BY_WORD`). Saat pencarian aktif semua grup dibuka dan grup tanpa hasil disembunyikan; chip disembunyikan.
+  - Sumber isi: latin, terjemah, dan daftar riwayat dari buku "Ragam Bacaan Sholat" (Nor Kandir, Pustaka Syabab, 1447 H); teks Arab, nomor, dan derajat diverifikasi ke Hadits.id. Item yang nomornya tidak ada di Hadits.id tidak dipakai: ta'awwudz lafaz umum dan Ahmad 22179, tasyahud 'Umar (Malik 53), shalawat Ahmad 18104, doa sebelum salam Ahmad 24215, salam satu kali (Tirmidzi 296), serta An-Nasa'i Al-Kubra 9848 dan Ash-Shahihah 114 (dzikir). Abu Daud 873 diriwayatkan 'Auf bin Malik (PDF menulis Aisyah). Nomor hadits ragam digabung otomatis ke Info (`renderInfo`), buku diletakkan di `infoSumber`.
 
 #### Module 5: Yang Membatalkan Sholat
 Itemized list of invalidating conditions with Matan where a specific hadith exists:
@@ -213,7 +215,8 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 - Aturan isi: **setiap soal harus bersumber dari materi yang ada di aplikasi** (field `src` menunjuk bagian/dalil). Jangan menambah fakta atau dalil baru lewat kuis. Tambah soal dengan skill `add-quiz-question`.
 
 #### Footer Requirement
-- Mandatory attribution footer referencing [Rumaysho.com](https://rumaysho.com) (Ustadz Muhammad Abduh Tuasikal, M.Sc.).
+- Footer memuat tautan ke tab Info (`switchTab('info')`), tempat semua referensi dicantumkan.
+- Tab `info` (`tab-info`, `mob-tab-info`, panel `content-info`, kontainer `#info-sumber`, `#info-quran`, `#info-dalil`, dirender `renderInfo()` dari `infoSumber`, `infoQuran`, `infoDalil`). Setiap nomor hadits ditautkan ke `https://www.hadits.id/hadits/{kitab}/{nomor}`. Tambahkan nomor baru ke `infoDalil` saat menambah dalil.
 
 ---
 
@@ -226,15 +229,16 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 | Main tab panels | `content-<id>` (class `tab-content`), `<id>` in `home, syarat, wudhu, rukun, pembatal, quiz, bookmarks` |
 | Wudhu sub-tab buttons | `sub-wudhu-<name>` (class `wudhu-sub-btn`, pill style) |
 | Wudhu sub-tab panels | `wudhu-sub-<name>` (class `wudhu-sub-content`), `<name>` in `langkah, syarat, rukun, sunnah, ancaman` |
-| Sholat sub-tab buttons / panels | `btn-sholat-gerakan`, `btn-sholat-bacaan` / `sholat-gerakan-container`, `sholat-bacaan-container` |
+| Sholat sub-tab buttons / panels | `btn-sholat-gerakan`, `btn-sholat-bacaan`, `btn-sholat-ragam` / `sholat-gerakan-container`, `sholat-bacaan-container`, `sholat-ragam-container` (+ `ragam-nav`, `ragam-body`) |
 | Searchable card | class `search-item` (optional `data-search` overrides text used for matching) |
 | Theme | `#theme-picker`, `#meta-theme-color` (in `#settings-bar`) |
 | Quiz | `tab-quiz`, `mob-tab-quiz`, `content-quiz`, `#quiz-root` |
+| Info | `tab-info`, `mob-tab-info`, `content-info`, `#info-sumber`, `#info-quran`, `#info-dalil` |
 | Install button | `#pwa-install-btn` (hidden until `beforeinstallprompt`, or iOS Safari not standalone) |
 
 ### 5.2 JavaScript map (single inline `<script>`)
 - Data arrays: `syaratData`, `wudhuStepsData`, `sholatStepsData`, `bacaanSholatWords`, `pembatalData`. Rendered by `renderSyarat/renderWudhuSteps/renderSholatSteps/renderSholatWords/renderPembatal` (and `renderDalilDetails` for collapsible matan).
-- Navigation: `switchTab(tabId, skipSearchReset)`, `switchWudhuSub(subId)` (accepts `'wudhu-langkah'` or `'langkah'`; null-safe), `switchSholatSub('sholat-gerakan'|'sholat-bacaan')`.
+- Navigation: `switchTab(tabId, skipSearchReset)`, `switchWudhuSub(subId)` (accepts `'wudhu-langkah'` or `'langkah'`; null-safe), `switchSholatSub('sholat-gerakan'|'sholat-bacaan'|'sholat-ragam')`.
 - Search: `toggleSearch`, `handleSearch`, `enterSearchMode` (snapshots active tab and sub-tabs), `exitSearchMode` (restores them). While searching, all sub-panels are un-hidden so matches in any sub-tab show.
 - Settings: `toggleSettings`, `changeFontSize(delta)` (CSS var `--arabic-size`, default 28px, 20-42px).
 - Lightbox: `openLightbox(src, title)`, `closeLightbox(event)`.
@@ -250,7 +254,7 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 
 ### 5.4 PWA / Service worker
 - Strategy: stale-while-revalidate for all GET requests; precache list `ASSETS_TO_CACHE` is added one-by-one (`cache.add(...).catch`), so a failing CDN URL does not abort install.
-- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v12`.
+- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v34`.
 - Installability needs: valid manifest, 192/512 icons, active SW, HTTPS. Chrome will not fire `beforeinstallprompt` if the app is already installed.
 
 ---
@@ -294,3 +298,10 @@ bash .claude/skills/verify-site/check.sh   # static checks
 git add -A && git commit -m "<message>" && git push origin main
 ```
 Then confirm: `curl -s https://kamaludin68.github.io/islamic-learning/sw.js | head -1` shows the new `CACHE_NAME`.
+
+
+## Catatan dalil (disesuaikan dengan Hadits.id)
+- Matan, terjemahan, nomor, dan derajat hadits mengikuti Hadits.id. Kartu `sholatStepsData` memuat `matan` (Arab, arti, sumber) yang ditampilkan dalam `<details>`. Ragam bacaan lengkap ada di `ragamBacaan` (tab Ragam); `bacaanVariants` (kunci = indeks `bacaanSholatWords`) hanya menyimpan catatan singkat per kartu, ditampilkan oleh `renderBacaanVariants(idx)` bersama tombol ke tab Ragam.
+- Bacaan ruku' dan sujud utama adalah tasbih tanpa "wa bihamdih" (HR. Muslim 772, Abu Daud 871); versi "wa bihamdih" (Abu Daud 870) hanya sebagai ragam bacaan dengan catatan perbedaan penilaian.
+- Hadits siwak memakai Bukhari 887 & Muslim 252 ("setiap kali shalat"); redaksi "setiap kali wudhu" (HR. Ahmad) tidak ditemukan di Hadits.id sehingga tidak dipakai.
+- Kartu "Menutup Aurat" memuat QS. Al-A'raf: 31 (potongan) dan hadits di `extra`: Tirmidzi 377, Abu Daud 4104 (wanita: wajah dan telapak tangan; Abu Daud menyebutnya mursal), Abu Daud 4114 (di bawah pusar dan di atas lutut), Abu Daud 4014 (paha adalah aurat), Muslim 338. Ahmad 6756 dan Al-Baihaqi 3219 tidak ditemukan di Hadits.id sehingga tidak dipakai; Nasa'i 4952 dan Abu Daud 4140 bukan hadits aurat.

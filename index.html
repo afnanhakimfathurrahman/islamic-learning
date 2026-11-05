@@ -203,11 +203,16 @@
         /* Taman (mode anak): sudut lebih bulat */
         [data-theme="taman"] .rounded-2xl { border-radius: 1.75rem; }
         [data-theme="taman"] .rounded-xl { border-radius: 1.25rem; }
+        [data-theme="gelap"] .ragam-chip.bg-white:hover { background-color: #2c2c2e; color: #fff; }
+        .ragam-nav { scroll-margin-top: 8rem; scrollbar-width: none; }
+        .ragam-nav::-webkit-scrollbar { display: none; }
+        .ragam-item > summary { list-style: none; }
+        .ragam-item > summary::-webkit-details-marker { display: none; }
         .theme-swatch { width: 2rem; height: 2rem; border-radius: 9999px; border: 2px solid transparent; }
         .theme-swatch.active { border-color: #fff; box-shadow: 0 0 0 2px rgb(var(--g-400)); }
         /* Hover hanya untuk tab tidak aktif (mencegah tab aktif jadi pucat setelah disentuh) */
         @media (hover: hover) {
-            .wudhu-sub-btn.bg-white:hover { background-color: rgb(var(--p-50)); color: rgb(var(--p-800)); }
+            .wudhu-sub-btn.bg-white:hover, .ragam-chip.bg-white:hover { background-color: rgb(var(--p-50)); color: rgb(var(--p-800)); }
         }
         .font-arabic {
             font-family: 'Amiri', 'Traditional Arabic', serif;
@@ -284,8 +289,7 @@
                         <i class="fa-solid fa-kaaba"></i>
                     </div>
                     <div>
-                        <h1 class="text-lg font-bold tracking-wide text-amber-50">Panduan Sholat & Wudhu</h1>
-                        <p class="text-xs text-emerald-200">Sesuai Sunnah - Referensi Rumaysho.com</p>
+                        <h1 class="text-base sm:text-lg font-bold tracking-wide text-amber-50 leading-tight">Panduan Sholat & Wudhu Sesuai Sunnah</h1>
                     </div>
                 </div>
 
@@ -356,6 +360,9 @@
                 </button>
                 <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-tab py-3 px-2 text-sm font-medium text-emerald-200 hover:text-gold-400 whitespace-nowrap">
                     <i class="fa-solid fa-circle-question mr-1.5"></i> Kuis
+                </button>
+                <button onclick="switchTab('info')" id="tab-info" class="nav-tab py-3 px-2 text-sm font-medium text-emerald-200 hover:text-gold-400 whitespace-nowrap">
+                    <i class="fa-solid fa-circle-info mr-1.5"></i> Info
                 </button>
                 <button onclick="switchTab('bookmarks')" id="tab-bookmarks" class="nav-tab py-3 px-2 text-sm font-medium text-emerald-200 hover:text-gold-400 whitespace-nowrap">
                     <i class="fa-solid fa-bookmark mr-1.5"></i> Favorit
@@ -430,7 +437,7 @@
                         <!-- Hadith Evidence -->
                         <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-gold-500">
                             <div class="flex justify-between text-xs text-slate-500 mb-2 font-medium">
-                                <span>HR. Bukhari (No. 8) & Muslim (No. 16)</span>
+                                <span>HR. Bukhari (No. 8)</span>
                                 <span>Kitab Imann / Rukun Islam</span>
                             </div>
                             <p class="font-arabic text-right text-emerald-950 text-xl mb-3 leading-loose" dir="rtl">
@@ -472,14 +479,14 @@
                         <!-- Hadith Permisalan Mandi 5 Kali -->
                         <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-gold-500">
                             <div class="flex justify-between text-xs text-slate-500 mb-2 font-medium">
-                                <span>HR. Muslim (No. 667) & Bukhari (No. 528)</span>
+                                <span>HR. Bukhari (No. 528); semakna: HR. Muslim (No. 667)</span>
                                 <span>Penghapus Dosa-dosa Kecil</span>
                             </div>
                             <p class="font-arabic text-right text-emerald-950 text-xl mb-3 leading-loose" dir="rtl">
-                                أَرَأَيْتُمْ لَوْ أَنَّ نَهَرًا بِبَابِ أَحَدِكُمْ يَغْتَسِلُ مِنْهُ كُلَّ يَوْمٍ خَمْسَ مَرَّاتٍ، هَلْ يَبْقَى مِنْ دَرَنِهِ شَيْءٌ؟ قَالُوا: لاَ يَبْقَى مِنْ دَرَنِهِ شَيْءٌ، قَالَ: فَذَلِكَ مَثَلُ الصَّلَوَاتِ الْخَمْسِ، يَمْحُو اللَّهُ بِهِنَّ الْخَطَايَا
+                                أَرَأَيْتُمْ لَوْ أَنَّ نَهَرًا بِبَابِ أَحَدِكُمْ، يَغْتَسِلُ فِيهِ كُلَّ يَوْمٍ خَمْسًا، مَا تَقُولُ ذَلِكَ يُبْقِي مِنْ دَرَنِهِ. قَالُوا لاَ يُبْقِي مِنْ دَرَنِهِ شَيْئًا. قَالَ  فَذَلِكَ مِثْلُ الصَّلَوَاتِ الْخَمْسِ، يَمْحُو اللَّهُ بِهَا الْخَطَايَا.
                             </p>
                             <p class="text-sm text-slate-700">
-                                <strong>Terjemahan:</strong> "Tahukah kalian, seandainya ada sebuah sungai di depan pintu rumah salah seorang di antara kalian, lalu ia mandi di sungai itu lima kali sehari, apakah masih ada kotoran yang tersisa di badannya?" Para sahabat menjawab: "Tidak ada kotoran yang tersisa sedikit pun." Beliau bersabda: "Demikianlah perumpamaan sholat lima waktu, dengan sholat itu Allah menghapus dosa-dosa."
+                                <strong>Terjemahan:</strong> "Jika ada sebuah sungai di depan salah satu dari kalian dan ia mandi di dalamnya lima kali sehari, apakah kalian akan melihat ada kotoran padanya?" Mereka menjawab, "Tidak ada jejak kotoran yang tersisa." Nabi (S.A.W) menambahkan, "Itulah perumpamaan shalat lima waktu yang dengannya Allah menghapus (menghilangkan) perbuatan jahat.""
                             </p>
                         </div>
                     </div>
@@ -654,16 +661,16 @@
                         <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                             <h4 class="font-bold text-emerald-800">1. Bersiwak / Gosok Gigi</h4>
                             <p class="font-arabic text-right text-lg text-emerald-950 mt-2 mb-1" dir="rtl">
-                                لَوْلَا أَنْ أَشُقَّ عَلَى أُمَّتِي لَأَمَرْتُهُمْ بِالسِّوَاكِ عِنْدَ كُلِّ وُضُوءٍ
+                                لَوْلاَ أَنْ أَشُقَّ عَلَى أُمَّتِي ـ أَوْ عَلَى النَّاسِ ـ لأَمَرْتُهُمْ بِالسِّوَاكِ مَعَ كُلِّ صَلاَةٍ
                             </p>
-                            <p class="text-slate-600 text-xs">"Seandainya tidak memberatkan umatku, niscaya aku perintahkan mereka bersiwak setiap kali wudhu." <span class="font-semibold">(HR. Ahmad)</span></p>
+                            <p class="text-slate-600 text-xs">"Seandainya aku tidak merasa berat bagi umatku -atau bagi manusia- niscaya aku akan memerintahkan mereka untuk bersiwak setiap kali shalat." <span class="font-semibold">(HR. Bukhari No. 887 & Muslim No. 252)</span></p>
                         </div>
                         <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                             <h4 class="font-bold text-emerald-800">2. Membaca Basmalah</h4>
                             <p class="font-arabic text-right text-lg text-emerald-950 mt-2 mb-1" dir="rtl">
-                                لَا وُضُوءَ لِمَنْ لَمْ يَذْكُرِ اسْمَ اللَّهِ عَلَيْهِ
+                                لاَ صَلاَةَ لِمَنْ لاَ وُضُوءَ لَهُ وَلاَ وُضُوءَ لِمَنْ لَمْ يَذْكُرِ اسْمَ اللَّهِ تَعَالَى عَلَيْهِ
                             </p>
-                            <p class="text-slate-600 text-xs">"Tidak ada wudhu bagi orang yang tidak menyebut nama Allah atasnya." <span class="font-semibold">(HR. Abu Daud No. 101)</span></p>
+                            <p class="text-slate-600 text-xs">"Tidak ada shalat bagi orang yang tidak berwudhu, dan tidak ada wudhu bagi orang yang tidak menyebut nama Allah (di awal)." <span class="font-semibold">(HR. Abu Daud No. 101)</span></p>
                         </div>
                         <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                             <h4 class="font-bold text-emerald-800">3. Kumur & Istinsyaq (Hirup air ke hidung)</h4>
@@ -674,7 +681,7 @@
                             <p class="font-arabic text-right text-lg text-emerald-950 mt-2 mb-1" dir="rtl">
                                 كَانَ النَّبِيُّ ﷺ يُعْجِبُهُ التَّيَمُّنُ فِي تَنَعُّلِهِ وَتَرَجُّلِهِ وَطُهُورِهِ وَفِي شَأْنِهِ كُلِّهِ
                             </p>
-                            <p class="text-slate-600 text-xs">"Nabi <span class="font-arabic">ﷺ</span> menyukai mendahulukan yang kanan saat memakai sandal, menyisir, bersuci, dan dalam segala urusannya." <span class="font-semibold">(HR. Bukhari No. 168 & Muslim No. 268)</span></p>
+                            <p class="text-slate-600 text-xs">"Nabi <span class="font-arabic">ﷺ</span> menyukai mendahulukan yang kanan saat memakai sandal, menyisir, bersuci, dan dalam segala urusannya." <span class="font-semibold">(HR. Bukhari No. 168)</span></p>
                         </div>
                     </div>
 
@@ -693,7 +700,7 @@
 
                         <!-- 2. Bacaan -->
                         <div class="bg-white p-3 rounded-lg border border-emerald-100">
-                            <p class="text-xs font-bold text-emerald-800 mb-1">Bacaan Setelah Wudhu (tambahan doa: HR. At-Tirmidzi no. 55, dishahihkan Al-Albani)</p>
+                            <p class="text-xs font-bold text-emerald-800 mb-1">Bacaan Setelah Wudhu (tambahan doa: HR. At-Tirmidzi no. 55; dishahihkan Al-Albani, sebagian ulama mendha'ifkan)</p>
                             <p class="font-arabic arabic-size text-right text-emerald-950 my-2 leading-loose" dir="rtl">
                                 أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ، اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ
                             </p>
@@ -797,7 +804,6 @@
                             </div>
                             </div>
                         </div>
-                        <p class="text-[11px] text-slate-500">Sumber: <a class="underline" href="https://rumaysho.com/19523-kumpulan-amalan-ringan-02-membaca-doa-setelah-berwudhu.html" target="_blank" rel="noopener">Rumaysho.com - Membaca Doa Setelah Berwudhu</a></p>
                     </div>
                 </div>
             </div>
@@ -815,7 +821,7 @@
                             "Celakalah bagi tumit-tumit (yang tidak terbasuh air wudhu) dari api neraka!"
                         </p>
                         <p class="text-xs text-slate-600 mt-2">
-                            <strong>Penjelasan Rumaysho:</strong> Hadits ini menunjukkan kewajiban meratakan air wudhu ke seluruh anggota wudhu yang wajib. Meremehkan bagian kecil seperti tumit yang kering dapat membatalkan wudhu dan diancam azab neraka.
+                            <strong>Penjelasan:</strong> Hadits ini menunjukkan kewajiban meratakan air wudhu ke seluruh anggota wudhu yang wajib. Meremehkan bagian kecil seperti tumit yang kering dapat membatalkan wudhu dan diancam azab neraka.
                         </p>
                     </div>
                 </div>
@@ -831,13 +837,16 @@
                 </p>
             </div>
 
-            <!-- Filter Switch: Gerakan vs Bacaan -->
-            <div class="flex bg-slate-200 p-1 rounded-xl max-w-md mx-auto">
+            <!-- Filter Switch: Gerakan vs Bacaan vs Ragam -->
+            <div class="flex bg-slate-200 p-1 rounded-xl max-w-xl mx-auto">
                 <button onclick="switchSholatSub('sholat-gerakan')" id="btn-sholat-gerakan" class="flex-1 py-2 text-xs sm:text-sm font-bold rounded-lg bg-white shadow text-emerald-900 transition">
-                    <i class="fa-solid fa-person-praying mr-1"></i> Gerakan & Rukun
+                    <i class="fa-solid fa-person-praying mr-1"></i> Gerakan
                 </button>
                 <button onclick="switchSholatSub('sholat-bacaan')" id="btn-sholat-bacaan" class="flex-1 py-2 text-xs sm:text-sm font-bold rounded-lg text-slate-600 hover:text-emerald-900 transition">
-                    <i class="fa-solid fa-language mr-1"></i> Bacaan Kata Per Kata
+                    <i class="fa-solid fa-language mr-1"></i> Bacaan
+                </button>
+                <button onclick="switchSholatSub('sholat-ragam')" id="btn-sholat-ragam" class="flex-1 py-2 text-xs sm:text-sm font-bold rounded-lg text-slate-600 hover:text-emerald-900 transition">
+                    <i class="fa-solid fa-list-check mr-1"></i> Ragam
                 </button>
             </div>
 
@@ -884,6 +893,15 @@
             <div id="sholat-bacaan-container" class="hidden space-y-6">
                 <!-- Dynamically populated word-by-word recitations -->
             </div>
+
+            <!-- Sub 3: Ragam Bacaan per gerakan (perbandingan riwayat) -->
+            <div id="sholat-ragam-container" class="hidden space-y-4">
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 text-xs leading-relaxed text-slate-600">
+                    <p><i class="fa-solid fa-circle-info text-gold-500 mr-1"></i> <strong class="text-emerald-900">Ragam bacaan</strong> adalah beberapa riwayat yang sah untuk gerakan yang sama. Pilih satu per gerakan dan boleh bergantian. Bacaan pokok yang dianjurkan untuk pemula ada di tab <em>Bacaan</em>; di sini tersedia semua pilihan riwayat beserta dalil dan derajatnya, silakan pilih yang ingin diamalkan.</p>
+                </div>
+                <div id="ragam-nav" class="ragam-nav flex gap-2 overflow-x-auto py-2 -mx-1 px-1" role="tablist" aria-label="Pilih gerakan sholat"></div>
+                <div id="ragam-body" class="space-y-4"></div>
+            </div>
         </section>
 
         <!-- TAB 5: YANG MEMBATALKAN SHOLAT -->
@@ -909,7 +927,7 @@
                         أَمَا يَخْشَى الَّذِي يَرْفَعُ رَأْسَهُ قَبْلَ الإِمَامِ أَنْ يُحَوِّلَ اللَّهُ رَأْسَهُ رَأْسَ حِمَارٍ
                     </p>
                     <p class="text-xs text-slate-700">
-                        <strong>HR. Bukhari (No. 691) & Muslim (No. 427):</strong> "Tidakkah takut orang yang mengangkat kepalanya sebelum imam, Allah akan mengubah kepalanya menjadi kepala keledai?"
+                        <strong>HR. Muslim (No. 427):</strong> "Tidakkah takut orang yang mengangkat kepalanya sebelum imam, Allah akan mengubah kepalanya menjadi kepala keledai?"
                     </p>
                 </div>
             </div>
@@ -925,6 +943,25 @@
                 </p>
             </div>
             <div id="quiz-root"></div>
+        </section>
+
+        <section id="content-info" class="tab-content hidden space-y-6">
+            <div class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-950 rounded-2xl p-6 text-white shadow-xl">
+                <h2 class="text-xl font-bold text-amber-50"><i class="fa-solid fa-circle-info mr-2 text-gold-400"></i> Info & Referensi</h2>
+                <p class="text-sm text-emerald-100 mt-1">Sumber matan, terjemahan, nomor, dan derajat hadits yang dimuat di aplikasi ini. Setiap nomor hadits bisa dibuka langsung untuk dicek.</p>
+            </div>
+            <div id="info-sumber" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 text-xs text-slate-600 leading-relaxed space-y-2">
+                <p><strong class="text-emerald-900">Catatan:</strong> Nomor hadits mengikuti Hadits.id, sedangkan isi dan penjelasan konten merujuk ke Rumaysho.com dan Muslim.or.id. Matan Arab, terjemahan, dan derajat hadits juga mengikuti Hadits.id. Beberapa kartu hanya memuat potongan matan yang relevan. Para ulama dapat berbeda dalam menilai derajat suatu hadits; perbedaan itu dicantumkan pada kartu terkait.</p>
+            </div>
+            <div>
+                <h3 class="text-sm font-bold text-emerald-900 mb-2"><i class="fa-solid fa-book-quran text-gold-500 mr-1"></i> Ayat Al-Qur'an</h3>
+                <div id="info-quran" class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap gap-2"></div>
+            </div>
+            <div>
+                <h3 class="text-sm font-bold text-emerald-900 mb-2"><i class="fa-solid fa-scroll text-gold-500 mr-1"></i> Daftar Hadits per Topik</h3>
+                <div id="info-dalil" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
         </section>
 
         <section id="content-bookmarks" class="tab-content hidden space-y-6">
@@ -968,6 +1005,10 @@
             <i class="fa-solid fa-circle-question text-base mb-0.5"></i>
             <span>Kuis</span>
         </button>
+        <button onclick="switchTab('info')" id="mob-tab-info" class="flex-1 py-1.5 px-1 text-xs text-emerald-300 flex flex-col items-center">
+            <i class="fa-solid fa-circle-info text-base mb-0.5"></i>
+            <span>Info</span>
+        </button>
     </nav>
 
     <!-- Fullscreen Infographic Lightbox -->
@@ -1002,10 +1043,10 @@
             </div>
             <p>Aplikasi Progressive Web App (PWA) Offline-Ready untuk Tablet & Mobile.</p>
             <div class="p-3 bg-slate-800/60 rounded-xl border border-slate-700/50 inline-block text-slate-300">
-                <p><strong>Referensi Utama & Sumber Fikih:</strong></p>
-                <a href="https://rumaysho.com" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:underline font-medium flex items-center justify-center gap-1 mt-1">
-                    <i class="fa-solid fa-globe"></i> https://rumaysho.com (Ustadz Muhammad Abduh Tuasikal, M.Sc.)
-                </a>
+                <p><strong>Sumber & Referensi</strong></p>
+                <button onclick="switchTab('info')" class="text-gold-400 hover:underline font-medium flex items-center justify-center gap-1 mt-1 mx-auto">
+                    <i class="fa-solid fa-circle-info"></i> Lihat daftar referensi di menu Info
+                </button>
             </div>
             <p class="text-slate-500">&copy; 2026 Panduan Sholat Sunnah. Didukung Hadits Shahih Bukhari, Muslim, & Kutubut Tis'ah.</p>
         </div>
@@ -1050,16 +1091,49 @@
             {
                 title: "5. Suci Badan, Pakaian, & Tempat Sholat",
                 desc: "Bebas dari najis yang tidak dimaafkan.",
-                dalil: "HR. Bukhari (No. 216) & Muslim (No. 292)",
-                arab: "دَعُوهُ، وَهَرِيقُوا عَلَى بَوْلِهِ سَجْلًا مِنْ مَاءٍ، فَإِنَّمَا بُعِثْتُمْ مُيَسِّرِينَ وَلَمْ تُبْعَثُوا مُعَسِّرِينَ",
-                translation: "Biarkanlah dia, dan tuangkanlah seember air pada air kencingnya. Sesungguhnya kalian diutus untuk memudahkan, bukan untuk menyulitkan."
+                dalil: "HR. Bukhari (No. 220)",
+                arab: "دَعُوهُ وَهَرِيقُوا عَلَى بَوْلِهِ سَجْلاً مِنْ مَاءٍ، أَوْ ذَنُوبًا مِنْ مَاءٍ، فَإِنَّمَا بُعِثْتُمْ مُيَسِّرِينَ، وَلَمْ تُبْعَثُوا مُعَسِّرِينَ",
+                translation: "Biarkanlah dia, dan tuangkanlah seember atau secangkir air di atas tempat ia berkemih. Sesungguhnya kalian diutus untuk mempermudah dan bukan untuk mempersulit."
             },
             {
                 title: "6. Menutup Aurat",
-                desc: "Laki-laki (pusar hingga lutut), Wanita (seluruh tubuh kecuali wajah & telapak tangan).",
-                dalil: "QS. Al-A'raf: 31 & HR. Tirmidzi (No. 377)",
-                arab: "يَا بَنِي آدَمَ خُذُوا زِينَتَكُمْ عِنْدَ كُلِّ مَسْجِدٍ. لَا تُقْبَلُ صَلَاةُ الْحَائِضِ إِلَّا بِخِمَارٍ",
-                translation: "Wahai anak-anak Adam, pakailah pakaianmu yang indah di setiap (memasuki) masjid. (Dan) sholat seorang wanita yang telah haid tidak diterima kecuali dengan mengenakan khimar (penutup kepala)."
+                desc: "Laki-laki: bagian di bawah pusar sampai di atas lutut, termasuk paha, tidak boleh dilihat. Wanita yang telah baligh: seluruh tubuh kecuali wajah dan kedua telapak tangan. Sholat wanita yang telah haid tidak diterima tanpa khimar.",
+                dalil: "QS. Al-A'raf: 31; HR. Tirmidzi (No. 377); HR. Abu Daud (No. 4104, 4114, 4014); HR. Muslim (No. 338)",
+                mainLabel: "QS. Al-A'raf: 31 (potongan ayat)",
+                arab: "يَا بَنِي آدَمَ خُذُوا زِينَتَكُمْ عِنْدَ كُلِّ مَسْجِدٍ",
+                translation: "Wahai anak-anak Adam, pakailah pakaianmu yang indah di setiap (memasuki) masjid.",
+                extra: [
+                    {
+                        "label": "HR. Tirmidzi (No. 377)",
+                        "arab": "لاَ تُقْبَلُ صَلاَةُ الْحَائِضِ إِلاَّ بِخِمَارٍ",
+                        "translation": "Shalat seorang wanita yang telah mencapai usia haid tidak diterima tanpa Khimar.",
+                        "note": "Derajat: Shahih."
+                    },
+                    {
+                        "label": "HR. Abu Daud (No. 4104) — aurat wanita",
+                        "arab": "يَا أَسْمَاءُ إِنَّ الْمَرْأَةَ إِذَا بَلَغَتِ الْمَحِيضَ لَمْ تَصْلُحْ أَنْ يُرَى مِنْهَا إِلاَّ هَذَا وَهَذَا . وَأَشَارَ إِلَى وَجْهِهِ وَكَفَّيْهِ",
+                        "translation": "Wahai Asma, sesungguhnya seorang wanita apabila telah datang masa haid, tidak pantas baginya untuk menampakkan dari tubuhnya kecuali ini dan ini, sambil menunjuk ke wajah dan kedua tangannya.",
+                        "note": "Derajat: Shahih. Penilaian ulama berbeda: Al-Albani: Shahih · Zubair 'Ali Za'i: Dha'if. Abu Daud berkata: hadits ini mursal, Khalid bin Duraik tidak bertemu 'Aisyah."
+                    },
+                    {
+                        "label": "HR. Abu Daud (No. 4114) — batas aurat laki-laki",
+                        "arab": "إِذَا زَوَّجَ أَحَدُكُمْ خَادِمَهُ عَبْدَهُ أَوْ أَجِيرَهُ فَلاَ يَنْظُرْ إِلَى مَا دُونَ السُّرَّةِ وَفَوْقَ الرُّكْبَةِ",
+                        "translation": "Ketika salah satu dari kalian menikahkan pelayan wanitanya kepada budaknya atau kepada pegawainya, maka janganlah dia melihat bagian tubuhnya di bawah pusar dan di atas lutut.",
+                        "note": "Derajat: Hasan."
+                    },
+                    {
+                        "label": "HR. Abu Daud (No. 4014) — paha adalah aurat",
+                        "arab": "أَمَا عَلِمْتَ أَنَّ الْفَخِذَ عَوْرَةٌ",
+                        "translation": "Tidakkah kamu tahu bahwa paha itu adalah aurat?.",
+                        "note": "Derajat: Shahih."
+                    },
+                    {
+                        "label": "HR. Muslim (No. 338) — larangan melihat aurat",
+                        "arab": "لاَ يَنْظُرُ الرَّجُلُ إِلَى عَوْرَةِ الرَّجُلِ وَلاَ الْمَرْأَةُ إِلَى عَوْرَةِ الْمَرْأَةِ وَلاَ يُفْضِي الرَّجُلُ إِلَى الرَّجُلِ فِي ثَوْبٍ وَاحِدٍ وَلاَ تُفْضِي الْمَرْأَةُ إِلَى الْمَرْأَةِ فِي الثَّوْبِ الْوَاحِدِ",
+                        "translation": "Seorang laki-laki tidak boleh melihat aurat laki-laki lainnya, dan seorang wanita tidak boleh melihat aurat wanita lainnya, dan seorang laki-laki tidak boleh berbaring dengan laki-laki lainnya di bawah satu selimut, dan seorang wanita tidak boleh berbaring dengan wanita lainnya di bawah satu selimut.",
+                        "note": "Derajat: Shahih."
+                    }
+                ]
             },
             {
                 title: "7. Masuk Waktu Sholat",
@@ -1078,7 +1152,7 @@
             {
                 title: "9. Niat",
                 desc: "Meniatkan sholat tertentu di dalam hati saat Takbiratul Ihram.",
-                dalil: "HR. Bukhari (No. 1) & Muslim (No. 1907)",
+                dalil: "HR. Bukhari (No. 1); semakna: HR. Muslim (No. 1907)",
                 arab: "إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى",
                 translation: "Sesungguhnya amal itu tergantung pada niatnya, dan setiap orang hanya mendapatkan apa yang ia niatkan."
             }
@@ -1100,15 +1174,24 @@
 
         // Steps Sholat Data
         const sholatStepsData = [
-            { rukun: "Rukun 1 & 2", title: "Berdiri Tegak & Niat", desc: "Berdiri tegak menghadap kiblat bagi yang mampu, berniat sholat di dalam hati.", icon: "fa-person", dalil: "QS. Al-Baqarah: 238" },
-            { rukun: "Rukun 3", title: "Takbiratul Ihram", desc: "Mengangkat kedua tangan sejajar bahu/telinga seraya mengucapkan 'Allahu Akbar'.", icon: "fa-hands-praying", dalil: "HR. Bukhari (No. 757)" },
-            { rukun: "Sunnah", title: "Sedekap & Doa Iftitah", desc: "Meletakkan tangan kanan di atas punggung tangan kiri di atas dada. Membaca Iftitah & Al-Fatihah.", icon: "fa-hands", dalil: "HR. Muslim (No. 401)" },
-            { rukun: "Rukun 4 & 5", title: "Ruku' Dengan Thuma'ninah", desc: "Membungkukkan badan, punggung rata, memegang kedua lutut, membaca doa ruku'.", icon: "fa-person-praying", dalil: "HR. Bukhari & Muslim" },
-            { rukun: "Rukun 6 & 7", title: "I'tidal Dengan Thuma'ninah", desc: "Bangkit dari ruku' seraya mengucapkan 'Sami'allahu liman hamidah', berdiri lurus.", icon: "fa-person", dalil: "HR. Bukhari (No. 789)" },
-            { rukun: "Rukun 8 & 9", title: "Sujud Pertama & Kedua", desc: "Sujud di atas 7 anggota tubuh (dahi+hidung, 2 telapak tangan, 2 lutut, 2 ujung kaki).", icon: "fa-person-praying", dalil: "HR. Bukhari (No. 812)" },
-            { rukun: "Rukun 10 & 11", title: "Duduk Antara Dua Sujud", desc: "Duduk Iftirasy (menduduki kaki kiri dan menegakkan kaki kanan), membaca doa.", icon: "fa-chair", dalil: "HR. Abu Daud (No. 850)" },
-            { rukun: "Rukun 12-14", title: "Tasyahud Akhir & Shalawat", desc: "Duduk Tawarruk (kaki kiri dimasukkan ke bawah kaki kanan), membaca Tasyahud & Shalawat Nabi.", icon: "fa-chair", dalil: "HR. Bukhari (No. 831)" },
-            { rukun: "Rukun 15", title: "Salam Pertama", desc: "Menoleh ke kanan hingga pipi terlihat dari belakang seraya mengucapkan 'Assalamu'alaikum wa rahmatullah'.", icon: "fa-comment", dalil: "HR. Muslim (No. 582)" }
+            { rukun: "Rukun 1 & 2", title: "Berdiri Tegak & Niat", desc: "Berdiri tegak menghadap kiblat bagi yang mampu, berniat sholat di dalam hati.", icon: "fa-person", dalil: "QS. Al-Baqarah: 238",
+              matan: {"arab": "حَٰفِظُوا۟ عَلَى ٱلصَّلَوَٰتِ وَٱلصَّلَوٰةِ ٱلْوُسْطَىٰ وَقُومُوا۟ لِلَّهِ قَٰنِتِينَ", "arti": "Peliharalah semua shalat(mu), dan (peliharalah) shalat wusthaa. Berdirilah untuk Allah (dalam shalatmu) dengan khusyu'.", "sumber": "QS. Al-Baqarah: 238"} },
+            { rukun: "Rukun 3", title: "Takbiratul Ihram", desc: "Mengangkat kedua tangan sejajar bahu (atau telinga) seraya mengucapkan 'Allahu Akbar'.", icon: "fa-hands-praying", dalil: "HR. Muslim (No. 390), Bukhari (No. 735); telinga: HR. Muslim (No. 401)",
+              matan: {"arab": "رَأَيْتُ رَسُولَ اللَّهِ ﷺ إِذَا افْتَتَحَ الصَّلاَةَ رَفَعَ يَدَيْهِ حَتَّى يُحَاذِيَ مَنْكِبَيْهِ وَقَبْلَ أَنْ يَرْكَعَ وَإِذَا رَفَعَ مِنَ الرُّكُوعِ وَلاَ يَرْفَعُهُمَا بَيْنَ السَّجْدَتَيْنِ", "arti": "Saya melihat Rasulullah ﷺ mengangkat kedua tangannya sejajar dengan bahunya pada saat memulai shalat dan sebelum ruku serta setelah kembali ke posisi setelah ruku. Namun beliau tidak mengangkatnya di antara dua sujud.", "sumber": "HR. Muslim (No. 390)", "derajat": "Derajat: Shahih."} },
+            { rukun: "Sunnah", title: "Sedekap & Doa Iftitah", desc: "Meletakkan tangan kanan di atas tangan kiri setelah takbiratul ihram. Dilanjutkan membaca doa Iftitah dan Al-Fatihah.", icon: "fa-hands", dalil: "HR. Muslim (No. 401)",
+              matan: {"arab": "رَأَى النَّبِيَّ ﷺ رَفَعَ يَدَيْهِ حِينَ دَخَلَ فِي الصَّلاَةِ كَبَّرَ - وَصَفَ هَمَّامٌ حِيَالَ أُذُنَيْهِ - ثُمَّ الْتَحَفَ بِثَوْبِهِ ثُمَّ وَضَعَ يَدَهُ الْيُمْنَى عَلَى الْيُسْرَى", "arti": "Dia melihat Rasulullah ﷺ mengangkat kedua tangannya pada saat memulai shalat dan mengucapkan takbir, dan menurut Hammam (perawi), tangan diangkat sejajar dengan telinga. Kemudian beliau membungkus tangannya dengan kainnya dan meletakkan tangan kanannya di atas tangan kirinya.", "sumber": "HR. Muslim (No. 401)", "derajat": "Derajat: Shahih."} },
+            { rukun: "Rukun 4 & 5", title: "Ruku' Dengan Thuma'ninah", desc: "Meletakkan kedua tangan di lutut, membungkukkan punggung dengan lurus, membaca doa ruku'.", icon: "fa-person-praying", dalil: "HR. Bukhari (No. 828)",
+              matan: {"arab": "رَأَيْتُهُ إِذَا كَبَّرَ جَعَلَ يَدَيْهِ حِذَاءَ مَنْكِبَيْهِ، وَإِذَا رَكَعَ أَمْكَنَ يَدَيْهِ مِنْ رُكْبَتَيْهِ، ثُمَّ هَصَرَ ظَهْرَهُ", "arti": "Saya melihat beliau mengangkat kedua tangannya hingga sejajar dengan bahu saat mengucapkan Takbir; dan saat ruku beliau meletakkan kedua tangannya di kedua lutut dan membungkukkan punggungnya dengan lurus.", "sumber": "HR. Bukhari (No. 828), dari Abu Humaid As-Sa'idi", "derajat": "Derajat: Shahih."} },
+            { rukun: "Rukun 6 & 7", title: "I'tidal Dengan Thuma'ninah", desc: "Bangkit dari ruku' seraya mengucapkan 'Sami'allahu liman hamidah', berdiri lurus.", icon: "fa-person", dalil: "HR. Bukhari (No. 789)",
+              matan: {"arab": "كَانَ رَسُولُ اللَّهِ ﷺ إِذَا قَامَ إِلَى الصَّلاَةِ يُكَبِّرُ حِينَ يَقُومُ، ثُمَّ يُكَبِّرُ حِينَ يَرْكَعُ، ثُمَّ يَقُولُ سَمِعَ اللَّهُ لَمِنْ حَمِدَهُ. حِينَ يَرْفَعُ صُلْبَهُ مِنَ الرَّكْعَةِ، ثُمَّ يَقُولُ وَهُوَ قَائِمٌ رَبَّنَا لَكَ الْحَمْدُ", "arti": "Setiap kali Rasulullah ﷺ berdiri untuk shalat, beliau mengucapkan Takbir pada awal shalat dan kemudian saat ruku. Ketika bangkit dari ruku, beliau berkata, 'Sami`a llahu liman hamidah,' dan kemudian saat berdiri tegak beliau biasa berkata, 'Rabbana laka-l hamd'.", "sumber": "HR. Bukhari (No. 789), dari Abu Hurairah", "derajat": "Derajat: Shahih."} },
+            { rukun: "Rukun 8 & 9", title: "Sujud Pertama & Kedua", desc: "Sujud di atas 7 anggota tubuh (dahi+hidung, 2 telapak tangan, 2 lutut, 2 ujung kaki).", icon: "fa-person-praying", dalil: "HR. Bukhari (No. 812)",
+              matan: {"arab": "أُمِرْتُ أَنْ أَسْجُدَ عَلَى سَبْعَةِ أَعْظُمٍ عَلَى الْجَبْهَةِ ـ وَأَشَارَ بِيَدِهِ عَلَى أَنْفِهِ ـ وَالْيَدَيْنِ، وَالرُّكْبَتَيْنِ وَأَطْرَافِ الْقَدَمَيْنِ، وَلاَ نَكْفِتَ الثِّيَابَ وَالشَّعَرَ", "arti": "Aku diperintahkan untuk sujud di atas tujuh tulang, yaitu di atas dahi bersama ujung hidung dan Nabi ﷺ menunjuk ke arah hidungnya, kedua tangan, kedua lutut, dan jari-jari kedua kaki serta tidak mengumpulkan pakaian atau rambut.", "sumber": "HR. Bukhari (No. 812), dari Ibnu 'Abbas", "derajat": "Derajat: Shahih."} },
+            { rukun: "Rukun 10 & 11", title: "Duduk Antara Dua Sujud", desc: "Duduk iftirasy (kaki kiri dihamparkan dan diduduki, kaki kanan ditegakkan), membaca doa.", icon: "fa-chair", dalil: "HR. Muslim (No. 498); doa: HR. Abu Daud (No. 850)",
+              matan: {"arab": "وَكَانَ يَفْرِشُ رِجْلَهُ الْيُسْرَى وَيَنْصِبُ رِجْلَهُ الْيُمْنَى", "arti": "Beliau biasa meletakkan kaki kirinya datar (di tanah) dan mengangkat kaki kanannya.", "sumber": "HR. Muslim (No. 498), dari 'Aisyah", "derajat": "Derajat: Shahih."} },
+            { rukun: "Rukun 12-14", title: "Tasyahud Akhir & Shalawat", desc: "Duduk tawarruk (kaki kiri dimajukan, kaki kanan ditegakkan, duduk di atas pantat), membaca Tasyahud & Shalawat Nabi.", icon: "fa-chair", dalil: "HR. Bukhari (No. 828); tasyahud: HR. Bukhari (No. 831) & Muslim (No. 402); shalawat: HR. Bukhari (No. 3370)",
+              matan: {"arab": "وَإِذَا جَلَسَ فِي الرَّكْعَةِ الآخِرَةِ قَدَّمَ رِجْلَهُ الْيُسْرَى وَنَصَبَ الأُخْرَى وَقَعَدَ عَلَى مَقْعَدَتِهِ", "arti": "Di rakaat terakhir beliau mendorong kaki kirinya ke depan dan menjaga kaki lainnya tetap terangkat dan duduk di atas pantatnya.", "sumber": "HR. Bukhari (No. 828), dari Abu Humaid As-Sa'idi", "derajat": "Derajat: Shahih."} },
+            { rukun: "Rukun 15", title: "Salam", desc: "Salam ke kanan lalu ke kiri hingga terlihat putih pipi, seraya mengucapkan 'Assalamu'alaikum wa rahmatullah'.", icon: "fa-comment", dalil: "HR. Muslim (No. 582); lafaz salam: HR. An-Nasa'i (No. 1325), Tirmidzi (No. 295), Ibnu Majah (No. 914)",
+              matan: {"arab": "كُنْتُ أَرَى رَسُولَ اللَّهِ ﷺ يُسَلِّمُ عَنْ يَمِينِهِ وَعَنْ يَسَارِهِ حَتَّى أَرَى بَيَاضَ خَدِّهِ", "arti": "Saya melihat Rasulullah ﷺ mengucapkan salam ke kanan dan ke kiri hingga saya melihat putih pipinya.", "sumber": "HR. Muslim (No. 582), dari Sa'd bin Abi Waqqash", "derajat": "Derajat: Shahih."} }
         ];
 
         // Word-by-Word Prayer Recitations Data
@@ -1118,7 +1201,7 @@
                 arabFull: "اللَّهُ أَكْبَرُ",
                 latinFull: "Allaahu akbar",
                 translationFull: "Allah Maha Besar.",
-                source: "HR. Bukhari (No. 757) & Muslim (No. 397)",
+                source: "HR. Bukhari (No. 757) & Muslim (No. 397); lafaz: HR. Abu Daud (No. 857)",
                 words: [
                     { ar: "اللَّهُ", lat: "Allaahu", id: "Allah" },
                     { ar: "أَكْبَرُ", lat: "akbar", id: "Maha Besar" }
@@ -1128,7 +1211,7 @@
                 title: "2. Doa Iftitah (Pilihan 1 - HR. Bukhari & Muslim)",
                 arabFull: "اللَّهُمَّ بَاعِدْ بَيْنِي وَبَيْنَ خَطَايَايَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَالْمَغْرِبِ",
                 latinFull: "Allahumma baa'id bainii wa baina khathaayaaya kamaa baa'adta bainal masyriqi wal maghrib.",
-                translationFull: "Ya Allah, jauhkah antara aku dan kesalahan-kesalahanku sebagaimana Engkau menjauhkan antara timur dan barat.",
+                translationFull: "Ya Allah, jauhkanlah antara aku dan kesalahan-kesalahanku sebagaimana Engkau menjauhkan antara timur dan barat.",
                 source: "HR. Bukhari (No. 744) & Muslim (No. 598)",
                 words: [
                     { ar: "اللَّهُمَّ", lat: "Allahumma", id: "Ya Allah" },
@@ -1172,15 +1255,14 @@
             },
             {
                 title: "4. Bacaan Ruku'",
-                arabFull: "سُبْحَانَ رَبِّيَ الْعَظِيمِ وَبِحَمْدِهِ",
-                latinFull: "Subhaana rabbiyal 'azhiimi wa bihamdih (3x)",
-                translationFull: "Maha Suci Tuhanku Yang Maha Agung dan dengan memuji-Nya.",
-                source: "HR. Abu Daud (No. 870) & An-Nasa'i",
+                arabFull: "سُبْحَانَ رَبِّيَ الْعَظِيمِ",
+                latinFull: "Subhaana rabbiyal 'azhiim (3x)",
+                translationFull: "Maha Suci Tuhanku Yang Maha Agung.",
+                source: "HR. Muslim (No. 772) & Abu Daud (No. 871)",
                 words: [
                     { ar: "سُبْحَانَ", lat: "Subhaana", id: "Maha Suci" },
                     { ar: "رَبِّيَ", lat: "rabbiya", id: "Tuhanku" },
-                    { ar: "الْعَظِيمِ", lat: "al-'azhiim", id: "Yang Maha Agung" },
-                    { ar: "وَبِحَمْدِهِ", lat: "wa bihamdih", id: "dan dengan memuji-Nya" }
+                    { ar: "الْعَظِيمِ", lat: "al-'azhiim", id: "Yang Maha Agung" }
                 ]
             },
             {
@@ -1215,15 +1297,14 @@
             },
             {
                 title: "7. Bacaan Sujud",
-                arabFull: "سُبْحَانَ رَبِّيَ الْأَعْلَى وَبِحَمْدِهِ",
-                latinFull: "Subhaana rabbiyal a'laa wa bihamdih (3x)",
-                translationFull: "Maha Suci Tuhanku Yang Maha Tinggi dan dengan memuji-Nya.",
-                source: "HR. Abu Daud (No. 870) & An-Nasa'i",
+                arabFull: "سُبْحَانَ رَبِّيَ الْأَعْلَى",
+                latinFull: "Subhaana rabbiyal a'laa (3x)",
+                translationFull: "Maha Suci Tuhanku Yang Maha Tinggi.",
+                source: "HR. Muslim (No. 772) & Abu Daud (No. 871)",
                 words: [
                     { ar: "سُبْحَانَ", lat: "Subhaana", id: "Maha Suci" },
                     { ar: "رَبِّيَ", lat: "rabbiya", id: "Tuhanku" },
-                    { ar: "الْأَعْلَى", lat: "al-a'laa", id: "Yang Maha Tinggi" },
-                    { ar: "وَبِحَمْدِهِ", lat: "wa bihamdih", id: "dan dengan memuji-Nya" }
+                    { ar: "الْأَعْلَى", lat: "al-a'laa", id: "Yang Maha Tinggi" }
                 ]
             },
             {
@@ -1231,7 +1312,7 @@
                 arabFull: "رَبِّ اغْفِرْ لِي رَبِّ اغْفِرْ لِي",
                 latinFull: "Rabbighfir lii, Rabbighfir lii",
                 translationFull: "Wahai Tuhanku ampunilah aku, wahai Tuhanku ampunilah aku.",
-                source: "HR. Abu Daud (No. 874) & Ibn Majah",
+                source: "HR. Abu Daud (No. 874) & Ibnu Majah (No. 897)",
                 words: [
                     { ar: "رَبِّ", lat: "Rabbi", id: "Wahai Tuhanku" },
                     { ar: "اغْفِرْ", lat: "ighfir", id: "ampunilah" },
@@ -1269,7 +1350,7 @@
                 arabFull: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
                 latinFull: "Allaahumma shalli 'alaa Muhammad wa 'alaa aali Muhammad, kamaa shallaita 'alaa Ibraahiim wa 'alaa aali Ibraahiim, innaka hamiidum majiid. Allaahumma baarik 'alaa Muhammad wa 'alaa aali Muhammad, kamaa baarakta 'alaa Ibraahiim wa 'alaa aali Ibraahiim, innaka hamiidum majiid.",
                 translationFull: "Ya Allah, limpahkanlah sholawat kepada Muhammad dan keluarga Muhammad, sebagaimana Engkau telah melimpahkan sholawat kepada Ibrahim dan keluarga Ibrahim; sungguh Engkau Maha Terpuji lagi Maha Mulia. Ya Allah, berikanlah berkah kepada Muhammad dan keluarga Muhammad, sebagaimana Engkau telah memberikan berkah kepada Ibrahim dan keluarga Ibrahim; sungguh Engkau Maha Terpuji lagi Maha Mulia.",
-                source: "HR. Bukhari (No. 3370) & Muslim (No. 406)",
+                source: "HR. Bukhari (No. 3370)",
                 words: [
                     { ar: "اللَّهُمَّ", lat: "Allaahumma", id: "Ya Allah" },
                     { ar: "صَلِّ", lat: "shalli", id: "limpahkanlah sholawat" },
@@ -1282,7 +1363,14 @@
                     { ar: "حَمِيدٌ", lat: "hamiid", id: "Maha Terpuji" },
                     { ar: "مَجِيدٌ", lat: "majiid", id: "Maha Mulia" },
                     { ar: "بَارِكْ", lat: "baarik", id: "berilah berkah" },
-                    { ar: "كَمَا بَارَكْتَ", lat: "kamaa baarakta", id: "sebagaimana Engkau memberi berkah" }
+                    { ar: "عَلَى مُحَمَّدٍ", lat: "'alaa Muhammad", id: "kepada Muhammad" },
+                    { ar: "وَعَلَى آلِ مُحَمَّدٍ", lat: "wa 'alaa aali Muhammad", id: "dan kepada keluarga Muhammad" },
+                    { ar: "كَمَا بَارَكْتَ", lat: "kamaa baarakta", id: "sebagaimana Engkau memberi berkah" },
+                    { ar: "عَلَى إِبْرَاهِيمَ", lat: "'alaa Ibraahiim", id: "kepada Ibrahim" },
+                    { ar: "وَعَلَى آلِ إِبْرَاهِيمَ", lat: "wa 'alaa aali Ibraahiim", id: "dan kepada keluarga Ibrahim" },
+                    { ar: "إِنَّكَ", lat: "innaka", id: "sungguh Engkau" },
+                    { ar: "حَمِيدٌ", lat: "hamiid", id: "Maha Terpuji" },
+                    { ar: "مَجِيدٌ", lat: "majiid", id: "Maha Mulia" }
                 ]
             },
             {
@@ -1290,7 +1378,7 @@
                 arabFull: "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",
                 latinFull: "Assalaamu 'alaikum wa rahmatullaah",
                 translationFull: "Semoga keselamatan dan rahmat Allah tercurah kepada kalian. (Diucapkan sambil menoleh ke kanan, lalu ke kiri.)",
-                source: "HR. Abu Daud (No. 996) & At-Tirmidzi (No. 295)",
+                source: "HR. An-Nasa'i (No. 1325), At-Tirmidzi (No. 295), Ibnu Majah (No. 914)",
                 words: [
                     { ar: "السَّلَامُ", lat: "as-salaamu", id: "keselamatan" },
                     { ar: "عَلَيْكُمْ", lat: "'alaikum", id: "atas kalian" },
@@ -1299,6 +1387,43 @@
                 ]
             }
         ];
+
+        // Ragam bacaan lainnya per kartu bacaan (kunci = indeks di bacaanSholatWords). Matan, terjemahan, nomor, dan derajat dari Hadits.id; jangan diubah dari sumber.
+        const bacaanVariants = {
+    "0": {
+        "note": "Perintah bertakbir disebut dalam hadits orang yang salah shalatnya: \"إِذَا قُمْتَ إِلَى الصَّلاَةِ فَكَبِّرْ\" — \"Jika engkau berdiri untuk shalat, maka bertakbirlah\" (HR. Bukhari no. 757). Lafaz takbir: \"ثُمَّ يُكَبِّرُ ... ثُمَّ يَقُولُ اللَّهُ أَكْبَرُ\" — \"kemudian ia mengucapkan takbir ... Kemudian ia mengucapkan Allahu Akbar\" (HR. Abu Daud no. 857, Shahih). Derajat (HR. Bukhari 757: Shahih; Muslim 397: Shahih; Abu Daud 857: Shahih)."
+    },
+    "1": {
+        "note": "Derajat (HR. Bukhari 744: Shahih; Muslim 598: Shahih)."
+    },
+    "3": {
+        "note": "Dibaca tiga kali; riwayat tiga kali (HR. Tirmidzi no. 261, Abu Daud no. 886, Ibnu Majah no. 890) berderajat dha'if menurut Al-Albani, tetapi bacaan tasbihnya sendiri shahih (HR. Muslim no. 772). Derajat (HR. Muslim 772; Abu Daud 871): Shahih."
+    },
+    "5": {
+        "note": "Derajat (HR. Bukhari 799: Shahih)."
+    },
+    "6": {
+        "note": "Bacaan tasbih sujud: HR. Muslim no. 772 dan Abu Daud no. 871. Dibaca tiga kali (HR. Tirmidzi no. 261, Abu Daud no. 886, Ibnu Majah no. 890; dha'if menurut Al-Albani). Derajat (HR. Muslim 772; Abu Daud 871): Shahih."
+    },
+    "7": {
+        "note": "Derajat (HR. Abu Daud 874: Shahih; Ibnu Majah 897: Shahih)."
+    },
+    "8": {
+        "note": "Derajat (HR. Bukhari 6265: Shahih; Muslim 402: Shahih)."
+    },
+    "2": {
+        "note": "Derajat (HR. Bukhari 756: Shahih; Muslim 394: Shahih)."
+    },
+    "4": {
+        "note": "Derajat (HR. Bukhari 689: Shahih; Muslim 411: Shahih)."
+    },
+    "9": {
+        "note": "Derajat (HR. Bukhari 3370: Shahih)."
+    },
+    "10": {
+        "note": "Derajat: HR. An-Nasa'i 1325, Tirmidzi 295, dan Ibnu Majah 914 semuanya Shahih (tanpa perbedaan penilaian di Hadits.id). Gerakan salam ke kanan dan ke kiri juga diriwayatkan Muslim no. 582 dari Sa'd bin Abi Waqqash."
+    }
+};
 
         // Pembatal Sholat Data
         const pembatalData = [
@@ -1347,7 +1472,7 @@
             {
                 title: "7. Mendahului Imam (Bagi Makmum)",
                 desc: "Sengaja ruku' atau sujud mendahului imam hingga 2 rukun fi'li.",
-                dalil: "HR. Bukhari (No. 691) & Muslim (No. 427)",
+                dalil: "HR. Muslim (No. 427); semakna: HR. Bukhari (No. 691)",
                 arab: "أَمَا يَخْشَى الَّذِي يَرْفَعُ رَأْسَهُ قَبْلَ الْإِمَامِ أَنْ يُحَوِّلَ اللَّهُ رَأْسَهُ رَأْسَ حِمَارٍ",
                 translation: "Tidakkah orang yang mengangkat kepalanya sebelum imam takut bahwa Allah akan mengubah kepalanya menjadi kepala keledai?"
             },
@@ -1374,7 +1499,9 @@
             renderWudhuSteps();
             renderSholatSteps();
             renderSholatWords();
+            renderRagam();
             renderPembatal();
+            renderInfo();
             renderQuiz();
             renderBookmarks();
         };
@@ -1389,8 +1516,16 @@
                         <i class="fa-solid fa-chevron-down details-chevron text-[10px]"></i>
                     </summary>
                     <div class="mt-3 space-y-2 border-t border-slate-200 pt-3">
+                        ${item.mainLabel ? `<p class="text-[11px] font-semibold text-slate-500">${item.mainLabel}</p>` : ''}
                         ${item.arab ? `<p class="font-arabic text-right text-xl leading-loose text-emerald-950" dir="rtl">${item.arab}</p>` : ''}
                         ${item.translation ? `<p class="text-xs italic leading-relaxed text-slate-600">"${item.translation}"</p>` : ''}
+                        ${(item.extra || []).map(x => `
+                        <div class="mt-3 space-y-2 border-t border-slate-200 pt-3">
+                            <p class="text-[11px] font-semibold text-slate-500">${x.label}</p>
+                            <p class="font-arabic text-right text-xl leading-loose text-emerald-950" dir="rtl">${x.arab}</p>
+                            <p class="text-xs italic leading-relaxed text-slate-600">"${x.translation}"</p>
+                            ${x.note ? `<p class="text-[11px] leading-relaxed text-slate-500">${x.note}</p>` : ''}
+                        </div>`).join('')}
                     </div>
                 </details>
             `;
@@ -1450,9 +1585,1633 @@
                         </div>
                         <h3 class="text-base sm:text-lg font-bold text-emerald-950">${step.title}</h3>
                         <p class="text-sm text-slate-600 leading-relaxed">${step.desc}</p>
+                        ${step.matan ? `
+                        <details class="rounded-xl border border-slate-200 bg-slate-50/80 px-3 py-2">
+                            <summary class="flex cursor-pointer items-center justify-between gap-2 text-xs font-semibold text-emerald-800">
+                                <span><i class="fa-solid fa-book-open text-gold-500 mr-1"></i> Matan & Terjemahan</span>
+                                <i class="fa-solid fa-chevron-down details-chevron text-[10px]"></i>
+                            </summary>
+                            <div class="mt-3 space-y-2 border-t border-slate-200 pt-3">
+                                <p class="text-[11px] text-slate-500 italic">${step.matan.sumber}</p>
+                                ${step.matan.derajat ? `<p class="text-[11px] text-slate-500">${step.matan.derajat}</p>` : ''}
+                                <p class="font-arabic text-right text-xl leading-loose text-emerald-950" dir="rtl">${step.matan.arab}</p>
+                                <p class="text-xs italic leading-relaxed text-slate-600">"${step.matan.arti}"</p>
+                            </div>
+                        </details>` : ''}
                     </div>
                 </div>
             `).join('');
+        }
+
+        // Info & Referensi: sumber utama dan daftar dalil (tautan ke Hadits.id)
+        const infoSumber = [
+            { nama: "Hadits.id", peran: "Referensi nomor hadits", url: "https://www.hadits.id", ket: "Dasar penulisan nomor hadits (Bukhari, Muslim, Abu Daud, Tirmidzi, Nasa'i, Ibnu Majah), juga matan Arab, terjemahan Indonesia, dan derajat hadits. Setiap nomor di aplikasi bisa dicek lewat daftar di bawah." },
+            { nama: "Rumaysho.com", peran: "Referensi isi konten", url: "https://rumaysho.com", ket: "Ustadz Muhammad Abduh Tuasikal, M.Sc. Rujukan isi dan penjelasan: tata cara sholat, doa setelah wudhu, dan ragam bacaan sholat." },
+            { nama: "Muslim.or.id", peran: "Referensi isi konten", url: "https://muslim.or.id", ket: "Rujukan isi dan penjelasan: tata cara ruku', sujud, dan doa istiftah." },
+            { nama: "Al-Qur'an (Al-Quran Cloud)", peran: "Referensi teks ayat", url: "https://alquran.cloud", ket: "Teks Al-Qur'an (Uthmani) dan terjemahan Indonesia; tiap ayat dapat dibuka di Quran.com." }
+        ];
+        infoSumber.push({ nama: "Ragam Bacaan Sholat (Nor Kandir, Pustaka Syabab)", peran: "Referensi ragam bacaan", url: "https://www.terjemahmatan.com", ket: "Buku Ragam Bacaan Sholat, cetakan ke-1, 1447 H (2026). Rujukan susunan tab Ragam: latin, terjemah, dan daftar riwayat per gerakan; teks Arab dan nomor hadits diverifikasi ke Hadits.id." });
+        const infoQuran = [["2", "43", "Al-Baqarah: 43"], ["2", "144", "Al-Baqarah: 144"], ["2", "238", "Al-Baqarah: 238"], ["3", "85", "Ali Imran: 85"], ["4", "103", "An-Nisa: 103"], ["5", "6", "Al-Ma'idah: 6"], ["7", "31", "Al-A'raf: 31"], ["29", "45", "Al-Ankabut: 45"], ["74", "42", "Al-Muddatstsir: 42-43"], ["1", "1", "Al-Fatihah: 1-7"]];
+        const infoKitab = { bukhari: "Bukhari", muslim: "Muslim", abudawud: "Abu Daud", tirmidzi: "Tirmidzi", nasai: "Nasa'i", ibnmajah: "Ibnu Majah" };
+        const infoDalil = [
+            { judul: "Home & Dalil Sholat", items: ["bukhari:8", "bukhari:528", "muslim:667", "muslim:82", "muslim:233"] },
+            { judul: "Syarat Sah Sholat", items: ["abudawud:4403", "abudawud:495", "abudawud:4104", "abudawud:4114", "abudawud:4014", "muslim:338", "bukhari:135", "bukhari:220", "tirmidzi:377", "bukhari:1", "muslim:1907"] },
+            { judul: "Panduan Wudhu", items: ["bukhari:887", "muslim:252", "abudawud:101", "bukhari:168", "muslim:234", "tirmidzi:55", "bukhari:60", "muslim:242", "bukhari:631"] },
+            { judul: "Gerakan Sholat", items: ["muslim:390", "bukhari:735", "muslim:401", "bukhari:828", "bukhari:789", "bukhari:812", "muslim:498", "abudawud:850", "muslim:582", "nasai:1325", "tirmidzi:295", "ibnmajah:914"] },
+            { judul: "Bacaan Sholat", items: ["bukhari:757", "muslim:397", "abudawud:857", "bukhari:744", "muslim:598", "bukhari:756", "muslim:394", "muslim:770", "muslim:771", "abudawud:775", "tirmidzi:242", "ibnmajah:804", "abudawud:764", "muslim:772", "abudawud:871", "abudawud:870", "bukhari:817", "muslim:484", "muslim:487", "bukhari:689", "muslim:411", "bukhari:799", "bukhari:796", "muslim:409", "muslim:478", "abudawud:874", "ibnmajah:897", "tirmidzi:284", "ibnmajah:898", "bukhari:831", "bukhari:6265", "muslim:402", "muslim:403", "bukhari:3370", "muslim:406", "tirmidzi:261", "abudawud:886", "ibnmajah:890"] },
+            { judul: "Pembatal Sholat", items: ["muslim:537", "bukhari:135", "muslim:427", "bukhari:691"] }
+        ];
+
+        function renderInfo() {
+            if (!infoDalil.some(g => g.judul === "Ragam Bacaan Sholat")) {
+                const have = new Set(infoDalil.flatMap(g => g.items));
+                const extra = [];
+                ragamBacaan.forEach(g => g.items.forEach(v => (v.refs || []).forEach(r => {
+                    const k = r.k + ':' + r.n;
+                    if (!have.has(k)) { have.add(k); extra.push(k); }
+                })));
+                if (extra.length) infoDalil.push({ judul: "Ragam Bacaan Sholat", items: extra });
+            }
+            const sumber = document.getElementById('info-sumber');
+            const quran = document.getElementById('info-quran');
+            const dalil = document.getElementById('info-dalil');
+            if (!sumber || !quran || !dalil) return;
+            sumber.innerHTML = infoSumber.map(x => `
+                <a href="${x.url}" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-2xl shadow-sm border border-slate-200 hover:border-gold-400 transition">
+                    <span class="inline-block text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full mb-1">${x.peran}</span>
+                    <h4 class="font-bold text-emerald-900 text-sm"><i class="fa-solid fa-globe text-gold-500 mr-1"></i> ${x.nama}</h4>
+                    <p class="text-[11px] text-slate-500 break-all">${x.url.replace('https://', '')}</p>
+                    <p class="text-xs text-slate-600 mt-1 leading-relaxed">${x.ket}</p>
+                </a>`).join('');
+            quran.innerHTML = infoQuran.map(([sr, ay, label]) => `
+                <a href="https://quran.com/${sr}/${ay}" target="_blank" rel="noopener noreferrer" class="text-xs px-3 py-1.5 rounded-full border border-slate-200 bg-slate-50 text-emerald-800 font-medium hover:border-gold-400 transition">QS. ${label}</a>`).join('');
+            dalil.innerHTML = infoDalil.map(g => `
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-emerald-900 text-sm mb-2">${g.judul}</h4>
+                    <div class="flex flex-wrap gap-2">
+                        ${g.items.map(k => { const [kt, no] = k.split(':'); return `<a href="https://www.hadits.id/hadits/${kt}/${no}" target="_blank" rel="noopener noreferrer" class="text-[11px] px-2.5 py-1 rounded-full border border-slate-200 bg-slate-50 text-emerald-800 font-medium hover:border-gold-400 transition">${infoKitab[kt]} ${no}</a>`; }).join('')}
+                    </div>
+                </div>`).join('');
+        }
+
+        const ragamBacaan = [
+ {
+  "key": "iftitah",
+  "title": "Doa Iftitah",
+  "intro": "Terdapat tujuh riwayat doa iftitah yang berbeda lafazhnya; satu riwayat dipilih Imam Ahmad dan Abu Hanifah, lafazh Ali dipilih Imam Asy-Syafi'i, dan beberapa dianjurkan pada Tahajjud.",
+  "items": [
+   {
+    "id": "iftitah-1",
+    "label": "Hadits Umar, Abu Said, Jabir, Aisyah",
+    "tag": "alternatif",
+    "arab": "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ وَتَعَالَى جَدُّكَ وَلاَ إِلَهَ غَيْرُكَ",
+    "latin": "Subhaanaka Alloohumma wa bihamdika, wa tabaarokasmuka wa ta’aalaa jadduka, wa laa ilaaha ghoiruka.",
+    "translation": "Maha Suci Engkau ya Allah, dan dengan memuji-Mu, Maha Suci Nama-Mu, Maha Tinggi Keagungan-Mu, dan tidak ada Rabb yang berhak disembah dengan benar selain Engkau.",
+    "source": "HR. Abu Dawud no. 775",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 775
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "Dipilih Imam Ahmad dan Abu Hanifah",
+    "note": "Penilaian di Hadits.id: Al-Albani: Shahih."
+   },
+   {
+    "id": "iftitah-2",
+    "label": "Hadits Ali bin Abi Thalib",
+    "tag": "alternatif",
+    "arab": "وَجَّهْتُ وَجْهِيَ لِلَّذِي فَطَرَ السَّمَوَاتِ وَالأَرْضَ حَنِيفًا وَمَا أَنَا مِنَ الْمُشْرِكِينَ إِنَّ صَلاَتِي وَنُسُكِي وَمَحْيَاىَ وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ لاَ شَرِيكَ لَهُ وَبِذَلِكَ أُمِرْتُ وَأَنَا مِنَ الْمُسْلِمِينَ اللَّهُمَّ أَنْتَ الْمَلِكُ لاَ إِلَهَ إِلاَّ أَنْتَ . أَنْتَ رَبِّي وَأَنَا عَبْدُكَ ظَلَمْتُ نَفْسِي وَاعْتَرَفْتُ بِذَنْبِي فَاغْفِرْ لِي ذُنُوبِي جَمِيعًا إِنَّهُ لاَ يَغْفِرُ الذُّنُوبَ إِلاَّ أَنْتَ وَاهْدِنِي لأَحْسَنِ الأَخْلاَقِ لاَ يَهْدِي لأَحْسَنِهَا إِلاَّ أَنْتَ وَاصْرِفْ عَنِّي سَيِّئَهَا لاَ يَصْرِفُ عَنِّي سَيِّئَهَا إِلاَّ أَنْتَ لَبَّيْكَ وَسَعْدَيْكَ وَالْخَيْرُ كُلُّهُ فِي يَدَيْكَ وَالشَّرُّ لَيْسَ إِلَيْكَ أَنَا بِكَ وَإِلَيْكَ تَبَارَكْتَ وَتَعَالَيْتَ أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ",
+    "latin": "Wajjahtu wajhiya lilladzii fathorossamaawaati wal ardho haniifaw wa maa ana minal musyrikiin, inna sholaatii wa nusukii wa mahyaaya wa mamaatii lillaahi robbil ‘aalamiin, laa syariika lahu wa bidzaalika umirtu wa ana minal muslimiin, Alloohumma antal maliku laa ilaha illa anta, anta robbii wa ana ‘abduka, zholamtu nafsii wa’taroftu bi dzanbii faghfir lii dzunuubii jamii’aa, innahu laa yaghfirudz dzunuuba illa anta, wahdinii li ahsanil akhlaaq, laa yahdii li ahsanihaa illaa anta, washrif ‘annii sayyi-ahaa laa yashrifu ‘annii sayyi-ahaa illa anta, labbaika wa sa’daika, wal khoiru kulluhu fii yadaika, wasy syarru laisa ilaika, ana bika wa ilaika, tabaarokta wa ta’aalaita, astaghfiruka wa atuubu ilaika.",
+    "translation": "Aku hadapkan wajahku kepada Dzat yang menciptakan langit dan bumi dengan lurus dan aku bukan termasuk orang-orang musyrik. Sesungguhnya sholatku, sembelihanku, hidupku, dan matiku hanya milik Allah, Rabb semesta alam. Tidak ada sekutu bagi-Nya dan demikianlah aku diperintahkan, dan aku termasuk orang-orang Muslim. Ya Allah, Engkau adalah Raja, tidak ada Rabb yang berhak disembah dengan benar kecuali Engkau. Engkau adalah Rabbku dan aku adalah hamba-Mu. Aku telah menzholimi diriku sendiri dan aku mengakui dosaku, maka ampunilah dosa-dosaku semuanya, sesungguhnya tidak ada yang mengampuni dosa-dosa kecuali Engkau. Tunjukkanlah aku kepada akhlak yang paling baik, tidak ada yang dapat menunjukkannya kecuali Engkau. Palingkanlah aku dari akhlak yang buruk, tidak ada yang dapat memalingkannya kecuali Engkau. Aku penuhi panggilan-Mu dengan senang hati, segala kebaikan ada di tangan-Mu dan keburukan tidak dinisbatkan kepada-Mu. Aku hidup dengan pertolongan-Mu dan akan kembali kepada-Mu. Maha Suci Engkau dan Maha Tinggi Engkau. Aku memohon ampun kepada-Mu dan bertaubat kepada-Mu.",
+    "source": "HR. Muslim no. 771",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 771
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "Dipilih Imam Asy-Syafi'i, yang berkata: \"Jika lafazh ini ditambah atau dikurangi, aku membencinya.\" (Al-Umm, 1/128)",
+    "note": "Ulama Syafi'iyah membolehkan memotongnya sampai \"wa ana minal muslimiin\" jika memberatkan."
+   },
+   {
+    "id": "iftitah-3",
+    "label": "Hadits Abu Hurairah",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ بَاعِدْ بَيْنِي وَبَيْنَ خَطَايَاىَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَالْمَغْرِبِ اللَّهُمَّ نَقِّنِي مِنْ خَطَايَاىَ كَمَا يُنَقَّى الثَّوْبُ الأَبْيَضُ مِنَ الدَّنَسِ اللَّهُمَّ اغْسِلْنِي مِنْ خَطَايَاىَ بِالثَّلْجِ وَالْمَاءِ وَالْبَرَدِ",
+    "latin": "Alloohumma baa’id bainii wa baina khothooyaaya kamaa baa’adta bainal masyriqi wal maghrib, Alloohumma naqqinii min khothooyaaya kamaa yunaqqots tsaubul abyadhu minad danas, Alloohumma-ghsilnii min khothooyaaya bits tsalji wal maa-i wal barod.",
+    "translation": "Ya Allah, jauhkanlah antara aku dan kesalahan-kesalahanku sebagaimana Engkau menjauhkan antara timur dan barat. Ya Allah, bersihkanlah aku dari kesalahan-kesalahanku sebagaimana baju putih dibersihkan dari kotoran. Ya Allah, cucilah aku dari kesalahan-kesalahanku dengan salju, air, dan air es.",
+    "source": "HR. Al-Bukhari no. 744, dan lafazh Muslim no. 598",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 744
+     },
+     {
+      "k": "muslim",
+      "n": 598
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Derajat: HR. Bukhari 744 Shahih; HR. Muslim 598 Shahih. Matan Arab di sini mengikuti lafazh Muslim no. 598."
+   },
+   {
+    "id": "iftitah-4",
+    "label": "Hadits Ibnu Umar",
+    "tag": "alternatif",
+    "arab": "اللَّهُ أَكْبَرُ كَبِيرًا وَالْحَمْدُ لِلَّهِ كَثِيرًا وَسُبْحَانَ اللَّهِ بُكْرَةً وَأَصِيلاً",
+    "latin": "Alloohu akbar kabiiron, wal hamdu lillaahi katsiiron, wa subhaanalloohi bukrotaw wa ashiilaa.",
+    "translation": "Allah Maha Besar dengan segala kebesaran, segala puji bagi Allah dengan pujian yang banyak, dan Maha Suci Allah di waktu pagi dan petang.",
+    "source": "HR. Muslim no. 601",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 601
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "iftitah-5",
+    "label": "Hadits Anas",
+    "tag": "alternatif",
+    "arab": "الْحَمْدُ لِلَّهِ حَمْدًا كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ",
+    "latin": "Al hamdu lillaahi hamdan katsiiron thoyyibam mubaarokan fiihi.",
+    "translation": "Segala puji bagi Allah dengan pujian yang banyak, baik, dan penuh keberkahan di dalamnya.",
+    "source": "HR. Muslim no. 600",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 600
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "iftitah-6",
+    "label": "Hadits Aisyah",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ رَبَّ جِبْرَائِيلَ وَمِيكَائِيلَ وَإِسْرَافِيلَ فَاطِرَ السَّمَوَاتِ وَالأَرْضِ عَالِمَ الْغَيْبِ وَالشَّهَادَةِ أَنْتَ تَحْكُمُ بَيْنَ عِبَادِكَ فِيمَا كَانُوا فِيهِ يَخْتَلِفُونَ اهْدِنِي لِمَا اخْتُلِفَ فِيهِ مِنَ الْحَقِّ بِإِذْنِكَ إِنَّكَ تَهْدِي مَنْ تَشَاءُ إِلَى صِرَاطٍ مُسْتَقِيمٍ",
+    "latin": "Alloohumma robba Jibroo-iila wa Miikaa-iila wa Isroofiila, faathirossamaawaati wal ardh, ‘aalimal ghoibi wasy syahaadah, anta tahkumu baina ‘ibaadika fiimaa kaanuu fiihi yakhtalifuun, ihdinii limakhtulifa fiihi minal haqqi bi-idznik, innaka tahdii man tasyaa-u ilaa shiroothim mustaqiim.",
+    "translation": "Ya Allah, Rabb Jibril, Mikail, dan Israfil, Dzat yang menciptakan langit dan bumi, Yang Maha Mengetahui yang ghaib dan yang nampak, Engkau yang menghukumi di antara hamba-hamba-Mu terhadap apa yang mereka perselisihkan. Tunjukkanlah aku kepada kebenaran dari apa yang diperselisihkan dengan izin-Mu. Sesungguhnya Engkau memberikan hidayah kepada siapa yang Engkau kehendaki menuju jalan yang lurus.",
+    "source": "HR. Muslim no. 770",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 770
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "Dianjurkan dibaca pada Tahajjud",
+    "note": ""
+   },
+   {
+    "id": "iftitah-7",
+    "label": "Hadits Ibnu Abbas",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ لَكَ الْحَمْدُ أَنْتَ قَيِّمُ السَّمَوَاتِ وَالأَرْضِ وَمَنْ فِيهِنَّ وَلَكَ الْحَمْدُ، لَكَ مُلْكُ السَّمَوَاتِ وَالأَرْضِ وَمَنْ فِيهِنَّ، وَلَكَ الْحَمْدُ أَنْتَ نُورُ السَّمَوَاتِ وَالأَرْضِ، وَلَكَ الْحَمْدُ أَنْتَ الْحَقُّ، وَوَعْدُكَ الْحَقُّ، وَلِقَاؤُكَ حَقٌّ، وَقَوْلُكَ حَقٌّ، وَالْجَنَّةُ حَقٌّ، وَالنَّارُ حَقٌّ، وَالنَّبِيُّونَ حَقٌّ، وَمُحَمَّدٌ ﷺ حَقٌّ، وَالسَّاعَةُ حَقٌّ، اللَّهُمَّ لَكَ أَسْلَمْتُ، وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ، وَإِلَيْكَ أَنَبْتُ، وَبِكَ خَاصَمْتُ، وَإِلَيْكَ حَاكَمْتُ، فَاغْفِرْ لِي مَا قَدَّمْتُ وَمَا أَخَّرْتُ، وَمَا أَسْرَرْتُ وَمَا أَعْلَنْتُ، أَنْتَ الْمُقَدِّمُ وَأَنْتَ الْمُؤَخِّرُ، لاَ إِلَهَ إِلاَّ أَنْتَ",
+    "latin": "Alloohumma lakal hamdu anta qoyyimus samaawaati wal ardhi wa man fiihinna, wa lakal hamdu laka mulkus samaawaati wal ardhi wa man fiihinna, wa lakal hamdu anta nuurus samaawaati wal ardhi wa man fiihinn, wa lakal hamdu antal haqqu wa wa’dukal haqq, wa liqoo-uka haqq, wa qouluka haqq, wal jannatu haqq, wan naaru haqq, wan nabiyyuuna haqq, wa Muhammadun ﷺ haqq, was saa’atu haqq, Alloohumma laka aslamtu, wa bika aamantu, wa ‘alaika tawakkaltu, wa ilaika anabtu, wa bika khooshomtu, wa ilaika haakamtu, faghfir lii maa qoddamtu wa maa akhkhortu, wa maa asrortu wa maa a’lantu, antal muqoddimu wa antal mu-akhkhiru, laa ilaha illa anta.",
+    "translation": "Ya Allah, bagi-Mu segala puji, Engkau penegak langit dan bumi serta apa yang ada di dalamnya. Bagi-Mu segala puji, milik-Mu kerajaan langit dan bumi serta apa yang ada di dalamnya. Bagi-Mu segala puji, Engkau cahaya langit dan bumi serta apa yang ada di dalamnya. Bagi-Mu segala puji, Engkau Al-Haqq (Maha Benar), janji-Mu benar, pertemuan dengan-Mu benar, firman-Mu benar, Jannah itu benar, Naar itu benar, para Nabi itu benar, Muhammad ﷺ itu benar, dan hari Qiyamah itu benar. Ya Allah, hanya kepada-Mu aku berserah diri, hanya kepada-Mu aku beriman, hanya kepada-Mu aku bertawakkal, hanya kepada-Mu aku kembali, karena-Mu aku menghadapi musuh, dan kepada-Mu aku berhukum. Maka ampunilah aku atas dosa yang telah aku lakukan dan yang akan aku lakukan, dosa yang aku sembunyikan dan yang aku nampakkan. Engkau adalah Yang Memajukan dan Engkau adalah Yang Mengakhirkan, tidak ada Rabb yang berhak disembah dengan benar kecuali Engkau.",
+    "source": "HR. Al-Bukhari no. 1120, dan Muslim no. 769",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 1120
+     },
+     {
+      "k": "muslim",
+      "n": 769
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "Dianjurkan dibaca pada Tahajjud",
+    "note": "Derajat: HR. Bukhari 1120 Shahih; HR. Muslim 769 Shahih. Matan Arab di sini mengikuti lafazh Bukhari no. 1120."
+   },
+   {
+    "id": "iftitah-8",
+    "label": "Allahu akbar kabiira (dengan ta'awwudz)",
+    "tag": "alternatif",
+    "arab": "اللَّهُ أَكْبَرُ كَبِيرًا اللَّهُ أَكْبَرُ كَبِيرًا اللَّهُ أَكْبَرُ كَبِيرًا وَالْحَمْدُ لِلَّهِ كَثِيرًا وَالْحَمْدُ لِلَّهِ كَثِيرًا وَالْحَمْدُ لِلَّهِ كَثِيرًا وَسُبْحَانَ اللَّهِ بُكْرَةً وَأَصِيلاً (ثَلاَثًا) أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ مِنْ نَفْخِهِ وَنَفْثِهِ وَهَمْزِهِ",
+    "latin": "Allohu akbar kabiiro, allohu akbar kabiiro, allohu akbar kabiiro, walhamdulillahi katsiiro, walhamdulillahi katsiiro, walhamdulillahi katsiiro, wa subhanallahi bukrotaw washiilaa (3x). A'udzu billahi minasy syaithoni min nafkhihi, wa naftshihi, wa hamzih",
+    "translation": "Allah Maha Besar, Allah Maha Besar, Allah Maha Besar; dan puji bagi Allah dalam jumlah yang banyak; dan puji bagi Allah dalam jumlah yang banyak; dan puji bagi Allah dalam jumlah yang banyak. Maha Suci Allah di pagi dan petang.\" Saya berlindung kepada Allah dari setan terkutuk, dari hembusan (nafkh) dan ludah (nafth) dan bisikan (hamz)nya.",
+    "source": "HR. Abu Daud no. 764",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 764
+     }
+    ],
+    "grade": "Hasan",
+    "madzhab": "",
+    "note": "Derajat: Hasan. Penilaian ulama berbeda: Al-Albani: Dha'if · Syu'aib Al-Arnauth: Hasan · Zubair 'Ali Za'i: Sanad hasan."
+   }
+  ]
+ },
+ {
+  "key": "taawudz",
+  "title": "Ta'awwudz",
+  "intro": "Ta'awwudz ada lafazh umum (lihat QS. An-Nahl: 98) dan lafazh dari hadits Abu Said serta Abu Umamah yang menambahkan perlindungan dari hamz, nafkh, dan naftsih.",
+  "items": [
+   {
+    "id": "taawudz-1",
+    "label": "Hadits Abu Said",
+    "tag": "alternatif",
+    "arab": "أَعُوذُ بِاللَّهِ السَّمِيعِ الْعَلِيمِ مِنَ الشَّيْطَانِ الرَّجِيمِ مِنْ هَمْزِهِ وَنَفْخِهِ وَنَفْثِهِ",
+    "latin": "A’uudzu billaahis samii’il ‘aliimi minas syaithoonir rojiimi min hamzihi wa nafkhihi wa naftsih.",
+    "translation": "Aku berlindung kepada Allah Yang Maha Mendengar lagi Maha Mengetahui, dari syaithan yang terkutuk; dari kegilaannya (bisikannya), dari kesombongannya, dan dari syairnya yang buruk (hembusannya).",
+    "source": "HR. Abu Dawud no. 775",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 775
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Penilaian di Hadits.id: Al-Albani: Shahih."
+   }
+  ]
+ },
+ {
+  "key": "fatihah",
+  "title": "Al-Fatihah & Amin",
+  "intro": "Al-Fatihah dibaca dalam sholat dan diakhiri dengan ucapan Amin.",
+  "items": [
+   {
+    "id": "fatihah-1",
+    "label": "Al-Fatihah",
+    "tag": "pokok",
+    "arab": "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ الرَّحْمَنِ الرَّحِيمِ مَالِكِ يَوْمِ الدِّينِ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+    "latin": "Bismillaahir rohmaanir rohiim. Al hamdu lillaahi robbil ‘aalamiin. Ar rohmaanir rohiim. Maaliki yaumid diin. Iyyaaka na’budu wa iyyaaka nasta’iin. Ihdinash shiroothol mustaqiim. Shirootholladziina an’amta ‘alaihim ghoiril maghdhuubi ‘alaihim waladh dhooolliin.",
+    "translation": "Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang. Segala puji bagi Allah, Rabb semesta alam. Yang Maha Pengasih lagi Maha Penyayang. Pemilik hari pembalasan. Hanya kepada Engkaulah kami beribadah dan hanya kepada Engkaulah kami memohon pertolongan dalam segala urusan kami. Tunjukkanlah kami dan bimbinglah kami ke jalan yang lurus. Yaitu jalan orang-orang yang telah Engkau beri ni’mat kepada mereka; bukan jalan mereka yang dimurkai dan bukan pula jalan mereka yang sesat.",
+    "source": "QS. Al-Fatihah: 1-7",
+    "refs": [],
+    "grade": "",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "fatihah-2",
+    "label": "Bacaan Amin",
+    "tag": "pokok",
+    "arab": "آمِينَ",
+    "latin": "Aamiin.",
+    "translation": "Ya Allah, kabulkanlah doa kami.",
+    "source": "HR. Al-Bukhari no. 780, dan Muslim no. 410",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 780
+     },
+     {
+      "k": "muslim",
+      "n": 410
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Derajat: HR. Bukhari 780 Shahih; HR. Muslim 410 Shahih."
+   }
+  ]
+ },
+ {
+  "key": "ruku",
+  "title": "Ruku'",
+  "intro": "Bacaan pokok ruku' adalah tasbih Hudzaifah (dibaca sekali, dianjurkan tiga kali atau lebih). Setelahnya dianjurkan menambah bacaan lain dari hadits Aisyah dan Ali bin Abi Thalib.",
+  "items": [
+   {
+    "id": "ruku-1",
+    "label": "Hadits Hudzaifah",
+    "tag": "pokok",
+    "arab": "سُبْحَانَ رَبِّيَ الْعَظِيمِ",
+    "latin": "Subhaana robbiya-l ‘azhiim.",
+    "translation": "“Maha Suci Rabbku Yang Maha Agung.”",
+    "source": "HR. Muslim no. 772",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 772
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "Dibaca 1 kali, dianjurkan 3 kali atau lebih. Boleh ditambah wabihamdih; yang utama tanpanya, karena sanadnya tidak lebih kuat.",
+    "note": ""
+   },
+   {
+    "id": "ruku-1b",
+    "label": "Tambahan \"wa bihamdih\" (Hadits 'Uqbah bin 'Amir)",
+    "tag": "alternatif",
+    "arab": "سُبْحَانَ رَبِّيَ الْعَظِيمِ وَبِحَمْدِهِ",
+    "latin": "Subhaana robbiya-l ‘azhiim wa bihamdih.",
+    "translation": "“Maha Suci Rabbku Yang Maha Agung, dan dengan memuji-Nya.”",
+    "source": "HR. Abu Dawud no. 870",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 870
+     }
+    ],
+    "grade": "Dha'if",
+    "madzhab": "Boleh ditambah wabihamdih; yang utama tanpanya.",
+    "note": "Penilaian ulama berbeda: Al-Albani: Dha'if · Syu'aib Al-Arnauth: Dha'if · Zubair 'Ali Za'i: Shahih Abu Daud berkata: kami khawatir tambahan \"wa bihamdih\" ini tidak terjaga (mahfuzh)."
+   },
+   {
+    "id": "ruku-2",
+    "label": "Hadits Aisyah",
+    "tag": "tambahan",
+    "arab": "سُبْحَانَكَ اللَّهُمَّ رَبَّنَا وَبِحَمْدِكَ، اللَّهُمَّ اغْفِرْ لِي",
+    "latin": "Subhaanakalloohumma robbanaa wa bihamdikalloohummaghfir lii.",
+    "translation": "“Maha Suci Engkau ya Allah Rabb kami, dan dengan memuji-Mu, ya Allah ampunilah aku.”",
+    "source": "HR. Bukhari no. 794 & Muslim no. 484",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 794
+     },
+     {
+      "k": "muslim",
+      "n": 484
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "ruku-3",
+    "label": "Hadits Aisyah",
+    "tag": "tambahan",
+    "arab": "سُبُّوحٌ قُدُّوسٌ رَبُّ الْمَلاَئِكَةِ وَالرُّوحِ",
+    "latin": "Subbuuhun qudduusun robbul malaa-ikati war ruuh.",
+    "translation": "“Maha Suci, Maha Quddus, Rabb para Malaikat dan Jibril.”",
+    "source": "HR. Muslim no. 487",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 487
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "ruku-4",
+    "label": "Hadits Aisyah",
+    "tag": "tambahan",
+    "arab": "سُبْحَانَ ذِي الْجَبَرُوتِ وَالْمَلَكُوتِ وَالْكِبْرِيَاءِ وَالْعَظَمَةِ",
+    "latin": "Subhaana dzil jabaruuti wal malakuuti wal kibriyaa-i wal ‘azhomah.",
+    "translation": "“Maha Suci Dzat yang memiliki kekuasaan yang memaksa, kerajaan yang luas, kesombongan (keagungan), dan kebesaran.”",
+    "source": "HSR. Abu Dawud no. 873",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 873
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Dalam hadits ini yang tertera adalah hadits 'Auf bin Malik; dalam PDF dicantumkan sebagai riwayat Aisyah."
+   },
+   {
+    "id": "ruku-5",
+    "label": "Hadits Ali bin Abi Thalib",
+    "tag": "tambahan",
+    "arab": "اللَّهُمَّ لَكَ رَكَعْتُ وَبِكَ آمَنْتُ وَلَكَ أَسْلَمْتُ خَشَعَ لَكَ سَمْعِي وَبَصَرِي وَمُخِّي وَعَظْمِي وَعَصَبِي",
+    "latin": "Alloohumma laka roka’tu, wa bika aamantu, wa laka aslamtu, khosya’a laka sam’ii, wa bashorii, wa mukhkhii, wa ‘azhmii, wa ‘ashobii.",
+    "translation": "“Ya Allah, hanya kepada-Mu aku ruku, hanya kepada-Mu aku beriman, dan hanya kepada-Mu aku berserah diri. Pendengaranku, penglihatanku, otakku, tulangku, dan urat sarafku tunduk dengan rendah hati kepada-Mu.”",
+    "source": "HR. Muslim no. 771",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 771
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   }
+  ]
+ },
+ {
+  "key": "bangkit",
+  "title": "Bangkit dari Ruku'",
+  "intro": "Ketika bangkit dari ruku, dibaca \"Sami’allahu liman hamidah\".",
+  "items": [
+   {
+    "id": "bangkit-1",
+    "label": "Hadits Ibnu Umar",
+    "tag": "pokok",
+    "arab": "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ",
+    "latin": "Sami’alloohu liman hamidah.",
+    "translation": "“Allah mendengar orang yang memuji-Nya.”",
+    "source": "HR. Bukhari no. 735",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 735
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   }
+  ]
+ },
+ {
+  "key": "itidal",
+  "title": "I'tidal",
+  "intro": "Bacaan pokok i’tidal adalah \"Rabbanaa wa lakal hamd\" (Abu Hurairah) yang memiliki tiga ragam lafazh lain. Setelahnya dianjurkan menambah pujian dari Rifa’ah bin Rafi’, Ibnu Abbas, dan Abu Sa’id.",
+  "items": [
+   {
+    "id": "itidal-1",
+    "label": "Hadits Abu Hurairah",
+    "tag": "pokok",
+    "arab": "رَبَّنَا وَلَكَ الْحَمْدُ",
+    "latin": "Robbanaa wa lakal hamd.",
+    "translation": "“Wahai Rabb kami, bagi-Mu segala puji.”",
+    "source": "HR. Bukhari no. 803",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 803
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "itidal-1b",
+    "label": "Ragam lafazh: tanpa \"wa\"",
+    "tag": "alternatif",
+    "arab": "رَبَّنَا لَكَ الْحَمْدُ",
+    "latin": "Robbanaa lakal hamd.",
+    "translation": "“Wahai Rabb kami, bagi-Mu segala puji.”",
+    "source": "HR. Bukhari no. 722",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 722
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "itidal-1c",
+    "label": "Ragam lafazh: dengan \"Allahumma\"",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ رَبَّنَا لَكَ الْحَمْدُ",
+    "latin": "Alloohumma robbanaa lakal hamd.",
+    "translation": "“Ya Allah Rabb kami, bagi-Mu segala puji.”",
+    "source": "HR. Bukhari no. 796",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 796
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "itidal-1d",
+    "label": "Ragam lafazh: \"Allahumma\" dan \"wa\"",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ رَبَّنَا وَلَكَ الْحَمْدُ",
+    "latin": "Alloohumma robbanaa wa lakal hamd.",
+    "translation": "“Ya Allah Rabb kami, bagi-Mu segala puji.”",
+    "source": "HR. Bukhari no. 795",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 795
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "itidal-2",
+    "label": "Hadits Rifa'ah bin Rafi'",
+    "tag": "tambahan",
+    "arab": "حَمْدًا كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ",
+    "latin": "Hamdan katsiiron thoyyibam mubaarokan fiihi.",
+    "translation": "“Pujian yang banyak, baik, dan penuh keberkahan di dalamnya.”",
+    "source": "HR. Bukhari no. 799",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 799
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "Dianjurkan ditambahkan setelah bacaan pokok.",
+    "note": ""
+   },
+   {
+    "id": "itidal-3",
+    "label": "Hadits Ibnu Abbas dan Abu Sa'id (riwayat Ibnu Abbas)",
+    "tag": "tambahan",
+    "arab": "مِلْءَ السَّمَوَاتِ وَمِلْءَ الأَرْضِ وَمَا بَيْنَهُمَا وَمِلْءَ مَا شِئْتَ مِنْ شَىْءٍ بَعْدُ أَهْلَ الثَّنَاءِ وَالْمَجْدِ لاَ مَانِعَ لِمَا أَعْطَيْتَ وَلاَ مُعْطِيَ لِمَا مَنَعْتَ وَلاَ يَنْفَعُ ذَا الْجَدِّ",
+    "latin": "Mil-as samaawaati wa mil-al ardhi, wa maa bainahumaa, wa mil-a maa syi-ta min syai-in ba’du, Ahlats tsanaa-i wal majdi, Alloohumma laa maani’a limaa a’thoyta, wa laa mu’thiya limaa mana’ta, wa laa yanfa’u dzal jaddi minkal jaddu.",
+    "translation": "“Pujian yang memenuhi langit dan memenuhi bumi, memenuhi apa yang ada di antara keduanya, dan memenuhi apa pun yang Engkau kehendaki setelah itu. Wahai Dzat pemilik segala pujian dan keagungan. Ya Allah, tidak ada yang dapat menghalangi apa yang Engkau berikan dan tidak ada yang dapat memberi apa yang Engkau halangi. Kekayaan dan kedudukan seseorang tidaklah bermanfaat baginya untuk menyelamatkan diri dari hukuman-Mu.”",
+    "source": "HR. Muslim no. 478",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 478
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "Dianjurkan ditambahkan setelah bacaan pokok.",
+    "note": "Lafazh dalam PDF menggabungkan riwayat Ibnu Abbas (no. 478) dan Abu Sa'id (no. 477); di sini dipisah sesuai teks masing-masing riwayat."
+   },
+   {
+    "id": "itidal-3b",
+    "label": "Hadits Ibnu Abbas dan Abu Sa'id (riwayat Abu Sa'id)",
+    "tag": "tambahan",
+    "arab": "مِلْءَ السَّمَوَاتِ وَالأَرْضِ وَمِلْءَ مَا شِئْتَ مِنْ شَىْءٍ بَعْدُ أَهْلَ الثَّنَاءِ وَالْمَجْدِ أَحَقُّ مَا قَالَ الْعَبْدُ وَكُلُّنَا لَكَ عَبْدٌ اللَّهُمَّ لاَ مَانِعَ لِمَا أَعْطَيْتَ وَلاَ مُعْطِيَ لِمَا مَنَعْتَ وَلاَ يَنْفَعُ ذَا الْجَدِّ",
+    "latin": "Mil-as samaawaati wal ardhi, wa mil-a maa syi-ta min syai-in ba’du, Ahlats tsanaa-i wal majdi, ahaqqu maa qoolal ‘abdu, wa kullunaa laka ‘abdun: Alloohumma laa maani’a limaa a’thoyta, wa laa mu’thiya limaa mana’ta, wa laa yanfa’u dzal jaddi minkal jaddu.",
+    "translation": "“Pujian yang memenuhi langit dan bumi, dan memenuhi apa pun yang Engkau kehendaki setelah itu. Wahai Dzat pemilik segala pujian dan keagungan. Inilah perkataan paling benar yang diucapkan oleh seorang hamba, dan kami semua adalah hamba bagi-Mu. Ya Allah, tidak ada yang dapat menghalangi apa yang Engkau berikan dan tidak ada yang dapat memberi apa yang Engkau halangi. Kekayaan dan kedudukan seseorang tidaklah bermanfaat baginya untuk menyelamatkan diri dari hukuman-Mu.”",
+    "source": "HR. Muslim no. 477",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 477
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "Dianjurkan ditambahkan setelah bacaan pokok.",
+    "note": ""
+   }
+  ]
+ },
+ {
+  "key": "sujud",
+  "title": "Sujud",
+  "intro": "Bacaan pokok sujud adalah tasbih Hudzaifah (sekali, dianjurkan tiga kali atau lebih). Dianjurkan menambah bacaan lain dari hadits Aisyah, Ali bin Abi Thalib, dan Abu Hurairah.",
+  "items": [
+   {
+    "id": "sujud-1",
+    "label": "Hadits Hudzaifah",
+    "tag": "pokok",
+    "arab": "سُبْحَانَ رَبِّيَ الأَعْلَى",
+    "latin": "Subhaana robbiya-l a’laa.",
+    "translation": "“Maha Suci Rabbku Yang Maha Tinggi.”",
+    "source": "HR. Muslim no. 772",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 772
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "Dibaca 1 kali, dianjurkan 3 kali atau lebih. Boleh ditambah wabihamdih; yang utama tanpanya, karena sanadnya tidak lebih kuat.",
+    "note": ""
+   },
+   {
+    "id": "sujud-1b",
+    "label": "Tambahan \"wa bihamdih\" (Hadits 'Uqbah bin 'Amir)",
+    "tag": "alternatif",
+    "arab": "سُبْحَانَ رَبِّيَ الأَعْلَى وَبِحَمْدِهِ",
+    "latin": "Subhaana robbiya-l a’laa wa bihamdih.",
+    "translation": "“Maha Suci Rabbku Yang Maha Tinggi, dan dengan memuji-Nya.”",
+    "source": "HR. Abu Dawud no. 870",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 870
+     }
+    ],
+    "grade": "Dha'if",
+    "madzhab": "Boleh ditambah wabihamdih; yang utama tanpanya.",
+    "note": "Penilaian ulama berbeda: Al-Albani: Dha'if · Syu'aib Al-Arnauth: Dha'if · Zubair 'Ali Za'i: Shahih Abu Daud berkata: kami khawatir tambahan \"wa bihamdih\" ini tidak terjaga (mahfuzh)."
+   },
+   {
+    "id": "sujud-2",
+    "label": "Hadits Aisyah",
+    "tag": "tambahan",
+    "arab": "سُبْحَانَكَ اللَّهُمَّ رَبَّنَا وَبِحَمْدِكَ، اللَّهُمَّ اغْفِرْ لِي",
+    "latin": "Subhaanakalloohumma robbanaa wa bihamdikalloohummaghfir lii.",
+    "translation": "“Maha Suci Engkau ya Allah Rabb kami, dan dengan memuji-Mu, ya Allah ampunilah aku.”",
+    "source": "HR. Bukhari no. 794 & Muslim no. 484",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 794
+     },
+     {
+      "k": "muslim",
+      "n": 484
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "sujud-3",
+    "label": "Hadits Aisyah",
+    "tag": "tambahan",
+    "arab": "سُبُّوحٌ قُدُّوسٌ رَبُّ الْمَلاَئِكَةِ وَالرُّوحِ",
+    "latin": "Subbuuhun qudduusun robbul malaa-ikati war ruuh.",
+    "translation": "“Maha Suci, Maha Quddus, Rabb para Malaikat dan Jibril.”",
+    "source": "HR. Muslim no. 487",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 487
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "sujud-4",
+    "label": "Hadits Aisyah",
+    "tag": "tambahan",
+    "arab": "سُبْحَانَ ذِي الْجَبَرُوتِ وَالْمَلَكُوتِ وَالْكِبْرِيَاءِ وَالْعَظَمَةِ",
+    "latin": "Subhaana dzil jabaruuti wal malakuuti wal kibriyaa-i wal ‘azhomah.",
+    "translation": "“Maha Suci Dzat yang memiliki kekuasaan yang memaksa, kerajaan yang luas, kesombongan (keagungan), dan kebesaran.”",
+    "source": "HSR. Abu Dawud no. 873",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 873
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Dalam hadits ini lafazh dibaca di ruku' lalu di sujud \"semisal itu\"; hadits yang tertera adalah hadits 'Auf bin Malik, dalam PDF dicantumkan sebagai riwayat Aisyah."
+   },
+   {
+    "id": "sujud-5",
+    "label": "Hadits Ali bin Abi Thalib",
+    "tag": "tambahan",
+    "arab": "اللَّهُمَّ لَكَ سَجَدْتُ وَبِكَ آمَنْتُ وَلَكَ أَسْلَمْتُ سَجَدَ وَجْهِي لِلَّذِي خَلَقَهُ وَصَوَّرَهُ وَشَقَّ سَمْعَهُ وَبَصَرَهُ تَبَارَكَ اللَّهُ أَحْسَنُ الْخَالِقِينَ",
+    "latin": "Alloohumma laka sajadtu, wa bika aamantu, wa laka aslamtu, sajada wajhii lilladzii kholaqohu, wa showworohu, wa syaqqo sam’ahu wa bashorohu, tabaarokalloohu ahsanul khooliqiina.",
+    "translation": "“Ya Allah, hanya kepada-Mu aku sujud, hanya kepada-Mu aku beriman, dan hanya kepada-Mu aku berserah diri. Wajahku bersujud kepada Dzat yang menciptakannya, membentuk rupanya, dan membelah pendengaran serta penglihatannya. Maha Berkah Allah, sebaik-baik Pencipta.”",
+    "source": "HR. Muslim no. 771",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 771
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "sujud-6",
+    "label": "Hadits Abu Hurairah",
+    "tag": "tambahan",
+    "arab": "اللَّهُمَّ اغْفِرْ لِي ذَنْبِي كُلَّهُ دِقَّهُ وَجِلَّهُ وَأَوَّلَهُ وَآخِرَهُ وَعَلاَنِيَتَهُ وَسِرَّهُ",
+    "latin": "Alloohummaghfir lii dzanbii kullahu diqqohu wa jillah, wa awwalahu wa aakhiroh, wa ‘alaaniyatahu wa sirroh.",
+    "translation": "“Ya Allah, ampunilah seluruh dosaku: yang kecil maupun yang besar, yang awal maupun yang akhir, yang terang-terangan maupun yang tersembunyi.”",
+    "source": "HR. Muslim no. 483",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 483
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "sujud-7",
+    "label": "Hadits Aisyah",
+    "tag": "tambahan",
+    "arab": "اللَّهُمَّ أَعُوذُ بِرِضَاكَ مِنْ سَخَطِكَ وَبِمُعَافَاتِكَ مِنْ عُقُوبَتِكَ وَأَعُوذُ بِكَ مِنْكَ لاَ أُحْصِي ثَنَاءً عَلَيْكَ أَنْتَ كَمَا أَثْنَيْتَ عَلَى نَفْسِكَ",
+    "latin": "Alloohumma a’uudzu biridhooka min sakhotik, wa bimu’aafaatika min ‘uquubatik, wa a’uudzu bika minka laa uhshii tsanaa-an ‘alaik, anta kamaa atsnaita ‘alaa nafsik.",
+    "translation": "“Ya Allah, aku berlindung dengan keridhaan-Mu dari kemurkaan-Mu, dengan keselamatan-Mu dari hukuman-Mu. Aku berlindung kepada-Mu dari siksa-Mu. Aku tidak mampu menghitung pujian untuk-Mu, sebagaimana Engkau memuji diri-Mu sendiri.”",
+    "source": "HR. Muslim no. 486",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 486
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   }
+  ]
+ },
+ {
+  "key": "duduk",
+  "title": "Duduk di Antara Dua Sujud",
+  "intro": "Yang wajib adalah \"Rabbighfir lii\" (Hadits Hudzaifah) cukup sekali; selebihnya sunnah. Dianjurkan memilih doa yang lebih lengkap dari hadits Thariq dan Ibnu Abbas.",
+  "items": [
+   {
+    "id": "duduk-1",
+    "label": "Hadits Hudzaifah",
+    "tag": "pokok",
+    "arab": "رَبِّ اغْفِرْ لِي رَبِّ اغْفِرْ لِي",
+    "latin": "Robbighfir lii, robbighfir lii.",
+    "translation": "“Wahai Rabbku ampunilah aku, wahai Rabbku ampunilah aku.”",
+    "source": "HSR. Abu Dawud no. 874",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 874
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "Yang wajib sekali, selebihnya sunnah.",
+    "note": ""
+   },
+   {
+    "id": "duduk-2",
+    "label": "Hadits Ibnu Abbas (Abu Daud)",
+    "tag": "tambahan",
+    "arab": "اللَّهُمَّ اغْفِرْ لِي وَارْحَمْنِي وَعَافِنِي وَاهْدِنِي وَارْزُقْنِي",
+    "latin": "Alloohummaghfir lii, warhamnii, wa ‘aafinii, wahdinii, warzuqnii.",
+    "translation": "“Ya Allah ampunilah aku, sayangilah aku, berilah aku keselamatan (kesehatan), berilah aku petunjuk, dan berilah aku rizqi.”",
+    "source": "HR. Abu Dawud no. 850",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 850
+     }
+    ],
+    "grade": "Hasan",
+    "madzhab": "Dianjurkan memilih doa yang lebih lengkap ini.",
+    "note": "Penilaian ulama berbeda: Al-Albani: Hasan · Syu'aib Al-Arnauth: Hasan · Zubair 'Ali Za'i: Dha'if Dalam PDF doa ini ditulis gabungan dari beberapa riwayat (Muslim no. 2697, Abu Dawud no. 850, Tirmidzi no. 284, Ibnu Majah no. 898); di sini dipisah sesuai teks tiap riwayat."
+   },
+   {
+    "id": "duduk-3",
+    "label": "Hadits Thariq (Muslim)",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ اغْفِرْ لِي وَارْحَمْنِي وَاهْدِنِي وَارْزُقْنِي",
+    "latin": "Alloohummaghfir lii, warhamnii, wahdinii, warzuqnii.",
+    "translation": "“Ya Allah ampunilah aku, sayangilah aku, berilah aku petunjuk, dan berilah aku rizqi.”",
+    "source": "HR. Muslim no. 2697",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 2697
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "Dianjurkan memilih doa yang lebih lengkap.",
+    "note": ""
+   },
+   {
+    "id": "duduk-4",
+    "label": "Riwayat Tirmidzi (ada \"wajburnii\")",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ اغْفِرْ لِي وَارْحَمْنِي وَاجْبُرْنِي وَاهْدِنِي وَارْزُقْنِي",
+    "latin": "Alloohummaghfir lii, warhamnii, wajburnii, wahdinii, warzuqnii.",
+    "translation": "“Ya Allah ampunilah aku, sayangilah aku, cukupilah kekuranganku, berilah aku petunjuk, dan berilah aku rizqi.”",
+    "source": "HR. Tirmidzi no. 284",
+    "refs": [
+     {
+      "k": "tirmidzi",
+      "n": 284
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Penilaian ulama berbeda: Darussalam: Dha'if · Al-Albani: Shahih"
+   },
+   {
+    "id": "duduk-5",
+    "label": "Riwayat Ibnu Majah (ada \"warfa'nii\")",
+    "tag": "alternatif",
+    "arab": "رَبِّ اغْفِرْ لِي وَارْحَمْنِي وَاجْبُرْنِي وَارْزُقْنِي وَارْفَعْنِي",
+    "latin": "Robbighfir lii, warhamnii, wajburnii, warzuqnii, warfa’nii.",
+    "translation": "“Wahai Rabbku ampunilah aku, sayangilah aku, cukupilah kekuranganku, berilah aku rizqi, dan angkatlah derajatku.”",
+    "source": "HR. Ibnu Majah no. 898",
+    "refs": [
+     {
+      "k": "ibnmajah",
+      "n": 898
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Penilaian ulama berbeda: Darussalam: Dha'if · Al-Albani: Shahih Dibaca ketika shalat malam."
+   }
+  ]
+ },
+ {
+  "key": "tasyahud",
+  "title": "Tasyahud",
+  "intro": "Tasyahud memiliki beberapa lafazh yang semuanya sah: Ibnu Mas'ud (dipilih Imam Ahmad dan Abu Hanifah), Ibnu 'Abbas (dipilih Imam Asy-Syafi'i), dan 'Umar bin Al-Khoththob (dipilih Imam Malik). Lafazh lain dari Aisyah, Ibnu Umar, Abu Musa dan Abdullah Az-Zubair sudah terwakili ketiganya.",
+  "items": [
+   {
+    "id": "tasyahud-1",
+    "label": "Hadits Ibnu Mas'ud",
+    "tag": "pokok",
+    "arab": "التَّحِيَّاتُ لِلَّهِ، وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلاَمُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلاَمُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+    "latin": "At-tahiyyaatu lillaahi wash sholawaatu wath thoyyibaat, as-salaamu ‘alaika ayyuhan nabiyyu wa rohmatulloohi wa barokaatuh, as-salaamu ‘alainaa wa ‘alaa ‘ibaadillaahish shoolihiin, asy-hadu an laa ilaaha illalloohu, wa asy-hadu anna Muhammadan ‘abduhu wa rosuuluh.",
+    "translation": "Segala ucapan penghormatan hanyalah milik Allah, begitu juga segala pengabdian dan kebaikan. Semoga keselamatan tercurah kepadamu wahai Nabi, serta rohmat Allah dan keberkahan-Nya. Semoga keselamatan tercurah kepada kami dan kepada hamba-hamba Allah yang sholih. Aku bersaksi bahwa tidak ada Rabb yang berhak disembah dengan benar kecuali Allah, dan aku bersaksi bahwa Muhammad adalah hamba dan Rasul-Nya.",
+    "source": "HR. Bukhari no. 831 & Muslim no. 402",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 831
+     },
+     {
+      "k": "muslim",
+      "n": 402
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "Dipilih Imam Ahmad dan Abu Hanifah",
+    "note": "Jika (عَلَيْكَ أَيُّهَا النَّبِيُّ) diganti (عَلَى النَّبِيِّ) maka lebih baik. Ini dikuatkan Ibnu Hajar dalam Al-Fath."
+   },
+   {
+    "id": "tasyahud-2",
+    "label": "Hadits Ibnu 'Abbas",
+    "tag": "alternatif",
+    "arab": "التَّحِيَّاتُ الْمُبَارَكَاتُ الصَّلَوَاتُ الطَّيِّبَاتُ لِلَّهِ السَّلاَمُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ السَّلاَمُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
+    "latin": "At-tahiyyaatu-l mubaarokaatu-sh sholawaatu-th thoyyibaatu lillaah, as-salaamu ‘alaika ayyuhan nabiyyu wa rohmatulloohi wa barokaatuh, as-salaamu ‘alainaa wa ‘alaa ‘ibaadillaahish shoolihiin, asy-hadu an laa ilaaha illalloohu wa asy-hadu anna Muhammadan rosuulullooh.",
+    "translation": "Segala ucapan penghormatan yang penuh keberkahan, segala pengabdian, serta segala kebaikan hanyalah milik Allah. Semoga keselamatan tercurah kepadamu wahai Nabi, serta rohmat Allah dan keberkahan-Nya. Semoga keselamatan tercurah kepada kami dan kepada hamba-hamba Allah yang sholih. Aku bersaksi bahwa tidak ada Rabb yang berhak disembah dengan benar kecuali Allah dan aku bersaksi bahwa Muhammad adalah utusan Allah.",
+    "source": "HR. Muslim no. 403",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 403
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "Dipilih Imam Asy-Syafi'i",
+    "note": ""
+   }
+  ]
+ },
+ {
+  "key": "sholawat",
+  "title": "Shalawat",
+  "intro": "Sholawat Ibrahimiyyah memiliki beberapa ragam lafazh yang berbeda pada penyebutan Ibrahim/keluarga Ibrahim, tambahan istri dan keturunan, 'hamba-Mu dan Rasul-Mu', atau 'di seluruh alam', menurut riwayat Ka'ab bin 'Ujrah, Abu Humaid, Abu Sa'id, Abu Mas'ud, dan Tholhah.",
+  "items": [
+   {
+    "id": "sholawat-1",
+    "label": "Hadits Ka'ab bin 'Ujrah",
+    "tag": "pokok",
+    "arab": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ، وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ، وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ، وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
+    "latin": "Alloohumma sholli ‘alaa Muhammadin wa ‘alaa aali Muhammadin kamaa shollaita ‘alaa Ibroohiima wa ‘alaa aali Ibroohiima innaka hamiidun majiid, Alloohumma baarik ‘alaa Muhammadin wa ‘alaa aali Muhammadin kamaa baarokta ‘alaa Ibroohiima wa ‘alaa aali Ibroohiima innaka hamiidun majiid.",
+    "translation": "Ya Allah, berilah sanjungan kepada Muhammad dan keluarga Muhammad sebagaimana Engkau telah memberi sanjungan kepada Ibrahim dan keluarga Ibrahim, sesungguhnya Engkau Maha Terpuji lagi Maha Mulia. Ya Allah, berkahilah Muhammad dan keluarga Muhammad sebagaimana Engkau telah memberkahi Ibrahim dan keluarga Ibrahim, sesungguhnya Engkau Maha Terpuji lagi Maha Mulia.",
+    "source": "HR. Bukhari no. 3370 & Muslim no. 406",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 3370
+     },
+     {
+      "k": "muslim",
+      "n": 406
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Teks Arab diambil dari riwayat Bukhari no. 3370; riwayat Muslim no. 406 memuat lafaz yang lebih ringkas (hanya 'ala aali Ibrahim)."
+   },
+   {
+    "id": "sholawat-2",
+    "label": "Tanpa \"Ibrahim\" (Ka'ab bin 'Ujrah, riwayat Bukhari)",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
+    "latin": "",
+    "translation": "Dari Ka'b bin Ujra: Dikatakan, \"Wahai Rasulullah! Kami tahu bagaimana cara memberi salam kepadamu, tetapi bagaimana cara kami memohon kepada Allah untukmu?\" Nabi bersabda, \"Katakanlah: Allahumma salli ala Muhammadin wa'ala Ali Muhammaddin, kama sallaita 'ala all Ibrahim, innaka Hamidun Majid.\"",
+    "source": "HR. Bukhari no. 4797",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 4797
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Ragam lafaz Ka'ab bin 'Ujrah tanpa kata \"Ibrahim\" (hanya \"aali Ibrahim\"). Terjemahan disalin dari teks Indonesia hadits.id. Teks Indonesia hadits.id hanya memuat bagian sholawat pertama."
+   },
+   {
+    "id": "sholawat-3",
+    "label": "Hadits Abu Humaid As-Sa'idi",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَأَزْوَاجِهِ وَذُرِّيَّتِهِ، كَمَا صَلَّيْتَ عَلَى آلِ إِبْرَاهِيمَ، وَبَارِكْ عَلَى مُحَمَّدٍ وَأَزْوَاجِهِ وَذُرِّيَّتِهِ، كَمَا بَارَكْتَ عَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
+    "latin": "Alloohumma sholli ‘alaa Muhammadin wa azwaajihi wa dzurriyyatihi kamaa shollaita ‘alaa aali Ibroohiim, Wa baarik ‘alaa Muhammadin wa azwaajihi wa dzurriyyatihi kamaa baarokta ‘alaa aali Ibroohiim, innaka hamiidun majiid.",
+    "translation": "Ya Allah, berilah sanjungan kepada Muhammad, istri-istrinya, dan keturunannya sebagaimana Engkau telah memberi sanjungan kepada keluarga Ibrahim. Dan berkahilah Muhammad, istri-istrinya, dan keturunannya sebagaimana Engkau telah memberkahi keluarga Ibrahim, sesungguhnya Engkau Maha Terpuji lagi Maha Mulia.",
+    "source": "HR. Bukhari no. 3369 & Muslim no. 407",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 3369
+     },
+     {
+      "k": "muslim",
+      "n": 407
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "sholawat-4",
+    "label": "Hadits Abu Sa'id Al-Khudri",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ عَبْدِكَ وَرَسُولِكَ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ، وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَآلِ إِبْرَاهِيمَ",
+    "latin": "Alloohumma sholli ‘alaa Muhammadin ‘abdika wa rosuulika kamaa shollaita ‘alaa Ibroohiim, Wa baarik ‘alaa Muhammadin wa ‘alaa aali Muhammadin kamaa baarokta ‘alaa Ibroohiima wa aali Ibroohiim.",
+    "translation": "Ya Allah, berilah sanjungan kepada Muhammad, hamba-Mu dan Rasul-Mu, sebagaimana Engkau telah memberi sanjungan kepada Ibrahim. Dan berkahilah Muhammad dan keluarga Muhammad sebagaimana Engkau telah memberkahi Ibrahim dan keluarga Ibrahim.",
+    "source": "HR. Bukhari no. 6358",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 6358
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "sholawat-5",
+    "label": "Hadits Abu Mas'ud Al-Anshori",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى آلِ إِبْرَاهِيمَ وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى آلِ إِبْرَاهِيمَ فِي الْعَالَمِينَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
+    "latin": "Alloohumma sholli ‘alaa Muhammadin wa ‘alaa aali Muhammadin kamaa shollaita ‘alaa aali Ibroohiim, Wa baarik ‘alaa Muhammadin wa ‘alaa aali Muhammadin kamaa baarokta ‘alaa aali Ibroohiima fil ‘aalamiina, innaka hamiidun majiid.",
+    "translation": "Ya Allah, berilah sanjungan kepada Muhammad dan keluarga Muhammad sebagaimana Engkau telah memberi sanjungan kepada keluarga Ibrahim. Dan berkahilah Muhammad dan keluarga Muhammad sebagaimana Engkau telah memberkahi keluarga Ibrahim di seluruh alam, sesungguhnya Engkau Maha Terpuji lagi Maha Mulia.",
+    "source": "HR. Muslim no. 405",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 405
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "sholawat-6",
+    "label": "Hadits Tholhah bin 'Ubaidillah",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
+    "latin": "Alloohumma sholli ‘alaa Muhammadin wa ‘alaa aali Muhammadin kamaa shollaita ‘alaa Ibroohiim, innaka hamiidun majiid, Wa baarik ‘alaa Muhammadin wa ‘alaa aali Muhammadin kamaa baarokta ‘alaa aali Ibroohiim, innaka hamiidun majiid.",
+    "translation": "Ya Allah, berilah sanjungan kepada Muhammad dan keluarga Muhammad sebagaimana Engkau telah memberi sanjungan kepada Ibrahim dan keluarga Ibrahim, sesungguhnya Engkau Maha Terpuji lagi Maha Mulia. Dan berkahilah Muhammad dan keluarga Muhammad sebagaimana Engkau telah memberkahi Ibrahim dan keluarga Ibrahim, sesungguhnya Engkau Maha Terpuji lagi Maha Mulia.",
+    "source": "HR. Ahmad no. 1396",
+    "refs": [
+     {
+      "k": "ahmad",
+      "n": 1396
+     }
+    ],
+    "grade": "Sanad kuat",
+    "madzhab": "Lebih disukai Hanabilah",
+    "note": "hadits.id mencantumkan: Sanad kuat (Darussalam)."
+   }
+  ]
+ },
+ {
+  "key": "doasalam",
+  "title": "Doa Sebelum Salam",
+  "intro": "Setelah tasyahud (dan shalawat) dan sebelum salam, dianjurkan memilih salah satu dari 13 doa yang diriwayatkan dari para sahabat, berisi permohonan perlindungan, ampunan, dan berbagai kebaikan.",
+  "items": [
+   {
+    "id": "doasalam-1",
+    "label": "Abu Hurairah — 4 perlindungan",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ جَهَنَّمَ وَمِنْ عَذَابِ الْقَبْرِ وَمِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ وَمِنْ شَرِّ فِتْنَةِ الْمَسِيحِ الدَّجَّالِ",
+    "latin": "Alloohumma innii a’uudzu bika min ‘adzaabi Jahannama, wa min ‘adzaabil qobri, wa min fitnatil mahyaa wal mamaati, wa min syarri fitnatil masiihid dajjaal.",
+    "translation": "Ya Allah, sesungguhnya aku berlindung kepada-Mu dari adzab Jahannam (Neraka), dari adzab kubur, dari fitnah kehidupan dan kematian, serta dari keburukan fitnah Al-Masih Ad-Dajjal.",
+    "source": "HR. Muslim no. 588",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 588
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "doasalam-2",
+    "label": "Abu Bakr Ash-Shiddiq — Ampunan",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي ظُلْمًا كَثِيرًا وَلاَ يَغْفِرُ الذُّنُوبَ إِلاَّ أَنْتَ، فَاغْفِرْ لِي مَغْفِرَةً مِنْ عِنْدِكَ، وَارْحَمْنِي إِنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ",
+    "latin": "Alloohumma innii zholamtu nafsii zhulman katsiiron wa laa yaghfirudz dzunuuba illa anta, faghfir lii maghfirotan min ‘indika warhamnii innaka antal ghofuurur rohiim.",
+    "translation": "Ya Allah, sesungguhnya aku telah menzholimi diriku sendiri dengan kezholiman yang banyak, dan tidak ada yang dapat mengampuni dosa-dosa kecuali Engkau, maka ampunilah aku dengan ampunan dari sisi-Mu dan sayangilah aku, sesungguhnya Engkau Maha Pengampun lagi Maha Penyayang.",
+    "source": "HR. Al-Bukhari no. 834 dan Muslim no. 2705",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 834
+     },
+     {
+      "k": "muslim",
+      "n": 2705
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "doasalam-3",
+    "label": "Aisyah — Dosa dan hutang",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْمَأْثَمِ وَالْمَغْرَمِ",
+    "latin": "Alloohumma innii a’uudzu bika minal ma-tsami wal maghromi.",
+    "translation": "Ya Allah, sesungguhnya aku berlindung kepada-Mu dari perbuatan dosa dan jeratan hutang.",
+    "source": "HR. Al-Bukhari no. 832 dan Muslim no. 589",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 832
+     },
+     {
+      "k": "muslim",
+      "n": 589
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "doasalam-4",
+    "label": "Ali bin Abi Thalib — Ampunan",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ اغْفِرْ لِي مَا قَدَّمْتُ وَمَا أَخَّرْتُ وَمَا أَسْرَرْتُ وَمَا أَعْلَنْتُ وَمَا أَسْرَفْتُ وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي أَنْتَ الْمُقَدِّمُ وَأَنْتَ الْمُؤَخِّرُ لاَ إِلَهَ إِلاَّ أَنْتَ",
+    "latin": "Alloohummaghfir lii maa qoddamtu wa maa akhkhortu, wa maa asrortu wa maa a’lantu, wa maa asroftu, wa maa anta a’lamu bihi minnii, antal muqoddimu wa antal mu-akhkhiru, laa ilaaha illa anta.",
+    "translation": "Ya Allah, ampunilah dosaku yang telah lalu dan yang akan datang, yang aku sembunyikan dan yang aku nampakkan, apa yang aku perbuat secara berlebihan, serta apa yang Engkau lebih mengetahuinya daripadaku. Engkau adalah Yang Memajukan dan Engkau adalah Yang Mengakhirkan, tidak ada Rabb yang berhak disembah dengan benar kecuali Engkau.",
+    "source": "HR. Muslim no. 771",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 771
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Dibaca di antara tasyahud dan salam (bagian akhir doa dalam hadits panjang tentang shalat malam)."
+   },
+   {
+    "id": "doasalam-5",
+    "label": "Sa’ad bin Abi Waqqash — 5 hal",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْبُخْلِ، وَأَعُوذُ بِكَ مِنَ الْجُبْنِ، وَأَعُوذُ بِكَ أَنْ أُرَدَّ إِلَى أَرْذَلِ الْعُمُرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الدُّنْيَا وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ",
+    "latin": "Alloohumma innii a’uudzu bika minal bukhl, wa a’uudzu bika minal jubn, wa a’uudzu bika an urodda ilaa ardzalil ‘umur, wa a’uudzu bika min fitnatid dunyaa, wa a’uudzu bika min ‘adzaabil qobr.",
+    "translation": "Ya Allah, sesungguhnya aku berlindung kepada-Mu dari sifat kikir, aku berlindung kepada-Mu dari sifat penakut, aku berlindung kepada-Mu dari dikembalikan ke umur yang paling hina (pikun), aku berlindung kepada-Mu dari fitnah dunia, dan aku berlindung kepada-Mu dari adzab kubur.",
+    "source": "HR. Al-Bukhari no. 6365",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 6365
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Pada teks Arab, keterangan perawi di tengah hadits (yang menafsirkan fitnah dunia) tidak disertakan karena bukan bagian lafaz doa."
+   },
+   {
+    "id": "doasalam-6",
+    "label": "Mu’adz — Pertolongan ibadah",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ",
+    "latin": "Alloohumma a’innii ‘alaa dzikrika, wa syukrika, wa husni ‘ibaadatik.",
+    "translation": "Ya Allah, tolonglah aku untuk senantiasa berdzikir kepada-Mu, bersyukur kepada-Mu, dan memperbagus ibadah kepada-Mu.",
+    "source": "HSR. Abu Dawud no. 1522",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 1522
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Diwasiatkan Nabi untuk dibaca di akhir setiap shalat."
+   },
+   {
+    "id": "doasalam-7",
+    "label": "Al-Bara’ — Penjagaan di hari kebangkitan",
+    "tag": "alternatif",
+    "arab": "رَبِّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ",
+    "latin": "Robbi qinii ‘adzaabaka yauma tab’atsu ‘ibaadak.",
+    "translation": "Wahai Rabbku, jagalah aku dari adzab-Mu pada hari Engkau membangkitkan hamba-hamba-Mu.",
+    "source": "HR. Muslim no. 709",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 709
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Dalam riwayat, perawi ragu antara 'tab’atsu' (membangkitkan) dan 'tajma’u' (mengumpulkan); teks Arab di sini tanpa keraguan tersebut. Dibaca setelah shalat ketika Nabi menghadap makmum."
+   },
+   {
+    "id": "doasalam-8",
+    "label": "Mu’adz — Jannah dan Naar",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَأَعُوذُ بِكَ مِنَ النَّارِ",
+    "latin": "Alloohumma innii as-alukal jannata, wa a’uudzu bika minan naar.",
+    "translation": "Ya Allah, sesungguhnya aku memohon kepada-Mu Jannah, dan aku berlindung kepada-Mu dari Naar (Neraka).",
+    "source": "HSR. Abu Dawud no. 792",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 792
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "doasalam-9",
+    "label": "Mihjan — Tawassul minta ampunan",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ إِنِّي أَسْأَلُكَ يَا اللَّهُ الأَحَدُ الصَّمَدُ الَّذِي لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ أَنْ تَغْفِرَ لِي ذُنُوبِي إِنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ",
+    "latin": "Alloohumma innii as-aluka yaa Allohu bi-annakal waahidul ahadus shomadul ladzii lam yalid wa lam yuulad wa lam yakul lahu kufuwan ahad, an taghfiro lii dzunuubii innaka antal ghofuurur rohiim.",
+    "translation": "Ya Allah, sesungguhnya aku memohon kepada-Mu, ya Allah, karena Engkaulah Dzat Yang Maha Esa, Yang Bergantung kepada-Mu segala sesuatu, yang tidak beranak dan tidak pula diperanakkan, serta tidak ada seorang pun yang setara dengan-Nya; agar Engkau mengampuni dosa-dosaku, sesungguhnya Engkau Maha Pengampun lagi Maha Penyayang.",
+    "source": "HSR. Abu Dawud no. 985",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 985
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "doasalam-10",
+    "label": "Anas — Tawassul dengan Al-Mannan",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ إِنِّي أَسْأَلُكَ بِأَنَّ لَكَ الْحَمْدَ لاَ إِلَهَ إِلاَّ أَنْتَ الْمَنَّانُ بَدِيعُ السَّمَوَاتِ وَالأَرْضِ يَا ذَا الْجَلاَلِ وَالإِكْرَامِ يَا حَىُّ يَا قَيُّومُ",
+    "latin": "Alloohumma innii as-aluka bi-anna lakal hamda laa ilaha illa antal mannaanu badii’us samaawaati wal ardhi yaa dzal jalaali wal ikroom yaa hayyu yaa qoyyuum.",
+    "translation": "Ya Allah, sesungguhnya aku memohon kepada-Mu karena bagi-Mu segala puji, tidak ada Rabb yang berhak disembah dengan benar kecuali Engkau, Dzat Yang Maha Pemberi, Pencipta langit dan bumi, wahai Dzat Pemilik keagungan dan kemuliaan, wahai Dzat Yang Maha Hidup lagi terus-menerus mengurus makhluk-Nya.",
+    "source": "HSR. Abu Dawud no. 1495",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 1495
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Latin dan terjemahan dipangkas sampai 'yaa hayyu yaa qoyyuum' agar sesuai teks Arab pada hadits ini; permintaan Jannah dan perlindungan dari Naar yang ada pada buku tidak terdapat pada halaman hadits yang dirujuk."
+   },
+   {
+    "id": "doasalam-11",
+    "label": "Buraidah — Tawassul dengan keesaan",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ إِنِّي أَسْأَلُكَ أَنِّي أَشْهَدُ أَنَّكَ أَنْتَ اللَّهُ لاَ إِلَهَ إِلاَّ أَنْتَ الأَحَدُ الصَّمَدُ الَّذِي لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
+    "latin": "Alloohumma innii as-aluka bi-annii asyhadu annaka antalloohu laa ilaha illa antal ahadus shomadul ladzii lam yalid wa lam yuulad wa lam yakul lahu kufuwan ahad.",
+    "translation": "Ya Allah, sesungguhnya aku memohon kepada-Mu dengan persaksianku bahwa sesungguhnya Engkau adalah Allah, tidak ada Rabb yang berhak disembah dengan benar kecuali Engkau, Yang Maha Esa, Yang Bergantung kepada-Mu segala sesuatu, yang tidak beranak dan tidak pula diperanakkan, serta tidak ada seorang pun yang setara dengan-Nya.",
+    "source": "HSR. Abu Dawud no. 1493",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 1493
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "doasalam-12",
+    "label": "Ammar — Semua permintaan",
+    "tag": "alternatif",
+    "arab": "اللَّهُمَّ بِعِلْمِكَ الْغَيْبَ وَقُدْرَتِكَ عَلَى الْخَلْقِ أَحْيِنِي مَا عَلِمْتَ الْحَيَاةَ خَيْرًا لِي وَتَوَفَّنِي إِذَا عَلِمْتَ الْوَفَاةَ خَيْرًا لِي اللَّهُمَّ وَأَسْأَلُكَ خَشْيَتَكَ فِي الْغَيْبِ وَالشَّهَادَةِ وَأَسْأَلُكَ كَلِمَةَ الْحَقِّ فِي الرِّضَا وَالْغَضَبِ وَأَسْأَلُكَ الْقَصْدَ فِي الْفَقْرِ وَالْغِنَى وَأَسْأَلُكَ نَعِيمًا لاَ يَنْفَدُ وَأَسْأَلُكَ قُرَّةَ عَيْنٍ لاَ تَنْقَطِعُ وَأَسْأَلُكَ الرِّضَاءَ بَعْدَ الْقَضَاءِ وَأَسْأَلُكَ بَرْدَ الْعَيْشِ بَعْدَ الْمَوْتِ وَأَسْأَلُكَ لَذَّةَ النَّظَرِ إِلَى وَجْهِكَ وَالشَّوْقَ إِلَى لِقَائِكَ فِي غَيْرِ ضَرَّاءَ مُضِرَّةٍ وَلاَ فِتْنَةٍ مُضِلَّةٍ اللَّهُمَّ زَيِّنَّا بِزِينَةِ الإِيمَانِ وَاجْعَلْنَا هُدَاةً مُهْتَدِينَ",
+    "latin": "Alloohumma bi’ilmikal ghoiba wa qudrotika ‘alal kholqi ahyinii maa ‘alimtal hayaata khoiron lii wa tawaffanii idzaa ‘alimtal wafaata khoiron lii, Alloohumma wa as-aluka khosyyataka fil ghoibi wasy syahaadati wa as-aluka kalimatul haqqi fir ridhoo wal ghodhob, wa as-alukal qoshda fil faqri wal ghinaa, wa as-aluka na’iiman laa yanfad, wa as-aluka qurrota ‘ainin laa tanqothi’, wa as-alukar ridhoo ba’dal qodhoo, wa as-aluka bardal ‘aisyi ba’dal maut, wa as-aluka ladzzatan nazhori ilaa wajhika wasy syauqo ilaa liqoo-ika fii ghoiri dhorroo-a mudhirrotin wa laa fitnatim mudhillah, Alloohumma zayyinnaa biziinatil iimaani waj’alnaa hudaatam muhtadiin.",
+    "translation": "Ya Allah, dengan ilmu-Mu yang ghoib dan kekuasaan-Mu atas seluruh makhluk, hidupkanlah aku selama Engkau mengetahui bahwa kehidupan itu baik bagiku, dan wafatkanlah aku jika Engkau mengetahui bahwa kematian itu baik bagiku. Ya Allah, aku memohon kepada-Mu agar aku takut kepada-Mu dalam keadaan sembunyi maupun terang-terangan. Aku memohon kepada-Mu perkataan yang benar dalam keadaan ridho maupun marah. Aku memohon kepada-Mu kesederhanaan dalam keadaan miskin maupun kaya. Aku memohon kepada-Mu ni’mat yang tidak akan habis dan penyejuk mata yang tidak akan putus. Aku memohon kepada-Mu keridhoan setelah ketetapan (takdir). Aku memohon kepada-Mu kesejukan hidup setelah mati. Aku memohon kepada-Mu kelezatan memandang wajah-Mu dan kerinduan untuk bertemu dengan-Mu tanpa penderitaan yang membahayakan dan fitnah yang menyesatkan. Ya Allah, hiasilah kami dengan hiasan Iman dan jadikanlah kami pemberi petunjuk yang mendapat petunjuk.",
+    "source": "HSR. An-Nasa'i no. 1305",
+    "refs": [
+     {
+      "k": "nasai",
+      "n": 1305
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   }
+  ]
+ },
+ {
+  "key": "salam",
+  "title": "Salam",
+  "intro": "Salam mengakhiri shalat; ragamnya adalah salam dua kali (ke kanan dan ke kiri) dengan beberapa tambahan lafaz, serta salam satu kali.",
+  "items": [
+   {
+    "id": "salam-1",
+    "label": "Rahmat-rahmat",
+    "tag": "pokok",
+    "arab": "السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",
+    "latin": "As-salaamu ‘alaikum wa rohmatullooh, As-salaamu ‘alaikum wa rohmatullooh.",
+    "translation": "Semoga keselamatan dan rahmat Allah tercurah kepadamu, semoga keselamatan dan rahmat Allah tercurah kepadamu.",
+    "source": "HR. Muslim no. 582, Abu Dawud no. 996, An-Nasa'i no. 1325, At-Tirmidzi no. 295, Ibnu Majah no. 914",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 582
+     },
+     {
+      "k": "abudawud",
+      "n": 996
+     },
+     {
+      "k": "nasai",
+      "n": 1325
+     },
+     {
+      "k": "tirmidzi",
+      "n": 295
+     },
+     {
+      "k": "ibnmajah",
+      "n": 914
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Salam pertama ke arah kanan hingga terlihat putih pipi kanan beliau ﷺ, dan salam kedua ke arah kiri hingga terlihat putih pipi kiri beliau ﷺ. Lafaz salam pada hadits ini terdapat pada Abu Dawud 996, An-Nasa'i 1325, At-Tirmidzi 295, dan Ibnu Majah 914 (seluruhnya Shahih); Muslim 582 menyebut gerakan salam ke kanan dan kiri hingga terlihat putih pipi (dari Sa'd bin Abi Waqqash)."
+   },
+   {
+    "id": "salam-2",
+    "label": "Barakah dan rahmat",
+    "tag": "alternatif",
+    "arab": "السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",
+    "latin": "As-salaamu ‘alaikum wa rohmatulloohi wa barokaatuh, as-salaamu ‘alaikum wa rohmatullooh.",
+    "translation": "Semoga keselamatan, rahmat Allah, dan keberkahan-Nya tercurah kepadamu; semoga keselamatan dan rahmat Allah tercurah kepadamu.",
+    "source": "HSR. Abu Dawud no. 997",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 997
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Tambahan 'wa barokaatuh' pada salam ke kanan."
+   },
+   {
+    "id": "salam-3",
+    "label": "Rahmat dan salam",
+    "tag": "alternatif",
+    "arab": "السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ السَّلاَمُ عَلَيْكُمْ",
+    "latin": "As-salaamu ‘alaikum wa rohmatullooh, As-salaamu ‘alaikum.",
+    "translation": "Semoga keselamatan dan rahmat Allah tercurah kepadamu, semoga keselamatan tercurah kepadamu.",
+    "source": "HSR. An-Nasa'i no. 1321",
+    "refs": [
+     {
+      "k": "nasai",
+      "n": 1321
+     }
+    ],
+    "grade": "Hasan shahih",
+    "madzhab": "",
+    "note": "Salam ke kanan dengan 'wa rohmatullooh', salam ke kiri hanya 'as-salaamu ‘alaikum'. Derajat pada hadits ini: Hasan shahih (Al-Albani)."
+   }
+  ]
+ },
+ {
+  "key": "dzikir",
+  "title": "Dzikir Setelah Salam",
+  "intro": "Dzikir yang dibaca setelah salam sholat: istighfar, tahlil, ragam bilangan tasbih, tahmid, takbir, Ayat Kursi, surat-surat pendek, serta dzikir khusus Shubuh dan Maghrib.",
+  "items": [
+   {
+    "id": "dzikir-1",
+    "label": "Istighfar dan keselamatan",
+    "tag": "tambahan",
+    "arab": "أَسْتَغْفِرُ اللَّهَ أَسْتَغْفِرُ اللَّهَ\nاللَّهُمَّ أَنْتَ السَّلاَمُ وَمِنْكَ السَّلاَمُ تَبَارَكْتَ ذَا الْجَلاَلِ وَالإِكْرَامِ",
+    "latin": "Astaghfirullooh, astaghfirullooh, astaghfirullooh.\nAlloohumma antas salaam, wa minkas salaam, tabaarokta yaa dzal jalaali wal ikroom.",
+    "translation": "Aku memohon ampun kepada Allah.\nYa Allah, Engkau adalah Dzat yang Maha Memberi keselamatan dan dari-Mu segala keselamatan. Maha Berkah Engkau, wahai Dzat yang memiliki keagungan dan kemuliaan.",
+    "source": "HR. Muslim no. 591",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 591
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Istighfar dibaca 3 kali."
+   },
+   {
+    "id": "dzikir-2",
+    "label": "Tahlil dan pengesaan Allah",
+    "tag": "tambahan",
+    "arab": "لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهْوَ عَلَى كُلِّ شَىْءٍ قَدِيرٌ، اللَّهُمَّ لاَ مَانِعَ لِمَا أَعْطَيْتَ، وَلاَ مُعْطِيَ لِمَا مَنَعْتَ، وَلاَ يَنْفَعُ ذَا الْجَدِّ",
+    "latin": "Laa ilaaha illalloohu wahdahuu laa syariika lah, lahul mulku wa lahul hamdu wa huwa ‘alaa kulli syai-in qodiir, Alloohumma laa maani’a limaa a’thoyta, wa laa mu’thiya limaa mana’ta, wa laa yanfa’u dzal jaddi minkal jadd.",
+    "translation": "Tidak ada Robb yang berhak disembah dengan benar kecuali Allah semata, tidak ada sekutu bagi-Nya. Bagi-Nya kerajaan dan bagi-Nya segala pujian, dan Dia Maha Kuasa atas segala sesuatu.\nYa Allah, tidak ada yang dapat menghalangi apa yang Engkau berikan dan tidak ada yang dapat memberi apa yang Engkau halangi. Kekayaan seseorang tidaklah bermanfaat baginya untuk menyelamatkan diri dari hukuman-Mu.",
+    "source": "HR. Al-Bukhari no. 844, dan Muslim no. 593",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 844
+     },
+     {
+      "k": "muslim",
+      "n": 593
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "dzikir-3",
+    "label": "Ragam 1: 33-33-33 digenapkan tahlil",
+    "tag": "tambahan",
+    "arab": "مَنْ سَبَّحَ اللَّهَ فِي دُبُرِ كُلِّ صَلاَةٍ ثَلاَثًا وَثَلاَثِينَ وَحَمِدَ اللَّهَ ثَلاَثًا وَثَلاَثِينَ وَكَبَّرَ اللَّهَ ثَلاَثًا وَثَلاَثِينَ فَتِلْكَ تِسْعَةٌ وَتِسْعُونَ وَقَالَ تَمَامَ الْمِائَةِ لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَىْءٍ قَدِيرٌ",
+    "latin": "Subhaanallooh 33 kali, Alhamdulillaah 33 kali, Allohu akbar 33 kali. Lalu digenapkan menjadi 100 dengan: Laa ilaaha illalloohu wahdahu laa syariika lah, lahul mulku wa lahul hamdu wa huwa ‘alaa kulli syai-in qodiir.",
+    "translation": "Tidak ada Robb yang berhak disembah dengan benar kecuali Allah semata, tidak ada sekutu bagi-Nya. Bagi-Nya kerajaan dan bagi-Nya segala pujian, dan Dia Maha Kuasa atas segala sesuatu.",
+    "source": "HR. Muslim no. 597",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 597
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Tasbih 33x, tahmid 33x, takbir 33x, lalu digenapkan menjadi 100 dengan tahlil."
+   },
+   {
+    "id": "dzikir-4",
+    "label": "Ragam 2: 33-33-34",
+    "tag": "tambahan",
+    "arab": "ثَلاَثٌ وَثَلاَثُونَ تَسْبِيحَةً وَثَلاَثٌ وَثَلاَثُونَ تَحْمِيدَةً وَأَرْبَعٌ وَثَلاَثُونَ تَكْبِيرَةً",
+    "latin": "Subhanallooh 33x, Alhamdulillah 33x, Allohu akbar 34x.",
+    "translation": "",
+    "source": "HR. Muslim no. 596",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 596
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Tasbih 33 kali, tahmid 33 kali, takbir 34 kali."
+   },
+   {
+    "id": "dzikir-5",
+    "label": "Ragam 3: 10-10-10",
+    "tag": "tambahan",
+    "arab": "تُسَبِّحُونَ فِي دُبُرِ كُلِّ صَلاَةٍ عَشْرًا، وَتَحْمَدُونَ عَشْرًا، وَتُكَبِّرُونَ عَشْرًا",
+    "latin": "",
+    "translation": "",
+    "source": "HR. Al-Bukhari no. 6329",
+    "refs": [
+     {
+      "k": "bukhari",
+      "n": 6329
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Masing-masing (tasbih, tahmid, takbir) dibaca 10 kali."
+   },
+   {
+    "id": "dzikir-6",
+    "label": "Ragam 4: 25-25-25-25 dengan tahlil",
+    "tag": "tambahan",
+    "arab": "فَاجْعَلُوهَا خَمْسًا وَعِشْرِينَ وَاجْعَلُوا فِيهَا التَّهْلِيلَ",
+    "latin": "",
+    "translation": "",
+    "source": "HSR. An-Nasa'i no. 1350",
+    "refs": [
+     {
+      "k": "nasai",
+      "n": 1350
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Tasbih, tahmid, takbir masing-masing 25x ditambah Laa ilaaha illallooh 25x. Total 100x."
+   },
+   {
+    "id": "dzikir-7",
+    "label": "Ayat Kursi",
+    "tag": "tambahan",
+    "arab": "ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلۡحَيُّ ٱلۡقَيُّومُۚ لَا تَأۡخُذُهُۥ سِنَةٞ وَلَا نَوۡمٞۚ لَّهُۥ مَا فِي ٱلسَّمَٰوَٰتِ وَمَا فِي ٱلۡأَرۡضِۗ مَن ذَا ٱلَّذِي يَشۡفَعُ عِندَهُۥٓ إِلَّا بِإِذۡنِهِۦۚ يَعۡلَمُ مَا بَيۡنَ أَيۡدِيهِمۡ وَمَا خَلۡفَهُمۡۖ وَلَا يُحِيطُونَ بِشَيۡءٖ مِّنۡ عِلۡمِهِۦٓ إِلَّا بِمَا شَآءَۚ وَسِعَ كُرۡسِيُّهُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضَۖ وَلَا يَـُٔودُهُۥ حِفۡظُهُمَاۚ وَهُوَ ٱلۡعَلِيُّ ٱلۡعَظِيمُ",
+    "latin": "Allohu laa ilaaha illa huwal hayyul qoyyuum, laa ta-khudzuhu sinatuw wa laa naum, lahu maa fis samaawaati wa maa fil ardh, man dzalladzii yasyfa’u ‘indahu illa bi-idznih, ya’lamu maa baina aidiihim wa maa kholfahum, wa laa yuhiithuuna bisyai-im min ‘ilmihi illa bimaa syaa’, wasi’a kursiyyuhus samaawaati wal ardh, wa laa ya-uuduhu hifzhuhumaa, wa huwal ‘aliyyul ‘azhiim.",
+    "translation": "Allah, tidak ada Robb yang berhak disembah dengan benar melainkan Dia Yang Hidup kekal lagi terus-menerus mengurus makhluk-Nya; tidak mengantuk dan tidak tidur. Kepunyaan-Nya apa yang di langit dan di bumi. Tiada yang dapat memberi syafa’at di sisi Allah tanpa izin-Nya. Allah mengetahui apa-apa yang di hadapan mereka dan di belakang mereka, dan mereka tidak mengetahui apa-apa dari ilmu Allah melainkan apa yang dikehendaki-Nya. Kursi Allah meliputi langit dan bumi. Dan Allah tidak merasa berat memelihara keduanya, dan Allah Maha Tinggi lagi Maha Agung.",
+    "source": "QS. Al-Baqarah: 255",
+    "refs": [],
+    "grade": "",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "dzikir-8",
+    "label": "Al-Ikhlas, Al-Falaq, dan An-Nas",
+    "tag": "tambahan",
+    "arab": "قُلۡ هُوَ ٱللَّهُ أَحَدٌ ٱللَّهُ ٱلصَّمَدُ لَمۡ يَلِدۡ وَلَمۡ يُولَدۡ وَلَمۡ يَكُن لَّهُۥ كُفُوًا أَحَدُۢ\nقُلۡ أَعُوذُ بِرَبِّ ٱلۡفَلَقِ مِن شَرِّ مَا خَلَقَ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِي ٱلۡعُقَدِ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ\nقُلۡ أَعُوذُ بِرَبِّ ٱلنَّاسِ مَلِكِ ٱلنَّاسِ إِلَٰهِ ٱلنَّاسِ مِن شَرِّ ٱلۡوَسۡوَاسِ ٱلۡخَنَّاسِ ٱلَّذِي يُوَسۡوِسُ فِي صُدُورِ ٱلنَّاسِ مِنَ ٱلۡجِنَّةِ وَٱلنَّاسِ",
+    "latin": "",
+    "translation": "Membaca Surat Al-Ikhlash, Al-Falaq, dan An-Naas masing-masing 1 kali setelah Sholat wajib, kecuali setelah Shubuh dan Maghrib dibaca 3 kali.",
+    "source": "HSR. Abu Dawud no. 1523",
+    "refs": [
+     {
+      "k": "abudawud",
+      "n": 1523
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": "Masing-masing 1 kali setelah sholat wajib; setelah Shubuh dan Maghrib dibaca 3 kali."
+   },
+   {
+    "id": "dzikir-9",
+    "label": "Tahlil dan ikhlas dalam ibadah",
+    "tag": "tambahan",
+    "arab": "لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَىْءٍ قَدِيرٌ لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ لاَ إِلَهَ إِلاَّ اللَّهُ وَلاَ نَعْبُدُ إِلاَّ إِيَّاهُ لَهُ النِّعْمَةُ وَلَهُ الْفَضْلُ وَلَهُ الثَّنَاءُ الْحَسَنُ لاَ إِلَهَ إِلاَّ اللَّهُ مُخْلِصِينَ لَهُ الدِّينَ وَلَوْ كَرِهَ الْكَافِرُونَ",
+    "latin": "Laa ilaaha illalloohu wahdahu laa syariika lahu, lahul mulku wa lahul hamdu wa huwa ‘alaa kulli syai-in qodiir, laa hawla wa laa quwwata illa billaah, Laa ilaaha illalloohu, wa laa na’budu illa iyyaahu, lahun ni’matu wa lahul fadhlu wa lahuts tsanaa-ul hasan, Laa ilaaha illalloohu mukhlishiina lahud diina walau karihal kaafiruun.",
+    "translation": "Tidak ada Robb yang berhak disembah dengan benar kecuali Allah semata, tidak ada sekutu bagi-Nya. Bagi-Nya kerajaan dan bagi-Nya segala pujian, dan Dia Maha Kuasa atas segala sesuatu. Tidak ada daya dan kekuatan kecuali dengan pertolongan Allah. Tidak ada Robb yang berhak disembah dengan benar kecuali Allah, dan kami tidak beribadah kecuali kepada-Nya. Hanya milik-Nya segala ni’mat, karunia, dan sanjungan yang baik. Tidak ada Robb yang berhak disembah dengan benar kecuali Allah, dengan memurnikan agama bagi-Nya meskipun orang-orang kafir tidak menyukai.",
+    "source": "HR. Muslim no. 594",
+    "refs": [
+     {
+      "k": "muslim",
+      "n": 594
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "dzikir-10",
+    "label": "Khusus Shubuh",
+    "tag": "tambahan",
+    "arab": "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلاً مُتَقَبَّلاً",
+    "latin": "Alloohumma innii as-aluka ‘ilman naafi’an, wa rizqon thoyyiban, wa ‘amalam mutaqobbalan.",
+    "translation": "Ya Allah, sesungguhnya aku memohon kepada-Mu ilmu yang bermanfaat, rizqi yang baik, dan amal yang diterima.",
+    "source": "HSR. Ibnu Majah no. 925",
+    "refs": [
+     {
+      "k": "ibnmajah",
+      "n": 925
+     }
+    ],
+    "grade": "Shahih",
+    "madzhab": "",
+    "note": ""
+   },
+   {
+    "id": "dzikir-11",
+    "label": "Khusus Maghrib dan Subuh",
+    "tag": "tambahan",
+    "arab": "لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+    "latin": "Laa ilaaha illalloohu wahdahu laa syariika lah, lahul mulku wa lahul hamdu yuhyii wa yumiit, wa huwa ‘alaa kulli syai-in qodiir",
+    "translation": "Tidak ada Robb yang berhak disembah dengan benar kecuali Allah semata, tidak ada sekutu bagi-Nya. Bagi-Nya kerajaan dan bagi-Nya segala pujian, Maha menghidupkan dan mematikan, serta Dia Maha Kuasa atas segala sesuatu.",
+    "source": "HR. At-Tirmidzi no. 3474",
+    "refs": [
+     {
+      "k": "tirmidzi",
+      "n": 3474
+     }
+    ],
+    "grade": "Hasan",
+    "madzhab": "",
+    "note": "Penilaian ulama berbeda: Hasan, Dha'if, dan Hasan shahih. Teks hadits yang tertera menyebut dibaca setelah Shubuh (10 kali)."
+   }
+  ]
+ }
+];
+
+        // Kartu bacaan: catatan singkat + tautan ke tab Ragam (daftar lengkap riwayat ada di sana)
+        const RAGAM_BY_WORD = { 1: 'iftitah', 2: 'fatihah', 3: 'ruku', 4: 'bangkit', 5: 'itidal', 6: 'sujud', 7: 'duduk', 8: 'tasyahud', 9: 'sholawat', 10: 'salam' };
+        function renderBacaanVariants(idx) {
+            const entry = bacaanVariants[idx];
+            const note = entry && entry.note ? `<p class="text-xs leading-relaxed text-slate-600"><i class="fa-solid fa-circle-info text-gold-500 mr-1"></i>${entry.note}</p>` : '';
+            const group = ragamBacaan.find(g => g.key === RAGAM_BY_WORD[idx]);
+            if (!group || group.items.length < 2) return note;
+            return `${note}
+                    <button type="button" onclick="openRagam('${group.key}')" class="w-full flex items-center justify-between gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-left text-xs font-semibold text-emerald-800 hover:border-gold-400 transition">
+                        <span><i class="fa-solid fa-list-check text-gold-500 mr-1.5"></i> Lihat ${group.items.length} pilihan bacaan ${group.title}</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>`;
+        }
+
+        /* -------------------------------------------------------------
+           RAGAM BACAAN: satu grup per gerakan, satu grup tampil sekaligus
+        ------------------------------------------------------------- */
+        let ragamActive = 'iftitah';
+        const RAGAM_TAG = {
+            pokok: ['Pokok', 'bg-emerald-100 text-emerald-800 border-emerald-200'],
+            tambahan: ['Tambahan', 'bg-white text-gold-600 border-gold-500'],
+            alternatif: ['Alternatif', 'bg-slate-100 text-slate-600 border-slate-200']
+        };
+        const RAGAM_CHIP_ON = 'bg-emerald-800 text-white border-emerald-800 shadow-sm';
+        const RAGAM_CHIP_OFF = 'bg-white text-slate-600 border-slate-200';
+        const RAGAM_KITAB = { bukhari: 'Bukhari', muslim: 'Muslim', abudawud: 'Abu Daud', tirmidzi: 'Tirmidzi', nasai: "An-Nasa'i", ibnmajah: 'Ibnu Majah', ahmad: 'Ahmad' };
+
+        function renderRagam() {
+            const nav = document.getElementById('ragam-nav');
+            const body = document.getElementById('ragam-body');
+            if (!nav || !body) return;
+            nav.innerHTML = ragamBacaan.map((g, i) => `
+                <button type="button" role="tab" onclick="showRagamGroup('${g.key}')" id="ragam-chip-${g.key}" aria-controls="ragam-g-${g.key}"
+                    class="ragam-chip px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 ${RAGAM_CHIP_OFF}">
+                    ${g.title} <span class="opacity-70">(${g.items.length})</span>
+                </button>`).join('');
+            body.innerHTML = ragamBacaan.map((g, gi) => {
+                const prev = ragamBacaan[gi - 1], next = ragamBacaan[gi + 1];
+                const many = g.items.length > 3;
+                return `
+                <div id="ragam-g-${g.key}" class="ragam-group hidden space-y-3" role="tabpanel">
+                    <div class="bg-emerald-900 text-white p-4 rounded-2xl border border-gold-500/20">
+                        <div class="flex items-start justify-between gap-3">
+                            <div>
+                                <p class="text-[11px] text-emerald-200">Gerakan ${gi + 1} dari ${ragamBacaan.length}</p>
+                                <h3 class="text-lg font-bold text-amber-50">${g.title}</h3>
+                            </div>
+                            ${many ? `<button type="button" onclick="toggleRagamAll('${g.key}')" class="shrink-0 text-[11px] font-semibold rounded-full border border-emerald-300/40 px-3 py-1 hover:bg-emerald-800 transition"><i class="fa-solid fa-angles-down mr-1"></i><span id="ragam-toggle-${g.key}">Buka semua</span></button>` : ''}
+                        </div>
+                        ${g.intro ? `<p class="text-xs text-emerald-100 mt-2 leading-relaxed">${g.intro}</p>` : ''}
+                    </div>
+                    ${g.items.map((v, vi) => renderRagamItem(g, v, vi, !many || v.tag === 'pokok')).join('')}
+                    <div class="flex items-center justify-between gap-2 pt-1">
+                        ${prev ? `<button type="button" onclick="showRagamGroup('${prev.key}', true)" class="text-xs font-semibold text-emerald-800 border border-slate-200 bg-white rounded-xl px-3 py-2 hover:border-gold-400 transition"><i class="fa-solid fa-arrow-left mr-1"></i> ${prev.title}</button>` : '<span></span>'}
+                        ${next ? `<button type="button" onclick="showRagamGroup('${next.key}', true)" class="text-xs font-semibold text-white bg-emerald-800 rounded-xl px-3 py-2 hover:bg-emerald-700 transition">${next.title} <i class="fa-solid fa-arrow-right ml-1"></i></button>` : '<span></span>'}
+                    </div>
+                </div>`;
+            }).join('');
+            showRagamGroup(ragamActive);
+        }
+
+        function renderRagamItem(g, v, vi, open) {
+            const [tagText, tagCls] = RAGAM_TAG[v.tag] || RAGAM_TAG.alternatif;
+            const links = (v.refs || []).map(r => `<a href="https://www.hadits.id/hadits/${r.k}/${r.n}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] text-emerald-800 hover:border-gold-400">${RAGAM_KITAB[r.k] || r.k} ${r.n} <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a>`).join('');
+            return `
+                    <details class="ragam-item search-item bg-white rounded-2xl border border-slate-200 shadow-sm" ${open ? 'open' : ''}>
+                        <summary class="flex cursor-pointer items-center gap-3 p-3.5">
+                            <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-800 text-xs font-bold text-white">${vi + 1}</span>
+                            <span class="min-w-0 flex-1">
+                                <span class="block text-sm font-bold leading-snug text-emerald-900">${v.label}</span>
+                                <span class="mt-1 flex flex-wrap items-center gap-1.5">
+                                    <span class="rounded-full border px-2 py-0.5 text-[10px] font-bold ${tagCls}">${tagText}</span>
+                                    ${v.grade ? `<span class="text-[11px] text-slate-500">${v.grade}</span>` : ''}
+                                    <span class="text-[11px] italic text-slate-500">${v.source}</span>
+                                </span>
+                            </span>
+                            <i class="fa-solid fa-chevron-down details-chevron text-[10px] text-slate-400"></i>
+                        </summary>
+                        <div class="space-y-2 border-t border-slate-100 p-3.5">
+                            ${v.arab ? `<p class="font-arabic arabic-size text-right leading-loose text-emerald-950" dir="rtl">${v.arab}</p>` : ''}
+                            ${v.latin ? `<p class="text-xs font-semibold leading-relaxed text-emerald-800">${v.latin}</p>` : ''}
+                            ${v.translation ? `<p class="text-xs italic leading-relaxed text-slate-600">"${v.translation}"</p>` : ''}
+                            ${v.madzhab ? `<p class="text-[11px] font-semibold text-gold-600"><i class="fa-solid fa-scale-balanced mr-1"></i>${v.madzhab}</p>` : ''}
+                            ${v.note ? `<p class="text-[11px] leading-relaxed text-slate-500">${v.note}</p>` : ''}
+                            ${links ? `<div class="flex flex-wrap gap-1.5 pt-1">${links}</div>` : ''}
+                        </div>
+                    </details>`;
+        }
+
+        function showRagamGroup(key, scroll) {
+            if (!ragamBacaan.some(g => g.key === key)) key = ragamBacaan[0].key;
+            ragamActive = key;
+            if (searchActive) return;
+            ragamBacaan.forEach(g => {
+                const panel = document.getElementById('ragam-g-' + g.key);
+                const chip = document.getElementById('ragam-chip-' + g.key);
+                if (panel) panel.classList.toggle('hidden', g.key !== key);
+                if (chip) {
+                    chip.className = chip.className.replace(RAGAM_CHIP_ON, '').replace(RAGAM_CHIP_OFF, '').trim() + ' ' + (g.key === key ? RAGAM_CHIP_ON : RAGAM_CHIP_OFF);
+                    chip.setAttribute('aria-selected', g.key === key);
+                    if (g.key === key) chip.scrollIntoView({ block: 'nearest', inline: 'center' });
+                }
+            });
+            if (scroll) document.getElementById('ragam-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function toggleRagamAll(key) {
+            const items = document.querySelectorAll('#ragam-g-' + key + ' details.ragam-item');
+            const open = ![...items].every(d => d.open);
+            items.forEach(d => { d.open = open; });
+            const label = document.getElementById('ragam-toggle-' + key);
+            if (label) label.textContent = open ? 'Tutup semua' : 'Buka semua';
+        }
+
+        function openRagam(key) {
+            switchTab('rukun');
+            switchSholatSub('sholat-ragam');
+            showRagamGroup(key, true);
         }
 
         // Render Sholat Recitations with Word-by-Word Breakdown
@@ -1473,6 +3232,8 @@
                         <p class="text-xs text-emerald-800 font-semibold text-left mb-1">${item.latinFull}</p>
                         <p class="text-xs text-slate-600 text-left italic">"${item.translationFull}"</p>
                     </div>
+
+                    ${renderBacaanVariants(idx)}
 
                     <!-- Word by Word Interactive Badges -->
                     <div>
@@ -1516,6 +3277,8 @@
                 document.querySelectorAll('.search-item').forEach(el => el.classList.remove('hidden'));
                 switchWudhuSub('wudhu-langkah');
                 switchSholatSub('sholat-gerakan');
+                document.getElementById('ragam-nav').classList.remove('hidden');
+                showRagamGroup(ragamActive);
             }
 
             // Hide all tabs
@@ -1575,22 +3338,15 @@
         }
 
         function switchSholatSub(type) {
-            const gCont = document.getElementById('sholat-gerakan-container');
-            const bCont = document.getElementById('sholat-bacaan-container');
-            const gBtn = document.getElementById('btn-sholat-gerakan');
-            const bBtn = document.getElementById('btn-sholat-bacaan');
-
-            if (type === 'sholat-gerakan') {
-                gCont.classList.remove('hidden');
-                bCont.classList.add('hidden');
-                gBtn.className = "flex-1 py-2 text-xs sm:text-sm font-bold rounded-lg bg-white shadow text-emerald-900 transition";
-                bBtn.className = "flex-1 py-2 text-xs sm:text-sm font-bold rounded-lg text-slate-600 hover:text-emerald-900 transition";
-            } else {
-                gCont.classList.add('hidden');
-                bCont.classList.remove('hidden');
-                bBtn.className = "flex-1 py-2 text-xs sm:text-sm font-bold rounded-lg bg-white shadow text-emerald-900 transition";
-                gBtn.className = "flex-1 py-2 text-xs sm:text-sm font-bold rounded-lg text-slate-600 hover:text-emerald-900 transition";
-            }
+            const ON = "flex-1 py-2 text-xs sm:text-sm font-bold rounded-lg bg-white shadow text-emerald-900 transition";
+            const OFF = "flex-1 py-2 text-xs sm:text-sm font-bold rounded-lg text-slate-600 hover:text-emerald-900 transition";
+            ['gerakan', 'bacaan', 'ragam'].forEach(name => {
+                const cont = document.getElementById('sholat-' + name + '-container');
+                const btn = document.getElementById('btn-sholat-' + name);
+                const active = type === 'sholat-' + name;
+                if (cont) cont.classList.toggle('hidden', !active);
+                if (btn) btn.className = active ? ON : OFF;
+            });
         }
 
         /* -------------------------------------------------------------
@@ -1613,22 +3369,22 @@
         const quizBank = [
             // ---- Dalil sholat (Home)
             mc('d1', 'Dalil Sholat', 1, "Menurut QS. Al-Baqarah: 43, perintah yang disebut bersama sholat dan rukuk adalah…", ["Menunaikan zakat", "Berpuasa", "Berhaji", "Bersedekah"], "Ayat ini memerintahkan: laksanakan sholat, tunaikan zakat, dan rukuklah bersama orang-orang yang rukuk.", "QS. Al-Baqarah: 43"),
-            mc('d2', 'Dalil Sholat', 1, "Berapa perkara yang menjadi dasar bangunan Islam menurut HR. Bukhari no. 8 & Muslim no. 16?", ["Lima", "Tiga", "Empat", "Enam"], "\"Islam dibangun di atas lima perkara\", salah satunya mendirikan sholat.", "HR. Bukhari no. 8 & Muslim no. 16"),
+            mc('d2', 'Dalil Sholat', 1, "Berapa perkara yang menjadi dasar bangunan Islam menurut HR. Bukhari no. 8?", ["Lima", "Tiga", "Empat", "Enam"], "\"Islam dibangun di atas lima perkara\", salah satunya mendirikan sholat.", "HR. Bukhari no. 8"),
             mc('d3', 'Dalil Sholat', 2, "Menurut HR. Muslim no. 233, sholat lima waktu menghapus dosa di antaranya selama…", ["tidak melakukan dosa-dosa besar", "tidak lupa membaca Al-Fatihah", "dikerjakan di masjid", "dikerjakan berjamaah"], "Sholat lima waktu dan Jumat ke Jumat adalah penghapus dosa di antara keduanya selama tidak melakukan dosa-dosa besar.", "HR. Muslim no. 233"),
-            mc('d4', 'Dalil Sholat', 1, "Dalam HR. Bukhari no. 528 & Muslim no. 667, sholat lima waktu diumpamakan seperti…", ["Sungai di depan rumah yang dipakai mandi lima kali sehari", "Pohon yang berbuah setiap hari", "Cahaya yang menerangi malam", "Pagar yang melindungi rumah"], "Orang yang mandi lima kali sehari di sungai tidak akan tersisa kotorannya; begitu pula sholat lima waktu menghapus kesalahan.", "HR. Bukhari no. 528 & Muslim no. 667"),
+            mc('d4', 'Dalil Sholat', 1, "Dalam HR. Bukhari no. 528, sholat lima waktu diumpamakan seperti…", ["Sungai di depan rumah yang dipakai mandi lima kali sehari", "Pohon yang berbuah setiap hari", "Cahaya yang menerangi malam", "Pagar yang melindungi rumah"], "Orang yang mandi lima kali sehari di sungai tidak akan tersisa kotorannya; begitu pula sholat lima waktu menghapus kesalahan.", "HR. Bukhari no. 528"),
             mc('d5', 'Dalil Sholat', 1, "Menurut QS. Al-Ankabut: 45, sholat mencegah dari…", ["Perbuatan keji dan mungkar", "Rasa malas", "Kemiskinan", "Penyakit"], "\"Sesungguhnya sholat itu mencegah dari (perbuatan) keji dan mungkar.\"", "QS. Al-Ankabut: 45"),
             mc('d6', 'Dalil Sholat', 2, "Menurut HR. Muslim no. 82, batas antara seseorang dengan kesyirikan dan kekafiran adalah…", ["Meninggalkan sholat", "Meninggalkan puasa sunnah", "Terlambat sholat", "Tidak berjamaah"], "\"Sesungguhnya batasan antara seseorang dengan kesyirikan dan kekafiran adalah meninggalkan sholat.\"", "HR. Muslim no. 82"),
             mc('d7', 'Dalil Sholat', 3, "Dalam QS. Al-Muddaththir: 42-43, penghuni Saqar menjawab mereka masuk neraka karena…", ["Dahulu tidak termasuk orang-orang yang melaksanakan sholat", "Tidak berzakat", "Tidak berpuasa", "Tidak bersedekah"], "\"Dahulu kami tidak termasuk orang-orang yang melaksanakan sholat.\"", "QS. Al-Muddaththir: 42-43"),
 
             // ---- Syarat sah sholat
             mc('s1', 'Syarat Sah Sholat', 1, "Anak yang sudah mumayyiz dan sah sholatnya berusia sekitar…", ["7 tahun", "3 tahun", "5 tahun", "12 tahun"], "Syarat mumayyiz: anak yang sudah bisa membedakan baik dan buruk (sekitar 7 tahun).", "HR. Abu Daud no. 495"),
-            mc('s2', 'Syarat Sah Sholat', 1, "Batas aurat laki-laki dalam sholat menurut materi adalah…", ["Pusar hingga lutut", "Dada hingga lutut", "Bahu hingga mata kaki", "Seluruh tubuh"], "Laki-laki: pusar hingga lutut.", "QS. Al-A'raf: 31 & HR. Tirmidzi no. 377"),
-            mc('s3', 'Syarat Sah Sholat', 1, "Aurat wanita dalam sholat adalah seluruh tubuh kecuali…", ["Wajah dan telapak tangan", "Wajah dan telapak kaki", "Rambut dan leher", "Telapak tangan dan kaki"], "Wanita: seluruh tubuh kecuali wajah dan telapak tangan.", "QS. Al-A'raf: 31 & HR. Tirmidzi no. 377"),
+            mc('s2', 'Syarat Sah Sholat', 1, "Menurut HR. Abu Daud no. 4114, bagian tubuh laki-laki yang tidak boleh dilihat adalah di bawah pusar dan di atas…", ["Lutut", "Dada", "Bahu", "Mata kaki"], "Yang tidak boleh dilihat adalah bagian di bawah pusar dan di atas lutut.", "HR. Abu Daud no. 4114"),
+            mc('s3', 'Syarat Sah Sholat', 1, "Menurut HR. Abu Daud no. 4104, bagian tubuh wanita yang telah baligh yang boleh tampak adalah…", ["Wajah dan kedua telapak tangan", "Wajah dan kedua kaki", "Rambut dan leher", "Kedua tangan sampai siku"], "Beliau menunjuk wajah dan kedua telapak tangannya.", "HR. Abu Daud no. 4104"),
             mc('s4', 'Syarat Sah Sholat', 2, "Dalil syarat menghadap kiblat terdapat pada…", ["QS. Al-Baqarah: 144", "QS. An-Nisa: 103", "QS. Ali 'Imran: 85", "QS. Maryam: 59"], "\"Maka hadapkanlah wajahmu ke arah Masjidil Haram.\"", "QS. Al-Baqarah: 144"),
             mc('s5', 'Syarat Sah Sholat', 2, "Syarat masuk waktu sholat berdalil pada…", ["QS. An-Nisa: 103", "QS. Al-Baqarah: 144", "QS. Al-A'raf: 31", "QS. Ali 'Imran: 85"], "Sholat adalah kewajiban yang ditetapkan waktunya atas orang-orang beriman.", "QS. An-Nisa: 103"),
-            mc('s6', 'Syarat Sah Sholat', 2, "Hadits <span class='font-arabic text-xl' dir='rtl'>إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ</span> (Innamal a'maalu bin niyyaat) menjadi dalil syarat…", ["Niat", "Menutup aurat", "Suci dari najis", "Menghadap kiblat"], "Amal tergantung niatnya.", "HR. Bukhari no. 1 & Muslim no. 1907"),
+            mc('s6', 'Syarat Sah Sholat', 2, "Hadits <span class='font-arabic text-xl' dir='rtl'>إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ</span> (Innamal a'maalu bin niyyaat) menjadi dalil syarat…", ["Niat", "Menutup aurat", "Suci dari najis", "Menghadap kiblat"], "Amal tergantung niatnya.", "HR. Bukhari no. 1"),
             mc('s7', 'Syarat Sah Sholat', 2, "QS. Al-A'raf: 31 (\"pakailah pakaianmu yang indah di setiap masjid\") menjadi dalil syarat…", ["Menutup aurat", "Berakal", "Islam", "Masuk waktu"], "Ayat ini dipakai sebagai dalil menutup aurat.", "QS. Al-A'raf: 31"),
-            mc('s8', 'Syarat Sah Sholat', 3, "Hadits dua orang yang disiksa, salah satunya tidak menjaga diri dari air kencing, menjadi dalil syarat…", ["Suci badan, pakaian, dan tempat dari najis", "Berakal", "Mumayyiz", "Niat"], "Syarat menghilangkan najis yang tidak dimaafkan.", "HR. Bukhari no. 216 & Muslim no. 292"),
+            mc('s8', 'Syarat Sah Sholat', 3, "Hadits orang Badui yang kencing di masjid lalu bekas kencingnya disiram air menjadi dalil syarat…", ["Suci badan, pakaian, dan tempat dari najis", "Berakal", "Mumayyiz", "Niat"], "Najis (air kencing) dihilangkan dengan menyiramkan air.", "HR. Bukhari no. 220"),
             mc('s9', 'Syarat Sah Sholat', 3, "Menurut HR. Abu Daud no. 4403, pena diangkat dari orang tidur hingga bangun, anak kecil hingga baligh, dan…", ["Orang gila hingga berakal", "Orang sakit hingga sembuh", "Musafir hingga pulang", "Orang miskin hingga kaya"], "Hadits ini menjadi dalil syarat berakal.", "HR. Abu Daud no. 4403"),
 
             // ---- Wudhu
@@ -1640,24 +3396,24 @@
             mc('w6', 'Wudhu', 1, "Berapa pintu surga yang dibukakan bagi orang yang menyempurnakan wudhu lalu membaca syahadat?", ["Delapan", "Tujuh", "Lima", "Sepuluh"], "\"…dibukakan baginya delapan pintu surga; ia boleh masuk dari pintu mana saja yang ia kehendaki.\"", "HR. Muslim no. 234"),
             mc('w7', 'Wudhu', 1, "Hadits <span class='font-arabic text-xl' dir='rtl'>وَيْلٌ لِلْأَعْقَابِ مِنَ النَّارِ</span> (Wailul lil a'qaab minan naar) mengancam…", ["Tumit yang tidak terbasuh air wudhu", "Orang yang tidak bersiwak", "Orang yang tidak berdoa setelah wudhu", "Orang yang berwudhu terlalu lama"], "Celakalah tumit-tumit yang tidak terbasuh air wudhu dari api neraka.", "HR. Bukhari no. 60 & Muslim no. 242"),
             mc('w8', 'Wudhu', 2, "Kumur dan istinsyaq (menghirup air ke hidung) sebaiknya dilakukan…", ["Dalam satu cakupan air, 3 kali", "Terpisah, masing-masing 1 kali", "Hanya sekali", "Setelah mencuci kaki"], "Disatukan dalam satu cakupan air dan dilakukan 3 kali.", "Sunnah Wudhu"),
-            mc('w9', 'Wudhu', 2, "Mendahulukan anggota badan yang kanan dalam bersuci disebut…", ["At-Tayamun", "Tuma'ninah", "Istinsyaq", "Tawarruk"], "Nabi <span class='font-arabic'>ﷺ</span> menyukai mendahulukan yang kanan dalam bersuci dan segala urusan.", "HR. Bukhari no. 168 & Muslim no. 268"),
-            mc('w10', 'Wudhu', 2, "Hadits \"Seandainya tidak memberatkan umatku, niscaya aku perintahkan mereka … setiap kali wudhu\" menyebut sunnah…", ["Bersiwak", "Membaca basmalah", "Berkumur", "Membasuh telinga"], "Sunnah bersiwak setiap akan berwudhu.", "HR. Ahmad"),
+            mc('w9', 'Wudhu', 2, "Mendahulukan anggota badan yang kanan dalam bersuci disebut…", ["At-Tayamun", "Tuma'ninah", "Istinsyaq", "Tawarruk"], "Nabi <span class='font-arabic'>ﷺ</span> menyukai mendahulukan yang kanan dalam bersuci dan segala urusan.", "HR. Bukhari no. 168"),
+            mc('w10', 'Wudhu', 2, "Hadits \"Seandainya aku tidak merasa berat bagi umatku, niscaya aku akan memerintahkan mereka … setiap kali shalat\" menyebut sunnah…", ["Bersiwak", "Membaca basmalah", "Berkumur", "Membasuh telinga"], "Sunnah bersiwak setiap kali shalat.", "HR. Bukhari no. 887 & Muslim no. 252"),
             mc('w11', 'Wudhu', 2, "Yang termasuk penghalang air ke kulit sehingga wudhu tidak sah adalah…", ["Cat kuku waterproof (kutek)", "Keringat", "Air hujan", "Air sumur"], "Penghalang seperti cat, cat kuku waterproof, lilin, atau minyak tebal harus dihilangkan.", "Syarat Sah Wudhu"),
             mc('w12', 'Wudhu', 2, "Menurut HR. Abu Daud no. 101, tidak ada wudhu bagi orang yang tidak…", ["Menyebut nama Allah atasnya", "Bersiwak", "Berniat dengan lisan", "Berwudhu berurutan"], "Dalil sunnah membaca basmalah saat wudhu.", "HR. Abu Daud no. 101"),
             mc('w13', 'Wudhu', 3, "Wudhu bagi penderita istihadhah (beser) disyaratkan…", ["Masuk waktu sholat", "Dilakukan tiga kali", "Dengan siwak", "Setelah mandi"], "Salah satu syarat sah wudhu: masuk waktu sholat bagi penderita istihadhah/beser.", "Syarat Sah Wudhu"),
 
             // ---- Sholat: gerakan & rukun
             mc('g1', 'Gerakan Sholat', 1, "Sujud dilakukan di atas berapa anggota tubuh?", ["7", "5", "6", "8"], "Dahi+hidung, 2 telapak tangan, 2 lutut, dan 2 ujung kaki.", "HR. Bukhari no. 812"),
-            mc('g2', 'Gerakan Sholat', 1, "Duduk di antara dua sujud memakai cara duduk…", ["Iftirasy", "Tawarruk", "Bersila", "Berlutut"], "Menduduki kaki kiri dan menegakkan kaki kanan.", "HR. Abu Daud no. 850"),
-            mc('g3', 'Gerakan Sholat', 1, "Duduk pada tasyahud akhir memakai cara duduk…", ["Tawarruk", "Iftirasy", "Bersila", "Berlutut"], "Kaki kiri dimasukkan ke bawah kaki kanan.", "HR. Bukhari no. 831"),
+            mc('g2', 'Gerakan Sholat', 1, "Duduk di antara dua sujud memakai cara duduk…", ["Iftirasy", "Tawarruk", "Bersila", "Berlutut"], "Menduduki kaki kiri dan menegakkan kaki kanan.", "HR. Muslim no. 498"),
+            mc('g3', 'Gerakan Sholat', 1, "Duduk pada tasyahud akhir memakai cara duduk…", ["Tawarruk", "Iftirasy", "Bersila", "Berlutut"], "Kaki kiri dimajukan, kaki kanan ditegakkan, lalu duduk di atas pantat.", "HR. Bukhari no. 828"),
             mc('g4', 'Gerakan Sholat', 1, "Ucapan ketika bangkit dari ruku' menuju i'tidal adalah…", [ARL("سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ", "Sami'allahu liman hamidah"), ARL("اللَّهُ أَكْبَرُ", "Allahu akbar"), ARL("سُبْحَانَ رَبِّيَ الْعَظِيمِ وَبِحَمْدِهِ", "Subhaana rabbiyal 'azhiimi wa bihamdih"), ARL("السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ", "Assalaamu 'alaikum wa rahmatullaah")], "Bangkit dari ruku' sambil mengucapkan 'Sami'allahu liman hamidah'.", "HR. Bukhari no. 789"),
-            mc('g5', 'Gerakan Sholat', 2, "Saat salam pertama, kepala ditoleh ke kanan hingga…", ["Pipi terlihat dari belakang", "Bahu menyentuh dagu", "Mata terpejam", "Telinga menyentuh bahu"], "Menoleh ke kanan hingga pipi terlihat dari belakang.", "HR. Muslim no. 582"),
-            mc('g6', 'Gerakan Sholat', 2, "Posisi tangan saat sedekap adalah…", ["Tangan kanan di atas punggung tangan kiri, di atas dada", "Kedua tangan di samping badan", "Tangan kiri di atas tangan kanan di perut", "Kedua tangan di belakang"], "Sedekap sunnah: kanan di atas punggung tangan kiri, di atas dada.", "HR. Muslim no. 401"),
-            mc('g7', 'Gerakan Sholat', 2, "Saat takbiratul ihram, tangan diangkat sejajar…", ["Bahu atau telinga", "Pinggang", "Lutut", "Dahi"], "Mengangkat kedua tangan sejajar bahu/telinga sambil mengucapkan 'Allahu Akbar'.", "HR. Bukhari no. 757"),
+            mc('g5', 'Gerakan Sholat', 2, "Saat salam ke kanan dan ke kiri, kepala ditoleh hingga…", ["Putih pipi terlihat", "Bahu menyentuh dagu", "Mata terpejam", "Telinga menyentuh bahu"], "Salam ke kanan dan ke kiri hingga terlihat putih pipi beliau.", "HR. Muslim no. 582"),
+            mc('g6', 'Gerakan Sholat', 2, "Posisi tangan saat sedekap adalah…", ["Tangan kanan di atas tangan kiri", "Kedua tangan di samping badan", "Tangan kiri di atas tangan kanan", "Kedua tangan di belakang"], "Sedekap: tangan kanan diletakkan di atas tangan kiri.", "HR. Muslim no. 401"),
+            mc('g7', 'Gerakan Sholat', 2, "Saat takbiratul ihram, tangan diangkat sejajar…", ["Bahu atau telinga", "Pinggang", "Lutut", "Dahi"], "Mengangkat kedua tangan sejajar bahu (atau telinga) sambil bertakbir.", "HR. Muslim no. 390 & no. 401"),
 
             // ---- Pembatal sholat
             mc('p1', 'Pembatal Sholat', 1, "Menurut ijma' ulama, tertawa terbahak-bahak (hingga terdengar suara) dalam sholat…", ["Membatalkan sholat", "Tidak berpengaruh", "Hanya makruh", "Menggugurkan pahala saja"], "Para ulama sepakat tertawa terbahak-bahak membatalkan sholat.", "Ijma' Ulama"),
-            mc('p2', 'Pembatal Sholat', 1, "Hadits tentang \"kepala keledai\" berkaitan dengan…", ["Mendahului imam", "Berbicara saat sholat", "Menoleh saat sholat", "Meninggalkan sholat"], "Orang yang mengangkat kepalanya sebelum imam diancam Allah mengubah kepalanya menjadi kepala keledai.", "HR. Bukhari no. 691 & Muslim no. 427"),
+            mc('p2', 'Pembatal Sholat', 1, "Hadits tentang \"kepala keledai\" berkaitan dengan…", ["Mendahului imam", "Berbicara saat sholat", "Menoleh saat sholat", "Meninggalkan sholat"], "Orang yang mengangkat kepalanya sebelum imam diancam Allah mengubah kepalanya menjadi kepala keledai.", "HR. Muslim no. 427"),
             mc('p3', 'Pembatal Sholat', 1, "Menurut HR. Muslim no. 537, sholat itu hanyalah…", ["Tasbih, takbir, dan bacaan Al-Qur'an", "Doa dan zikir bebas", "Gerakan dan diam", "Perkataan baik"], "Tidak boleh ada perkataan manusia di dalam sholat.", "HR. Muslim no. 537"),
             mc('p4', 'Pembatal Sholat', 2, "Dalil berhadats (batal wudhu) membatalkan sholat adalah…", ["HR. Bukhari no. 135", "HR. Muslim no. 82", "QS. Maryam: 59", "HR. Abu Daud no. 495"], "\"Tidak diterima sholat orang yang berhadats hingga ia berwudhu.\"", "HR. Bukhari no. 135"),
             mc('p5', 'Pembatal Sholat', 3, "Berapa hal yang membatalkan sholat dibahas pada materi aplikasi ini?", ["8", "5", "10", "12"], "Berbicara sengaja, tertawa terbahak-bahak, terbuka aurat, makan-minum, berhadats, banyak bergerak berturut-turut, mendahului imam, dan murtad/berubah niat.", "Tab Batal"),
@@ -1667,14 +3423,14 @@
             fill('f2', 'Bacaan Sholat', 1, "Lengkapi potongan ayat Al-Fatihah ini:", ["الدِّينِ", "الْعَالَمِينَ", "الْمُسْتَقِيمَ", "الضَّالِّينَ"], "Maaliki yawmid-diin: Pemilik hari pembalasan.", "QS. Al-Fatihah: 4", "مَالِكِ يَوْمِ ____"),
             fill('f3', 'Bacaan Sholat', 1, "Lengkapi potongan ayat Al-Fatihah ini:", ["نَسْتَعِينُ", "نَعْبُدُ", "الْمُسْتَقِيمَ", "اهْدِنَا"], "Hanya kepada-Mu kami menyembah dan hanya kepada-Mu kami memohon pertolongan.", "QS. Al-Fatihah: 5", "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ ____"),
             fill('f4', 'Bacaan Sholat', 2, "Lengkapi potongan ayat Al-Fatihah ini:", ["الْمُسْتَقِيمَ", "الْعَالَمِينَ", "الدِّينِ", "الرَّحِيمِ"], "Ihdinash-shiraathal mustaqiim: tunjukilah kami jalan yang lurus.", "QS. Al-Fatihah: 6", "اهْدِنَا الصِّرَاطَ ____"),
-            fill('f5', 'Bacaan Sholat', 1, "Lengkapi bacaan RUKU' berikut:", ["الْعَظِيمِ", "الْأَعْلَى", "الْكَرِيمِ", "الْحَكِيمِ"], "Subhaana rabbiyal 'azhiimi wa bihamdih: Maha Suci Tuhanku Yang Maha Agung.", "HR. Abu Daud no. 870 & An-Nasa'i", "سُبْحَانَ رَبِّيَ ____ وَبِحَمْدِهِ"),
-            fill('f6', 'Bacaan Sholat', 1, "Lengkapi bacaan SUJUD berikut:", ["الْأَعْلَى", "الْعَظِيمِ", "الْكَبِيرِ", "الرَّحِيمِ"], "Subhaana rabbiyal a'laa wa bihamdih: Maha Suci Tuhanku Yang Maha Tinggi.", "HR. Abu Daud no. 870 & An-Nasa'i", "سُبْحَانَ رَبِّيَ ____ وَبِحَمْدِهِ"),
+            fill('f5', 'Bacaan Sholat', 1, "Lengkapi bacaan RUKU' berikut:", ["الْعَظِيمِ", "الْأَعْلَى", "الْكَرِيمِ", "الْحَكِيمِ"], "Subhaana rabbiyal 'azhiim: Maha Suci Tuhanku Yang Maha Agung.", "HR. Muslim no. 772", "سُبْحَانَ رَبِّيَ ____"),
+            fill('f6', 'Bacaan Sholat', 1, "Lengkapi bacaan SUJUD berikut:", ["الْأَعْلَى", "الْعَظِيمِ", "الْكَبِيرِ", "الرَّحِيمِ"], "Subhaana rabbiyal a'laa: Maha Suci Tuhanku Yang Maha Tinggi.", "HR. Muslim no. 772", "سُبْحَانَ رَبِّيَ ____"),
             fill('f7', 'Bacaan Sholat', 2, "Lengkapi bacaan duduk di antara dua sujud:", ["اغْفِرْ", "ارْحَمْ", "ارْزُقْ", "اهْدِ"], "Rabbighfir lii: Wahai Tuhanku ampunilah aku.", "HR. Abu Daud no. 874 & Ibn Majah", "رَبِّ ____ لِي"),
             fill('f8', 'Bacaan Sholat', 2, "Lengkapi doa setelah wudhu:", ["التَّوَّابِينَ", "الْمُتَطَهِّرِينَ", "الصَّالِحِينَ", "الْمُؤْمِنِينَ"], "Ya Allah, jadikanlah aku termasuk orang-orang yang bertaubat.", "HR. At-Tirmidzi no. 55", "اللَّهُمَّ اجْعَلْنِي مِنَ ____"),
             fill('f9', 'Bacaan Sholat', 2, "Lengkapi bacaan tasyahud:", ["الطَّيِّبَاتُ", "الصَّالِحَاتُ", "الْبَرَكَاتُ", "الْحَسَنَاتُ"], "Segala penghormatan, sholawat, dan kebaikan adalah milik Allah.", "HR. Bukhari no. 6265 & Muslim no. 402", "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَ____"),
             fill('f10', 'Bacaan Sholat', 3, "Lengkapi bacaan i'tidal:", ["مُبَارَكًا", "كَثِيرًا", "طَيِّبًا", "عَظِيمًا"], "Pujian yang banyak, baik, dan diberkahi di dalamnya.", "HR. Bukhari no. 799", "رَبَّنَا وَلَكَ الْحَمْدُ حَمْدًا كَثِيرًا طَيِّبًا ____ فِيهِ"),
             fill('f11', 'Bacaan Sholat', 3, "Lengkapi doa iftitah:", ["الْمَغْرِبِ", "الْمَشْرِقِ", "الشَّمَالِ", "الْجَنُوبِ"], "Sebagaimana Engkau menjauhkan antara timur dan barat.", "HR. Bukhari no. 744 & Muslim no. 598", "اللَّهُمَّ بَاعِدْ بَيْنِي وَبَيْنَ خَطَايَايَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَ____"),
-            fill('f12', 'Bacaan Sholat', 2, "Lengkapi bacaan salam:", ["رَحْمَةُ", "بَرَكَاتُ", "مَغْفِرَةُ", "جَنَّةُ"], "Semoga keselamatan dan rahmat Allah tercurah kepada kalian.", "HR. Abu Daud no. 996 & At-Tirmidzi no. 295", "السَّلَامُ عَلَيْكُمْ وَ____ اللَّهِ"),
+            fill('f12', 'Bacaan Sholat', 2, "Lengkapi bacaan salam:", ["رَحْمَةُ", "بَرَكَاتُ", "مَغْفِرَةُ", "جَنَّةُ"], "Semoga keselamatan dan rahmat Allah tercurah kepada kalian.", "HR. An-Nasa'i no. 1325 & At-Tirmidzi no. 295", "السَّلَامُ عَلَيْكُمْ وَ____ اللَّهِ"),
             fill('f13', 'Wudhu', 2, "Lengkapi hadits tentang basmalah dalam wudhu:", ["اسْمَ اللَّهِ", "الْبَسْمَلَةَ", "الدُّعَاءَ", "النِّيَّةَ"], "Tidak ada wudhu bagi orang yang tidak menyebut nama Allah atasnya.", "HR. Abu Daud no. 101", "لَا وُضُوءَ لِمَنْ لَمْ يَذْكُرِ ____ عَلَيْهِ"),
             fill('f14', 'Wudhu', 2, "Lengkapi hadits ancaman wudhu tidak sempurna:", ["النَّارِ", "الْمَاءِ", "الْأَرْضِ", "الْجَنَّةِ"], "Celakalah bagi tumit-tumit dari api neraka.", "HR. Bukhari no. 60 & Muslim no. 242", "وَيْلٌ لِلْأَعْقَابِ مِنَ ____"),
 
@@ -1684,10 +3440,10 @@
             fill('h3', 'Dalil Sholat', 2, "Lengkapi jawaban penghuni Saqar:", ["الْمُصَلِّينَ", "الْمُتَطَهِّرِينَ", "التَّوَّابِينَ", "الصَّالِحِينَ"], "Dahulu kami tidak termasuk orang-orang yang melaksanakan sholat.", "QS. Al-Muddaththir: 42-43", "مَا سَلَكَكُمْ فِي سَقَرَ . قَالُوا لَمْ نَكُ مِنَ ____"),
             fill('h4', 'Dalil Sholat', 2, "Lengkapi hadits tentang batas antara keimanan dan kekafiran:", ["الصَّلاَةِ", "الزَّكَاةِ", "الْوُضُوءِ", "الْمَاءِ"], "Batasan antara seseorang dengan kesyirikan dan kekafiran adalah meninggalkan sholat.", "HR. Muslim no. 82", "إِنَّ بَيْنَ الرَّجُلِ وَبَيْنَ الشِّرْكِ وَالْكُفْرِ تَرْكَ ____"),
             fill('h5', 'Syarat Sah Sholat', 2, "Lengkapi hadits tentang wudhu dan diterimanya sholat:", ["يَتَوَضَّأَ", "يَسْتَيْقِظَ", "يَعْقِلَ", "يَحْتَلِمَ"], "Tidak diterima sholat orang yang berhadats hingga ia berwudhu.", "HR. Bukhari no. 135", "لَا تُقْبَلُ صَلَاةُ مَنْ أَحْدَثَ حَتَّى ____"),
-            fill('h6', 'Wudhu', 1, "Lengkapi hadits tentang sunnah sebelum wudhu:", ["بِالسِّوَاكِ", "بِالصَّلَاةِ", "بِالْمَاءِ", "بِالنَّارِ"], "Seandainya tidak memberatkan umatku, niscaya aku perintahkan mereka bersiwak setiap kali wudhu.", "HR. Ahmad", "لَوْلَا أَنْ أَشُقَّ عَلَى أُمَّتِي لَأَمَرْتُهُمْ ____ عِنْدَ كُلِّ وُضُوءٍ"),
-            fill('h7', 'Wudhu', 3, "Lengkapi hadits tentang mendahulukan anggota kanan:", ["التَّيَمُّنُ", "التَّسْبِيحُ", "التَّكْبِيرُ", "التَّحِيَّاتُ"], "Nabi menyukai mendahulukan yang kanan saat memakai sandal, menyisir, bersuci, dan dalam segala urusannya.", "HR. Bukhari no. 168 & Muslim no. 268", "كَانَ النَّبِيُّ ﷺ يُعْجِبُهُ ____ فِي تَنَعُّلِهِ وَتَرَجُّلِهِ وَطُهُورِهِ وَفِي شَأْنِهِ كُلِّهِ"),
+            fill('h6', 'Wudhu', 1, "Lengkapi hadits tentang sunnah bersiwak:", ["بِالسِّوَاكِ", "بِالصَّلَاةِ", "بِالْمَاءِ", "بِالنَّارِ"], "Seandainya aku tidak memberatkan umatku, niscaya aku akan memerintahkan mereka bersiwak setiap kali shalat.", "HR. Muslim no. 252", "لَوْلاَ أَنْ أَشُقَّ عَلَى الْمُؤْمِنِينَ لأَمَرْتُهُمْ ____ عِنْدَ كُلِّ صَلاَةٍ"),
+            fill('h7', 'Wudhu', 3, "Lengkapi hadits tentang mendahulukan anggota kanan:", ["التَّيَمُّنُ", "التَّسْبِيحُ", "التَّكْبِيرُ", "التَّحِيَّاتُ"], "Nabi menyukai mendahulukan yang kanan saat memakai sandal, menyisir, bersuci, dan dalam segala urusannya.", "HR. Bukhari no. 168", "كَانَ النَّبِيُّ ﷺ يُعْجِبُهُ ____ فِي تَنَعُّلِهِ وَتَرَجُّلِهِ وَطُهُورِهِ وَفِي شَأْنِهِ كُلِّهِ"),
             fill('h8', 'Syarat Sah Sholat', 2, "Lengkapi ayat tentang menghadap kiblat:", ["الْمَسْجِدِ", "الْمَشْرِقِ", "الْمَغْرِبِ", "الْعَالَمِينَ"], "Maka hadapkanlah wajahmu ke arah Masjidil Haram.", "QS. Al-Baqarah: 144", "فَوَلِّ وَجْهَكَ شَطْرَ ____ الْحَرَامِ"),
-            fill('h9', 'Syarat Sah Sholat', 2, "Lengkapi hadits tentang niat:", ["النِّيَّاتِ", "الصَّلَوَاتِ", "الطَّيِّبَاتِ", "الْحَسَنَاتِ"], "Amal tergantung niatnya.", "HR. Bukhari no. 1 & Muslim no. 1907", "إِنَّمَا الْأَعْمَالُ بِ____، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى"),
+            fill('h9', 'Syarat Sah Sholat', 2, "Lengkapi hadits tentang niat:", ["النِّيَّاتِ", "الصَّلَوَاتِ", "الطَّيِّبَاتِ", "الْحَسَنَاتِ"], "Amal tergantung niatnya.", "HR. Bukhari no. 1", "إِنَّمَا الْأَعْمَالُ بِ____، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى"),
             fill('h10', 'Wudhu', 1, "Lengkapi ayat tentang tata cara wudhu:", ["ٱلْمَرَافِقِ", "ٱلْكَعْبَيْنِ", "ٱلصَّلَوٰةِ", "بِرُءُوسِكُمْ"], "Basuhlah wajahmu dan tanganmu sampai siku.", "QS. Al-Ma'idah: 6", "فَٱغْسِلُوا۟ وُجُوهَكُمْ وَأَيْدِيَكُمْ إِلَى ____"),
             fill('h11', 'Bacaan Sholat', 2, "Lengkapi shalawat ibrahimiyyah:", ["إِبْرَاهِيمَ", "الْمُصَلِّينَ", "الصَّالِحِينَ", "الْمُؤْمِنِينَ"], "Sebagaimana Engkau bershalawat atas Ibrahim dan keluarga Ibrahim.", "Bacaan Sholat: Shalawat Ibrahimiyyah", "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى ____ وَعَلَى آلِ إِبْرَاهِيمَ"),
             fill('h12', 'Bacaan Sholat', 1, "Lengkapi akhir surat Al-Fatihah:", ["الضَّالِّينَ", "الْمُسْتَقِيمَ", "الدِّينِ", "الرَّحِيمِ"], "Bukan jalan mereka yang dimurkai dan bukan pula jalan mereka yang sesat.", "QS. Al-Fatihah: 7", "غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا ____"),
@@ -1700,17 +3456,17 @@
             tf('t3', 'Pembatal Sholat', 1, "Berbicara dengan sengaja di tengah sholat membatalkan sholat.", true, "Sholat tidak boleh dicampuri perkataan manusia.", "HR. Muslim no. 537"),
             tf('t4', 'Syarat Sah Sholat', 1, "Anak yang sudah mumayyiz (sekitar 7 tahun) sah sholatnya.", true, "Mumayyiz adalah salah satu syarat sah sholat.", "HR. Abu Daud no. 495"),
             tf('t5', 'Wudhu', 2, "Orang yang berakal dan orang yang kehilangan akal sama-sama sah wudhunya.", false, "Berakal adalah syarat sah wudhu; orang gila/pingsan wudhunya tidak sah.", "Syarat Sah Wudhu"),
-            tf('t6', 'Gerakan Sholat', 1, "Duduk di antara dua sujud memakai duduk tawarruk.", false, "Antara dua sujud memakai iftirasy; tawarruk dipakai pada tasyahud akhir.", "HR. Abu Daud no. 850"),
+            tf('t6', 'Gerakan Sholat', 1, "Duduk di antara dua sujud memakai duduk tawarruk.", false, "Antara dua sujud memakai iftirasy; tawarruk dipakai pada tasyahud akhir.", "HR. Muslim no. 498 & Bukhari no. 828"),
             tf('t7', 'Dalil Sholat', 2, "Sholat lima waktu menghapus dosa apa pun tanpa syarat.", false, "Penghapusan dosa berlaku selama tidak melakukan dosa-dosa besar.", "HR. Muslim no. 233"),
             tf('t8', 'Syarat Sah Sholat', 1, "Sholat yang dikerjakan sebelum masuk waktunya tetap sah.", false, "Sholat adalah kewajiban yang ditetapkan waktunya.", "QS. An-Nisa: 103"),
             tf('t9', 'Pembatal Sholat', 1, "Makan dan minum dengan sengaja membatalkan sholat.", true, "Termasuk hal yang membatalkan sholat.", "Fikih Syafi'i"),
-            tf('t10', 'Pembatal Sholat', 2, "Mendahului imam dengan sengaja termasuk perbuatan yang diancam dalam hadits.", true, "Diancam Allah mengubah kepalanya menjadi kepala keledai.", "HR. Bukhari no. 691 & Muslim no. 427"),
+            tf('t10', 'Pembatal Sholat', 2, "Mendahului imam dengan sengaja termasuk perbuatan yang diancam dalam hadits.", true, "Diancam Allah mengubah kepalanya menjadi kepala keledai.", "HR. Muslim no. 427"),
             tf('t11', 'Wudhu', 1, "Tertib (berurutan) termasuk rukun wudhu.", true, "Tertib adalah salah satu dari enam rukun wudhu.", "Rukun Wudhu"),
-            tf('t12', 'Gerakan Sholat', 1, "Salam pertama diucapkan sambil menoleh ke kiri.", false, "Salam pertama menoleh ke kanan hingga pipi terlihat dari belakang.", "HR. Muslim no. 582"),
+            tf('t12', 'Gerakan Sholat', 1, "Salam pertama diucapkan sambil menoleh ke kiri.", false, "Salam dimulai ke kanan, lalu ke kiri, hingga terlihat putih pipi beliau.", "HR. Muslim no. 582"),
             tf('t13', 'Wudhu', 2, "Doa setelah wudhu dibaca sambil menghadap kiblat (langkah 8 tata cara wudhu).", true, "Langkah 8: menghadap kiblat dan membaca doa kesaksian.", "Tata Cara Wudhu"),
             tf('t14', 'Syarat Sah Sholat', 2, "Terbukanya aurat dengan sengaja membatalkan sholat.", true, "Termasuk hal yang membatalkan sholat.", "QS. Al-A'raf: 31"),
             tf('t15', 'Wudhu', 3, "Basmalah saat wudhu termasuk rukun wudhu.", false, "Basmalah termasuk sunnah wudhu; rukunnya ada enam (niat, muka, tangan, kepala, kaki, tertib).", "HR. Abu Daud no. 101"),
-            tf('t16', 'Gerakan Sholat', 2, "Tangan diangkat sejajar bahu atau telinga saat takbiratul ihram.", true, "Dilakukan sambil mengucapkan 'Allahu Akbar'.", "HR. Bukhari no. 757"),
+            tf('t16', 'Gerakan Sholat', 2, "Tangan diangkat sejajar bahu atau telinga saat takbiratul ihram.", true, "Dilakukan sambil bertakbir; sejajar bahu atau telinga.", "HR. Muslim no. 390 & no. 401"),
 
             // ---- Susun urutan
             order('o1', 'Wudhu', 1, "Urutkan anggota wudhu sesuai urutan dalam QS. Al-Ma'idah: 6:", ["Wajah", "Kedua tangan sampai siku", "Kepala", "Kedua kaki sampai mata kaki"], "Urutannya: wajah, tangan sampai siku, usap kepala, kaki sampai mata kaki.", "QS. Al-Ma'idah: 6"),
@@ -1733,13 +3489,15 @@
         const QUIZ_AR = {
             d1: "وَأَقِيمُوا۟ ٱلصَّلَوٰةَ وَءَاتُوا۟ ٱلزَّكَوٰةَ وَٱرْكَعُوا۟ مَعَ ٱلرَّٰكِعِينَ",
             d2: "بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلاَةِ، وَإِيتَاءِ الزَّكَاةِ، وَالحَجِّ، وَصَوْمِ رَمَضَانَ",
-            d4: "أَرَأَيْتُمْ لَوْ أَنَّ نَهَرًا بِبَابِ أَحَدِكُمْ يَغْتَسِلُ مِنْهُ كُلَّ يَوْمٍ خَمْسَ مَرَّاتٍ، هَلْ يَبْقَى مِنْ دَرَنِهِ شَيْءٌ؟ قَالُوا: لاَ يَبْقَى مِنْ دَرَنِهِ شَيْءٌ، قَالَ: فَذَلِكَ مَثَلُ الصَّلَوَاتِ الْخَمْسِ، يَمْحُو اللَّهُ بِهِنَّ الْخَطَايَا",
+            d4: "أَرَأَيْتُمْ لَوْ أَنَّ نَهَرًا بِبَابِ أَحَدِكُمْ، يَغْتَسِلُ فِيهِ كُلَّ يَوْمٍ خَمْسًا، مَا تَقُولُ ذَلِكَ يُبْقِي مِنْ دَرَنِهِ. قَالُوا لاَ يُبْقِي مِنْ دَرَنِهِ شَيْئًا. قَالَ  فَذَلِكَ مِثْلُ الصَّلَوَاتِ الْخَمْسِ، يَمْحُو اللَّهُ بِهَا الْخَطَايَا.",
             d5: "إِنَّ ٱلصَّلَوٰةَ تَنْهَىٰ عَنِ ٱلْفَحْشَآءِ وَٱلْمُنكَرِ ۗ وَلَذِكْرُ ٱللَّهِ أَكْبَرُ",
             d6: "إِنَّ بَيْنَ الرَّجُلِ وَبَيْنَ الشِّرْكِ وَالْكُفْرِ تَرْكَ الصَّلاَةِ",
             d7: "مَا سَلَكَكُمْ فِي سَقَرَ . قَالُوا لَمْ نَكُ مِنَ الْمُصَلِّينَ",
             w6: "مَا مِنْكُمْ مِنْ أَحَدٍ يَتَوَضَّأُ فَيُبْلِغُ أَوْ فَيُسْبِغُ الْوُضُوءَ ثُمَّ يَقُولُ أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَنَّ مُحَمَّدًا عَبْدُ اللَّهِ وَرَسُولُهُ إِلَّا فُتِحَتْ لَهُ أَبْوَابُ الْجَنَّةِ الثَّمَانِيَةُ يَدْخُلُ مِنْ أَيِّهَا شَاءَ",
-            w10: "لَوْلَا أَنْ أَشُقَّ عَلَى أُمَّتِي لَأَمَرْتُهُمْ بِالسِّوَاكِ عِنْدَ كُلِّ وُضُوءٍ",
-            w12: "لَا وُضُوءَ لِمَنْ لَمْ يَذْكُرِ اسْمَ اللَّهِ عَلَيْهِ",
+            s2: "إِذَا زَوَّجَ أَحَدُكُمْ خَادِمَهُ عَبْدَهُ أَوْ أَجِيرَهُ فَلاَ يَنْظُرْ إِلَى مَا دُونَ السُّرَّةِ وَفَوْقَ الرُّكْبَةِ",
+            s3: "يَا أَسْمَاءُ إِنَّ الْمَرْأَةَ إِذَا بَلَغَتِ الْمَحِيضَ لَمْ تَصْلُحْ أَنْ يُرَى مِنْهَا إِلاَّ هَذَا وَهَذَا . وَأَشَارَ إِلَى وَجْهِهِ وَكَفَّيْهِ",
+            w10: "لَوْلاَ أَنْ أَشُقَّ عَلَى أُمَّتِي ـ أَوْ عَلَى النَّاسِ ـ لأَمَرْتُهُمْ بِالسِّوَاكِ مَعَ كُلِّ صَلاَةٍ",
+            w12: "لاَ صَلاَةَ لِمَنْ لاَ وُضُوءَ لَهُ وَلاَ وُضُوءَ لِمَنْ لَمْ يَذْكُرِ اسْمَ اللَّهِ تَعَالَى عَلَيْهِ",
             p2: "أَمَا يَخْشَى الَّذِي يَرْفَعُ رَأْسَهُ قَبْلَ الْإِمَامِ أَنْ يُحَوِّلَ اللَّهُ رَأْسَهُ رَأْسَ حِمَارٍ",
             p3: "إِنَّ هَذِهِ الصَّلَاةَ لَا يَصْلُحُ فِيهَا شَيْءٌ مِنْ كَلَامِ النَّاسِ، إِنَّمَا هُوَ التَّسْبِيحُ وَالتَّكْبِيرُ وَقِرَاءَةُ الْقُرْآنِ"
         };
@@ -2212,8 +3970,8 @@
             searchPrevState = {
                 tab: activeTab ? activeTab.id.replace('content-', '') : 'home',
                 wudhuSub: activeWudhu ? activeWudhu.id.replace('wudhu-sub-', '') : 'wudhu-langkah',
-                sholatSub: document.getElementById('sholat-bacaan-container').classList.contains('hidden')
-                    ? 'sholat-gerakan' : 'sholat-bacaan'
+                sholatSub: ['bacaan', 'ragam'].map(n => 'sholat-' + n)
+                    .find(id => !document.getElementById(id + '-container').classList.contains('hidden')) || 'sholat-gerakan'
             };
         }
 
@@ -2226,6 +3984,8 @@
             switchTab(prev.tab, true);
             switchWudhuSub(prev.tab === 'wudhu' ? prev.wudhuSub : 'wudhu-langkah');
             switchSholatSub(prev.tab === 'rukun' ? prev.sholatSub : 'sholat-gerakan');
+            document.getElementById('ragam-nav').classList.remove('hidden');
+            showRagamGroup(ragamActive);
             searchPrevState = null;
         }
 
@@ -2242,6 +4002,9 @@
             document.querySelectorAll('.wudhu-sub-content').forEach(el => el.classList.remove('hidden'));
             document.getElementById('sholat-gerakan-container').classList.remove('hidden');
             document.getElementById('sholat-bacaan-container').classList.remove('hidden');
+            document.getElementById('sholat-ragam-container').classList.remove('hidden');
+            document.querySelectorAll('.ragam-group').forEach(el => el.classList.remove('hidden'));
+            document.getElementById('ragam-nav').classList.add('hidden');
 
             let total = 0;
             document.querySelectorAll('.tab-content').forEach(section => {
@@ -2256,6 +4019,10 @@
                     section.classList.remove('hidden');
                     total += matches;
                 }
+            });
+
+            document.querySelectorAll('.ragam-group').forEach(g => {
+                g.classList.toggle('hidden', !g.querySelector('.search-item:not(.hidden)'));
             });
 
             const safeQuery = query.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
