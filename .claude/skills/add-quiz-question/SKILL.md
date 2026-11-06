@@ -1,11 +1,11 @@
 ---
 name: add-quiz-question
-description: Add or edit multiple-choice, fill-in, true/false, ordering or matching questions in the quiz bank (quizBank in index.html). Use when expanding the Kuis tab.
+description: Add or edit multiple-choice, fill-in, true/false, ordering or matching questions in the quiz bank (quizBank in js/data/quiz.js). Use when expanding the Kuis tab.
 ---
 
 # add-quiz-question
 
-Questions live in `quizBank` inside `index.html`, built with helpers (see the comment above `const mc`).
+Questions live in `quizBank` inside `js/data/quiz.js`, built with helpers (see the comment above `const mc`).
 
 **Hard rule:** every question must come from content already shown in the app (dalil, steps, per-word meanings). Do not introduce new hadith, rulings, or numbers via the quiz. `src` must name the app section/dalil it is based on, and `exp` should restate the app text.
 

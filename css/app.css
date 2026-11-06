@@ -1,0 +1,211 @@
+/* Tema warna: skala utama (--p-*) dan aksen (--g-*) dipakai kelas emerald-* dan gold-* lewat tailwind.config.
+   Tema dipilih lewat data-theme pada <html> (default: langit). */
+:root {
+    --p-50: 242 248 253;
+    --p-100: 226 239 250;
+    --p-200: 200 224 245;
+    --p-300: 168 205 236;
+    --p-400: 138 186 226;
+    --p-500: 113 166 214;
+    --p-600: 94 148 198;
+    --p-700: 78 128 176;
+    --p-800: 66 110 154;
+    --p-900: 55 94 133;
+    --p-950: 44 77 112;
+    --g-400: 254 215 170;
+    --g-500: 253 186 116;
+    --g-600: 240 145 74;
+}
+[data-theme="zamrud"] {
+    --p-50: 236 253 245;
+    --p-100: 209 250 229;
+    --p-200: 167 243 208;
+    --p-300: 110 231 183;
+    --p-400: 52 211 153;
+    --p-500: 16 185 129;
+    --p-600: 5 150 105;
+    --p-700: 4 120 87;
+    --p-800: 6 95 70;
+    --p-900: 6 78 59;
+    --p-950: 2 44 34;
+    --g-400: 251 191 36;
+    --g-500: 245 158 11;
+    --g-600: 217 119 6;
+}
+[data-theme="taman"] {
+    --p-50: 243 250 246;
+    --p-100: 227 244 234;
+    --p-200: 200 232 214;
+    --p-300: 166 216 189;
+    --p-400: 132 198 162;
+    --p-500: 108 177 145;
+    --p-600: 90 158 130;
+    --p-700: 77 139 114;
+    --p-800: 68 122 100;
+    --p-900: 58 105 85;
+    --p-950: 47 87 70;
+    --g-400: 254 215 170;
+    --g-500: 253 186 116;
+    --g-600: 240 145 74;
+}
+[data-theme="senja"] {
+    --p-50: 247 244 253;
+    --p-100: 237 231 250;
+    --p-200: 221 210 245;
+    --p-300: 198 182 236;
+    --p-400: 172 152 224;
+    --p-500: 150 128 211;
+    --p-600: 129 104 196;
+    --p-700: 112 89 176;
+    --p-800: 98 80 158;
+    --p-900: 85 68 140;
+    --p-950: 70 55 122;
+    --g-400: 253 230 138;
+    --g-500: 252 211 77;
+    --g-600: 245 158 11;
+}
+[data-theme="coklat"] {
+    --p-50: 251 247 243;
+    --p-100: 243 234 224;
+    --p-200: 230 213 195;
+    --p-300: 212 185 156;
+    --p-400: 191 153 112;
+    --p-500: 166 124 82;
+    --p-600: 139 98 64;
+    --p-700: 114 78 51;
+    --p-800: 93 63 42;
+    --p-900: 74 50 34;
+    --p-950: 51 35 26;
+    --g-400: 251 191 36;
+    --g-500: 245 158 11;
+    --g-600: 217 119 6;
+}
+/* Tema pastel/hangat: latar halaman diberi semburat warna tema */
+:root body { background-color: #f4f9fd; }
+[data-theme="taman"] body { background-color: #f3faf6; }
+[data-theme="senja"] body { background-color: #f8f5fd; }
+[data-theme="coklat"] body { background-color: #faf6f1; }
+/* Gelap: hitam-abu-abu netral. Skala --p-* menjadi abu-abu untuk header/tombol (gelap), sedangkan permukaan terang
+   (bg-white, bg-slate-*, bg-emerald-50/100, bg-red/amber-50) dan teks gelap di atasnya dibalik lewat aturan di bawah. */
+[data-theme="gelap"] {
+    --p-50: 250 250 250;
+    --p-100: 229 229 229;
+    --p-200: 212 212 212;
+    --p-300: 189 189 189;
+    --p-400: 163 163 163;
+    --p-500: 115 115 115;
+    --p-600: 107 107 107;
+    --p-700: 64 64 64;
+    --p-800: 38 38 38;
+    --p-900: 23 23 23;
+    --p-950: 10 10 10;
+    --g-400: 251 191 36;
+    --g-500: 245 158 11;
+    --g-600: 217 119 6;
+    color-scheme: dark;
+}
+[data-theme="gelap"] body { background-color: #0f0f10; color: #e5e5e5; }
+[data-theme="gelap"] .bg-white { background-color: #1c1c1e; }
+[data-theme="gelap"] .bg-slate-50, [data-theme="gelap"] .bg-emerald-50 { background-color: #262628; }
+[data-theme="gelap"] .bg-slate-50\/80, [data-theme="gelap"] .bg-emerald-50\/40 { background-color: #262628; }
+[data-theme="gelap"] .bg-slate-100, [data-theme="gelap"] .bg-emerald-100 { background-color: #2c2c2e; }
+[data-theme="gelap"] .bg-red-50, [data-theme="gelap"] .bg-red-50\/50 { background-color: rgba(239, 68, 68, 0.12); }
+[data-theme="gelap"] .bg-red-100 { background-color: rgba(239, 68, 68, 0.2); }
+[data-theme="gelap"] .bg-amber-50 { background-color: rgba(245, 158, 11, 0.12); }
+[data-theme="gelap"] .bg-amber-100 { background-color: rgba(245, 158, 11, 0.2); }
+[data-theme="gelap"] .border-slate-100, [data-theme="gelap"] .border-slate-200, [data-theme="gelap"] .border-slate-300,
+[data-theme="gelap"] .border-emerald-100, [data-theme="gelap"] .border-emerald-200, [data-theme="gelap"] .border-emerald-300 { border-color: #3a3a3c; }
+[data-theme="gelap"] .border-red-100, [data-theme="gelap"] .border-red-200, [data-theme="gelap"] .border-red-300 { border-color: rgba(239, 68, 68, 0.4); }
+[data-theme="gelap"] .border-l-4.border-emerald-800, [data-theme="gelap"] .border-l-4.border-emerald-900 { border-left-color: rgb(var(--g-500)); }
+[data-theme="gelap"] .text-slate-800, [data-theme="gelap"] .text-emerald-950, [data-theme="gelap"] .text-emerald-900 { color: #ececec; }
+[data-theme="gelap"] .text-slate-700, [data-theme="gelap"] .text-emerald-800 { color: #dcdcdc; }
+[data-theme="gelap"] .text-slate-600, [data-theme="gelap"] .text-emerald-700 { color: #bcbcbc; }
+[data-theme="gelap"] .text-slate-500 { color: #a3a3a3; }
+[data-theme="gelap"] .text-slate-400 { color: #8e8e93; }
+[data-theme="gelap"] .text-red-700, [data-theme="gelap"] .text-red-800, [data-theme="gelap"] .text-red-900 { color: #fca5a5; }
+[data-theme="gelap"] .text-amber-800 { color: #fcd34d; }
+[data-theme="gelap"] .text-emerald-600 { color: #34d399; }
+[data-theme="gelap"] .bg-gold-500.text-emerald-950 { color: #171717; }
+[data-theme="gelap"] .bg-emerald-100.border-emerald-500 { background-color: rgba(16, 185, 129, 0.18); border-color: #10b981; color: #a7f3d0; }
+[data-theme="gelap"] .hover\:bg-emerald-50:hover { background-color: #2c2c2e; }
+[data-theme="gelap"] .hover\:border-emerald-300:hover { border-color: #525252; }
+[data-theme="gelap"] .hover\:bg-slate-200:hover { background-color: #3a3a3c; }
+[data-theme="gelap"] .hover\:text-emerald-900:hover { color: #fff; }
+[data-theme="gelap"] .wudhu-sub-btn.bg-white:hover { background-color: #2c2c2e; color: #fff; }
+[data-theme="gelap"] .infographic-img { background: #2c2c2e; }
+[data-theme="gelap"] ::-webkit-scrollbar-track { background: #1c1c1e; }
+/* Taman (mode anak): sudut lebih bulat */
+[data-theme="taman"] .rounded-2xl { border-radius: 1.75rem; }
+[data-theme="taman"] .rounded-xl { border-radius: 1.25rem; }
+[data-theme="gelap"] .ragam-chip.bg-white:hover { background-color: #2c2c2e; color: #fff; }
+.ragam-nav { scroll-margin-top: 8rem; scrollbar-width: none; }
+.ragam-nav::-webkit-scrollbar { display: none; }
+.ragam-item > summary { list-style: none; }
+.ragam-item > summary::-webkit-details-marker { display: none; }
+.theme-swatch { width: 2rem; height: 2rem; border-radius: 9999px; border: 2px solid transparent; }
+.theme-swatch.active { border-color: #fff; box-shadow: 0 0 0 2px rgb(var(--g-400)); }
+/* Hover hanya untuk tab tidak aktif (mencegah tab aktif jadi pucat setelah disentuh) */
+@media (hover: hover) {
+    .wudhu-sub-btn.bg-white:hover, .ragam-chip.bg-white:hover { background-color: rgb(var(--p-50)); color: rgb(var(--p-800)); }
+}
+.font-arabic {
+    font-family: 'Amiri', 'Traditional Arabic', serif;
+    line-height: 2.2;
+}
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(var(--p-600));
+    border-radius: 3px;
+}
+.tab-active {
+    border-bottom: 3px solid rgb(var(--g-600));
+    color: rgb(var(--g-400));
+    font-weight: 600;
+}
+.word-badge {
+    transition: all 0.2s ease;
+}
+.word-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+:root {
+    --arabic-size: 28px;
+}
+.arabic-size {
+    font-size: var(--arabic-size);
+}
+.infographic-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #f1f5f9;
+}
+.infographic-trigger {
+    cursor: zoom-in;
+}
+#lightbox {
+    overscroll-behavior: contain;
+}
+#lightbox-scroll {
+    -webkit-overflow-scrolling: touch;
+    touch-action: pinch-zoom;
+}
+details > summary {
+    list-style: none;
+}
+details > summary::-webkit-details-marker {
+    display: none;
+}
+details[open] .details-chevron {
+    transform: rotate(180deg);
+}
+.details-chevron {
+    transition: transform 0.2s ease;
+}

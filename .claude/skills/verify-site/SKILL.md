@@ -1,6 +1,6 @@
 ---
 name: verify-site
-description: Run static checks (manifest JSON, inline JS and sw.js syntax, getElementById and tab ID cross-check, SW precache files) before committing or pushing changes to the Islamic learning PWA.
+description: Run static checks (manifest JSON, JS module and sw.js syntax, window-exposed onclick handlers, getElementById and tab ID cross-check, SW precache files) before committing or pushing changes to the Islamic learning PWA.
 ---
 
 # verify-site

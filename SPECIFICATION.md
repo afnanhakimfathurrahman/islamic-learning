@@ -25,7 +25,9 @@
 
 ```
 islamic-learning/
-├── index.html               # Entire SPA: markup, inline <style>, inline <script>
+├── index.html               # Markup only + head scripts (theme bootstrap, tailwind config) + <script type="module" src="./js/main.js">
+├── css/app.css              # Custom styles (themes, details, lightbox, dark overrides)
+├── js/                      # ES modules (native, no bundler) - see section 5.2
 ├── manifest.json            # PWA manifest (id/scope/start_url "./", icons any + maskable)
 ├── sw.js                    # Service worker (stale-while-revalidate, per-asset precache)
 ├── SPECIFICATION.md         # This file: source of truth for AI agents
@@ -183,7 +185,7 @@ Itemized list with detailed explanations, full Matan, translation, and Dalil ref
   - Arabic text paired with word-by-word Indonesian transliteration and literal word meaning grid.
   - Font size setting applies to Arabic recitation via the CSS variable `--arabic-size` (default `28px`, range `20px`–`42px`).
 - **Ragam Bacaan (sub-tab ketiga, `btn-sholat-ragam` / `sholat-ragam-container`)**: daftar pilihan semua riwayat bacaan per gerakan (tujuannya menyediakan opsi, bukan membandingkan), agar tab Bacaan tidak menumpuk. Data `ragamBacaan` (13 grup berurutan sesuai sholat: iftitah, taawudz, fatihah, ruku, bangkit, itidal, sujud, duduk, tasyahud, sholawat, doasalam, salam, dzikir; tiap item: `label`, `tag` pokok|tambahan|alternatif, `arab`, `latin`, `translation`, `source`, `refs[{k,n}]`, `grade`, `madzhab`, `note`). Dirender `renderRagam()`: chip navigasi `#ragam-nav` (id `ragam-chip-<key>`), panel `ragam-g-<key>` (class `ragam-group`, satu tampil sekaligus lewat `showRagamGroup(key)`), kartu `<details class="ragam-item search-item">`, tombol sebelumnya/berikutnya, `toggleRagamAll`. Kartu di tab Bacaan hanya menampilkan tombol "Lihat N pilihan bacaan" (`openRagam(key)`, pemetaan `RAGAM_BY_WORD`). Saat pencarian aktif semua grup dibuka dan grup tanpa hasil disembunyikan; chip disembunyikan.
-  - Sumber isi: latin, terjemah, dan daftar riwayat dari buku "Ragam Bacaan Sholat" (Nor Kandir, Pustaka Syabab, 1447 H); teks Arab, nomor, dan derajat diverifikasi ke Hadits.id. Item yang nomornya tidak ada di Hadits.id tidak dipakai: ta'awwudz lafaz umum dan Ahmad 22179, tasyahud 'Umar (Malik 53), shalawat Ahmad 18104, doa sebelum salam Ahmad 24215, salam satu kali (Tirmidzi 296), serta An-Nasa'i Al-Kubra 9848 dan Ash-Shahihah 114 (dzikir). Abu Daud 873 diriwayatkan 'Auf bin Malik (PDF menulis Aisyah). Nomor hadits ragam digabung otomatis ke Info (`renderInfo`), buku diletakkan di `infoSumber`.
+  - Sumber isi: latin, terjemah, dan daftar riwayat dari buku "Ragam Bacaan Sholat" (Nor Kandir, Pustaka Syabab, 1447 H); teks Arab, nomor, dan derajat diverifikasi ke Hadits.id. Item yang nomornya tidak ada di Hadits.id tidak dipakai: ta'awwudz lafaz umum dan Ahmad 22179, tasyahud 'Umar (Malik 53), shalawat Ahmad 18104, doa sebelum salam Ahmad 24215, salam satu kali (Tirmidzi 296), serta An-Nasa'i Al-Kubra 9848 dan Ash-Shahihah 114 (dzikir). Abu Daud 873 diriwayatkan 'Auf bin Malik (PDF menulis Aisyah). Arti per kata: `js/data/ragam-words.js` (`ragamWords[idItem] = [[latin, arti], ...]`, sejajar dengan Arab yang dipecah per spasi; entri kosong = tanda baca). Dirender `renderRagamWords` sebagai `<details>` "Arti per kata" di tiap kartu; dilewati bila jumlah kata tidak cocok. Glos disusun mengikuti terjemahan masing-masing riwayat (bukan sumber hadits.id), jadi perlu ditinjau bila ada yang janggal; tambahkan entri baru saat menambah riwayat. Nomor hadits ragam digabung otomatis ke Info (`renderInfo`), buku diletakkan di `infoSumber`.
 
 #### Module 5: Yang Membatalkan Sholat
 Itemized list of invalidating conditions with Matan where a specific hadith exists:
@@ -220,7 +222,7 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 
 ---
 
-## 5. Architecture of `index.html`
+## 5. Architecture (`index.html` + `css/` + `js/`)
 
 ### 5.1 DOM conventions (IDs are an API; JS looks them up by string)
 | Purpose | ID / class pattern |
@@ -236,7 +238,9 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 | Info | `tab-info`, `mob-tab-info`, `content-info`, `#info-sumber`, `#info-quran`, `#info-dalil` |
 | Install button | `#pwa-install-btn` (hidden until `beforeinstallprompt`, or iOS Safari not standalone) |
 
-### 5.2 JavaScript map (single inline `<script>`)
+### 5.2 JavaScript map (ES modules in `js/`, loaded by `js/main.js`)
+Layout: `js/main.js` (init, imports everything, exposes inline-handler functions on `window` via `Object.assign(window, {...})`), `js/state.js` (shared mutable state object `state`: `searchActive`, `searchPrevState`, `currentFontSize`, `ragamActive`; imported bindings cannot be reassigned, so mutate `state.*`), `js/nav.js`, `js/search.js`, `js/theme.js`, `js/ui.js` (lightbox, search/settings toggles, font size), `js/bookmarks.js`, `js/quiz.js` (engine + views), `js/pwa.js` (install button + SW registration), `js/views/{content,ragam,info}.js` (renderers), `js/data/{syarat,wudhu,sholat,pembatal,info,ragam,quiz}.js` (content only, `export const`, no logic).
+**Rules**: every `onclick="fn(...)"` (static markup or generated templates) needs `fn` exported from a module AND listed in `main.js` `Object.assign(window, ...)` (verify-site checks this). Data modules must not import logic modules. Add new content to `js/data/*`; add new behaviour in the matching module, not in `index.html`. Head scripts stay inline on purpose (theme must apply before first paint; Tailwind CDN reads `tailwind.config`).
 - Data arrays: `syaratData`, `wudhuStepsData`, `sholatStepsData`, `bacaanSholatWords`, `pembatalData`. Rendered by `renderSyarat/renderWudhuSteps/renderSholatSteps/renderSholatWords/renderPembatal` (and `renderDalilDetails` for collapsible matan).
 - Navigation: `switchTab(tabId, skipSearchReset)`, `switchWudhuSub(subId)` (accepts `'wudhu-langkah'` or `'langkah'`; null-safe), `switchSholatSub('sholat-gerakan'|'sholat-bacaan'|'sholat-ragam')`.
 - Search: `toggleSearch`, `handleSearch`, `enterSearchMode` (snapshots active tab and sub-tabs), `exitSearchMode` (restores them). While searching, all sub-panels are un-hidden so matches in any sub-tab show.
@@ -254,7 +258,7 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 
 ### 5.4 PWA / Service worker
 - Strategy: stale-while-revalidate for all GET requests; precache list `ASSETS_TO_CACHE` is added one-by-one (`cache.add(...).catch`), so a failing CDN URL does not abort install.
-- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v34`.
+- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v36`. Every new file under `js/` or `css/` must also be added to `ASSETS_TO_CACHE` (verify-site checks this).
 - Installability needs: valid manifest, 192/512 icons, active SW, HTTPS. Chrome will not fire `beforeinstallprompt` if the app is already installed.
 
 ---
@@ -268,7 +272,7 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 6. **UI Consistency**: Emerald/gold scheme, `Amiri` for Arabic, collapsible `<details>` for long matan.
 7. **PWA Correctness**: Register only `./sw.js`; no blob: service workers; keep manifest `scope`/`start_url` as `./`.
 8. **ID contract**: When renaming or adding a tab/sub-tab, update the button ID, panel ID, the `onclick` argument, and the JS that references them together (see 5.1). Guard `getElementById` results against `null`.
-9. **No build step**: Keep it a single static `index.html`; do not introduce bundlers without the owner's approval.
+9. **No build step**: Plain static files and native ES modules (`<script type="module">`, relative imports with `.js` extension); do not introduce bundlers or frameworks without the owner's approval. The owner approved the split of the old single `index.html` into `css/` + `js/` modules (2026-11-05).
 10. **Language**: UI copy and docs are Indonesian; code identifiers in English/Indonesian mix as already present. Match the surrounding style.
 
 ## 7. Agent Skills
