@@ -246,7 +246,7 @@ Layout: `js/main.js` (init, imports everything, exposes inline-handler functions
 - Search: `toggleSearch`, `handleSearch`, `enterSearchMode` (snapshots active tab and sub-tabs), `exitSearchMode` (restores them). While searching, all sub-panels are un-hidden so matches in any sub-tab show.
 - Settings: `toggleSettings`, `changeFontSize(delta)` (CSS var `--arabic-size`, default 28px, 20-42px).
 - Lightbox: `openLightbox(src, title)`, `closeLightbox(event)`.
-- Bookmarks: `bookmarkItem(id)`, `renderBookmarks()`; persisted in `localStorage['sholat_bookmarks']` (JSON array of ids).
+- Bookmarks (`js/bookmarks.js`): setiap kartu `.search-item` WAJIB punya `data-bm="<id-stabil>"` (static: tulis manual, mis. `dalil-wajib`; dari data: `syarat-${bmSlug(judul)}`, `wudhu-langkah-N`, `gerakan-<slug>`, `bacaan-<idx>`, `pembatal-<slug>`, `ragam-<idItem>`) dan opsional `data-bm-title`. `decorateBookmarks()` menyuntikkan tombol bookmark (`[data-bm-btn]`) ke semua kartu (sudut kanan atas; di baris judul untuk kartu `<details>`; di akhir untuk kartu `flex`), jadi jangan menulis tombol manual. Id disimpan di `localStorage['sholat_bookmarks']` (JSON array); jangan ganti id yang sudah rilis karena favorit pengguna menunjuk ke sana. Tab Favorit (`renderBookmarks`) menampilkan daftar per menu dengan breadcrumb (tab > sub-tab > grup), cuplikan, tombol buka (`goToBookmark`: pindah tab/sub-tab/grup ragam, buka akordeon, gulir dan kedipkan kartu) dan tombol hapus per item serta "Hapus semua". Semua klik memakai satu pendengar delegasi (`data-bm-btn|go|del|clear`), tidak ada handler inline. Menu Favorit ada di bar atas dan di navigasi bawah mobile (`mob-tab-bookmarks`).
 - Quiz: data `quizBank` (helper `mc/fill/tf/order/match`), state `quizProgress`/`quizRound`, fungsi `quizStart`, `quizChoose`, `quizOrderAdd/Remove/Check`, `quizMatchLeft/Right/Check`, `quizNext`, `quizEndRound`, `quizNextLevel`, `quizReset`, render `renderQuiz` (`quizViewHome/Question/Result`).
 - PWA: `beforeinstallprompt` handler stores `deferredInstallPrompt`; install button calls `.prompt()`; `appinstalled` hides the button; iOS shows an "Add to Home Screen" alert. Service worker registered on `load` via `./sw.js`.
 
@@ -258,7 +258,7 @@ Layout: `js/main.js` (init, imports everything, exposes inline-handler functions
 
 ### 5.4 PWA / Service worker
 - Strategy: stale-while-revalidate for all GET requests; precache list `ASSETS_TO_CACHE` is added one-by-one (`cache.add(...).catch`), so a failing CDN URL does not abort install.
-- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v36`. Every new file under `js/` or `css/` must also be added to `ASSETS_TO_CACHE` (verify-site checks this).
+- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v37`. Every new file under `js/` or `css/` must also be added to `ASSETS_TO_CACHE` (verify-site checks this).
 - Installability needs: valid manifest, 192/512 icons, active SW, HTTPS. Chrome will not fire `beforeinstallprompt` if the app is already installed.
 
 ---

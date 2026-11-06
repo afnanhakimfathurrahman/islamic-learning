@@ -32,6 +32,11 @@ for n in re.findall(r"switchWudhuSub\('(?:wudhu-)?([^']+)'\)", src):
 for n in re.findall(r"switchTab\('([^']+)'\)", src):
     for need in (f'content-{n}', f'tab-{n}'):
         if need not in ids: print('MISSING tab id:', need); ok = False
+# setiap kartu .search-item wajib punya data-bm unik agar bisa difavoritkan
+for tag in re.findall(r'<(?:div|details)\b[^>]*\bsearch-item\b[^>]*>', src):
+    if 'data-bm=' not in tag: print('CARD without data-bm:', tag[:100]); ok = False
+statics = re.findall(r'<(?:div|details)\b[^>]*\bdata-bm="([^"$]+)"', s)
+if len(statics) != len(set(statics)): print('DUPLICATE static data-bm'); ok = False
 # handler inline (onclick="fn()") harus diekspos di window lewat js/main.js
 main = open('js/main.js').read()
 exposed = set(re.findall(r'\b(\w+)\b', main[main.index('Object.assign(window'):]))

@@ -1,4 +1,4 @@
-import { bookmarkItem, renderBookmarks } from './bookmarks.js';
+import { decorateBookmarks, renderBookmarks } from './bookmarks.js';
 import { goToDoaWudhu, switchSholatSub, switchTab, switchWudhuSub } from './nav.js';
 import { quizChoose, quizHome, quizMatchCheck, quizMatchLeft, quizMatchRight, quizNext, quizNextLevel, quizOrderAdd, quizOrderCheck, quizOrderRemove, quizReset, quizStart, renderQuiz } from './quiz.js';
 import { handleSearch } from './search.js';
@@ -20,6 +20,7 @@ function init() {
     renderPembatal();
     renderInfo();
     renderQuiz();
+    decorateBookmarks();
     renderBookmarks();
 }
 
@@ -29,7 +30,6 @@ init();
 // Handler inline di markup (onclick="...") mencari fungsi global, jadi diekspos lewat window
 Object.assign(window, {
     applyTheme,
-    bookmarkItem,
     changeFontSize,
     closeLightbox,
     goToDoaWudhu,

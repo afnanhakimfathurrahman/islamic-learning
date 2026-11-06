@@ -209,3 +209,7 @@ details[open] .details-chevron {
 .details-chevron {
     transition: transform 0.2s ease;
 }
+
+/* Kartu yang baru dibuka dari daftar Favorit berkedip sebentar */
+@keyframes bm-flash { 0%, 70% { box-shadow: 0 0 0 4px rgb(var(--g-400)); } 100% { box-shadow: 0 0 0 0 transparent; } }
+.bm-flash { animation: bm-flash 2.2s ease-out; }

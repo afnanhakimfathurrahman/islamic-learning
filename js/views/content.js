@@ -1,3 +1,4 @@
+import { bmSlug } from '../bookmarks.js';
 import { pembatalData } from '../data/pembatal.js';
 import { ragamBacaan } from '../data/ragam.js';
 import { bacaanSholatWords, bacaanVariants, sholatStepsData } from '../data/sholat.js';
@@ -32,7 +33,7 @@ export function renderDalilDetails(item) {
 export function renderSyarat() {
     const container = document.getElementById('syarat-container');
     container.innerHTML = syaratData.map(item => `
-        <div class="search-item bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:border-gold-400 transition">
+        <div data-bm="syarat-${bmSlug(item.title)}" class="search-item bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:border-gold-400 transition">
             <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
                 <h4 class="font-bold text-emerald-950">${item.title}</h4>
                 <span class="text-[11px] px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-semibold whitespace-nowrap">${item.dalil}</span>
@@ -47,7 +48,7 @@ export function renderSyarat() {
 export function renderWudhuSteps() {
     const container = document.getElementById('wudhu-steps-grid');
     container.innerHTML = wudhuStepsData.map(step => `
-        <div class="search-item bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:border-emerald-300 hover:shadow-md transition">
+        <div data-bm="wudhu-langkah-${step.step}" class="search-item bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:border-emerald-300 hover:shadow-md transition">
             <div class="flex items-start gap-3">
                 <div class="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-emerald-900 text-gold-400 shadow-sm">
                     <i class="fa-solid ${step.icon} text-lg"></i>
@@ -72,7 +73,7 @@ export function renderWudhuSteps() {
 export function renderSholatSteps() {
     const container = document.getElementById('sholat-steps-list');
     container.innerHTML = sholatStepsData.map(step => `
-        <div class="search-item bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:border-gold-300 hover:shadow-md transition flex gap-4">
+        <div data-bm="gerakan-${bmSlug(step.title)}" class="search-item bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:border-gold-300 hover:shadow-md transition flex gap-4">
             <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-emerald-900 text-gold-400 shadow-sm">
                 <i class="fa-solid ${step.icon} text-xl"></i>
             </div>
@@ -120,7 +121,7 @@ export function renderBacaanVariants(idx) {
 export function renderSholatWords() {
     const container = document.getElementById('sholat-bacaan-container');
     container.innerHTML = bacaanSholatWords.map((item, idx) => `
-        <div class="search-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+        <div data-bm="bacaan-${idx}" class="search-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
             <div class="flex items-center justify-between border-b pb-3">
                 <h3 class="font-bold text-emerald-900 text-base">${item.title}</h3>
                 <span class="text-xs text-slate-500 italic bg-slate-100 px-2.5 py-1 rounded-full">${item.source}</span>
@@ -158,7 +159,7 @@ export function renderSholatWords() {
 export function renderPembatal() {
     const container = document.getElementById('pembatal-list');
     container.innerHTML = pembatalData.map(item => `
-        <div class="search-item bg-white p-5 rounded-2xl shadow-sm border border-red-100 hover:border-red-300 transition">
+        <div data-bm="pembatal-${bmSlug(item.title)}" class="search-item bg-white p-5 rounded-2xl shadow-sm border border-red-100 hover:border-red-300 transition">
             <h4 class="font-bold text-red-900 mb-1">${item.title}</h4>
             <p class="text-xs text-slate-600 mb-2 leading-relaxed">${item.desc}</p>
             <span class="inline-block text-[10px] font-semibold bg-red-50 text-red-700 px-2 py-0.5 rounded">${item.dalil}</span>

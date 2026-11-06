@@ -77,7 +77,7 @@ export function renderRagamItem(g, v, vi, open) {
     const [tagText, tagCls] = RAGAM_TAG[v.tag] || RAGAM_TAG.alternatif;
     const links = (v.refs || []).map(r => `<a href="https://www.hadits.id/hadits/${r.k}/${r.n}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] text-emerald-800 hover:border-gold-400">${RAGAM_KITAB[r.k] || r.k} ${r.n} <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a>`).join('');
     return `
-            <details class="ragam-item search-item bg-white rounded-2xl border border-slate-200 shadow-sm" ${open ? 'open' : ''}>
+            <details data-bm="ragam-${v.id}" class="ragam-item search-item bg-white rounded-2xl border border-slate-200 shadow-sm" ${open ? 'open' : ''}>
                 <summary class="flex cursor-pointer items-center gap-3 p-3.5">
                     <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-800 text-xs font-bold text-white">${vi + 1}</span>
                     <span class="min-w-0 flex-1">

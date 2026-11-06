@@ -197,14 +197,11 @@
                 </div>
 
                 <!-- 1.1 Dalil Wajibnya Sholat -->
-                <div class="search-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition">
+                <div data-bm="dalil-wajib" data-bm-title="Dalil Wajibnya Sholat" class="search-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition">
                     <div class="flex items-center justify-between mb-4">
                         <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                             <i class="fa-solid fa-scale-balanced"></i> 1.1 Wajibnya Sholat
                         </span>
-                        <button onclick="bookmarkItem('dalil-wajib')" class="text-slate-400 hover:text-gold-500 transition">
-                            <i class="fa-regular fa-bookmark text-lg" id="bm-dalil-wajib"></i>
-                        </button>
                     </div>
 
                     <!-- Qur'an Evidence -->
@@ -239,14 +236,11 @@
                 </div>
 
                 <!-- 1.2 Dalil Ganjaran Mengerjakan Sholat -->
-                <div class="search-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition">
+                <div data-bm="dalil-ganjaran" data-bm-title="Ganjaran Mengerjakan Sholat" class="search-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition">
                     <div class="flex items-center justify-between mb-4">
                         <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                             <i class="fa-solid fa-gift"></i> 1.2 Keutamaan & Keagungan Sholat
                         </span>
-                        <button onclick="bookmarkItem('dalil-ganjaran')" class="text-slate-400 hover:text-gold-500 transition">
-                            <i class="fa-regular fa-bookmark text-lg" id="bm-dalil-ganjaran"></i>
-                        </button>
                     </div>
 
                     <div class="space-y-4">
@@ -281,14 +275,11 @@
                 </div>
 
                 <!-- 1.3 Dalil Ancaman Meninggalkan Sholat -->
-                <div class="search-item bg-white rounded-2xl p-6 shadow-sm border border-red-200 hover:shadow-md transition">
+                <div data-bm="dalil-ancaman" data-bm-title="Ancaman Meninggalkan Sholat" class="search-item bg-white rounded-2xl p-6 shadow-sm border border-red-200 hover:shadow-md transition">
                     <div class="flex items-center justify-between mb-4">
                         <span class="bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                             <i class="fa-solid fa-triangle-exclamation"></i> 1.3 Ancaman Meninggalkan Sholat
                         </span>
-                        <button onclick="bookmarkItem('dalil-ancaman')" class="text-slate-400 hover:text-gold-500 transition">
-                            <i class="fa-regular fa-bookmark text-lg" id="bm-dalil-ancaman"></i>
-                        </button>
                     </div>
 
                     <div class="space-y-4">
@@ -368,8 +359,8 @@
             <!-- Sub Content 1: Visual Steps -->
             <div id="wudhu-sub-langkah" class="wudhu-sub-content space-y-6">
                 <!-- Infografis Gerakan Wudhu -->
-                <div class="search-item bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="flex items-start justify-between gap-3 p-5 border-b border-slate-100">
+                <div data-bm="wudhu-infografis" data-bm-title="Infografis Wudhu" class="search-item bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="flex items-start justify-between gap-3 p-5 pr-14 border-b border-slate-100">
                         <div>
                             <h3 class="text-lg font-bold text-emerald-950">
                                 <i class="fa-solid fa-image text-gold-500 mr-1"></i> Infografis Gerakan Wudhu
@@ -406,7 +397,7 @@
 
             <!-- Sub Content 2: Syarat Sah Wudhu -->
             <div id="wudhu-sub-syarat" class="wudhu-sub-content hidden space-y-4">
-                <div class="search-item bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div data-bm="wudhu-syarat" data-bm-title="Syarat Sah Wudhu" class="search-item bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <h3 class="text-lg font-bold text-emerald-900 mb-4">Syarat Sah Wudhu</h3>
                     <ul class="space-y-3 text-slate-700 text-sm list-disc pl-5">
                         <li><strong>Islam:</strong> Wudhu orang kafir tidak sah.</li>
@@ -420,7 +411,7 @@
 
             <!-- Sub Content 3: Rukun Wudhu -->
             <div id="wudhu-sub-rukun" class="wudhu-sub-content hidden space-y-4">
-                <div class="search-item bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                <div data-bm="wudhu-rukun" data-bm-title="Rukun Wudhu (Wajib)" class="search-item bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
                     <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-emerald-800">
                         <span class="text-xs text-slate-500 font-bold">QS. Al-Ma'idah: 6</span>
                         <p class="font-arabic text-xl text-right text-emerald-950 my-2" dir="rtl">
@@ -443,7 +434,7 @@
 
             <!-- Sub Content 4: Sunnah Wudhu -->
             <div id="wudhu-sub-sunnah" class="wudhu-sub-content hidden space-y-4">
-                <div class="search-item bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div data-bm="wudhu-sunnah" data-bm-title="Sunnah-Sunnah Wudhu &amp; Keutamaannya" class="search-item bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <h3 class="text-lg font-bold text-emerald-900 mb-3">Sunnah-Sunnah Wudhu & Keutamaannya</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                         <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
@@ -474,7 +465,7 @@
                     </div>
 
                     <!-- Doa Setelah Wudhu -->
-                    <div id="doa-setelah-wudhu" class="search-item mt-6 bg-emerald-50 p-4 rounded-xl border border-emerald-200 space-y-4">
+                    <div id="doa-setelah-wudhu" data-bm="doa-setelah-wudhu" data-bm-title="Doa Setelah Wudhu" class="search-item mt-6 bg-emerald-50 p-4 rounded-xl border border-emerald-200 space-y-4">
                         <h4 class="font-bold text-emerald-900 text-sm"><i class="fa-solid fa-star text-gold-500"></i> Doa Setelah Wudhu & Keutamaan 8 Pintu Surga</h4>
 
                         <!-- 1. Dalil -->
@@ -598,7 +589,7 @@
 
             <!-- Sub Content 5: Ancaman Wudhu -->
             <div id="wudhu-sub-ancaman" class="wudhu-sub-content hidden space-y-4">
-                <div class="search-item bg-red-50 p-6 rounded-2xl border border-red-200 shadow-sm">
+                <div data-bm="wudhu-ancaman" data-bm-title="Ancaman Bagi Wudhu yang Tidak Sempurna" class="search-item bg-red-50 p-6 rounded-2xl border border-red-200 shadow-sm">
                     <h3 class="text-lg font-bold text-red-900 mb-3"><i class="fa-solid fa-circle-exclamation"></i> Ancaman Bagi Wudhu Yang Tidak Sempurna</h3>
                     <div class="bg-white p-4 rounded-xl border-l-4 border-red-600 shadow-xs">
                         <div class="text-xs text-slate-500 font-bold mb-1">HR. Bukhari (No. 60) & Muslim (No. 242)</div>
@@ -641,8 +632,8 @@
             <!-- Sub 1: Gerakan & Rukun Visual -->
             <div id="sholat-gerakan-container" class="space-y-6">
                 <!-- Infografis Gerakan Sholat -->
-                <div class="search-item bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="flex items-start justify-between gap-3 p-5 border-b border-slate-100">
+                <div data-bm="sholat-infografis" data-bm-title="Infografis Gerakan Sholat" class="search-item bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="flex items-start justify-between gap-3 p-5 pr-14 border-b border-slate-100">
                         <div>
                             <h3 class="text-lg font-bold text-emerald-950">
                                 <i class="fa-solid fa-image text-gold-500 mr-1"></i> Infografis Gerakan Sholat
@@ -768,34 +759,38 @@
     </main>
 
     <!-- Bottom Mobile Navigation Bar -->
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-emerald-950 border-t border-emerald-800 text-emerald-200 z-50 px-2 py-1 flex justify-around items-center text-center">
-        <button onclick="switchTab('home')" id="mob-tab-home" class="flex-1 py-1.5 px-1 text-xs text-gold-400 flex flex-col items-center">
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-emerald-950 border-t border-emerald-800 text-emerald-200 z-50 px-1 py-1 flex justify-around items-center text-center">
+        <button onclick="switchTab('home')" id="mob-tab-home" class="flex-1 py-1.5 px-0.5 text-[10px] text-gold-400 flex flex-col items-center">
             <i class="fa-solid fa-house text-base mb-0.5"></i>
             <span>Home</span>
         </button>
-        <button onclick="switchTab('syarat')" id="mob-tab-syarat" class="flex-1 py-1.5 px-1 text-xs text-emerald-300 flex flex-col items-center">
+        <button onclick="switchTab('syarat')" id="mob-tab-syarat" class="flex-1 py-1.5 px-0.5 text-[10px] text-emerald-300 flex flex-col items-center">
             <i class="fa-solid fa-list-check text-base mb-0.5"></i>
             <span>Syarat</span>
         </button>
-        <button onclick="switchTab('wudhu')" id="mob-tab-wudhu" class="flex-1 py-1.5 px-1 text-xs text-emerald-300 flex flex-col items-center">
+        <button onclick="switchTab('wudhu')" id="mob-tab-wudhu" class="flex-1 py-1.5 px-0.5 text-[10px] text-emerald-300 flex flex-col items-center">
             <i class="fa-solid fa-droplet text-base mb-0.5"></i>
             <span>Wudhu</span>
         </button>
-        <button onclick="switchTab('rukun')" id="mob-tab-rukun" class="flex-1 py-1.5 px-1 text-xs text-emerald-300 flex flex-col items-center">
+        <button onclick="switchTab('rukun')" id="mob-tab-rukun" class="flex-1 py-1.5 px-0.5 text-[10px] text-emerald-300 flex flex-col items-center">
             <i class="fa-solid fa-person-praying text-base mb-0.5"></i>
             <span>Sholat</span>
         </button>
-        <button onclick="switchTab('pembatal')" id="mob-tab-pembatal" class="flex-1 py-1.5 px-1 text-xs text-emerald-300 flex flex-col items-center">
+        <button onclick="switchTab('pembatal')" id="mob-tab-pembatal" class="flex-1 py-1.5 px-0.5 text-[10px] text-emerald-300 flex flex-col items-center">
             <i class="fa-solid fa-triangle-exclamation text-base mb-0.5"></i>
             <span>Batal</span>
         </button>
-        <button onclick="switchTab('quiz')" id="mob-tab-quiz" class="flex-1 py-1.5 px-1 text-xs text-emerald-300 flex flex-col items-center">
+        <button onclick="switchTab('quiz')" id="mob-tab-quiz" class="flex-1 py-1.5 px-0.5 text-[10px] text-emerald-300 flex flex-col items-center">
             <i class="fa-solid fa-circle-question text-base mb-0.5"></i>
             <span>Kuis</span>
         </button>
-        <button onclick="switchTab('info')" id="mob-tab-info" class="flex-1 py-1.5 px-1 text-xs text-emerald-300 flex flex-col items-center">
+        <button onclick="switchTab('info')" id="mob-tab-info" class="flex-1 py-1.5 px-0.5 text-[10px] text-emerald-300 flex flex-col items-center">
             <i class="fa-solid fa-circle-info text-base mb-0.5"></i>
             <span>Info</span>
+        </button>
+        <button onclick="switchTab('bookmarks')" id="mob-tab-bookmarks" class="flex-1 py-1.5 px-0.5 text-[10px] text-emerald-300 flex flex-col items-center">
+            <i class="fa-solid fa-bookmark text-base mb-0.5"></i>
+            <span>Favorit</span>
         </button>
     </nav>
 
