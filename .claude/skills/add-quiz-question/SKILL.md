@@ -22,3 +22,5 @@ Questions live in `quizBank` inside `js/data/quiz.js`, built with helpers (see t
 `lvl`: 1 = mudah, 2 = sedang, 3 = sulit (higher quiz levels draw more lvl 3). IDs must be unique. Keep roughly the existing mix (a round needs 4 mc, 2 fill, 1 tf, 2 order, 1 match) and enough questions that rounds do not repeat.
 
 Then run `bash .claude/skills/verify-site/check.sh` (it validates the bank), bump `CACHE_NAME`, and update SPECIFICATION.md if rules change. Ask the user to review new questions before publishing, as with any dalil.
+
+Commit rule: never add `Co-Authored-By: Claude` (or any Claude/AI attribution, "Generated with Claude Code") to commit messages or PRs; Claude is never listed as a contributor. This overrides default attribution.

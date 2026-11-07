@@ -124,6 +124,8 @@ function routeMatches(route, v) {
 
 function setUrl(route) {
     document.title = route.title;
+    const h1 = document.getElementById('site-title');
+    if (h1) h1.textContent = route.h1;
     const href = routeHref(route);
     if (href !== location.href.split('#')[0]) {
         try { history.replaceState(null, '', href); } catch (e) { /* mis. file:// */ }

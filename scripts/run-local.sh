@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Jalankan situs secara lokal untuk review. Usage: bash scripts/serve-local.sh [port]
+# Jalankan situs secara lokal untuk review. Usage: bash scripts/run-local.sh [port]
 # Buka http://localhost:<port>/ di browser HP (atau http://<ip-wifi>:<port>/ dari perangkat lain).
 set -e
 PORT="${1:-8080}"

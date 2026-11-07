@@ -35,7 +35,7 @@ islamic-learning/
 ├── AGENTS.md                # Short entry point for AI agents (points here)
 ├── CLAUDE.md                # Same, for Claude Code
 ├── CNAME                    # GitHub Pages custom domain (belajarsholat.is-my.app)
-├── scripts/serve-local.sh   # Local preview server (python http.server), manual trigger
+├── scripts/run-local.sh     # Local preview server (python http.server), manual trigger
 ├── scripts/stop-local.sh    # Stops the local preview server
 ├── scripts/build-pages.mjs  # Node: writes <slug>/index.html, footer #route-links, sitemap.xml and index.html meta from js/data/routes.js
 ├── robots.txt / sitemap.xml # SEO (sitemap is generated)
@@ -263,16 +263,17 @@ Layout: `js/main.js` (init, imports everything, exposes inline-handler functions
 
 ### 5.4 PWA / Service worker
 - Strategy: stale-while-revalidate for all GET requests; precache list `ASSETS_TO_CACHE` is added one-by-one (`cache.add(...).catch`), so a failing CDN URL does not abort install.
-- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v38`. Generated section pages (`'./<slug>/'`) are precached too; `build-pages.mjs --check` fails if one is missing. Every new file under `js/` or `css/` must also be added to `ASSETS_TO_CACHE` (verify-site checks this).
+- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v39`. Generated section pages (`'./<slug>/'`) are precached too; `build-pages.mjs --check` fails if one is missing. Every new file under `js/` or `css/` must also be added to `ASSETS_TO_CACHE` (verify-site checks this).
 - Installability needs: valid manifest, 192/512 icons, active SW, HTTPS. Chrome will not fire `beforeinstallprompt` if the app is already installed.
 
 ---
 
 ### 5.5 SEO: one URL per section
 - The SPA is still one page of markup, but each important section also has its own URL so search engines can index it separately: `/syarat-sah-sholat/`, `/tata-cara-wudhu/`, `/doa-setelah-wudhu/`, `/tata-cara-sholat/`, `/bacaan-sholat/`, `/ragam-bacaan-sholat/`, `/pembatal-sholat/`, `/kuis-sholat/`.
-- Source of truth: `js/data/routes.js` (`ROUTES`: `slug`, `tab`, optional `wudhu` sub name, `sholat` sub id, `anchor`, plus `label`, `title`, `description`; `SITE_URL`). `ROUTES[0]` (slug `''`) is the home page.
-- `scripts/build-pages.mjs` copies `index.html` to `<slug>/index.html` with its own `<title>`, meta description, canonical, Open Graph/Twitter tags, `<base href="../">` (so every relative URL still points at the site root) and the right tab/sub-tab un-hidden. It also rewrites the home meta in `index.html`, fills the footer link list `#route-links` (crawlable `<a href data-route>` links) and writes `sitemap.xml`. `--check` mode is run by verify-site.
-- Runtime (`js/nav.js`): on load `openRoute(routeFromLocation())` opens the page's tab; every `switchTab/switchWudhuSub/switchSholatSub` calls `syncUrl()`, which `history.replaceState`s to the matching route and sets `document.title` (tabs without a route, e.g. info/bookmarks, map to `/`). Because of `<base>`, code that builds URLs must resolve against `document.baseURI`, not `location.href` (see `js/theme.js`).
+- Source of truth: `js/data/routes.js` (`ROUTES`: `slug`, `tab`, optional `wudhu` sub name, `sholat` sub id, `anchor`, plus `label`, `h1` (header `<h1 id="site-title">` text), `title`, `description`; `SITE_URL`; `SITE_UPDATED` = sitemap `<lastmod>`, update it when content changes). `ROUTES[0]` (slug `''`) is the home page.
+- `scripts/build-pages.mjs` copies `index.html` to `<slug>/index.html` with its own `<title>`, meta description, canonical, Open Graph/Twitter tags, `<h1 id="site-title">`, its own JSON-LD (`WebPage` + `BreadcrumbList`, replacing the home `WebSite`/`FAQPage`/`WebApplication` graph), `<base href="../">` (so every relative URL still points at the site root) and the right tab/sub-tab un-hidden. It also rewrites the home meta in `index.html`, fills the footer link list `#route-links` (crawlable `<a href data-route>` links) and writes `sitemap.xml`. `--check` mode is run by verify-site.
+- Runtime (`js/nav.js`): on load `openRoute(routeFromLocation())` opens the page's tab; every `switchTab/switchWudhuSub/switchSholatSub` calls `syncUrl()`, which `history.replaceState`s to the matching route and sets `document.title` and the header `h1` (tabs without a route, e.g. info/bookmarks, map to `/`). Because of `<base>`, code that builds URLs must resolve against `document.baseURI`, not `location.href` (see `js/theme.js`).
+- Home `<head>` keeps the global `keywords` (spelling variants sholat/solat/shalat/salat etc.) and the `FAQPage` JSON-LD; edit those directly in `index.html`.
 - Adding a page: add a route, add `'./<slug>/'` to `ASSETS_TO_CACHE`, run the generator, bump `CACHE_NAME`.
 
 ## 6. Guidelines for AI Assistants & Contributors
@@ -305,7 +306,7 @@ Task playbooks live in `.claude/skills/<name>/SKILL.md` (frontmatter `name`, `de
 ## 9. Local Preview & Deploy
 Local preview (no build step):
 ```bash
-bash scripts/serve-local.sh [port]   # default 8080 -> http://localhost:8080/ (also prints LAN URL)
+bash scripts/run-local.sh [port]   # default 8080 -> http://localhost:8080/ (also prints LAN URL)
 ```
 The service worker is active on `localhost`; if edits do not show, reload twice or unregister it in DevTools. Stop it with `bash scripts/stop-local.sh [port]`.
 

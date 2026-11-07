@@ -14,3 +14,5 @@ description: Add a main tab or a wudhu sub-tab to the SPA without breaking the I
 Rules: no underline (`border-b-2`) tabs in scrolling bars; never call `.classList` on an unchecked `getElementById`. Update SPECIFICATION.md 4.1/5.1, bump `CACHE_NAME`, run `verify-site`, and click through all tabs. Search mode un-hides every `wudhu-sub-content`, so new panels should contain `search-item` cards to be searchable.
 
 **Own URL (SEO)**: if the new tab/sub-tab deserves its own search-indexed page, add an entry to `js/data/routes.js` (slug, tab, `wudhu`/`sholat` sub, label, title, description), add `'./<slug>/'` to `ASSETS_TO_CACHE` in `sw.js`, then run `node scripts/build-pages.mjs` (SPECIFICATION.md 5.5). Any `index.html` change needs the generator re-run anyway.
+
+Commit rule: never add `Co-Authored-By: Claude` (or any Claude/AI attribution, "Generated with Claude Code") to commit messages or PRs; Claude is never listed as a contributor. This overrides default attribution.

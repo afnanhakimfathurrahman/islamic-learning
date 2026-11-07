@@ -11,7 +11,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const { ROUTES, SITE_URL } = await import(pathToFileURL(join(ROOT, 'js/data/routes.js')).href);
+const { ROUTES, SITE_URL, SITE_UPDATED } = await import(pathToFileURL(join(ROOT, 'js/data/routes.js')).href);
 const CHECK = process.argv.includes('--check');
 const GENERATED_NOTE = '<!-- DIBUAT OTOMATIS oleh scripts/build-pages.mjs dari index.html + js/data/routes.js. Jangan diedit langsung. -->';
 
@@ -33,7 +33,38 @@ function setMeta(html, route) {
     html = replaceOne(html, /<meta property="og:description" content="[^"]*">/, () => `<meta property="og:description" content="${desc}">`, 'og:description');
     html = replaceOne(html, /<meta name="twitter:title" content="[^"]*">/, () => `<meta name="twitter:title" content="${title}">`, 'twitter:title');
     html = replaceOne(html, /<meta name="twitter:description" content="[^"]*">/, () => `<meta name="twitter:description" content="${desc}">`, 'twitter:description');
+    html = replaceOne(html, /(<h1 id="site-title"[^>]*>)[^<]*(<\/h1>)/, (_, open, close) => `${open}${esc(route.h1)}${close}`, 'h1#site-title');
     return html;
+}
+
+// Halaman turunan: structured data sendiri (WebPage + BreadcrumbList), bukan salinan milik beranda
+function pageJsonLd(route) {
+    const url = pageUrl(route);
+    const data = {
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'WebPage',
+                '@id': url + '#webpage',
+                url,
+                name: route.title,
+                description: route.description,
+                inLanguage: 'id-ID',
+                isPartOf: { '@id': SITE_URL + '#website', '@type': 'WebSite', name: ROUTES[0].h1, url: SITE_URL },
+                breadcrumb: { '@id': url + '#breadcrumb' }
+            },
+            {
+                '@type': 'BreadcrumbList',
+                '@id': url + '#breadcrumb',
+                itemListElement: [
+                    { '@type': 'ListItem', position: 1, name: ROUTES[0].label, item: SITE_URL },
+                    { '@type': 'ListItem', position: 2, name: route.label, item: url }
+                ]
+            }
+        ]
+    };
+    const json = JSON.stringify(data, null, 4).replace(/</g, '\\u003c').replace(/\n/g, '\n    ');
+    return `<script type="application/ld+json">\n    ${json}\n    </script>`;
 }
 
 function setRouteLinks(html) {
@@ -55,6 +86,7 @@ function setHidden(html, id, hide) {
 
 function subPage(base, route) {
     let html = setMeta(base, route);
+    html = replaceOne(html, /<script type="application\/ld\+json">[\s\S]*?<\/script>/, () => pageJsonLd(route), 'JSON-LD');
     html = replaceOne(html, /<!DOCTYPE html>\n/i, (m) => m + GENERATED_NOTE + '\n', 'doctype');
     html = replaceOne(html, /(<meta charset="UTF-8">\n)/, (m) => m + '    <base href="../">\n', 'meta charset');
     html = setHidden(html, 'content-home', true);
@@ -73,7 +105,7 @@ function subPage(base, route) {
 
 function sitemap() {
     return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-        ROUTES.map((r) => `  <url>\n    <loc>${pageUrl(r)}</loc>\n  </url>\n`).join('') + '</urlset>\n';
+        ROUTES.map((r) => `  <url>\n    <loc>${pageUrl(r)}</loc>\n    <lastmod>${SITE_UPDATED}</lastmod>\n  </url>\n`).join('') + '</urlset>\n';
 }
 
 // --- main ---
