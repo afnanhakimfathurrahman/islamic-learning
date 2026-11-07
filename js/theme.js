@@ -18,13 +18,13 @@ export function applyTheme(name) {
 }
 
 // Ikon & manifest mengikuti tema. Tema default memakai manifest.json + icon-*.png; tema lain memakai icon-<tema>-*.png
-// dan manifest sementara (Blob) dengan URL absolut. Ikon aplikasi yang sudah terpasang tidak berubah sampai dipasang ulang.
+// dan manifest sementara (Blob) dengan URL absolut (relatif ke document.baseURI = akar situs, juga di halaman turunan). Ikon aplikasi yang sudah terpasang tidak berubah sampai dipasang ulang.
 export const BASE_MANIFEST_HREF = document.getElementById('app-manifest').getAttribute('href');
 
 export let themeManifestUrl = null;
 
 export function themeIcon(name, size) {
-    return new URL(`icon${name === 'langit' ? '' : '-' + name}-${size}.png`, location.href).href;
+    return new URL(`icon${name === 'langit' ? '' : '-' + name}-${size}.png`, document.baseURI).href;
 }
 
 export async function updateAppIdentity(name) {
@@ -34,7 +34,7 @@ export async function updateAppIdentity(name) {
     if (name === 'langit') { link.href = BASE_MANIFEST_HREF; return; }
     try {
         const m = await (await fetch(BASE_MANIFEST_HREF)).json();
-        const abs = (u) => new URL(u, location.href).href;
+        const abs = (u) => new URL(u, document.baseURI).href;
         m.id = abs(m.id); m.scope = abs(m.scope); m.start_url = abs(m.start_url);
         m.theme_color = m.background_color = THEMES[name].bar;
         m.icons = [192, 512].flatMap((sz) => ['any', 'maskable'].map((purpose) =>

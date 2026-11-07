@@ -1,5 +1,5 @@
 import { decorateBookmarks, renderBookmarks } from './bookmarks.js';
-import { goToDoaWudhu, switchSholatSub, switchTab, switchWudhuSub } from './nav.js';
+import { goToDoaWudhu, initRouteLinks, openRoute, routeFromLocation, switchSholatSub, switchTab, switchWudhuSub } from './nav.js';
 import { quizChoose, quizHome, quizMatchCheck, quizMatchLeft, quizMatchRight, quizNext, quizNextLevel, quizOrderAdd, quizOrderCheck, quizOrderRemove, quizReset, quizStart, renderQuiz } from './quiz.js';
 import { handleSearch } from './search.js';
 import { state } from './state.js';
@@ -26,6 +26,11 @@ function init() {
 
 applyTheme(document.documentElement.dataset.theme);
 init();
+
+// Halaman per bagian (mis. /bacaan-sholat/) langsung membuka tab & sub-tabnya
+const initialRoute = routeFromLocation();
+if (initialRoute.slug) openRoute(initialRoute);
+initRouteLinks();
 
 // Handler inline di markup (onclick="...") mencari fungsi global, jadi diekspos lewat window
 Object.assign(window, {

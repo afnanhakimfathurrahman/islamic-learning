@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://belajarsholat.is-my.app/sitemap.xml

@@ -26,6 +26,7 @@
 ```
 islamic-learning/
 ├── index.html               # Markup only + head scripts (theme bootstrap, tailwind config) + <script type="module" src="./js/main.js">
+├── <slug>/index.html        # GENERATED per-section SEO pages (e.g. bacaan-sholat/), see section 5.5; never edit by hand
 ├── css/app.css              # Custom styles (themes, details, lightbox, dark overrides)
 ├── js/                      # ES modules (native, no bundler) - see section 5.2
 ├── manifest.json            # PWA manifest (id/scope/start_url "./", icons any + maskable)
@@ -36,12 +37,15 @@ islamic-learning/
 ├── CNAME                    # GitHub Pages custom domain (belajarsholat.is-my.app)
 ├── scripts/serve-local.sh   # Local preview server (python http.server), manual trigger
 ├── scripts/stop-local.sh    # Stops the local preview server
+├── scripts/build-pages.mjs  # Node: writes <slug>/index.html, footer #route-links, sitemap.xml and index.html meta from js/data/routes.js
+├── robots.txt / sitemap.xml # SEO (sitemap is generated)
+├── og-image.jpg             # 1200x630 social share preview (og:image / twitter:image)
 ├── .claude/skills/          # Task playbooks for AI agents (see section 7)
 ├── wudhu.jpg / sholat.jpg   # Infographics (faceless Muslim avatars)
 └── icon-192.png / icon-512.png
 ```
 
-Hosting: GitHub Pages from branch `main`, root. Live URL: `https://belajarsholat.is-my.app/` (custom domain via the free is-my.app subdomain registry; CNAME target `kamaludin68.github.io`). The GitHub fallback URL `https://kamaludin68.github.io/islamic-learning/` redirects to the custom domain. A push to `main` deploys automatically (about 1-2 minutes). There is no build or test tooling; everything is static.
+Hosting: GitHub Pages from branch `main`, root. Live URL: `https://belajarsholat.is-my.app/` (custom domain via the free is-my.app subdomain registry; CNAME target `kamaludin68.github.io`). The GitHub fallback URL `https://kamaludin68.github.io/islamic-learning/` redirects to the custom domain. A push to `main` deploys automatically (about 1-2 minutes). There is no build or test tooling; everything is static. The only generator is `scripts/build-pages.mjs` (section 5.5); its output is committed, so Pages still serves plain files.
 
 ---
 
@@ -239,9 +243,10 @@ Itemized list of invalidating conditions with Matan where a specific hadith exis
 | Install button | `#pwa-install-btn` (hidden until `beforeinstallprompt`, or iOS Safari not standalone) |
 
 ### 5.2 JavaScript map (ES modules in `js/`, loaded by `js/main.js`)
-Layout: `js/main.js` (init, imports everything, exposes inline-handler functions on `window` via `Object.assign(window, {...})`), `js/state.js` (shared mutable state object `state`: `searchActive`, `searchPrevState`, `currentFontSize`, `ragamActive`; imported bindings cannot be reassigned, so mutate `state.*`), `js/nav.js`, `js/search.js`, `js/theme.js`, `js/ui.js` (lightbox, search/settings toggles, font size), `js/bookmarks.js`, `js/quiz.js` (engine + views), `js/pwa.js` (install button + SW registration), `js/views/{content,ragam,info}.js` (renderers), `js/data/{syarat,wudhu,sholat,pembatal,info,ragam,quiz}.js` (content only, `export const`, no logic).
+Layout: `js/main.js` (init, imports everything, exposes inline-handler functions on `window` via `Object.assign(window, {...})`), `js/state.js` (shared mutable state object `state`: `searchActive`, `searchPrevState`, `currentFontSize`, `ragamActive`; imported bindings cannot be reassigned, so mutate `state.*`), `js/nav.js`, `js/search.js`, `js/theme.js`, `js/ui.js` (lightbox, search/settings toggles, font size), `js/bookmarks.js`, `js/quiz.js` (engine + views), `js/pwa.js` (install button + SW registration), `js/views/{content,ragam,info}.js` (renderers), `js/data/{syarat,wudhu,sholat,pembatal,info,ragam,quiz,routes}.js` (content only, `export const`, no logic).
 **Rules**: every `onclick="fn(...)"` (static markup or generated templates) needs `fn` exported from a module AND listed in `main.js` `Object.assign(window, ...)` (verify-site checks this). Data modules must not import logic modules. Add new content to `js/data/*`; add new behaviour in the matching module, not in `index.html`. Head scripts stay inline on purpose (theme must apply before first paint; Tailwind CDN reads `tailwind.config`).
 - Data arrays: `syaratData`, `wudhuStepsData`, `sholatStepsData`, `bacaanSholatWords`, `pembatalData`. Rendered by `renderSyarat/renderWudhuSteps/renderSholatSteps/renderSholatWords/renderPembatal` (and `renderDalilDetails` for collapsible matan).
+- URLs (section 5.5): `routeFromLocation()`, `openRoute(route)`, `syncUrl()` (called at the end of every switch function; skipped while searching), `initRouteLinks()` (click delegation for `a[data-route]`), all in `js/nav.js`.
 - Navigation: `switchTab(tabId, skipSearchReset)`, `switchWudhuSub(subId)` (accepts `'wudhu-langkah'` or `'langkah'`; null-safe), `switchSholatSub('sholat-gerakan'|'sholat-bacaan'|'sholat-ragam')`.
 - Search: `toggleSearch`, `handleSearch`, `enterSearchMode` (snapshots active tab and sub-tabs), `exitSearchMode` (restores them). While searching, all sub-panels are un-hidden so matches in any sub-tab show.
 - Settings: `toggleSettings`, `changeFontSize(delta)` (CSS var `--arabic-size`, default 28px, 20-42px).
@@ -258,10 +263,17 @@ Layout: `js/main.js` (init, imports everything, exposes inline-handler functions
 
 ### 5.4 PWA / Service worker
 - Strategy: stale-while-revalidate for all GET requests; precache list `ASSETS_TO_CACHE` is added one-by-one (`cache.add(...).catch`), so a failing CDN URL does not abort install.
-- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v37`. Every new file under `js/` or `css/` must also be added to `ASSETS_TO_CACHE` (verify-site checks this).
+- Bump `CACHE_NAME` (`islamic-learning-vN`) on every change to `index.html` or assets, otherwise installed clients keep serving stale files. Current: `v38`. Generated section pages (`'./<slug>/'`) are precached too; `build-pages.mjs --check` fails if one is missing. Every new file under `js/` or `css/` must also be added to `ASSETS_TO_CACHE` (verify-site checks this).
 - Installability needs: valid manifest, 192/512 icons, active SW, HTTPS. Chrome will not fire `beforeinstallprompt` if the app is already installed.
 
 ---
+
+### 5.5 SEO: one URL per section
+- The SPA is still one page of markup, but each important section also has its own URL so search engines can index it separately: `/syarat-sah-sholat/`, `/tata-cara-wudhu/`, `/doa-setelah-wudhu/`, `/tata-cara-sholat/`, `/bacaan-sholat/`, `/ragam-bacaan-sholat/`, `/pembatal-sholat/`, `/kuis-sholat/`.
+- Source of truth: `js/data/routes.js` (`ROUTES`: `slug`, `tab`, optional `wudhu` sub name, `sholat` sub id, `anchor`, plus `label`, `title`, `description`; `SITE_URL`). `ROUTES[0]` (slug `''`) is the home page.
+- `scripts/build-pages.mjs` copies `index.html` to `<slug>/index.html` with its own `<title>`, meta description, canonical, Open Graph/Twitter tags, `<base href="../">` (so every relative URL still points at the site root) and the right tab/sub-tab un-hidden. It also rewrites the home meta in `index.html`, fills the footer link list `#route-links` (crawlable `<a href data-route>` links) and writes `sitemap.xml`. `--check` mode is run by verify-site.
+- Runtime (`js/nav.js`): on load `openRoute(routeFromLocation())` opens the page's tab; every `switchTab/switchWudhuSub/switchSholatSub` calls `syncUrl()`, which `history.replaceState`s to the matching route and sets `document.title` (tabs without a route, e.g. info/bookmarks, map to `/`). Because of `<base>`, code that builds URLs must resolve against `document.baseURI`, not `location.href` (see `js/theme.js`).
+- Adding a page: add a route, add `'./<slug>/'` to `ASSETS_TO_CACHE`, run the generator, bump `CACHE_NAME`.
 
 ## 6. Guidelines for AI Assistants & Contributors
 1. **Maintain Image References**: Use `wudhu.jpg` and `sholat.jpg`. Never remove or rename them. Register any new asset in `sw.js` `ASSETS_TO_CACHE`.
@@ -274,6 +286,7 @@ Layout: `js/main.js` (init, imports everything, exposes inline-handler functions
 8. **ID contract**: When renaming or adding a tab/sub-tab, update the button ID, panel ID, the `onclick` argument, and the JS that references them together (see 5.1). Guard `getElementById` results against `null`.
 9. **No build step**: Plain static files and native ES modules (`<script type="module">`, relative imports with `.js` extension); do not introduce bundlers or frameworks without the owner's approval. The owner approved the split of the old single `index.html` into `css/` + `js/` modules (2026-11-05).
 10. **Language**: UI copy and docs are Indonesian; code identifiers in English/Indonesian mix as already present. Match the surrounding style.
+11. **SEO pages**: after editing `index.html` or `js/data/routes.js`, run `node scripts/build-pages.mjs` and commit the regenerated files. Edit page titles/descriptions only in `js/data/routes.js`, never in `<slug>/index.html` or in the `index.html` meta tags (the generator overwrites them). Keep `SITE_URL` equal to the custom domain.
 
 ## 7. Agent Skills
 Task playbooks live in `.claude/skills/<name>/SKILL.md` (frontmatter `name`, `description`). Agents other than Claude Code can read them as plain Markdown.
@@ -298,7 +311,8 @@ The service worker is active on `localhost`; if edits do not show, reload twice 
 
 Deploy:
 ```bash
-bash .claude/skills/verify-site/check.sh   # static checks
+node scripts/build-pages.mjs               # regenerate SEO pages + sitemap after any index.html/routes change
+bash .claude/skills/verify-site/check.sh   # static checks (includes build-pages --check)
 git add -A && git commit -m "<message>" && git push origin main
 ```
 Then confirm: `curl -s https://kamaludin68.github.io/islamic-learning/sw.js | head -1` shows the new `CACHE_NAME`.

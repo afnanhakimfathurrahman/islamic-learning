@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<!-- DIBUAT OTOMATIS oleh scripts/build-pages.mjs dari index.html + js/data/routes.js. Jangan diedit langsung. -->
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <base href="../">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bacaan Sholat Lengkap: Arab, Latin &amp; Arti per Kata</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Bacaan sholat lengkap dari takbiratul ihram, doa iftitah, Al-Fatihah, ruku, sujud, tasyahud dan shalawat hingga salam, dalam tulisan Arab, latin dan arti per kata.">
+    <meta name="keywords" content="tata cara sholat, tata cara wudhu, bacaan sholat, doa setelah wudhu, syarat sah sholat, pembatal sholat, sholat sesuai sunnah, bacaan sholat latin dan artinya">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="google-site-verification" content="QCF7VgD83QXwSeT7wKvTJpQHwt1-Q4OP29p5ZGuWldc">
+    <meta name="author" content="Panduan Sholat Sunnah">
+    <link rel="canonical" href="https://belajarsholat.is-my.app/bacaan-sholat/">
+
+    <!-- Open Graph / social share preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:site_name" content="Panduan Sholat & Wudhu Sesuai Sunnah">
+    <meta property="og:title" content="Bacaan Sholat Lengkap: Arab, Latin &amp; Arti per Kata">
+    <meta property="og:description" content="Bacaan sholat lengkap dari takbiratul ihram, doa iftitah, Al-Fatihah, ruku, sujud, tasyahud dan shalawat hingga salam, dalam tulisan Arab, latin dan arti per kata.">
+    <meta property="og:url" content="https://belajarsholat.is-my.app/bacaan-sholat/">
+    <meta property="og:image" content="https://belajarsholat.is-my.app/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Infografis gerakan sholat sesuai sunnah">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bacaan Sholat Lengkap: Arab, Latin &amp; Arti per Kata">
+    <meta name="twitter:description" content="Bacaan sholat lengkap dari takbiratul ihram, doa iftitah, Al-Fatihah, ruku, sujud, tasyahud dan shalawat hingga salam, dalam tulisan Arab, latin dan arti per kata.">
+    <meta name="twitter:image" content="https://belajarsholat.is-my.app/og-image.jpg">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://belajarsholat.is-my.app/#website",
+                "url": "https://belajarsholat.is-my.app/",
+                "name": "Panduan Sholat & Wudhu Sesuai Sunnah",
+                "inLanguage": "id-ID"
+            },
+            {
+                "@type": "WebApplication",
+                "name": "Panduan Sholat & Wudhu Sesuai Sunnah",
+                "url": "https://belajarsholat.is-my.app/",
+                "description": "Panduan tata cara wudhu dan sholat sesuai sunnah dengan bacaan Arab, latin, arti per kata, ragam bacaan, kuis dan dalil Al-Qur'an serta hadits shahih.",
+                "applicationCategory": "EducationalApplication",
+                "operatingSystem": "Any",
+                "inLanguage": "id-ID",
+                "isAccessibleForFree": true,
+                "image": "https://belajarsholat.is-my.app/og-image.jpg",
+                "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" },
+                "isPartOf": { "@id": "https://belajarsholat.is-my.app/#website" }
+            }
+        ]
+    }
+    </script>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" id="app-manifest" href="./manifest.json">
+    <link rel="icon" id="app-icon" type="image/png" href="./icon-192.png">
+    <link rel="apple-touch-icon" id="app-apple-icon" href="./icon-192.png">
+    <meta name="theme-color" id="meta-theme-color" content="#375e85">
+    <script>
+        // Terapkan tema tersimpan sebelum render agar tidak berkedip
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('theme'); } catch (e) {}
+            if (!['langit', 'zamrud', 'taman', 'senja', 'coklat', 'gelap'].includes(t)) t = 'langit';
+            document.documentElement.dataset.theme = t;
+        })();
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            50: 'rgb(var(--p-50) / <alpha-value>)',
+                            100: 'rgb(var(--p-100) / <alpha-value>)',
+                            200: 'rgb(var(--p-200) / <alpha-value>)',
+                            300: 'rgb(var(--p-300) / <alpha-value>)',
+                            400: 'rgb(var(--p-400) / <alpha-value>)',
+                            500: 'rgb(var(--p-500) / <alpha-value>)',
+                            600: 'rgb(var(--p-600) / <alpha-value>)',
+                            700: 'rgb(var(--p-700) / <alpha-value>)',
+                            800: 'rgb(var(--p-800) / <alpha-value>)',
+                            900: 'rgb(var(--p-900) / <alpha-value>)',
+                            950: 'rgb(var(--p-950) / <alpha-value>)',
+                        },
+                        gold: {
+                            400: 'rgb(var(--g-400) / <alpha-value>)',
+                            500: 'rgb(var(--g-500) / <alpha-value>)',
+                            600: 'rgb(var(--g-600) / <alpha-value>)',
+                        }
+                    },
+                    fontFamily: {
+                        arabic: ['Amiri', 'Traditional Arabic', 'Scheherazade New', 'serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="./css/app.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-gold-500 selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="bg-emerald-900 text-white sticky top-0 z-50 shadow-md border-b border-gold-500/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo / Title -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gold-500/20 border border-gold-400 flex items-center justify-center text-gold-400 font-bold text-xl">
+                        <i class="fa-solid fa-kaaba"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-base sm:text-lg font-bold tracking-wide text-amber-50 leading-tight">Panduan Sholat & Wudhu Sesuai Sunnah</h1>
+                    </div>
+                </div>
+
+                <!-- Header Actions -->
+                <div class="flex items-center gap-2 sm:gap-4">
+                    <!-- Search Input Toggle -->
+                    <button onclick="toggleSearch()" class="p-2 rounded-lg bg-emerald-800/80 hover:bg-emerald-800 text-emerald-100 transition">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <!-- Settings Toggle (Font Size) -->
+                    <button onclick="toggleSettings()" class="p-2 rounded-lg bg-emerald-800/80 hover:bg-emerald-800 text-emerald-100 transition">
+                        <i class="fa-solid fa-sliders"></i>
+                    </button>
+                    <!-- Install PWA Button (Hidden by default) -->
+                    <button id="pwa-install-btn" class="hidden items-center gap-2 px-3 py-1.5 rounded-lg bg-gold-500 hover:bg-gold-600 text-emerald-950 font-semibold text-xs transition shadow">
+                        <i class="fa-solid fa-download"></i> Install App
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dynamic Search Bar (Hidden) -->
+        <div id="search-bar" class="hidden bg-emerald-950 px-4 py-3 border-t border-emerald-800">
+            <div class="max-w-3xl mx-auto relative">
+                <input type="text" id="search-input" onkeyup="handleSearch()" placeholder="Cari doa, gerakan, rukun, atau dalil..." 
+                    class="w-full pl-10 pr-4 py-2 bg-emerald-900 border border-emerald-700 rounded-xl text-white placeholder-emerald-400 focus:outline-none focus:ring-2 focus:ring-gold-500">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-emerald-400"></i>
+                <button onclick="toggleSearch()" class="absolute right-3 top-2.5 text-emerald-400 hover:text-white">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Font Size Settings Bar (Hidden) -->
+        <div id="settings-bar" class="hidden bg-emerald-950 px-4 py-3 border-t border-emerald-800 space-y-3">
+            <div class="max-w-3xl mx-auto flex items-center justify-between text-sm text-emerald-200">
+                <span>Tema Warna:</span>
+                <div id="theme-picker" class="flex flex-wrap justify-end items-center gap-2"></div>
+            </div>
+            <p class="max-w-3xl mx-auto text-[11px] text-emerald-300">Ikon aplikasi mengikuti tema saat aplikasi dipasang (Install). Untuk mengganti ikon yang sudah terpasang, hapus lalu pasang ulang.</p>
+            <div class="max-w-3xl mx-auto flex items-center justify-between text-sm text-emerald-200">
+                <span>Ukuran Teks Arab:</span>
+                <div class="flex items-center gap-3">
+                    <button onclick="changeFontSize(-2)" class="px-3 py-1 bg-emerald-800 rounded hover:bg-emerald-700 font-bold">A-</button>
+                    <span id="font-size-label" class="font-mono text-gold-400">28px</span>
+                    <button onclick="changeFontSize(2)" class="px-3 py-1 bg-emerald-800 rounded hover:bg-emerald-700 font-bold">A+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs for Large Screens & Desktop -->
+        <nav class="hidden md:flex bg-emerald-950/80 backdrop-blur overflow-x-auto border-t border-emerald-800/50 px-4">
+            <div class="max-w-7xl mx-auto flex space-x-6">
+                <button onclick="switchTab('home')" id="tab-home" class="nav-tab py-3 px-2 text-sm font-medium text-emerald-200 hover:text-gold-400 whitespace-nowrap tab-active">
+                    <i class="fa-solid fa-house mr-1.5"></i> Home & Dalil
+                </button>
+                <button onclick="switchTab('syarat')" id="tab-syarat" class="nav-tab py-3 px-2 text-sm font-medium text-emerald-200 hover:text-gold-400 whitespace-nowrap">
+                    <i class="fa-solid fa-list-check mr-1.5"></i> Syarat Sah Sholat
+                </button>
+                <button onclick="switchTab('wudhu')" id="tab-wudhu" class="nav-tab py-3 px-2 text-sm font-medium text-emerald-200 hover:text-gold-400 whitespace-nowrap">
+                    <i class="fa-solid fa-droplet mr-1.5"></i> Panduan Wudhu
+                </button>
+                <button onclick="switchTab('rukun')" id="tab-rukun" class="nav-tab py-3 px-2 text-sm font-medium text-emerald-200 hover:text-gold-400 whitespace-nowrap">
+                    <i class="fa-solid fa-person-praying mr-1.5"></i> Tata Cara Sholat
+                </button>
+                <button onclick="switchTab('pembatal')" id="tab-pembatal" class="nav-tab py-3 px-2 text-sm font-medium text-emerald-200 hover:text-gold-400 whitespace-nowrap">
+                    <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Pembatal Sholat
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-tab py-3 px-2 text-sm font-medium text-emerald-200 hover:text-gold-400 whitespace-nowrap">
+                    <i class="fa-solid fa-circle-question mr-1.5"></i> Kuis
+                </button>
+                <button onclick="switchTab('info')" id="tab-info" class="nav-tab py-3 px-2 text-sm font-medium text-emerald-200 hover:text-gold-400 whitespace-nowrap">
+                    <i class="fa-solid fa-circle-info mr-1.5"></i> Info
+                </button>
+                <button onclick="switchTab('bookmarks')" id="tab-bookmarks" class="nav-tab py-3 px-2 text-sm font-medium text-emerald-200 hover:text-gold-400 whitespace-nowrap">
+                    <i class="fa-solid fa-bookmark mr-1.5"></i> Favorit
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 mb-20 md:mb-8">
+
+        <div id="search-status" role="status" aria-live="polite" class="hidden mb-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-900">
+        </div>
+
+        <!-- TAB 1: HOME & DALIL -->
+        <section id="content-home" class="tab-content hidden space-y-6">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-950 rounded-2xl p-6 md:p-8 text-white shadow-xl border border-gold-500/20 relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-gold-400">
+                    <i class="fa-solid fa-mosque text-9xl"></i>
+                </div>
+                <div class="relative z-10 max-w-2xl">
+                    <span class="inline-block px-3 py-1 bg-gold-500/20 text-gold-400 rounded-full text-xs font-semibold tracking-wider uppercase mb-3 border border-gold-400/30">Panduan Lengkap</span>
+                    <h2 class="text-2xl md:text-3xl font-bold text-amber-50 leading-tight mb-2">Panduan Sholat & Wudhu Sesuai Sunnah Rasulullah <span class="font-arabic">ﷺ</span></h2>
+                    <p class="text-emerald-200 text-sm md:text-base mb-4">
+                        Dipandu berdasarkan Al-Qur'an dan Hadits Shahih dengan penjelasan terperinci, matan Arab, terjemahan kata-per-kata, dan gambar visual faceless.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="switchTab('rukun')" class="px-4 py-2 bg-gold-500 hover:bg-gold-600 text-emerald-950 font-bold rounded-xl text-sm transition shadow-lg flex items-center gap-2">
+                            <i class="fa-solid fa-book-open"></i> Mulai Belajar Sholat
+                        </button>
+                        <button onclick="switchTab('wudhu')" class="px-4 py-2 bg-emerald-800/80 hover:bg-emerald-700 text-white font-medium rounded-xl text-sm transition border border-emerald-600 flex items-center gap-2">
+                            <i class="fa-solid fa-droplet"></i> Tata Cara Wudhu
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dalil Cards Section -->
+            <div class="space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
+                    <i class="fa-solid fa-book-quran text-emerald-800 text-xl"></i>
+                    <h3 class="text-xl font-bold text-slate-800">Dalil-Dalil Tentang Sholat 5 Waktu</h3>
+                </div>
+
+                <!-- 1.1 Dalil Wajibnya Sholat -->
+                <div data-bm="dalil-wajib" data-bm-title="Dalil Wajibnya Sholat" class="search-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                            <i class="fa-solid fa-scale-balanced"></i> 1.1 Wajibnya Sholat
+                        </span>
+                    </div>
+
+                    <!-- Qur'an Evidence -->
+                    <div class="space-y-4 mb-6">
+                        <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-emerald-700">
+                            <div class="flex justify-between text-xs text-slate-500 mb-2 font-medium">
+                                <span>QS. Al-Baqarah: 43</span>
+                                <span>Al-Qur'anul Karim</span>
+                            </div>
+                            <p class="font-arabic text-right text-emerald-950 text-2xl mb-3 leading-loose" dir="rtl">
+                                وَأَقِيمُوا۟ ٱلصَّلَوٰةَ وَءَاتُوا۟ ٱلزَّكَوٰةَ وَٱرْكَعُوا۟ مَعَ ٱلرَّٰكِعِينَ
+                            </p>
+                            <p class="text-sm text-slate-700 italic mb-1">
+                                "Dan laksanakanlah sholat, tunaikanlah zakat, dan rukuklah bersama orang-orang yang rukuk."
+                            </p>
+                        </div>
+
+                        <!-- Hadith Evidence -->
+                        <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-gold-500">
+                            <div class="flex justify-between text-xs text-slate-500 mb-2 font-medium">
+                                <span>HR. Bukhari (No. 8)</span>
+                                <span>Kitab Imann / Rukun Islam</span>
+                            </div>
+                            <p class="font-arabic text-right text-emerald-950 text-xl mb-3 leading-loose" dir="rtl">
+                                بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلاَةِ، وَإِيتَاءِ الزَّكَاةِ، وَالحَجِّ، وَصَوْمِ رَمَضَانَ
+                            </p>
+                            <p class="text-sm text-slate-700">
+                                <strong>Terjemahan:</strong> "Islam dibangun di atas lima perkara: bersaksi bahwa tidak ada sesembahan yang berhak disembah selain Allah dan Muhammad adalah utusan Allah, mendirikan sholat, menunaikan zakat, haji, dan puasa Ramadhan."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1.2 Dalil Ganjaran Mengerjakan Sholat -->
+                <div data-bm="dalil-ganjaran" data-bm-title="Ganjaran Mengerjakan Sholat" class="search-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                            <i class="fa-solid fa-gift"></i> 1.2 Keutamaan & Keagungan Sholat
+                        </span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Quran -->
+                        <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-emerald-700">
+                            <div class="flex justify-between text-xs text-slate-500 mb-2 font-medium">
+                                <span>QS. Al-Ankabut: 45</span>
+                                <span>Pencegah Perbuatan Keji</span>
+                            </div>
+                            <p class="font-arabic text-right text-emerald-950 text-2xl mb-3 leading-loose" dir="rtl">
+                                إِنَّ ٱلصَّلَوٰةَ تَنْهَىٰ عَنِ ٱلْفَحْشَآءِ وَٱلْمُنكَرِ ۗ وَلَذِكْرُ ٱللَّهِ أَكْبَرُ
+                            </p>
+                            <p class="text-sm text-slate-700 italic">
+                                "Sesungguhnya sholat itu mencegah dari (perbuatan) keji dan mungkar. Dan sungguh, mengingat Allah (sholat) itu lebih besar (keutamaannya)."
+                            </p>
+                        </div>
+
+                        <!-- Hadith Permisalan Mandi 5 Kali -->
+                        <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-gold-500">
+                            <div class="flex justify-between text-xs text-slate-500 mb-2 font-medium">
+                                <span>HR. Bukhari (No. 528); semakna: HR. Muslim (No. 667)</span>
+                                <span>Penghapus Dosa-dosa Kecil</span>
+                            </div>
+                            <p class="font-arabic text-right text-emerald-950 text-xl mb-3 leading-loose" dir="rtl">
+                                أَرَأَيْتُمْ لَوْ أَنَّ نَهَرًا بِبَابِ أَحَدِكُمْ، يَغْتَسِلُ فِيهِ كُلَّ يَوْمٍ خَمْسًا، مَا تَقُولُ ذَلِكَ يُبْقِي مِنْ دَرَنِهِ. قَالُوا لاَ يُبْقِي مِنْ دَرَنِهِ شَيْئًا. قَالَ  فَذَلِكَ مِثْلُ الصَّلَوَاتِ الْخَمْسِ، يَمْحُو اللَّهُ بِهَا الْخَطَايَا.
+                            </p>
+                            <p class="text-sm text-slate-700">
+                                <strong>Terjemahan:</strong> "Jika ada sebuah sungai di depan salah satu dari kalian dan ia mandi di dalamnya lima kali sehari, apakah kalian akan melihat ada kotoran padanya?" Mereka menjawab, "Tidak ada jejak kotoran yang tersisa." Nabi (S.A.W) menambahkan, "Itulah perumpamaan shalat lima waktu yang dengannya Allah menghapus (menghilangkan) perbuatan jahat.""
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1.3 Dalil Ancaman Meninggalkan Sholat -->
+                <div data-bm="dalil-ancaman" data-bm-title="Ancaman Meninggalkan Sholat" class="search-item bg-white rounded-2xl p-6 shadow-sm border border-red-200 hover:shadow-md transition">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                            <i class="fa-solid fa-triangle-exclamation"></i> 1.3 Ancaman Meninggalkan Sholat
+                        </span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-red-50/50 p-4 rounded-xl border-l-4 border-red-600">
+                            <div class="flex justify-between text-xs text-slate-500 mb-2 font-medium">
+                                <span>QS. Al-Muddaththir: 42-43</span>
+                                <span>Penyebab Masuk Neraka Saqar</span>
+                            </div>
+                            <p class="font-arabic text-right text-emerald-950 text-2xl mb-3 leading-loose" dir="rtl">
+                                مَا سَلَكَكُمْ فِي سَقَرَ . قَالُوا لَمْ نَكُ مِنَ الْمُصَلِّينَ
+                            </p>
+                            <p class="text-sm text-slate-700 italic">
+                                "Apakah yang memasukkan kamu ke dalam Saqar (neraka)?" Mereka menjawab: "Dahulu kami tidak termasuk orang-orang yang melaksanakan sholat."
+                            </p>
+                        </div>
+
+                        <div class="bg-red-50/50 p-4 rounded-xl border-l-4 border-red-600">
+                            <div class="flex justify-between text-xs text-slate-500 mb-2 font-medium">
+                                <span>HR. Muslim (No. 82)</span>
+                                <span>Batas Antara Keimanan dan Kekafiran</span>
+                            </div>
+                            <p class="font-arabic text-right text-emerald-950 text-xl mb-3 leading-loose" dir="rtl">
+                                إِنَّ بَيْنَ الرَّجُلِ وَبَيْنَ الشِّرْكِ وَالْكُفْرِ تَرْكَ الصَّلاَةِ
+                            </p>
+                            <p class="text-sm text-slate-700">
+                                <strong>Terjemahan:</strong> "Sesungguhnya batasan antara seseorang dengan kesyirikan dan kekafiran adalah meninggalkan sholat."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: SYARAT SAH SHOLAT -->
+        <section id="content-syarat" class="tab-content hidden space-y-6">
+            <div class="bg-emerald-900 text-white p-6 rounded-2xl shadow-md border border-gold-500/20">
+                <h2 class="text-2xl font-bold mb-2 text-amber-50">Syarat Sah Sholat</h2>
+                <p class="text-emerald-200 text-sm">
+                    Syarat sah sholat adalah hal-hal yang harus dipenuhi sebelum seseorang memulai ibadah sholat. Jika salah satu syarat tidak terpenuhi, maka sholatnya tidak sah.
+                </p>
+            </div>
+
+            <!-- List Syarat Sah Grid -->
+            <div id="syarat-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Javascript will dynamic render or hardcode structured content -->
+            </div>
+        </section>
+
+        <!-- TAB 3: TATA CARA WUDHU -->
+        <section id="content-wudhu" class="tab-content hidden space-y-6">
+            <div class="bg-emerald-900 text-white p-6 rounded-2xl shadow-md border border-gold-500/20">
+                <h2 class="text-2xl font-bold mb-2 text-amber-50">Panduan Bersuci (Wudhu) Sesuai Sunnah</h2>
+                <p class="text-emerald-200 text-sm">
+                    Wudhu merupakan syarat mutlak sahnya sholat. Pembahasan meliputi Syarat, Rukun, Sunnah, dan Visualisasi gerakan wudhu.
+                </p>
+            </div>
+
+            <!-- Sub Tabs inside Wudhu -->
+            <div class="flex overflow-x-auto gap-2 pb-2 -mx-1 px-1">
+                <button onclick="switchWudhuSub('wudhu-langkah')" id="sub-wudhu-langkah" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-emerald-800 text-white border-emerald-800 shadow-sm">
+                    <i class="fa-solid fa-person-dots-from-line mr-1"></i> Visual & Tata Cara
+                </button>
+                <button onclick="switchWudhuSub('wudhu-syarat')" id="sub-wudhu-syarat" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200">
+                    3.1 Syarat Sah Wudhu
+                </button>
+                <button onclick="switchWudhuSub('wudhu-rukun')" id="sub-wudhu-rukun" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200">
+                    3.2 Rukun Wudhu
+                </button>
+                <button onclick="switchWudhuSub('wudhu-sunnah')" id="sub-wudhu-sunnah" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200">
+                    3.3 Sunnah & Keutamaan
+                </button>
+                <button onclick="switchWudhuSub('wudhu-ancaman')" id="sub-wudhu-ancaman" class="wudhu-sub-btn px-4 py-2 text-sm font-semibold rounded-full border whitespace-nowrap transition shrink-0 bg-white text-slate-600 border-slate-200">
+                    3.4 Ancaman Wudhu Salah
+                </button>
+            </div>
+
+            <!-- Sub Content 1: Visual Steps -->
+            <div id="wudhu-sub-langkah" class="wudhu-sub-content space-y-6">
+                <!-- Infografis Gerakan Wudhu -->
+                <div data-bm="wudhu-infografis" data-bm-title="Infografis Wudhu" class="search-item bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="flex items-start justify-between gap-3 p-5 pr-14 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-lg font-bold text-emerald-950">
+                                <i class="fa-solid fa-image text-gold-500 mr-1"></i> Infografis Gerakan Wudhu
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-1">
+                                Urutan lengkap tata cara wudhu sesuai sunnah. Ketuk gambar untuk memperbesar.
+                            </p>
+                        </div>
+                        <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full whitespace-nowrap">
+                            <i class="fa-solid fa-hand-pointer"></i> Ketuk untuk zoom
+                        </span>
+                    </div>
+                    <button type="button" onclick="openLightbox('wudhu.jpg', 'Infografis Gerakan Wudhu')"
+                        class="infographic-trigger group relative block w-full text-left focus:outline-none focus-visible:ring-4 focus-visible:ring-gold-400/50"
+                        aria-label="Perbesar infografis gerakan wudhu">
+                        <img src="wudhu.jpg" alt="Infografis tata cara wudhu: niat, membasuh tangan, berkumur, membasuh muka, tangan, kepala, telinga, dan kaki"
+                            class="infographic-img" loading="lazy" decoding="async">
+                        <span class="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-lg bg-emerald-950/85 px-3 py-1.5 text-xs font-semibold text-white shadow-lg backdrop-blur transition group-hover:bg-emerald-900">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i> Perbesar
+                        </span>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span class="h-px flex-1 bg-slate-200"></span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Rincian 8 Langkah</span>
+                    <span class="h-px flex-1 bg-slate-200"></span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="wudhu-steps-grid">
+                    <!-- Javascript populates the written steps -->
+                </div>
+            </div>
+
+            <!-- Sub Content 2: Syarat Sah Wudhu -->
+            <div id="wudhu-sub-syarat" class="wudhu-sub-content hidden space-y-4">
+                <div data-bm="wudhu-syarat" data-bm-title="Syarat Sah Wudhu" class="search-item bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-emerald-900 mb-4">Syarat Sah Wudhu</h3>
+                    <ul class="space-y-3 text-slate-700 text-sm list-disc pl-5">
+                        <li><strong>Islam:</strong> Wudhu orang kafir tidak sah.</li>
+                        <li><strong>Berakal (Mumayyiz):</strong> Orang gila/pingsan tidak sah wudhunyai.</li>
+                        <li><strong>Menggunakan Air Suci Mensucikan (Thahur):</strong> Air hujan, sumur, laut, sungai.</li>
+                        <li><strong>Menghilangkan Penghalang Air ke Kulit:</strong> Bebas dari cat, cat kuku (kutek waterproof), lilin, atau minyak tebal.</li>
+                        <li><strong>Masuk Waktu Sholat (Bagi penderita Istihadhah/Beser).</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Sub Content 3: Rukun Wudhu -->
+            <div id="wudhu-sub-rukun" class="wudhu-sub-content hidden space-y-4">
+                <div data-bm="wudhu-rukun" data-bm-title="Rukun Wudhu (Wajib)" class="search-item bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-emerald-800">
+                        <span class="text-xs text-slate-500 font-bold">QS. Al-Ma'idah: 6</span>
+                        <p class="font-arabic text-xl text-right text-emerald-950 my-2" dir="rtl">
+                            يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ إِذَا قُمْتُمْ إِلَى ٱلصَّلَوٰةِ فَٱغْسِلُوا۟ وُجُوهَكُمْ وَأَيْدِيَكُمْ إِلَى ٱلْمَرَافِقِ وَٱمْسَحُوا۟ بِرُءُوسِكُمْ وَأَرْجُلَكُمْ إِلَى ٱلْكَعْبَيْنِ
+                        </p>
+                        <p class="text-xs text-slate-700">"Wahai orang-orang yang beriman! Apabila kamu hendak melaksanakan sholat, maka basuhlah wajahmu dan tanganmu sampai ke siku, dan usaplah kepalamu dan (basuh) kedua kakimu sampai ke kedua mata kaki."</p>
+                    </div>
+
+                    <h4 class="font-bold text-slate-800">6 Rukun Wudhu Wajib:</h4>
+                    <ol class="list-decimal pl-5 text-sm text-slate-700 space-y-2">
+                        <li><strong>Niat:</strong> Bertempat di dalam hati.</li>
+                        <li><strong>Membasuh Muka:</strong> Dari tempat tumbuhnya rambut kepala hingga dagu, dan dari telinga kanan ke telinga kiri.</li>
+                        <li><strong>Membasuh Kedua Tangan sampai Siku.</strong></li>
+                        <li><strong>Mengusap sebagian/seluruh Kepala.</strong></li>
+                        <li><strong>Membasuh Kedua Kaki sampai Mata Kaki.</strong></li>
+                        <li><strong>Tertib (Berurutan).</strong></li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Sub Content 4: Sunnah Wudhu -->
+            <div id="wudhu-sub-sunnah" class="wudhu-sub-content hidden space-y-4">
+                <div data-bm="wudhu-sunnah" data-bm-title="Sunnah-Sunnah Wudhu &amp; Keutamaannya" class="search-item bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-emerald-900 mb-3">Sunnah-Sunnah Wudhu & Keutamaannya</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                            <h4 class="font-bold text-emerald-800">1. Bersiwak / Gosok Gigi</h4>
+                            <p class="font-arabic text-right text-lg text-emerald-950 mt-2 mb-1" dir="rtl">
+                                لَوْلاَ أَنْ أَشُقَّ عَلَى أُمَّتِي ـ أَوْ عَلَى النَّاسِ ـ لأَمَرْتُهُمْ بِالسِّوَاكِ مَعَ كُلِّ صَلاَةٍ
+                            </p>
+                            <p class="text-slate-600 text-xs">"Seandainya aku tidak merasa berat bagi umatku -atau bagi manusia- niscaya aku akan memerintahkan mereka untuk bersiwak setiap kali shalat." <span class="font-semibold">(HR. Bukhari No. 887 & Muslim No. 252)</span></p>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                            <h4 class="font-bold text-emerald-800">2. Membaca Basmalah</h4>
+                            <p class="font-arabic text-right text-lg text-emerald-950 mt-2 mb-1" dir="rtl">
+                                لاَ صَلاَةَ لِمَنْ لاَ وُضُوءَ لَهُ وَلاَ وُضُوءَ لِمَنْ لَمْ يَذْكُرِ اسْمَ اللَّهِ تَعَالَى عَلَيْهِ
+                            </p>
+                            <p class="text-slate-600 text-xs">"Tidak ada shalat bagi orang yang tidak berwudhu, dan tidak ada wudhu bagi orang yang tidak menyebut nama Allah (di awal)." <span class="font-semibold">(HR. Abu Daud No. 101)</span></p>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                            <h4 class="font-bold text-emerald-800">3. Kumur & Istinsyaq (Hirup air ke hidung)</h4>
+                            <p class="text-slate-600 text-xs mt-1">Disatukan dalam 1 cakupan air, dilakukan 3 kali.</p>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                            <h4 class="font-bold text-emerald-800">4. Mendahulukan Anggota Kanan (At-Tayamun)</h4>
+                            <p class="font-arabic text-right text-lg text-emerald-950 mt-2 mb-1" dir="rtl">
+                                كَانَ النَّبِيُّ ﷺ يُعْجِبُهُ التَّيَمُّنُ فِي تَنَعُّلِهِ وَتَرَجُّلِهِ وَطُهُورِهِ وَفِي شَأْنِهِ كُلِّهِ
+                            </p>
+                            <p class="text-slate-600 text-xs">"Nabi <span class="font-arabic">ﷺ</span> menyukai mendahulukan yang kanan saat memakai sandal, menyisir, bersuci, dan dalam segala urusannya." <span class="font-semibold">(HR. Bukhari No. 168)</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Doa Setelah Wudhu -->
+                    <div id="doa-setelah-wudhu" data-bm="doa-setelah-wudhu" data-bm-title="Doa Setelah Wudhu" class="search-item mt-6 bg-emerald-50 p-4 rounded-xl border border-emerald-200 space-y-4">
+                        <h4 class="font-bold text-emerald-900 text-sm"><i class="fa-solid fa-star text-gold-500"></i> Doa Setelah Wudhu & Keutamaan 8 Pintu Surga</h4>
+
+                        <!-- 1. Dalil -->
+                        <div class="bg-white p-3 rounded-lg border border-emerald-100">
+                            <p class="text-xs font-bold text-emerald-800 mb-1">Dalil (HR. Muslim no. 234, dari 'Umar bin Al-Khaththab)</p>
+                            <p class="font-arabic text-right text-xl text-emerald-950 my-2" dir="rtl">
+                                مَا مِنْكُمْ مِنْ أَحَدٍ يَتَوَضَّأُ فَيُبْلِغُ أَوْ فَيُسْبِغُ الْوُضُوءَ ثُمَّ يَقُولُ أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَنَّ مُحَمَّدًا عَبْدُ اللَّهِ وَرَسُولُهُ إِلَّا فُتِحَتْ لَهُ أَبْوَابُ الْجَنَّةِ الثَّمَانِيَةُ يَدْخُلُ مِنْ أَيِّهَا شَاءَ
+                            </p>
+                            <p class="text-xs text-slate-700 italic">"Tidak ada seorang pun di antara kalian yang berwudhu lalu menyempurnakan wudhunya, kemudian mengucapkan 'Aku bersaksi bahwa tidak ada sesembahan yang berhak disembah selain Allah dan Muhammad adalah hamba dan utusan-Nya', kecuali dibukakan baginya delapan pintu surga; ia boleh masuk dari pintu mana saja yang ia kehendaki."</p>
+                        </div>
+
+                        <!-- 2. Bacaan -->
+                        <div class="bg-white p-3 rounded-lg border border-emerald-100">
+                            <p class="text-xs font-bold text-emerald-800 mb-1">Bacaan Setelah Wudhu (tambahan doa: HR. At-Tirmidzi no. 55; dishahihkan Al-Albani, sebagian ulama mendha'ifkan)</p>
+                            <p class="font-arabic arabic-size text-right text-emerald-950 my-2 leading-loose" dir="rtl">
+                                أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ، اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ
+                            </p>
+                            <p class="text-xs text-slate-600 mb-2">Asyhadu allaa ilaaha illallaahu wahdahu laa syariika lah, wa asyhadu anna Muhammadan 'abduhu wa rasuuluh. Allaahummaj'alnii minat tawwaabiina waj'alnii minal mutathahhiriin.</p>
+                            <p class="text-xs text-slate-700 italic">"Aku bersaksi bahwa tidak ada sesembahan yang berhak disembah selain Allah semata, tidak ada sekutu bagi-Nya, dan aku bersaksi bahwa Muhammad adalah hamba dan utusan-Nya. Ya Allah, jadikanlah aku termasuk orang-orang yang bertaubat dan jadikanlah aku termasuk orang-orang yang bersuci."</p>
+                        </div>
+
+                        <!-- 3. Arti per kata -->
+                        <div>
+                            <p class="text-xs font-bold text-emerald-800 mb-2">Arti Per Kata</p>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">أَشْهَدُ</p>
+                                <p class="text-[11px] text-slate-500 italic">asyhadu</p>
+                                <p class="text-xs font-semibold text-emerald-800">aku bersaksi</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">أَنْ</p>
+                                <p class="text-[11px] text-slate-500 italic">an</p>
+                                <p class="text-xs font-semibold text-emerald-800">bahwa</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">لَا</p>
+                                <p class="text-[11px] text-slate-500 italic">laa</p>
+                                <p class="text-xs font-semibold text-emerald-800">tidak ada</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">إِلَهَ</p>
+                                <p class="text-[11px] text-slate-500 italic">ilaaha</p>
+                                <p class="text-xs font-semibold text-emerald-800">sesembahan (yang berhak disembah)</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">إِلَّا</p>
+                                <p class="text-[11px] text-slate-500 italic">illaa</p>
+                                <p class="text-xs font-semibold text-emerald-800">selain</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">اللَّهُ</p>
+                                <p class="text-[11px] text-slate-500 italic">Allaah</p>
+                                <p class="text-xs font-semibold text-emerald-800">Allah</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">وَحْدَهُ</p>
+                                <p class="text-[11px] text-slate-500 italic">wahdahu</p>
+                                <p class="text-xs font-semibold text-emerald-800">Dia semata</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">لَا شَرِيكَ لَهُ</p>
+                                <p class="text-[11px] text-slate-500 italic">laa syariika lah</p>
+                                <p class="text-xs font-semibold text-emerald-800">tidak ada sekutu bagi-Nya</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">وَأَشْهَدُ</p>
+                                <p class="text-[11px] text-slate-500 italic">wa asyhadu</p>
+                                <p class="text-xs font-semibold text-emerald-800">dan aku bersaksi</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">أَنَّ</p>
+                                <p class="text-[11px] text-slate-500 italic">anna</p>
+                                <p class="text-xs font-semibold text-emerald-800">bahwa</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">مُحَمَّدًا</p>
+                                <p class="text-[11px] text-slate-500 italic">Muhammadan</p>
+                                <p class="text-xs font-semibold text-emerald-800">Muhammad</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">عَبْدُهُ</p>
+                                <p class="text-[11px] text-slate-500 italic">'abduhu</p>
+                                <p class="text-xs font-semibold text-emerald-800">hamba-Nya</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">وَرَسُولُهُ</p>
+                                <p class="text-[11px] text-slate-500 italic">wa rasuuluh</p>
+                                <p class="text-xs font-semibold text-emerald-800">dan utusan-Nya</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">اللَّهُمَّ</p>
+                                <p class="text-[11px] text-slate-500 italic">Allaahumma</p>
+                                <p class="text-xs font-semibold text-emerald-800">Ya Allah</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">اجْعَلْنِي</p>
+                                <p class="text-[11px] text-slate-500 italic">ij'alnii</p>
+                                <p class="text-xs font-semibold text-emerald-800">jadikanlah aku</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">مِنَ التَّوَّابِينَ</p>
+                                <p class="text-[11px] text-slate-500 italic">minat tawwaabiin</p>
+                                <p class="text-xs font-semibold text-emerald-800">termasuk orang-orang yang banyak bertaubat</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">وَاجْعَلْنِي</p>
+                                <p class="text-[11px] text-slate-500 italic">waj'alnii</p>
+                                <p class="text-xs font-semibold text-emerald-800">dan jadikanlah aku</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-emerald-100 text-center">
+                                <p class="font-arabic text-lg text-emerald-950" dir="rtl">مِنَ الْمُتَطَهِّرِينَ</p>
+                                <p class="text-[11px] text-slate-500 italic">minal mutathahhiriin</p>
+                                <p class="text-xs font-semibold text-emerald-800">termasuk orang-orang yang bersuci</p>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub Content 5: Ancaman Wudhu -->
+            <div id="wudhu-sub-ancaman" class="wudhu-sub-content hidden space-y-4">
+                <div data-bm="wudhu-ancaman" data-bm-title="Ancaman Bagi Wudhu yang Tidak Sempurna" class="search-item bg-red-50 p-6 rounded-2xl border border-red-200 shadow-sm">
+                    <h3 class="text-lg font-bold text-red-900 mb-3"><i class="fa-solid fa-circle-exclamation"></i> Ancaman Bagi Wudhu Yang Tidak Sempurna</h3>
+                    <div class="bg-white p-4 rounded-xl border-l-4 border-red-600 shadow-xs">
+                        <div class="text-xs text-slate-500 font-bold mb-1">HR. Bukhari (No. 60) & Muslim (No. 242)</div>
+                        <p class="font-arabic text-xl text-right text-emerald-950 my-2" dir="rtl">
+                            وَيْلٌ لِلأَعْقَابِ مِنَ النَّارِ
+                        </p>
+                        <p class="text-sm text-slate-800 font-medium">
+                            "Celakalah bagi tumit-tumit (yang tidak terbasuh air wudhu) dari api neraka!"
+                        </p>
+                        <p class="text-xs text-slate-600 mt-2">
+                            <strong>Penjelasan:</strong> Hadits ini menunjukkan kewajiban meratakan air wudhu ke seluruh anggota wudhu yang wajib. Meremehkan bagian kecil seperti tumit yang kering dapat membatalkan wudhu dan diancam azab neraka.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: RUKUN & BACAAN SHOLAT -->
+        <section id="content-rukun" class="tab-content space-y-6">
+            <div class="bg-emerald-900 text-white p-6 rounded-2xl shadow-md border border-gold-500/20">
+                <h2 class="text-2xl font-bold mb-2 text-amber-50">Tata Cara, Gerakan & Bacaan Sholat</h2>
+                <p class="text-emerald-200 text-sm">
+                    Sesuai dengan sabda Nabi <span class="font-arabic">ﷺ</span>: <em>"Sholatlah kalian sebagaimana kalian melihat aku sholat."</em> (HR. Bukhari). Dilengkapi terjemahan kata per kata.
+                </p>
+            </div>
+
+            <!-- Filter Switch: Gerakan vs Bacaan vs Ragam -->
+            <div class="flex bg-slate-200 p-1 rounded-xl max-w-xl mx-auto">
+                <button onclick="switchSholatSub('sholat-gerakan')" id="btn-sholat-gerakan" class="flex-1 py-2 text-xs sm:text-sm font-bold rounded-lg bg-white shadow text-emerald-900 transition">
+                    <i class="fa-solid fa-person-praying mr-1"></i> Gerakan
+                </button>
+                <button onclick="switchSholatSub('sholat-bacaan')" id="btn-sholat-bacaan" class="flex-1 py-2 text-xs sm:text-sm font-bold rounded-lg text-slate-600 hover:text-emerald-900 transition">
+                    <i class="fa-solid fa-language mr-1"></i> Bacaan
+                </button>
+                <button onclick="switchSholatSub('sholat-ragam')" id="btn-sholat-ragam" class="flex-1 py-2 text-xs sm:text-sm font-bold rounded-lg text-slate-600 hover:text-emerald-900 transition">
+                    <i class="fa-solid fa-list-check mr-1"></i> Ragam
+                </button>
+            </div>
+
+            <!-- Sub 1: Gerakan & Rukun Visual -->
+            <div id="sholat-gerakan-container" class="space-y-6 hidden">
+                <!-- Infografis Gerakan Sholat -->
+                <div data-bm="sholat-infografis" data-bm-title="Infografis Gerakan Sholat" class="search-item bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="flex items-start justify-between gap-3 p-5 pr-14 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-lg font-bold text-emerald-950">
+                                <i class="fa-solid fa-image text-gold-500 mr-1"></i> Infografis Gerakan Sholat
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-1">
+                                Rangkaian gerakan sholat dari takbiratul ihram hingga salam. Ketuk gambar untuk memperbesar.
+                            </p>
+                        </div>
+                        <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full whitespace-nowrap">
+                            <i class="fa-solid fa-hand-pointer"></i> Ketuk untuk zoom
+                        </span>
+                    </div>
+                    <button type="button" onclick="openLightbox('sholat.jpg', 'Infografis Gerakan Sholat')"
+                        class="infographic-trigger group relative block w-full text-left focus:outline-none focus-visible:ring-4 focus-visible:ring-gold-400/50"
+                        aria-label="Perbesar infografis gerakan sholat">
+                        <img src="sholat.jpg" alt="Infografis gerakan sholat: berdiri, takbiratul ihram, rukuk, i'tidal, sujud, duduk, tasyahud, dan salam"
+                            class="infographic-img" loading="lazy" decoding="async">
+                        <span class="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-lg bg-emerald-950/85 px-3 py-1.5 text-xs font-semibold text-white shadow-lg backdrop-blur transition group-hover:bg-emerald-900">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i> Perbesar
+                        </span>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span class="h-px flex-1 bg-slate-200"></span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Rincian Rukun & Gerakan</span>
+                    <span class="h-px flex-1 bg-slate-200"></span>
+                </div>
+
+                <div id="sholat-steps-list" class="space-y-4">
+                    <!-- Dynamically populated rukun cards -->
+                </div>
+            </div>
+
+            <!-- Sub 2: Bacaan Sholat Lengkap Word-by-Word -->
+            <div id="sholat-bacaan-container" class="space-y-6">
+                <!-- Dynamically populated word-by-word recitations -->
+            </div>
+
+            <!-- Sub 3: Ragam Bacaan per gerakan (perbandingan riwayat) -->
+            <div id="sholat-ragam-container" class="hidden space-y-4">
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 text-xs leading-relaxed text-slate-600">
+                    <p><i class="fa-solid fa-circle-info text-gold-500 mr-1"></i> <strong class="text-emerald-900">Ragam bacaan</strong> adalah beberapa riwayat yang sah untuk gerakan yang sama. Pilih satu per gerakan dan boleh bergantian. Bacaan pokok yang dianjurkan untuk pemula ada di tab <em>Bacaan</em>; di sini tersedia semua pilihan riwayat beserta dalil dan derajatnya, silakan pilih yang ingin diamalkan.</p>
+                </div>
+                <div id="ragam-nav" class="ragam-nav flex gap-2 overflow-x-auto py-2 -mx-1 px-1" role="tablist" aria-label="Pilih gerakan sholat"></div>
+                <div id="ragam-body" class="space-y-4"></div>
+            </div>
+        </section>
+
+        <!-- TAB 5: YANG MEMBATALKAN SHOLAT -->
+        <section id="content-pembatal" class="tab-content hidden space-y-6">
+            <div class="bg-emerald-900 text-white p-6 rounded-2xl shadow-md border border-gold-500/20">
+                <h2 class="text-2xl font-bold mb-2 text-amber-50">Hal-Hal Yang Membatalkan Sholat</h2>
+                <p class="text-emerald-200 text-sm">
+                    Pahami hal-hal yang dapat merusak dan membatalkan keabsahan ibadah sholat Anda beserta dalil shahihnya.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="pembatal-list">
+                <!-- Dynamic or Rendered Pembatal -->
+            </div>
+
+            <!-- Warning Card -->
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-xl shadow-sm">
+                <div class="flex items-center gap-2 text-amber-800 font-bold mb-2">
+                    <i class="fa-solid fa-triangle-exclamation text-lg"></i> Ancaman Mendahului Imam Bagi Makmum
+                </div>
+                <div class="space-y-2">
+                    <p class="font-arabic text-right text-emerald-950 text-lg" dir="rtl">
+                        أَمَا يَخْشَى الَّذِي يَرْفَعُ رَأْسَهُ قَبْلَ الإِمَامِ أَنْ يُحَوِّلَ اللَّهُ رَأْسَهُ رَأْسَ حِمَارٍ
+                    </p>
+                    <p class="text-xs text-slate-700">
+                        <strong>HR. Muslim (No. 427):</strong> "Tidakkah takut orang yang mengangkat kepalanya sebelum imam, Allah akan mengubah kepalanya menjadi kepala keledai?"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 6: BOOKMARKS / FAVORIT -->
+        <!-- ============ TAB: KUIS ============ -->
+        <section id="content-quiz" class="tab-content hidden space-y-6">
+            <div class="bg-emerald-900 text-white p-6 rounded-2xl shadow-md border border-gold-500/20">
+                <h2 class="text-2xl font-bold mb-2 text-amber-50"><i class="fa-solid fa-circle-question text-gold-400"></i> Yuk, Uji Pemahamanmu!</h2>
+                <p class="text-emerald-200 text-sm">
+                    Jawab 10 soal acak dari materi wudhu & sholat. Semua benar? Naik ke level berikutnya!
+                </p>
+            </div>
+            <div id="quiz-root"></div>
+        </section>
+
+        <section id="content-info" class="tab-content hidden space-y-6">
+            <div class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-950 rounded-2xl p-6 text-white shadow-xl">
+                <h2 class="text-xl font-bold text-amber-50"><i class="fa-solid fa-circle-info mr-2 text-gold-400"></i> Info & Referensi</h2>
+                <p class="text-sm text-emerald-100 mt-1">Sumber matan, terjemahan, nomor, dan derajat hadits yang dimuat di aplikasi ini. Setiap nomor hadits bisa dibuka langsung untuk dicek.</p>
+            </div>
+            <div id="info-sumber" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 text-xs text-slate-600 leading-relaxed space-y-2">
+                <p><strong class="text-emerald-900">Catatan:</strong> Nomor hadits mengikuti Hadits.id, sedangkan isi dan penjelasan konten merujuk ke Rumaysho.com dan Muslim.or.id. Matan Arab, terjemahan, dan derajat hadits juga mengikuti Hadits.id. Beberapa kartu hanya memuat potongan matan yang relevan. Para ulama dapat berbeda dalam menilai derajat suatu hadits; perbedaan itu dicantumkan pada kartu terkait.</p>
+            </div>
+            <div>
+                <h3 class="text-sm font-bold text-emerald-900 mb-2"><i class="fa-solid fa-book-quran text-gold-500 mr-1"></i> Ayat Al-Qur'an</h3>
+                <div id="info-quran" class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap gap-2"></div>
+            </div>
+            <div>
+                <h3 class="text-sm font-bold text-emerald-900 mb-2"><i class="fa-solid fa-scroll text-gold-500 mr-1"></i> Daftar Hadits per Topik</h3>
+                <div id="info-dalil" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
+        </section>
+
+        <section id="content-bookmarks" class="tab-content hidden space-y-6">
+            <div class="bg-emerald-900 text-white p-6 rounded-2xl shadow-md border border-gold-500/20">
+                <h2 class="text-2xl font-bold mb-2 text-amber-50"><i class="fa-solid fa-bookmark text-gold-400"></i> Bacaan & Dalil Favorit Anda</h2>
+                <p class="text-emerald-200 text-sm">
+                    Daftar materi dan bacaan sholat yang telah Anda simpan untuk hafalan atau rujukan cepat.
+                </p>
+            </div>
+
+            <div id="bookmarks-container" class="space-y-4">
+                <!-- Javascript renders bookmarked items -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Mobile Navigation Bar -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-emerald-950 border-t border-emerald-800 text-emerald-200 z-50 px-1 py-1 flex justify-around items-center text-center">
+        <button onclick="switchTab('home')" id="mob-tab-home" class="flex-1 py-1.5 px-0.5 text-[10px] text-gold-400 flex flex-col items-center">
+            <i class="fa-solid fa-house text-base mb-0.5"></i>
+            <span>Home</span>
+        </button>
+        <button onclick="switchTab('syarat')" id="mob-tab-syarat" class="flex-1 py-1.5 px-0.5 text-[10px] text-emerald-300 flex flex-col items-center">
+            <i class="fa-solid fa-list-check text-base mb-0.5"></i>
+            <span>Syarat</span>
+        </button>
+        <button onclick="switchTab('wudhu')" id="mob-tab-wudhu" class="flex-1 py-1.5 px-0.5 text-[10px] text-emerald-300 flex flex-col items-center">
+            <i class="fa-solid fa-droplet text-base mb-0.5"></i>
+            <span>Wudhu</span>
+        </button>
+        <button onclick="switchTab('rukun')" id="mob-tab-rukun" class="flex-1 py-1.5 px-0.5 text-[10px] text-emerald-300 flex flex-col items-center">
+            <i class="fa-solid fa-person-praying text-base mb-0.5"></i>
+            <span>Sholat</span>
+        </button>
+        <button onclick="switchTab('pembatal')" id="mob-tab-pembatal" class="flex-1 py-1.5 px-0.5 text-[10px] text-emerald-300 flex flex-col items-center">
+            <i class="fa-solid fa-triangle-exclamation text-base mb-0.5"></i>
+            <span>Batal</span>
+        </button>
+        <button onclick="switchTab('quiz')" id="mob-tab-quiz" class="flex-1 py-1.5 px-0.5 text-[10px] text-emerald-300 flex flex-col items-center">
+            <i class="fa-solid fa-circle-question text-base mb-0.5"></i>
+            <span>Kuis</span>
+        </button>
+        <button onclick="switchTab('info')" id="mob-tab-info" class="flex-1 py-1.5 px-0.5 text-[10px] text-emerald-300 flex flex-col items-center">
+            <i class="fa-solid fa-circle-info text-base mb-0.5"></i>
+            <span>Info</span>
+        </button>
+        <button onclick="switchTab('bookmarks')" id="mob-tab-bookmarks" class="flex-1 py-1.5 px-0.5 text-[10px] text-emerald-300 flex flex-col items-center">
+            <i class="fa-solid fa-bookmark text-base mb-0.5"></i>
+            <span>Favorit</span>
+        </button>
+    </nav>
+
+    <!-- Fullscreen Infographic Lightbox -->
+    <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-slate-950/95 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+        <div class="absolute inset-x-0 top-0 z-10 flex items-center justify-between gap-3 bg-gradient-to-b from-slate-950/90 to-transparent px-4 py-3 sm:px-6">
+            <h3 id="lightbox-title" class="text-sm sm:text-base font-semibold text-white truncate">Infografis</h3>
+            <div class="flex items-center gap-2">
+                <a id="lightbox-open" href="#" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-2 text-xs font-semibold text-white hover:bg-white/20 transition">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="hidden sm:inline">Buka Tab Baru</span>
+                </a>
+                <button type="button" onclick="closeLightbox()" aria-label="Tutup pratinjau"
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white hover:bg-white/20 transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+        </div>
+        <div id="lightbox-scroll" class="absolute inset-0 overflow-auto p-4 pt-20 sm:p-8 sm:pt-24" onclick="closeLightbox(event)">
+            <img id="lightbox-img" src="" alt=""
+                class="mx-auto h-auto w-full max-w-6xl rounded-lg bg-white shadow-2xl">
+        </div>
+        <p class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 to-transparent px-4 py-3 text-center text-[11px] text-slate-300 sm:text-xs">
+            Cubit untuk zoom &middot; Geser untuk menjelajah &middot; Ketuk area gelap untuk menutup
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 px-4 border-t border-slate-800 text-center text-xs">
+        <div class="max-w-4xl mx-auto space-y-3">
+            <div class="flex justify-center items-center gap-2 text-gold-400 font-semibold text-sm">
+                <i class="fa-solid fa-kaaba"></i> Panduan Sholat & Wudhu Sesuai Sunnah
+            </div>
+            <p>Aplikasi Progressive Web App (PWA) Offline-Ready untuk Tablet & Mobile.</p>
+            <div class="p-3 bg-slate-800/60 rounded-xl border border-slate-700/50 inline-block text-slate-300">
+                <p><strong>Sumber & Referensi</strong></p>
+                <button onclick="switchTab('info')" class="text-gold-400 hover:underline font-medium flex items-center justify-center gap-1 mt-1 mx-auto">
+                    <i class="fa-solid fa-circle-info"></i> Lihat daftar referensi di menu Info
+                </button>
+            </div>
+            <!-- Daftar isi: diisi otomatis dari js/data/routes.js oleh scripts/build-pages.mjs -->
+            <nav id="route-links" aria-label="Daftar isi panduan" class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-slate-300 text-sm">
+                <a href="./" data-route="" class="hover:text-gold-400 hover:underline">Beranda</a>
+                <a href="syarat-sah-sholat/" data-route="syarat-sah-sholat" class="hover:text-gold-400 hover:underline">Syarat Sah Sholat</a>
+                <a href="tata-cara-wudhu/" data-route="tata-cara-wudhu" class="hover:text-gold-400 hover:underline">Tata Cara Wudhu</a>
+                <a href="doa-setelah-wudhu/" data-route="doa-setelah-wudhu" class="hover:text-gold-400 hover:underline">Doa Setelah Wudhu</a>
+                <a href="tata-cara-sholat/" data-route="tata-cara-sholat" class="hover:text-gold-400 hover:underline">Tata Cara Sholat</a>
+                <a href="bacaan-sholat/" data-route="bacaan-sholat" class="hover:text-gold-400 hover:underline">Bacaan Sholat</a>
+                <a href="ragam-bacaan-sholat/" data-route="ragam-bacaan-sholat" class="hover:text-gold-400 hover:underline">Ragam Bacaan Sholat</a>
+                <a href="pembatal-sholat/" data-route="pembatal-sholat" class="hover:text-gold-400 hover:underline">Pembatal Sholat</a>
+                <a href="kuis-sholat/" data-route="kuis-sholat" class="hover:text-gold-400 hover:underline">Kuis Sholat &amp; Wudhu</a>
+            </nav>
+            <p class="text-slate-500">&copy; 2026 Panduan Sholat Sunnah. Didukung Hadits Shahih Bukhari, Muslim, & Kutubut Tis'ah.</p>
+        </div>
+    </footer>
+
+    <!-- App Logic: ES modules (js/main.js memuat semua modul) -->
+    <script type="module" src="./js/main.js"></script>
+</body>
+</html>

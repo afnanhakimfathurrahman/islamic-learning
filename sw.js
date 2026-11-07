@@ -1,7 +1,16 @@
-const CACHE_NAME = 'islamic-learning-v37';
+const CACHE_NAME = 'islamic-learning-v38';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  // Halaman per bagian (SEO), dibuat oleh scripts/build-pages.mjs dari js/data/routes.js
+  './syarat-sah-sholat/',
+  './tata-cara-wudhu/',
+  './doa-setelah-wudhu/',
+  './tata-cara-sholat/',
+  './bacaan-sholat/',
+  './ragam-bacaan-sholat/',
+  './pembatal-sholat/',
+  './kuis-sholat/',
   './manifest.json',
   './css/app.css',
   './js/bookmarks.js',
@@ -10,6 +19,7 @@ const ASSETS_TO_CACHE = [
   './js/data/quiz.js',
   './js/data/ragam.js',
   './js/data/ragam-words.js',
+  './js/data/routes.js',
   './js/data/sholat.js',
   './js/data/syarat.js',
   './js/data/wudhu.js',

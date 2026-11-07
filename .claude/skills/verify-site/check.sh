@@ -4,9 +4,9 @@ set -e
 cd "$(dirname "$0")/../../.."
 python3 -I - <<'P'
 import re, json, subprocess, tempfile, os, sys
-import glob
+import glob, pathlib
 s = open('index.html').read()
-jsfiles = sorted(glob.glob('js/**/*.js', recursive=True))
+jsfiles = sorted(f.replace(os.sep, '/') for f in glob.glob('js/**/*.js', recursive=True))  # '/' juga di Windows
 alljs = '\n'.join(open(f).read() for f in jsfiles)
 src = s + '\n' + alljs          # markup + semua modul (ID bisa didefinisikan di template JS)
 ok = True
@@ -48,7 +48,7 @@ for a in re.findall(r"""\bon(?:click|input|change|keydown|submit)\s*=\s*"([^"]*)
 # Validasi bank soal kuis (impor modul data di Node)
 with tempfile.TemporaryDirectory() as d:
     p = os.path.join(d, 'bank.mjs')
-    open(p, 'w').write("import { quizBank } from 'file://" + os.path.abspath('js/data/quiz.js') + r"""';
+    open(p, 'w').write("import { quizBank } from '" + pathlib.Path('js/data/quiz.js').resolve().as_uri() + r"""';
 const ids = new Set(); let bad = 0;
 const err = (m) => { console.log('QUIZ:', m); bad++; };
 for (const q of quizBank) {
@@ -75,3 +75,6 @@ for f in jsfiles + ['css/app.css']:
 print('CACHE_NAME:', re.search(r"CACHE_NAME = '([^']+)'", sw).group(1))
 print('RESULT:', 'PASS' if ok else 'FAIL'); sys.exit(0 if ok else 1)
 P
+
+# Halaman per bagian (SEO) harus sinkron dengan index.html + js/data/routes.js
+node scripts/build-pages.mjs --check
