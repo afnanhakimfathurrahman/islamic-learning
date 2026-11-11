@@ -1,4 +1,5 @@
-import { decorateBookmarks, renderBookmarks } from './bookmarks.js';
+import { decorateBookmarks } from './bookmarks.js';
+import { initHafalan } from './hafalan.js';
 import { goToDoaWudhu, initRouteLinks, openRoute, routeFromLocation, switchSholatSub, switchTab, switchWudhuSub } from './nav.js';
 import { quizChoose, quizHome, quizMatchCheck, quizMatchLeft, quizMatchRight, quizNext, quizNextLevel, quizOrderAdd, quizOrderCheck, quizOrderRemove, quizReset, quizStart, renderQuiz } from './quiz.js';
 import { handleSearch } from './search.js';
@@ -8,6 +9,7 @@ import { changeFontSize, closeLightbox, openLightbox, toggleSearch, toggleSettin
 import { renderPembatal, renderSholatSteps, renderSholatWords, renderSyarat, renderWudhuSteps } from './views/content.js';
 import { renderInfo } from './views/info.js';
 import { openRagam, renderRagam, showRagamGroup, toggleRagamAll } from './views/ragam.js';
+import { decorateDalilWords } from './words.js';
 import './pwa.js';
 
 function init() {
@@ -20,8 +22,9 @@ function init() {
     renderPembatal();
     renderInfo();
     renderQuiz();
+    decorateDalilWords();
     decorateBookmarks();
-    renderBookmarks();
+    initHafalan();
 }
 
 applyTheme(document.documentElement.dataset.theme);

@@ -78,3 +78,6 @@ P
 
 # Halaman per bagian (SEO) harus sinkron dengan index.html + js/data/routes.js
 node scripts/build-pages.mjs --check
+
+# Arti per kata untuk setiap teks Arab dalil/bacaan
+node .claude/skills/verify-site/check-words.mjs

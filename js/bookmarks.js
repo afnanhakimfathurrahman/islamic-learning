@@ -86,7 +86,7 @@ export function refreshBookmarkIcons() {
 /* ---------- Daftar di tab Favorit ---------- */
 const textOf = (el) => (el ? el.textContent.replace(/\s+/g, ' ').trim() : '');
 
-function describe(id) {
+export function describe(id) {
     const card = findCard(id);
     if (!card) return null;
     const tabId = (card.closest('.tab-content')?.id || '').replace('content-', '');
@@ -116,18 +116,20 @@ function describe(id) {
     return info;
 }
 
+// Tab Favorit dirender oleh modul hafalan (js/hafalan.js) lewat setBookmarksRenderer
+let bookmarksRenderer = null;
+
+export function setBookmarksRenderer(fn) {
+    bookmarksRenderer = fn;
+}
+
 export function renderBookmarks() {
-    const container = document.getElementById('bookmarks-container');
-    if (!container) return;
-    if (bookmarkedIds.length === 0) {
-        container.innerHTML = `<div class="bg-white p-8 rounded-2xl text-center text-slate-500 border border-slate-200">
-            <i class="fa-regular fa-bookmark text-3xl text-gold-500 mb-2"></i>
-            <p class="font-semibold text-emerald-900">Belum ada favorit</p>
-            <p class="text-sm mt-1">Ketuk ikon bookmark di sudut kartu dalil, langkah, atau bacaan mana pun untuk menyimpannya di sini.</p>
-        </div>`;
-        return;
-    }
-    const rows = bookmarkedIds.map(id => ({ id, info: describe(id) }));
+    if (bookmarksRenderer) bookmarksRenderer();
+}
+
+// Daftar kartu favorit (dikelompokkan per menu) dengan tombol buka & hapus
+export function bookmarkListHtml(ids) {
+    const rows = ids.map(id => ({ id, info: describe(id) }));
     const rowHtml = ({ id, info }) => `
         <div class="flex items-stretch overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
             <button type="button" data-bm-go="${esc(id)}" ${info ? '' : 'disabled'} class="min-w-0 flex-1 p-4 text-left hover:bg-emerald-50 transition">
@@ -149,11 +151,7 @@ export function renderBookmarks() {
         if (!groups.has(key)) groups.set(key, []);
         groups.get(key).push(r);
     });
-    container.innerHTML = `
-        <div class="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm text-emerald-800">
-            <span><strong>${bookmarkedIds.length}</strong> item tersimpan</span>
-            <button type="button" data-bm-clear class="rounded-full border border-red-200 px-3 py-1 text-xs font-semibold text-red-600 hover:bg-red-50 transition"><i class="fa-regular fa-trash-can mr-1"></i> Hapus semua</button>
-        </div>
+    return `
         ${[...groups].map(([name, list]) => `
             <div class="space-y-2">
                 <h3 class="px-1 text-xs font-bold uppercase tracking-wider text-slate-500">${esc(name)} (${list.length})</h3>
@@ -193,5 +191,5 @@ document.addEventListener('click', (e) => {
     if (go) return goToBookmark(go.dataset.bmGo);
     const del = e.target.closest('[data-bm-del]');
     if (del) return removeBookmark(del.dataset.bmDel);
-    if (e.target.closest('[data-bm-clear]') && confirm('Hapus semua favorit?')) clearBookmarks();
+    if (e.target.closest('[data-bm-clear]') && confirm('Hapus semua favorit? Riwayat hafalannya tetap tersimpan.')) clearBookmarks();
 });

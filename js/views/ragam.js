@@ -2,6 +2,7 @@ import { ragamBacaan } from '../data/ragam.js';
 import { ragamWords } from '../data/ragam-words.js';
 import { switchSholatSub, switchTab } from '../nav.js';
 import { state } from '../state.js';
+import { wordsHtml } from '../words.js';
 
 export const RAGAM_TAG = {
     pokok: ['Pokok', 'bg-emerald-100 text-emerald-800 border-emerald-200'],
@@ -49,30 +50,6 @@ export function renderRagam() {
     showRagamGroup(state.ragamActive);
 }
 
-// Arti per kata: Arab dipecah per spasi, sejajar dengan ragamWords[v.id]; dilewati jika jumlahnya tidak cocok
-function renderRagamWords(v) {
-    const words = ragamWords[v.id];
-    const tokens = v.arab ? v.arab.split(/\s+/).filter(Boolean) : [];
-    if (!words || words.length !== tokens.length) return '';
-    const badges = tokens.map((ar, i) => ({ ar, lat: words[i][0], id: words[i][1] })).filter(w => w.id);
-    if (!badges.length) return '';
-    return `
-                    <details class="rounded-xl border border-slate-200 bg-slate-50/80 px-3 py-2">
-                        <summary class="flex cursor-pointer items-center justify-between gap-2 text-xs font-semibold text-emerald-800">
-                            <span><i class="fa-solid fa-list-ul text-gold-500 mr-1"></i> Arti per kata (${badges.length})</span>
-                            <i class="fa-solid fa-chevron-down details-chevron text-[10px]"></i>
-                        </summary>
-                        <div class="mt-3 flex flex-wrap gap-2" dir="rtl">
-                            ${badges.map(w => `
-                                <div class="word-badge bg-emerald-50 border border-emerald-200 rounded-xl p-2 text-center flex-1 min-w-[84px] max-w-[150px]" dir="ltr">
-                                    <p class="font-arabic text-lg font-bold text-emerald-950 mb-0.5" dir="rtl">${w.ar}</p>
-                                    <p class="text-[11px] font-semibold text-emerald-700 break-words">${w.lat}</p>
-                                    <p class="text-[11px] leading-snug text-slate-600 break-words">${w.id}</p>
-                                </div>`).join('')}
-                        </div>
-                    </details>`;
-}
-
 export function renderRagamItem(g, v, vi, open) {
     const [tagText, tagCls] = RAGAM_TAG[v.tag] || RAGAM_TAG.alternatif;
     const links = (v.refs || []).map(r => `<a href="https://www.hadits.id/hadits/${r.k}/${r.n}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] text-emerald-800 hover:border-gold-400">${RAGAM_KITAB[r.k] || r.k} ${r.n} <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a>`).join('');
@@ -91,10 +68,10 @@ export function renderRagamItem(g, v, vi, open) {
                     <i class="fa-solid fa-chevron-down details-chevron text-[10px] text-slate-400"></i>
                 </summary>
                 <div class="space-y-2 border-t border-slate-100 p-3.5">
-                    ${v.arab ? `<p class="font-arabic arabic-size text-right leading-loose text-emerald-950" dir="rtl">${v.arab}</p>` : ''}
+                    ${v.arab ? `<p class="font-arabic arabic-size text-right leading-loose text-emerald-950" dir="rtl" data-words="ragam">${v.arab}</p>` : ''}
                     ${v.latin ? `<p class="text-xs font-semibold leading-relaxed text-emerald-800">${v.latin}</p>` : ''}
                     ${v.translation ? `<p class="text-xs italic leading-relaxed text-slate-600">"${v.translation}"</p>` : ''}
-                    ${renderRagamWords(v)}
+                    ${wordsHtml(v.arab, ragamWords[v.id])}
                     ${v.madzhab ? `<p class="text-[11px] font-semibold text-gold-600"><i class="fa-solid fa-scale-balanced mr-1"></i>${v.madzhab}</p>` : ''}
                     ${v.note ? `<p class="text-[11px] leading-relaxed text-slate-500">${v.note}</p>` : ''}
                     ${links ? `<div class="flex flex-wrap gap-1.5 pt-1">${links}</div>` : ''}

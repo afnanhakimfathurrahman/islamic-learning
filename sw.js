@@ -1,4 +1,7 @@
-const CACHE_NAME = 'islamic-learning-v39';
+const CACHE_NAME = 'islamic-learning-v40';
+// Ringkasan jadwal hafalan dari js/hafalan.js (bukan aset; jangan dihapus saat CACHE_NAME naik)
+const HAFALAN_META_CACHE = 'hafalan-meta';
+const HAFALAN_META_URL = new URL('hafalan-state.json', self.registration.scope).href;
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -19,6 +22,9 @@ const ASSETS_TO_CACHE = [
   './js/data/quiz.js',
   './js/data/ragam.js',
   './js/data/ragam-words.js',
+  './js/data/dalil-words.js',
+  './js/words.js',
+  './js/hafalan.js',
   './js/data/routes.js',
   './js/data/sholat.js',
   './js/data/syarat.js',
@@ -62,7 +68,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cache) => {
-          if (cache !== CACHE_NAME) {
+          if (cache !== CACHE_NAME && cache !== HAFALAN_META_CACHE) {
             console.log('[Service Worker] Deleting old cache:', cache);
             return caches.delete(cache);
           }
@@ -91,6 +97,48 @@ self.addEventListener('fetch', (event) => {
         return cachedResponse;
       }
       return fetch(event.request);
+    })
+  );
+});
+
+// Pengingat hafalan harian (Periodic Background Sync; hanya Chrome/Edge dengan aplikasi terpasang)
+function localDate() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+async function remindHafalan() {
+  const cache = await caches.open(HAFALAN_META_CACHE);
+  const res = await cache.match(HAFALAN_META_URL);
+  if (!res) return;
+  const meta = await res.json();
+  const today = localDate();
+  if (!meta.remind || meta.notified === today) return;
+  // due kosong = bacaan baru yang belum pernah dilatih
+  const due = (meta.dues || []).filter((d) => !d || d <= today).length;
+  if (!due) return;
+  await self.registration.showNotification('Waktunya murajaah', {
+    body: `${due} bacaan perlu diulang hari ini.`,
+    icon: './icon-192.png',
+    badge: './icon-192.png',
+    tag: 'hafalan-reminder'
+  });
+  meta.notified = today;
+  await cache.put(HAFALAN_META_URL, new Response(JSON.stringify(meta), { headers: { 'content-type': 'application/json' } }));
+}
+
+self.addEventListener('periodicsync', (event) => {
+  if (event.tag === 'hafalan-reminder') event.waitUntil(remindHafalan());
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((list) => {
+      const url = new URL('./#hafalan', self.registration.scope).href;
+      const open = list.find((c) => c.url.startsWith(self.registration.scope));
+      if (open) return open.navigate(url).then((c) => (c || open).focus());
+      return self.clients.openWindow(url);
     })
   );
 });
