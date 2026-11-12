@@ -11,7 +11,12 @@ export const dalilWordsFor = (arab) => byKey.get(arabKey(arab));
 export function wordsHtml(arab, words) {
     const tokens = arab ? arabKey(arab).split(' ') : [];
     if (!words || words.length !== tokens.length) return '';
-    const badges = tokens.map((ar, i) => ({ ar, lat: words[i][0], id: words[i][1] })).filter(w => w.id);
+    return wordsBlockHtml(tokens.map((ar, i) => ({ ar, lat: words[i][0], id: words[i][1] })));
+}
+
+// Blok "Arti per kata" yang bisa dibuka-tutup dari satuan [{ ar, lat, id }] (dipakai semua konten agar seragam)
+export function wordsBlockHtml(units) {
+    const badges = units.filter(w => w.id);
     if (!badges.length) return '';
     return `
                     <details class="words-block rounded-xl border border-slate-200 bg-slate-50/80 px-3 py-2">

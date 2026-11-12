@@ -1,4 +1,4 @@
-const CACHE_NAME = 'islamic-learning-v40';
+const CACHE_NAME = 'islamic-learning-v41';
 // Ringkasan jadwal hafalan dari js/hafalan.js (bukan aset; jangan dihapus saat CACHE_NAME naik)
 const HAFALAN_META_CACHE = 'hafalan-meta';
 const HAFALAN_META_URL = new URL('hafalan-state.json', self.registration.scope).href;

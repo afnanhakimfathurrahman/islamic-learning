@@ -4,6 +4,7 @@ import { ragamBacaan } from '../data/ragam.js';
 import { bacaanSholatWords, bacaanVariants, sholatStepsData } from '../data/sholat.js';
 import { syaratData } from '../data/syarat.js';
 import { wudhuStepsData } from '../data/wudhu.js';
+import { wordsBlockHtml } from '../words.js';
 
 // Render Syarat Sah
 export function renderDalilDetails(item) {
@@ -136,21 +137,10 @@ export function renderSholatWords() {
                 <p class="text-xs text-slate-600 text-left italic">"${item.translationFull}"</p>
             </div>
 
+            ${wordsBlockHtml(item.words)}
+
             ${renderBacaanVariants(idx)}
 
-            <!-- Word by Word Interactive Badges -->
-            <div>
-                <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3"><i class="fa-solid fa-list-ul text-gold-500 mr-1"></i> Terjemahan Per Kata:</h4>
-                <div class="flex flex-wrap gap-2.5" dir="rtl">
-                    ${item.words.map(w => `
-                        <div class="word-badge bg-emerald-50 border border-emerald-200 rounded-xl p-2.5 text-center flex-1 min-w-[100px] max-w-[160px]" dir="ltr">
-                            <p class="font-arabic text-xl font-bold text-emerald-950 mb-1" dir="rtl">${w.ar}</p>
-                            <p class="text-[11px] font-semibold text-emerald-700 break-words">${w.lat}</p>
-                            <p class="text-[11px] leading-snug text-slate-600 break-words">${w.id}</p>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
         </div>
     `).join('');
 }
